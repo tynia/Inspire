@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="bson">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="event">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{b3f1515d-8c18-4a51-8f6e-be8b3864c65e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{e223ec13-e85f-4194-b5f7-9afeca13ec8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{f468f868-4587-41da-b5b1-b78c3808dd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stream">
+      <UniqueIdentifier>{8a4b96a2-9b5f-45d3-906f-4a73a0d1bfe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="processor">
+      <UniqueIdentifier>{52f5b923-bc18-41c2-8303-342b41fdefb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{9df9cc1c-498d-42fc-b671-00c1cc08709f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\include">
+      <UniqueIdentifier>{8d0f4180-335e-4034-9deb-6fd4c51c8c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\impl">
+      <UniqueIdentifier>{d4d46bff-1aba-41ca-b726-ad20df534535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bson\util">
+      <UniqueIdentifier>{b973a34b-aefd-4093-bffb-ba65622f794b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log\include">
+      <UniqueIdentifier>{fbb82cc1-b839-4731-88a3-f0894ed79eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log\impl">
+      <UniqueIdentifier>{5bebdaf1-91b6-440b-a8fe-0e07b43c0f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log\util">
+      <UniqueIdentifier>{e1544b17-ec39-4f5f-bf70-7de31a707dd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\event">
+      <UniqueIdentifier>{28a170ce-3c55-46a1-accf-eb4f0da3bed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\helper">
+      <UniqueIdentifier>{d61c72de-92dc-4413-8766-3f6cb45f4561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stream\endian">
+      <UniqueIdentifier>{8ee39acb-1002-4679-856b-ce0de9bcfff8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app\application.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\include\binary.h">
+      <Filter>bson\include</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\include\bsonobj.h">
+      <Filter>bson\include</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\include\element.h">
+      <Filter>bson\include</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\util\bson.h">
+      <Filter>bson\util</Filter>
+    </ClInclude>
+    <ClInclude Include="log\include\log.h">
+      <Filter>log\include</Filter>
+    </ClInclude>
+    <ClInclude Include="log\include\logFile.h">
+      <Filter>log\include</Filter>
+    </ClInclude>
+    <ClInclude Include="log\include\logHelper.h">
+      <Filter>log\include</Filter>
+    </ClInclude>
+    <ClInclude Include="log\include\logManager.h">
+      <Filter>log\include</Filter>
+    </ClInclude>
+    <ClInclude Include="net\connection.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\service.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\serviceManager.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\session.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\tcpconnection.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\helper\nethelper.h">
+      <Filter>net\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\basestream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\iostream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\util.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\endian\endian.h">
+      <Filter>stream\endian</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\threadController.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="util\contextBuffer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\noncopyable.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\refStream.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="processor\processor.h">
+      <Filter>processor</Filter>
+    </ClInclude>
+    <ClInclude Include="net\net.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\event\event.h">
+      <Filter>net\event</Filter>
+    </ClInclude>
+    <ClInclude Include="net\event\eventid.h">
+      <Filter>net\event</Filter>
+    </ClInclude>
+    <ClInclude Include="util\util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bson\impl\bsonobj.cpp">
+      <Filter>bson\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="bson\impl\element.cpp">
+      <Filter>bson\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="log\impl\logFile.cpp">
+      <Filter>log\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="log\impl\logManager.cpp">
+      <Filter>log\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="net\connection.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\service.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\session.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\tcpconnection.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\basestream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\iostream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="util\contextBuffer.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\refStream.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

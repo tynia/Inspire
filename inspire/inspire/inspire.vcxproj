@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E915FA31-DCE8-42EA-A782-C5BA4495BD85}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>inspire</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\app;$(ProjectDir)\bson;$(ProjectDir)\event;$(ProjectDir)\log;$(ProjectDir)\net;$(ProjectDir)\processor;$(ProjectDir)\stream;$(ProjectDir)\thread;$(ProjectDir)\util;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="app\application.h" />
+    <ClInclude Include="bson\include\binary.h" />
+    <ClInclude Include="bson\include\bsonobj.h" />
+    <ClInclude Include="bson\include\element.h" />
+    <ClInclude Include="bson\util\bson.h" />
+    <ClInclude Include="log\include\log.h" />
+    <ClInclude Include="log\include\logFile.h" />
+    <ClInclude Include="log\include\logHelper.h" />
+    <ClInclude Include="log\include\logManager.h" />
+    <ClInclude Include="net\connection.h" />
+    <ClInclude Include="net\event\event.h" />
+    <ClInclude Include="net\event\eventid.h" />
+    <ClInclude Include="net\helper\nethelper.h" />
+    <ClInclude Include="net\net.h" />
+    <ClInclude Include="net\service.h" />
+    <ClInclude Include="net\serviceManager.h" />
+    <ClInclude Include="net\session.h" />
+    <ClInclude Include="net\tcpconnection.h" />
+    <ClInclude Include="processor\processor.h" />
+    <ClInclude Include="stream\basestream.h" />
+    <ClInclude Include="stream\endian\endian.h" />
+    <ClInclude Include="stream\iostream.h" />
+    <ClInclude Include="stream\util.h" />
+    <ClInclude Include="thread\thread.h" />
+    <ClInclude Include="thread\threadController.h" />
+    <ClInclude Include="util\contextBuffer.h" />
+    <ClInclude Include="util\noncopyable.h" />
+    <ClInclude Include="util\refStream.h" />
+    <ClInclude Include="util\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bson\impl\bsonobj.cpp" />
+    <ClCompile Include="bson\impl\element.cpp" />
+    <ClCompile Include="log\impl\logFile.cpp" />
+    <ClCompile Include="log\impl\logManager.cpp" />
+    <ClCompile Include="net\connection.cpp" />
+    <ClCompile Include="net\service.cpp" />
+    <ClCompile Include="net\session.cpp" />
+    <ClCompile Include="net\tcpconnection.cpp" />
+    <ClCompile Include="stream\basestream.cpp" />
+    <ClCompile Include="stream\iostream.cpp" />
+    <ClCompile Include="util\contextBuffer.cpp" />
+    <ClCompile Include="util\refStream.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
