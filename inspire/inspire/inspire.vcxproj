@@ -80,13 +80,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="app\application.h" />
+    <ClInclude Include="app\control.h" />
     <ClInclude Include="bson\include\binary.h" />
     <ClInclude Include="bson\include\bsonobj.h" />
     <ClInclude Include="bson\include\element.h" />
     <ClInclude Include="bson\util\bson.h" />
-    <ClInclude Include="log\include\interface.h" />
+    <ClInclude Include="log\include\writeable.h" />
     <ClInclude Include="log\include\insLogFile.h" />
-    <ClInclude Include="log\include\logHelper.h" />
     <ClInclude Include="log\include\insLogManager.h" />
     <ClInclude Include="log\include\util.h" />
     <ClInclude Include="log\log.h" />
@@ -105,7 +105,9 @@
     <ClInclude Include="stream\stream.h" />
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\threadController.h" />
+    <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\contextBuffer.h" />
+    <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
     <ClInclude Include="util\noncopyable.h" />
     <ClInclude Include="util\oss\ossFile.h" />

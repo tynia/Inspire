@@ -2,39 +2,18 @@
 #define _INSPIRE_APPLICATION_INTERFACE_H_
 
 #include "inspire.h"
+#include "control.h"
 
 namespace inspire {
 
-   enum modType
-   {
-      MOD_APP,
-      MOD_LOG,
-      MOD_NET,
-      MOD_CTRL,
-   };
-
-   class IApplication
+   class IApplication : public IControl
    {
    public:
-      IApplication(modType id) : _id(id)
+      IApplication(modType id) : IControl(id)
       {}
       virtual ~IApplication() {}
 
-      const modType id() const
-      {
-         return _id;
-      }
-
-      virtual void initialize() = 0;
-
       virtual void run() = 0;
-
-      virtual void destroy() = 0;
-
-   private:
-      modType _id;
    };
-
-   typedef IApplication IControl;
 }
 #endif

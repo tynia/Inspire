@@ -75,9 +75,6 @@
     <ClInclude Include="bson\util\bson.h">
       <Filter>bson\util</Filter>
     </ClInclude>
-    <ClInclude Include="log\include\logHelper.h">
-      <Filter>log\include</Filter>
-    </ClInclude>
     <ClInclude Include="net\connection.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -147,9 +144,6 @@
     <ClInclude Include="log\include\util.h">
       <Filter>log\include</Filter>
     </ClInclude>
-    <ClInclude Include="log\include\interface.h">
-      <Filter>log\include</Filter>
-    </ClInclude>
     <ClInclude Include="log\include\insLogFile.h">
       <Filter>log\include</Filter>
     </ClInclude>
@@ -158,6 +152,18 @@
     </ClInclude>
     <ClInclude Include="log\include\insLogManager.h">
       <Filter>log\include</Filter>
+    </ClInclude>
+    <ClInclude Include="app\control.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="util\assert.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="log\include\writeable.h">
+      <Filter>log\include</Filter>
+    </ClInclude>
+    <ClInclude Include="util\insLog.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,55 +20,44 @@
 
 namespace inspire {
 
-   LogManager::LogManager() : _path(NULL)
+   insLogManager::insLogManager() : IControl(MOD_LOG), _path(NULL)
    {
-      _path = LOG_PATH;
-      init();
    }
 
-   LogManager::~LogManager()
+   insLogManager::~insLogManager()
    {
       _path = NULL;
    }
 
-   LogManager* LogManager::Instance()
+   void insLogManager::initialize()
    {
-      static LogManager _LogManager;
-      return &_LogManager;
+      _path = LOG_PATH;
    }
 
-   void LogManager::init()
+   void insLogManager::active()
    {
-      XMLDocument doc;
-      bool ret = doc.LoadXML("config.xml");
-      if (!ret)
-      {
-         __asm int 3;
-         return;
-      }
+      // init member
+   }
 
-      IXMLNode* root = doc.FirstChild("config");
-      if (root)
+   void insLogManager::destroy()
+   {
+      // destroy member
+      _path = NULL;
+   }
+
+   void insLogManager::writeLog(const int priority, const char* data)
+   {
+      IWriteable* inst = _logMap[priority];
+      if (NULL != inst)
       {
-         IXMLNode* node = root->FirstChild("logs");
-         if (node)
-         {
-            IXMLNode* child = node->FirstChild("item");
-            while (child)
-            {
-               const char* category = child->GetAttributeValue("category");
-               const char* filename = child->GetAttributeValue("filename");
-               const char* priority = child->GetAttributeValue("priority");
-               int prio = atoi(priority);
-               if (category)
-               {
-                  LogFile* log = new LogFile(filename, prio);
-                  //_categorys.push_back(log);
-               }
-               child = node->NextSibling("item");
-            }
-         }
+         inst->writeLog(priority, data);
       }
    }
 
+   insLogManager extLogMgr;
+
+   IWriteable* getLogMgr()
+   {
+      return &extLogMgr;
+   }
 }

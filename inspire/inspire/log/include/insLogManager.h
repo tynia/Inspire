@@ -18,26 +18,32 @@
 #ifndef _INSPIRE_LOG_MANAGER_H_
 #define _INSPIRE_LOG_MANAGER_H_
 
-#include "noncopyable.h"
+#include "control.h"
+#include "writeable.h"
 
 namespace inspire {
 
-static const char* LOG_PATH = "./Logs/";
+   static const char* LOG_PATH = "./appLogs/";
 
-class LogManager : public noncopyable
-{
-public:
-   virtual ~LogManager();
-   static LogManager* Instance();
+   class insLogManager : public IControl, public IWriteable
+   {
+   public:
+      insLogManager();
 
-private:
-   LogManager() ;
-   void init();
+      virtual ~insLogManager();
 
-private:
-   const char* _path;
-};
+      virtual void initialize();
 
+      virtual void active();
+
+      virtual void destroy();
+
+      virtual void writeLog(const int priority, const char* data);
+
+   private:
+      const char* _path;
+      std::map<unsigned int, IWriteable*> _logMap;
+   };
 }
 
 #endif

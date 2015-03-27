@@ -1,9 +1,25 @@
 #ifndef _INSPIRE_LOG_UITL_H_
 #define _INSPIRE_LOG_UITL_H_
 
-#include "interface.h"
+#include "writeable.h"
 
 namespace inspire {
+   /*
+   * the bigger of value, the more logs
+   **/
+   enum PRIORITY
+   {
+      LOG_ALWAYS = 0,   // print always
+      LOG_EMERG = 100,
+      LOG_FATAL = 200,
+      LOG_CRITICAL = 300,
+      LOG_ERROR = 400,
+      LOG_WARNING = 500,
+      LOG_DEBUG = 600,
+      LOG_NOTICE = 700, // for expected
+      LOG_INFO = 800,
+      LOG_DEFAULT = LOG_DEBUG,
+   };
 
    inline const char* typeString(const int type)
    {
@@ -40,9 +56,16 @@ namespace inspire {
       return str;
    }
 
-   inline void Log(const int level, const char* func,
-                   const char* file, const int line,
-                   const char* fmt, ...)
+   const static char *logFmt = "%04d-%02d-%02d-%02d.%02d.%02d"NEWLINE
+                               "Level: %s"NEWLINE
+                               "PID: %-37lldTID: %lld"NEWLINE
+                               "Function: %-32s"NEWLINE
+                               "File: %s"NEWLINE"Line: %d"NEWLINE
+                               "Message:"NEWLINE"%s"NEWLINE NEWLINE;
+
+   inline void flushToFile(const int level, const char* func,
+                           const char* file, const int line,
+                           const char* fmt, ...)
    {
       struct tm otm;
       GetLocalTime(&otm);
@@ -54,12 +77,12 @@ namespace inspire {
       va_end(ap);
 
       char buffer[LOG_BUFFER_SIZE] = { 0 };
-      sprintf_s(buffer, LOG_BUFFER_SIZE, formatLog,
+      sprintf_s(buffer, LOG_BUFFER_SIZE, logFmt,
                 otm.tm_year + 1900, otm.tm_mon + 1, otm.tm_mday,
                 otm.tm_hour, otm.tm_min, otm.tm_sec,
                 typeString(level), GetProcessID(), GetThreadID(),
                 func, file, line, userInfo);
-      //   LogManager::Instance()->WriteLog(level, buffer) ;
+      getLogMgr()->writeLog(level, buffer);
    }
 }
 #endif
