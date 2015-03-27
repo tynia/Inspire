@@ -10,7 +10,7 @@ namespace inspire {
    public:
       virtual ~IProcessor() {}
 
-      virtual void onRead (CEvent& ev) = 0;
+      virtual void doProcess(CEvent& ev) = 0;
    };
 }
 #endif

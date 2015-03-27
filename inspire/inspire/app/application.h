@@ -1,5 +1,7 @@
-#ifndef _INSPIRE_APPLICATION_H_
-#define _INSPIRE_APPLICATION_H_
+#ifndef _INSPIRE_APPLICATION_INTERFACE_H_
+#define _INSPIRE_APPLICATION_INTERFACE_H_
+
+#include "inspire.h"
 
 namespace inspire {
 

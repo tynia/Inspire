@@ -18,23 +18,40 @@
 #ifndef _INSPIRE_LOG_FILE_H_
 #define _INSPIRE_LOG_FILE_H_
 
-#include "include/logHelper.h"
-#include "include/log.h"
+#include "interface.h"
+#include "log.h"
 
 namespace inspire {
 
-class LogFile
-{
-public:
-   LogFile(const char* filename, int priority = PRIO_DEBUG);
-   virtual ~LogFile();
+   class LogFile
+   {
+   public:
+      LogFile(const char* filename, int priority = LOG_DEBUG);
+      virtual ~LogFile();
 
-   virtual void WriteLog(int priority, const char* str);
+      virtual void WriteLog(int priority, const char* str);
 
-private:
-   int  _priority;
-   char _filename[ MAX_LOG_FILE_NAME + 1 ] ;
-};
+   private:
+      int  _priority;
+      char _filename[ MAX_LOG_FILE_NAME + 1 ] ;
+   };
+
+   class insLogFile : public IWriteable
+   {
+   public:
+      insLogFile(const char* name, const int priority = LOG_DEBUG);
+      virtual ~insLogFile() {};
+
+      virtual void writeLog(const int priority, const char* data);
+
+   protected:
+      void _init(const char* name);
+
+   protected:
+      int  _priority;
+      // mutexLock
+      char _filename[MAX_LOG_FILE_NAME + 1];
+   };
 
 }
 #endif

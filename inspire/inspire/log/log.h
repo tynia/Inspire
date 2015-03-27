@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_PLATFORM_H_
-#define _INSPIRE_PLATFORM_H_
+#ifndef _INSPIRE_LOG_H_
+#define _INSPIRE_LOG_H_
 
 // defined NULL
 #ifdef _CXX_11
@@ -18,19 +18,21 @@ typedef long long int int64;
 #endif
 
 #ifdef _WIN32
-// include socket
-#include <Winsock2.h>
-#include <ws2tcpip.h>
-#pragma comment(lib, "Ws2_32.lib")
 // include windows.h
 #include <windows.h>
 // include STL
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <ctime>
 #include <fstream>
 #include <map>
 #else
+// header in Linux
 #endif
+
+// macros
+#define LOG_BUFFER_SIZE 4096
+#define MAX_LOG_FILE_NAME 255
 
 #endif

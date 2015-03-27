@@ -21,6 +21,16 @@
 #include "inspire.h"
 #include "include/log.h"
 
+inline void Panic()
+{
+#ifdef _DEBUG
+   __asm int 3;
+#else
+   int *p = NULL;
+   *p = 1;
+#endif
+}
+
 #define __LOG_WRAPPER(LEVEL, fmt, ...)                      \
 do                                                          \
 {                                                           \
@@ -34,7 +44,7 @@ do                                                          \
 {                                                           \
    if (!condition)                                          \
    {                                                        \
-      inspire::Panic();                                     \
+      Panic();                                              \
    }                                                        \
 }while(false)
 #else
@@ -54,7 +64,7 @@ do                                                          \
    {                                                        \
       inspire::Log(inspire::PRIO_ERROR, __FUNCTION__,       \
                     __FILE__, __LINE__, fmt, __VA_ARGS__) ; \
-      inspire::Panic() ;                                    \
+      Panic() ;                                             \
    }                                                        \
 }while(false)
 #else

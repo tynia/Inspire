@@ -1,8 +1,9 @@
 #ifndef _INSPIRE_NET_SERVICE_H_
 #define _INSPIRE_NET_SERVICE_H_
 
-#include "net.h"
+#include "inspire.h"
 #include "thread.h"
+
 namespace inspire {
 
    class IProcessor;

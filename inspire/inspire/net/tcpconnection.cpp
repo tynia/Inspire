@@ -1,7 +1,7 @@
 #include "tcpconnection.h"
 #include "iostream.h"
-#include "eventid.h"
-#include "event.h"
+#include "event/eventid.h"
+#include "event/event.h"
 
 namespace inspire {
 

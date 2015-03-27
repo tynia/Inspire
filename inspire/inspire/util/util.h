@@ -3,6 +3,16 @@
 
 namespace inspire {
 
+   inline void Panic()
+   {
+#ifdef _DEBUG
+      __asm int 3;
+#else
+      int *p = NULL;
+      *p = 1;
+#endif
+   }
+
    namespace util {
 
       inline const unsigned int roundUp(const unsigned int original,

@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_UTIL_STREAM_H_
-#define _INSPIRE_UTIL_STREAM_H_
+#ifndef _INSPIRE_CONTEXT_BUFFER_H_
+#define _INSPIRE_CONTEXT_BUFFER_H_
 
 #include "refStream.h"
 

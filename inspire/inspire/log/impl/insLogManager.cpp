@@ -15,11 +15,8 @@
    
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
-#include "platform.h"
-#include "logManager.h"
-#include "XMLNode.h"
-#include "XMLDocument.h"
-#include "logFile.h"
+#include "include/insLogManager.h"
+#include "include/insLogFile.h"
 
 namespace inspire {
 

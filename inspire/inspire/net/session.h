@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_NET_SESSION_H_
 #define _INSPIRE_NET_SESSION_H_
 
-#include "net.h"
+#include "inspire.h"
 #include "tcpconnection.h"
 
 namespace inspire {

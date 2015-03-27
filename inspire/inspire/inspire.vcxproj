@@ -84,15 +84,16 @@
     <ClInclude Include="bson\include\bsonobj.h" />
     <ClInclude Include="bson\include\element.h" />
     <ClInclude Include="bson\util\bson.h" />
-    <ClInclude Include="log\include\log.h" />
-    <ClInclude Include="log\include\logFile.h" />
+    <ClInclude Include="log\include\interface.h" />
+    <ClInclude Include="log\include\insLogFile.h" />
     <ClInclude Include="log\include\logHelper.h" />
-    <ClInclude Include="log\include\logManager.h" />
+    <ClInclude Include="log\include\insLogManager.h" />
+    <ClInclude Include="log\include\util.h" />
+    <ClInclude Include="log\log.h" />
     <ClInclude Include="net\connection.h" />
     <ClInclude Include="net\event\event.h" />
     <ClInclude Include="net\event\eventid.h" />
     <ClInclude Include="net\helper\nethelper.h" />
-    <ClInclude Include="net\net.h" />
     <ClInclude Include="net\service.h" />
     <ClInclude Include="net\serviceManager.h" />
     <ClInclude Include="net\session.h" />
@@ -101,19 +102,22 @@
     <ClInclude Include="stream\basestream.h" />
     <ClInclude Include="stream\endian\endian.h" />
     <ClInclude Include="stream\iostream.h" />
-    <ClInclude Include="stream\util.h" />
+    <ClInclude Include="stream\stream.h" />
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\threadController.h" />
     <ClInclude Include="util\contextBuffer.h" />
+    <ClInclude Include="util\inspire.h" />
     <ClInclude Include="util\noncopyable.h" />
+    <ClInclude Include="util\oss\ossFile.h" />
+    <ClInclude Include="util\oss\system.h" />
     <ClInclude Include="util\refStream.h" />
     <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp" />
     <ClCompile Include="bson\impl\element.cpp" />
-    <ClCompile Include="log\impl\logFile.cpp" />
-    <ClCompile Include="log\impl\logManager.cpp" />
+    <ClCompile Include="log\impl\insLogFile.cpp" />
+    <ClCompile Include="log\impl\insLogManager.cpp" />
     <ClCompile Include="net\connection.cpp" />
     <ClCompile Include="net\service.cpp" />
     <ClCompile Include="net\session.cpp" />
@@ -121,6 +125,7 @@
     <ClCompile Include="stream\basestream.cpp" />
     <ClCompile Include="stream\iostream.cpp" />
     <ClCompile Include="util\contextBuffer.cpp" />
+    <ClCompile Include="util\oss\ossFile.cpp" />
     <ClCompile Include="util\refStream.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

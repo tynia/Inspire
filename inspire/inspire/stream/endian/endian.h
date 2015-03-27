@@ -77,7 +77,7 @@ do                                              \
 // Endian used for server
 // client convert the data to match server
 // so server do not need to convert any data
-#include "util.h"
+#include "stream.h"
 
 namespace inspire {
 
