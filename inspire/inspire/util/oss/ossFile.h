@@ -10,6 +10,7 @@ namespace inspire {
    class ossFile
    {
    public:
+      ossFile();
       ossFile(const char* filename);
       virtual ~ossFile();
 

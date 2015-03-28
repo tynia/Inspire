@@ -81,6 +81,7 @@ do                                              \
 
 namespace inspire {
 
+   extern bool g_endian;
    class Endian
    {
    public:

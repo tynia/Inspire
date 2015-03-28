@@ -2,6 +2,7 @@
 #include "iostream.h"
 #include "event/eventid.h"
 #include "event/event.h"
+#include "inspire.h"
 
 namespace inspire {
 
@@ -141,7 +142,8 @@ namespace inspire {
    {
       _addr.sin_family = AF_INET;
       _addr.sin_port = ::htons(port);
-      _addr.sin_addr.s_addr = inet_addr(ip);
+      inet_pton(AF_INET, ip, &_addr.sin_addr.s_addr);
+      //_addr.sin_addr.s_addr = inet_addr(ip);
    }
 
    void TCPConnection::_recvLen(char* buffer, unsigned int recvLen)

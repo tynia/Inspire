@@ -58,6 +58,9 @@
     <Filter Include="insLog\impl">
       <UniqueIdentifier>{f940e301-3534-4081-bc0c-805575837ca1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{874b268d-0d1e-421d-8a96-03dff4024311}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\application.h">
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="inslog\impl\util.cpp">
       <Filter>insLog\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="test\main.cpp">
+      <Filter>test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

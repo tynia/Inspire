@@ -27,7 +27,7 @@ namespace inspire {
    public:
       virtual ~IWriteLog() {}
 
-      virtual void writeLog(const int priority, const char* data);
+      virtual void writeLog(const int priority, const char* data) = 0;
    };
 
    class insLogFile : public IWriteLog

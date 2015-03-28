@@ -1,20 +1,22 @@
 #include "include/log.h"
+#include <wchar.h>
 
 namespace inspire {
 
    const static char *logFmt = "%04d-%02d-%02d-%02d.%02d.%02d"NEWLINE
                                "Level: %s"NEWLINE
-                               "PID: %-37lldTID: %lld"NEWLINE
                                "Function: %-32s"NEWLINE
                                "File: %s"NEWLINE"Line: %d"NEWLINE
                                "Message:"NEWLINE"%s"NEWLINE NEWLINE;
+   //                               "PID: %-37lldTID: %lld"NEWLINE
 
    void flushToFile(const int level, const char* func,
                     const char* file, const int line,
                     const char* fmt, ...)
    {
       struct tm otm;
-      GetLocalTime(&otm);
+      time_t tt = time(NULL);
+      ::localtime_s(&otm, &tt);
 
       char userInfo[LOG_BUFFER_SIZE] = { 0 };
       va_list ap;
@@ -26,7 +28,7 @@ namespace inspire {
       sprintf_s(buffer, LOG_BUFFER_SIZE, logFmt,
                 otm.tm_year + 1900, otm.tm_mon + 1, otm.tm_mday,
                 otm.tm_hour, otm.tm_min, otm.tm_sec,
-                typeString(level), GetProcessID(), GetThreadID(),
+                typeString(level), //GetCurrentProcessId(), GetCurrentThreadId(),
                 func, file, line, userInfo);
       getLogMgr()->writeLog(level, buffer);
    }

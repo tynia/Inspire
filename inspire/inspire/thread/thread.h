@@ -3,6 +3,7 @@
 
 namespace inspire {
 
+   class IService;
    typedef void (*THREAD_ENTRY)(IService*, void*);
 
    class IThread

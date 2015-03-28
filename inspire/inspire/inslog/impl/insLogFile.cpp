@@ -25,7 +25,7 @@ namespace inspire {
       _init(name);
    }
 
-   void insLogFile::writeLog( const int priority, const char* data )
+   void insLogFile::writeLog(const int priority, const char* data)
    {
       if (priority <= _priority)
       {
@@ -42,8 +42,8 @@ namespace inspire {
       }
    }
 
-   void insLogFile::_init( const char* name )
+   void insLogFile::_init(const char* name)
    {
-      sprintf_s(_filename, "%s.%s.%d.%d.%d.%d.%d.%d.log", name, typeString(_priority));
+      sprintf_s(_filename, "%s.%s.log", name, typeString(_priority));
    }
 }

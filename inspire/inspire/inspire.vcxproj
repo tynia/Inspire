@@ -126,6 +126,7 @@
     <ClCompile Include="net\tcpconnection.cpp" />
     <ClCompile Include="stream\basestream.cpp" />
     <ClCompile Include="stream\iostream.cpp" />
+    <ClCompile Include="test\main.cpp" />
     <ClCompile Include="util\contextBuffer.cpp" />
     <ClCompile Include="util\oss\ossFile.cpp" />
     <ClCompile Include="util\refStream.cpp" />

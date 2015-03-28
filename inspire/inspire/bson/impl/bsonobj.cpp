@@ -9,7 +9,7 @@ namespace inspire {
 
    BSONDocument::BSONDocument(const char* data)
    {
-      _parse(data);
+      //_parse(data);
    }
 
    BSONDocument::BSONDocument(const BSONDocument& rhs)

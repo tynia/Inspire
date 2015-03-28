@@ -1,7 +1,7 @@
 #include "iostream.h"
 #include <cstring>
 
-#include "net.h"
+#include "inspire.h"
 
 namespace inspire {
 

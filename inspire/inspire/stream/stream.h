@@ -4,7 +4,7 @@
 namespace inspire {
 
 #ifndef _INSPIRE_SERVER_
-   extern bool g_endian = false;
+   static bool g_endian = false;
 
    inline void setEndian(bool endian)
    {

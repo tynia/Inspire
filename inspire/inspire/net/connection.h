@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_NET_CONNECTION_H_
 #define _INSPIRE_NET_CONNECTION_H_
 
-#include "net.h"
+#include "inspire.h"
 
 namespace inspire {
 

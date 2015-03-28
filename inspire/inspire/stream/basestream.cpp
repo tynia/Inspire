@@ -1,5 +1,6 @@
 #include "basestream.h"
 #include "stream.h"
+#include "util.h"
 
 namespace inspire {
 
