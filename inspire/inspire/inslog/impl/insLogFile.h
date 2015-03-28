@@ -18,13 +18,19 @@
 #ifndef _INSPIRE_LOG_FILE_H_
 #define _INSPIRE_LOG_FILE_H_
 
-#include "log.h"
-#include "util.h"
-#include "writeable.h"
+#include "include/log.h"
 
 namespace inspire {
 
-   class insLogFile : public IWriteable
+   class IWriteLog
+   {
+   public:
+      virtual ~IWriteLog() {}
+
+      virtual void writeLog(const int priority, const char* data);
+   };
+
+   class insLogFile : public IWriteLog
    {
    public:
       insLogFile(const char* name, const int priority = LOG_DEBUG);

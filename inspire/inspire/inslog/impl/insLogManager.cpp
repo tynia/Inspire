@@ -15,12 +15,11 @@
    
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
-#include "include/insLogManager.h"
-#include "include/insLogFile.h"
+#include "insLogManager.h"
 
 namespace inspire {
 
-   insLogManager::insLogManager() : IControl(MOD_LOG), _path(NULL)
+   insLogManager::insLogManager() : ILogControl(), _path(NULL)
    {
    }
 
@@ -31,7 +30,7 @@ namespace inspire {
 
    void insLogManager::initialize()
    {
-      _path = LOG_PATH;
+      _path = DEFAULT_LOG;
    }
 
    void insLogManager::active()
@@ -47,17 +46,13 @@ namespace inspire {
 
    void insLogManager::writeLog(const int priority, const char* data)
    {
-      IWriteable* inst = _logMap[priority];
+      IWriteLog* inst = _logMap[priority];
       if (NULL != inst)
       {
          inst->writeLog(priority, data);
       }
    }
 
+   //////////////////////////////////////////////////////////////////////////
    insLogManager extLogMgr;
-
-   IWriteable* getLogMgr()
-   {
-      return &extLogMgr;
-   }
 }

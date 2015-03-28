@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_LOG_H_
-#define _INSPIRE_LOG_H_
+#ifndef _INSPIRE_LOG_PRE_DEFINED_H_
+#define _INSPIRE_LOG_PRE_DEFINED_H_
 
 // defined NULL
 #ifdef _CXX_11

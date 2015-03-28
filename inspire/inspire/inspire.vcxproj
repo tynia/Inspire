@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\app;$(ProjectDir)\bson;$(ProjectDir)\event;$(ProjectDir)\log;$(ProjectDir)\net;$(ProjectDir)\processor;$(ProjectDir)\stream;$(ProjectDir)\thread;$(ProjectDir)\util;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\app;$(ProjectDir)\bson;$(ProjectDir)\event;$(ProjectDir)\insLog;$(ProjectDir)\net;$(ProjectDir)\processor;$(ProjectDir)\stream;$(ProjectDir)\thread;$(ProjectDir)\util;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -85,11 +85,10 @@
     <ClInclude Include="bson\include\bsonobj.h" />
     <ClInclude Include="bson\include\element.h" />
     <ClInclude Include="bson\util\bson.h" />
-    <ClInclude Include="log\include\writeable.h" />
-    <ClInclude Include="log\include\insLogFile.h" />
-    <ClInclude Include="log\include\insLogManager.h" />
-    <ClInclude Include="log\include\util.h" />
-    <ClInclude Include="log\log.h" />
+    <ClInclude Include="inslog\impl\insLogFile.h" />
+    <ClInclude Include="inslog\impl\insLogManager.h" />
+    <ClInclude Include="inslog\include\log.h" />
+    <ClInclude Include="inslog\platform.h" />
     <ClInclude Include="net\connection.h" />
     <ClInclude Include="net\event\event.h" />
     <ClInclude Include="net\event\eventid.h" />
@@ -118,8 +117,9 @@
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp" />
     <ClCompile Include="bson\impl\element.cpp" />
-    <ClCompile Include="log\impl\insLogFile.cpp" />
-    <ClCompile Include="log\impl\insLogManager.cpp" />
+    <ClCompile Include="inslog\impl\insLogFile.cpp" />
+    <ClCompile Include="inslog\impl\insLogManager.cpp" />
+    <ClCompile Include="inslog\impl\util.cpp" />
     <ClCompile Include="net\connection.cpp" />
     <ClCompile Include="net\service.cpp" />
     <ClCompile Include="net\session.cpp" />

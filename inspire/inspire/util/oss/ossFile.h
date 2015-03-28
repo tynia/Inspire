@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_OSS_FILE_H_
 #define _INSPIRE_OSS_FILE_H_
 
-#include "inspire.h"
+#include "platform.h"
 
 namespace inspire {
 

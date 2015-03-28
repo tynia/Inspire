@@ -19,7 +19,7 @@
 #define _INSPIRE_LOG_HELPER_H_
 
 #include "inspire.h"
-#include "util.h"
+#include "include/log.h"
 
 #define __LOG_WRAPPER(LEVEL, fmt, ...)                         \
 do                                                             \

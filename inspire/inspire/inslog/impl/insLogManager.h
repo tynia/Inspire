@@ -15,36 +15,40 @@
    
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
-#include "include/insLogFile.h"
-#include "include/util.h"
+#ifndef _INSPIRE_LOG_MANAGER_H_
+#define _INSPIRE_LOG_MANAGER_H_
+
+#include "insLogFile.h"
 
 namespace inspire {
 
-   insLogFile::insLogFile(const char* name, const int priority) : _priority(priority)
-   {
-      memset(_filename, 0, MAX_LOG_FILE_NAME + 1);
-      _init(name);
-   }
+   static const char* DEFAULT_LOG = "./appLogs/";
 
-   void insLogFile::writeLog( const int priority, const char* data )
+   class insLogManager : public ILogControl
    {
-      if (priority <= _priority)
-      {
-         return;
-      }
+   public:
+      insLogManager();
 
-      std::fstream file;
-      file.open(_filename, std::ios::out | std::ios::app) ;
-      if (file.is_open())
-      {
-         file.tellg();
-         file.write(data, strlen(data)) ;
-         file.close();
-      }
-   }
+      virtual ~insLogManager();
 
-   void insLogFile::_init( const char* name )
+      virtual void initialize();
+
+      virtual void active();
+
+      virtual void destroy();
+
+      virtual void writeLog(const int priority, const char* data);
+
+   private:
+      const char* _path;
+      std::map<unsigned int, IWriteLog*> _logMap;
+   };
+
+   extern insLogManager extLogMgr;
+   inline ILogControl* getLogMgr()
    {
-      sprintf_s(_filename, "%s.%s.%d.%d.%d.%d.%d.%d.log", name, typeString(_priority));
+      return &extLogMgr;
    }
 }
+
+#endif

@@ -15,35 +15,35 @@
    
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
-#ifndef _INSPIRE_LOG_MANAGER_H_
-#define _INSPIRE_LOG_MANAGER_H_
-
-#include "control.h"
-#include "writeable.h"
+#include "insLogFile.h"
 
 namespace inspire {
 
-   static const char* LOG_PATH = "./appLogs/";
-
-   class insLogManager : public IControl, public IWriteable
+   insLogFile::insLogFile(const char* name, const int priority) : _priority(priority)
    {
-   public:
-      insLogManager();
+      memset(_filename, 0, MAX_LOG_FILE_NAME + 1);
+      _init(name);
+   }
 
-      virtual ~insLogManager();
+   void insLogFile::writeLog( const int priority, const char* data )
+   {
+      if (priority <= _priority)
+      {
+         return;
+      }
 
-      virtual void initialize();
+      std::fstream file;
+      file.open(_filename, std::ios::out | std::ios::app) ;
+      if (file.is_open())
+      {
+         file.tellg();
+         file.write(data, strlen(data)) ;
+         file.close();
+      }
+   }
 
-      virtual void active();
-
-      virtual void destroy();
-
-      virtual void writeLog(const int priority, const char* data);
-
-   private:
-      const char* _path;
-      std::map<unsigned int, IWriteable*> _logMap;
-   };
+   void insLogFile::_init( const char* name )
+   {
+      sprintf_s(_filename, "%s.%s.%d.%d.%d.%d.%d.%d.log", name, typeString(_priority));
+   }
 }
-
-#endif
