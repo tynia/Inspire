@@ -1,9 +1,7 @@
 #ifndef _INSPIRE_NET_SESSION_H_
 #define _INSPIRE_NET_SESSION_H_
 
-#include "inspire.h"
-#include "tcpconnection.h"
-#include "event/eventhandler.h"
+#include "async/asyncconnection.h"
 #include "thread.h"
 
 namespace inspire {
@@ -11,18 +9,11 @@ namespace inspire {
    class IProcessor;
    class IThread;
 
-   class ISession : public INetEventHandler
+   class ISession : public INetAsyncEventHandler
    {
    public:
       virtual ~ISession() {};
-
-      virtual void init();
-
-      virtual void run(IProcessor* processor);
-
-      virtual void destroy();
-
-      virtual void sendEvent(CEvent& ev);
+      virtual void run(IProcessor* processor) = 0;
    };
 
    class Session : public ISession, public IThread
@@ -32,9 +23,12 @@ namespace inspire {
       virtual ~Session();
 
    public:
+      // ISession
+      virtual void run(IProcessor* processor);
+
       // IThread
       virtual void init();
-      virtual void run (IProcessor* processor);
+      virtual void run();
       virtual void destroy();
 
       // INetHandler
@@ -42,9 +36,8 @@ namespace inspire {
       virtual void OnEvent(CEvent& ev);
 
    protected:
-      
+      IAsyncConnection *_conn;
 #ifdef _WIN32
-      SOCKET  _conn;
       HANDLE  _hIOCP;
 #else
       int _fd;

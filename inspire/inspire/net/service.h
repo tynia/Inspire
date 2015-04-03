@@ -7,7 +7,7 @@
 namespace inspire {
 
    class IProcessor;
-   class TCPConnection;
+   class Connection;
    class IControl;
    class ISession;
 

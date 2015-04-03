@@ -35,5 +35,6 @@ typedef long long int int64;
 #endif
 
 #include "assert.h"
+#include "insLog.h"
 
 #endif

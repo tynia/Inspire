@@ -1,5 +1,5 @@
 #include "service.h"
-#include "tcpconnection.h"
+#include "connection.h"
 #include "async/ioservice.h"
 
 namespace inspire {
@@ -7,8 +7,8 @@ namespace inspire {
    Service::Service(const unsigned int servicePort, IControl* threadMng) : _stop(true), _threadMng(threadMng)
    {
       INSPIRE_ASSERT((NULL != threadMng));
-      _server = new TCPConnection(servicePort);
-      if (NULL == _server)
+      //_async = new Connection(servicePort);
+      if (NULL == _async)
       {
          //LogError
       }
@@ -16,17 +16,17 @@ namespace inspire {
 
    Service::~Service()
    {
-      if (NULL != _server)
+      if (NULL != _async)
       {
-         delete _server;
-         _server = NULL;
+         delete _async;
+         _async = NULL;
       }
    }
 
    void Service::initService()
    {
-      _server->bind();
-      _server->listen();
+      _async->bind();
+      _async->listen();
       _ioservice = new IOService();
       if (NULL == _ioservice)
       {
@@ -52,7 +52,7 @@ namespace inspire {
          int rc = 0;
          int fd = 0;
          sockaddr_in addr;
-         _server->accept(fd, addr);
+         _async->accept(fd, addr);
 
          //ISession* ss = new ISession(fd);
          //_sessions.insert(std::make_pair(fd, ss));

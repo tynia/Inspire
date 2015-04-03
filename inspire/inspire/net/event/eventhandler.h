@@ -12,6 +12,16 @@ namespace inspire {
 
       virtual void sendEvent(CEvent& ev) = 0;
 
+      virtual void recvEvent(CEvent& ev) = 0;
+   };
+
+   class INetAsyncEventHandler
+   {
+   public:
+      virtual ~INetAsyncEventHandler() {}
+
+      virtual void sendEvent(CEvent& ev) = 0;
+
       virtual void onEvent(CEvent& ev) = 0;
    };
 }
