@@ -3,35 +3,52 @@
 
 #include "inspire.h"
 #include "tcpconnection.h"
+#include "event/eventhandler.h"
+#include "thread.h"
 
 namespace inspire {
 
    class IProcessor;
+   class IThread;
 
-   class ISession
+   class ISession : public INetEventHandler
    {
    public:
-      virtual ~ISession() {}
-      virtual void init() = 0;
-      virtual void run(IProcessor* processor) = 0;
-      virtual void destroy() = 0;
-      virtual void onEventReceived(CEvent& ev) = 0;
+      virtual ~ISession() {};
+
+      virtual void init();
+
+      virtual void run(IProcessor* processor);
+
+      virtual void destroy();
+
+      virtual void sendEvent(CEvent& ev);
    };
 
-   class Session
+   class Session : public ISession, public IThread
    {
    public:
       Session(const int socket);
       virtual ~Session();
 
    public:
+      // IThread
       virtual void init();
       virtual void run (IProcessor* processor);
       virtual void destroy();
-      virtual void onEventReceived(CEvent& ev);
+
+      // INetHandler
+      virtual void SendEvent(CEvent& ev);
+      virtual void OnEvent(CEvent& ev);
 
    protected:
-      TCPConnection* _conn;
+      
+#ifdef _WIN32
+      SOCKET  _conn;
+      HANDLE  _hIOCP;
+#else
+      int _fd;
+#endif
    };
 }
 #endif

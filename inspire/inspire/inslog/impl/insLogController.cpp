@@ -15,40 +15,45 @@
    
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
-#ifndef _INSPIRE_LOG_MANAGER_H_
-#define _INSPIRE_LOG_MANAGER_H_
-
-#include "insLogFile.h"
+#include "insLogController.h"
 
 namespace inspire {
 
-   static const char* DEFAULT_LOG = "./appLogs/";
-
-   class insLogManager : public ILogControl
+   insLogController::insLogController() : ILogControl(), _path(NULL)
    {
-   public:
-      insLogManager();
-
-      virtual ~insLogManager();
-
-      virtual void initialize();
-
-      virtual void active();
-
-      virtual void destroy();
-
-      virtual void writeLog(const int priority, const char* data);
-
-   private:
-      const char* _path;
-      std::map<unsigned int, IWriteLog*> _logMap;
-   };
-
-   extern insLogManager extLogMgr;
-   inline ILogControl* getLogMgr()
-   {
-      return &extLogMgr;
    }
-}
 
-#endif
+   insLogController::~insLogController()
+   {
+      _path = NULL;
+   }
+
+   void insLogController::initialize()
+   {
+      _path = DEFAULT_LOG;
+   }
+
+   void insLogController::active()
+   {
+      // init member
+   }
+
+   void insLogController::destroy()
+   {
+      // destroy member
+      _path = NULL;
+   }
+
+   void insLogController::writeLog(const int priority, const char* data)
+   {
+      IWriteLog* inst = _logMap[priority];
+      if (NULL != inst)
+      {
+         inst->writeLog(priority, data);
+      }
+   }
+
+   //////////////////////////////////////////////////////////////////////////
+   // globle controller
+   insLogController extLogMgr;
+}

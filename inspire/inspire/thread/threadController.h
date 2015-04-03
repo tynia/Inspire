@@ -12,9 +12,6 @@ namespace inspire {
    class threadController : public IControl
    {
    public:
-      static threadController* instance();
-
-   private:
       threadController();
       ~threadController();
    };

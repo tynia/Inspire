@@ -1,28 +1,30 @@
 #ifndef _INSPIRE_NET_HELPER_H_
 #define _INSPIRE_NET_HELPER_H_
 
-#include "net.h"
+#include "inspire.h"
 
 namespace inspire {
 
-   inline int initNetModule()
+   inline bool initNetModule()
    {
       int rc = NO_ERROR;
 #ifdef _WIN32
       static bool initialized = false;
       // init
       WSADATA wsaData;
-      rc = WSAStartup(MAKEWORD(2, 2), &wsaData);
-      if (NO_ERROR != rc)
+      if ( !initialized )
       {
-         return WSAGetLastError(); 
-      }
-      else
-      {
+         rc = WSAStartup(MAKEWORD(2, 2), &wsaData);
+         if (NO_ERROR != rc)
+         {
+            //LogError
+            return false; 
+         }
          initialized = true;
       }
+      
 #endif
-      return rc;
+      return true;
    }
 
    inline void check(int& mask, int key, bool enable = true)
@@ -124,6 +126,5 @@ namespace inspire {
          //LogError("Failed to getnameinfo")
       }
    }
-
 }
 #endif

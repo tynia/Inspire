@@ -38,6 +38,6 @@ namespace inspire {
                     const char* file, const int line,
                     const char* fmt, ...);
 
-   extern ILogControl* getLogMgr();
+   extern ILogControl* getLogController();
 }
 #endif

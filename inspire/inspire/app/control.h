@@ -5,11 +5,16 @@ namespace inspire {
 
    enum modType
    {
-      MOD_APP,
-      MOD_LOG,
-      MOD_NET,
-      MOD_CTRL,
+      MOD_APP    = (1 << 16) | 1 << 0,
+      MOD_LOG    = (1 << 17) | 1 << 0,
+      MOD_NET    = (1 << 18) | 1 << 0,
+      MOD_CTRL   = (1 << 19) | 1 << 0,
    };
+
+//    inline bool isApp(IControl* ctrl)
+//    {
+//       return ctrl->id() & (1 << 16) ;
+//    }
 
    class IControl
    {

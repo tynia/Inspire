@@ -24,6 +24,7 @@ typedef long long int int64;
 #pragma comment(lib, "Ws2_32.lib")
 // include windows.h
 #include <windows.h>
+#include <process.h>
 // include STL
 #include <cstdlib>
 #include <cstdio>
@@ -32,5 +33,7 @@ typedef long long int int64;
 #include <map>
 #else
 #endif
+
+#include "assert.h"
 
 #endif

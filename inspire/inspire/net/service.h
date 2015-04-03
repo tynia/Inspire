@@ -13,18 +13,21 @@ namespace inspire {
 
    typedef std::map<int64, ISession*> SessionList;
 
-   class IService : public IThread
+   class IService
    {
    public:
       virtual ~IService() {}
 
-      virtual void run(IProcessor* processor) = 0;
+      virtual void run(IProcessor* processor) {};
+
+      virtual void notifyEvent( CEvent *ev) {};
    };
 
-   class Service : public IService
+   class IOService;
+   class Service : public IService, public IThread
    {
    public:
-      Service(const unsigned int port);
+      Service(const unsigned int servicePort, IControl* threadMng);
       virtual ~Service();
 
       void initService();
@@ -32,10 +35,11 @@ namespace inspire {
 
       virtual void run(IProcessor* processor);
    protected:
-      bool           _stop;
-      IControl*      _threadMng;
-      TCPConnection* _server;
-      SessionList    _sessions;
+      bool              _stop;
+      IControl*         _threadMng;
+      IAsyncConnection* _async;
+      IOService*        _ioservice;
+      SessionList       _sessions;
    };
 
 }

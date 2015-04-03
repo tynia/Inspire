@@ -2,18 +2,12 @@
 
 namespace inspire {
 
-   Session::Session(const int socket)
+   Session::Session(const int sock) : ISession(sock)
    {
-      _conn = new TCPConnection(socket);
-      if (NULL == _conn)
-      {
-         //LogError
-      }
    }
 
    Session::~Session()
    {
-      destroy();
    }
 
    void Session::init()
@@ -28,16 +22,6 @@ namespace inspire {
 
    void Session::destroy()
    {
-      if (NULL != _conn)
-      {
-         delete _conn;
-         _conn = NULL ;
-      }
+      close();
    }
-
-   void Session::onEventReceived(CEvent& ev)
-   {
-      // dispatch event
-   }
-
 }

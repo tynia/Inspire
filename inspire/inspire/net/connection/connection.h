@@ -8,15 +8,11 @@ namespace inspire {
    class IConnection
    {
    public:
-      IConnection();
-      IConnection(const int socket);
       virtual ~IConnection();
 
-      const int socket() const;
-      void close();
+      virtual const int socket() const = 0;
 
-   protected:
-      int _fd;    // socket
+      virtual const int64 id() const = 0;
    };
 }
 #endif
