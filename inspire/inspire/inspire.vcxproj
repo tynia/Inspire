@@ -93,7 +93,6 @@
     <ClInclude Include="net\async\asyncconnection.h" />
     <ClInclude Include="net\async\ioservice.h" />
     <ClInclude Include="net\connection.h" />
-    <ClInclude Include="net\entry\threadentry.h" />
     <ClInclude Include="net\event\event.h" />
     <ClInclude Include="net\event\eventhandler.h" />
     <ClInclude Include="net\event\eventid.h" />
@@ -107,6 +106,7 @@
     <ClInclude Include="stream\endian\endian.h" />
     <ClInclude Include="stream\iostream.h" />
     <ClInclude Include="stream\stream.h" />
+    <ClInclude Include="thread\entry\threadentry.h" />
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\threadController.h" />
     <ClInclude Include="util\assert.h" />

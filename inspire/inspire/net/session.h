@@ -7,7 +7,6 @@
 namespace inspire {
 
    class IProcessor;
-   class IThread;
 
    class ISession : public INetAsyncEventHandler
    {
@@ -16,7 +15,7 @@ namespace inspire {
       virtual void run(IProcessor* processor) = 0;
    };
 
-   class Session : public ISession, public IThread
+   class Session : public ISession, public threadEntity
    {
    public:
       Session(const int socket);

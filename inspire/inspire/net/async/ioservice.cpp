@@ -20,13 +20,11 @@ namespace inspire {
       _threadCount = (0 == threadCount ? 2 * cpuCount() : threadCount);
 
       // create i/o completion port
-      _hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, threadCount);
+      _hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0/*threadCount*/);
       if (NULL == _hIOCP)
       {
-         //LogError..
+         LogError("Failed to create iocp handle, rc = d%", GetLastError());
       }
-
-      _initWorkThread();
    }
 
    void IOService::bind(IAsyncConnection* conn)
@@ -35,17 +33,21 @@ namespace inspire {
       if (NULL != conn)
       {
          _conn = conn;
-         HANDLE h = CreateIoCompletionPort((HANDLE)_conn->socket(), _hIOCP, (ULONG_PTR)_conn->socket(), 0);
+         HANDLE h = CreateIoCompletionPort((HANDLE)_conn->socket(), _hIOCP, (ULONG_PTR)_conn->socket(), _threadCount);
          INSPIRE_ASSERT((_hIOCP == h));
          if (GetLastError())
          {
-            //LogError
+            LogError("Failed to bind socket to iocp handle, rc = ", GetLastError());
          }
       }
    }
 
    void IOService::run()
    {
+      _initWorkThread();
+
+      // start a listen thread for accept remote session
+      _threadMgr
       // active thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
@@ -73,11 +75,13 @@ namespace inspire {
       // create thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
-         _ctxThread[idx].hThread = (HANDLE)_beginthreadex(NULL, 0, /*callback*/NULL, NULL, CREATE_SUSPENDED, NULL);
+         _ctxThread[idx].hThread = (HANDLE)_beginthreadex(NULL, 0, /*callback*/NULL, &_ctxThread[idx], CREATE_SUSPENDED, NULL);
          if (INVALID_HANDLE_VALUE == _ctxThread[idx].hThread)
          {
-            //LogError
+            LogError("Failed to create work thread");
          }
+         _ctxThread[idx].idx = idx;
+         _ctxThread[idx]._ioservice = this;
       }
    }
 

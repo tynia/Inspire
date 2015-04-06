@@ -1,13 +1,15 @@
 #include "service.h"
 #include "connection.h"
 #include "async/ioservice.h"
+#include "async/asyncconnection.h"
+#include "tcpconnection.h"
 
 namespace inspire {
 
    Service::Service(const unsigned int servicePort, IControl* threadMng) : _stop(true), _threadMng(threadMng)
    {
       INSPIRE_ASSERT((NULL != threadMng));
-      //_async = new Connection(servicePort);
+      _async = new AsyncConnection(servicePort);
       if (NULL == _async)
       {
          //LogError
@@ -25,8 +27,7 @@ namespace inspire {
 
    void Service::initService()
    {
-      _async->bind();
-      _async->listen();
+      _async->bindAndListen();
       _ioservice = new IOService();
       if (NULL == _ioservice)
       {
@@ -34,7 +35,7 @@ namespace inspire {
          return;
       }
       _ioservice->init();
-      _ioservice->bind();
+      _ioservice->bind(_async);
    }
 
    void Service::stop()
@@ -46,7 +47,7 @@ namespace inspire {
    {
       initService();
       unsigned int _id = 0;
-
+      _ioservice->run();
       while (!_stop)
       {
          int rc = 0;

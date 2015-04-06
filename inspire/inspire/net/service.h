@@ -24,7 +24,7 @@ namespace inspire {
    };
 
    class IOService;
-   class Service : public IService, public IThread
+   class Service : public IService, public threadEntity
    {
    public:
       Service(const unsigned int servicePort, IControl* threadMng);

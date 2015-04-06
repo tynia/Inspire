@@ -51,7 +51,6 @@ namespace inspire {
 
    void AsyncConnection::sendEvent(CEvent& ev)
    {
-
    }
 
    void AsyncConnection::onEvent(CEvent& ev)

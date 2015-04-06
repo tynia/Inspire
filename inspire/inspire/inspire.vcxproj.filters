@@ -61,11 +61,11 @@
     <Filter Include="test">
       <UniqueIdentifier>{874b268d-0d1e-421d-8a96-03dff4024311}</UniqueIdentifier>
     </Filter>
-    <Filter Include="net\entry">
-      <UniqueIdentifier>{d371b5e4-074c-4ab7-bdf5-ba543d40822e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="net\async">
       <UniqueIdentifier>{867c4715-ffaa-42b8-9812-a2e229faffd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\entry">
+      <UniqueIdentifier>{7b786268-e4d1-43d1-bc93-be7bf6f14fd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +162,6 @@
     <ClInclude Include="net\event\eventhandler.h">
       <Filter>net\event</Filter>
     </ClInclude>
-    <ClInclude Include="net\entry\threadentry.h">
-      <Filter>net\entry</Filter>
-    </ClInclude>
     <ClInclude Include="net\servicecontroller.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -185,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="net\async\ioservice.h">
       <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\entry\threadentry.h">
+      <Filter>thread\entry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

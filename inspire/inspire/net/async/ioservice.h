@@ -7,6 +7,13 @@ namespace inspire {
 
    class IAsyncConnection;
 
+   enum IOEvent
+   {
+      IOE_ACCEPT,
+      IOE_RECV,
+      IOE_SEND,
+   };
+
    class IOService
    {
    public:
@@ -24,8 +31,16 @@ namespace inspire {
 
       void destroy();
 
+      void associate(int& _fd);
+
+      void postEvent(IOEvent ioe);
+
    protected:
       void _initWorkThread();
+      void _doAccept();
+      void _doSend();
+      void _doRecv();
+
    protected:
       IAsyncConnection* _conn;
       unsigned int _threadCount;

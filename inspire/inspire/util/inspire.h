@@ -14,6 +14,7 @@ typedef __int64 int64;
 #define NEWLINE "\r\n"
 #else
 typedef long long int int64;
+typedef void* HANDLE;
 #define NEWLINE "\n"
 #endif
 

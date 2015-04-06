@@ -28,13 +28,8 @@ namespace inspire {
    struct threadContext
    {
       IOService* _ioservice;
-#ifdef _WIN32
-      DWORD threadID;
+      int    idx;
       HANDLE hThread;
-#else
-      int64 threadID;
-      void* hThread;
-#endif
    };
 
    class IAsyncConnection : public tcpConnection, public INetAsyncEventHandler

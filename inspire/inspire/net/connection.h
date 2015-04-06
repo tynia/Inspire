@@ -6,7 +6,6 @@
 
 namespace inspire {
 
-   class COStream;
    class CEvent;
 
    class Connection : public tcpConnection, public INetEventHandler
