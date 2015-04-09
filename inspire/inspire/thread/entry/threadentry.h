@@ -16,5 +16,7 @@ namespace inspire {
       THREAD_SERVICE_ACCEPTOR,
       THREAD_SERVICE_SESSION,
    };
+
+   unsigned int __stdcall serviceListener(void* data);
 }
 #endif

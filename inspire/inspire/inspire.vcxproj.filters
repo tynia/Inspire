@@ -186,6 +186,12 @@
     <ClInclude Include="thread\entry\threadentry.h">
       <Filter>thread\entry</Filter>
     </ClInclude>
+    <ClInclude Include="util\mutex.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\lock.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -238,6 +244,21 @@
     </ClCompile>
     <ClCompile Include="net\tcpconnection.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\entry\threadentry.cpp">
+      <Filter>thread\entry</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\threadController.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="util\mutex.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\lock.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\thread.cpp">
+      <Filter>thread</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

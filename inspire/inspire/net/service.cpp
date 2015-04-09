@@ -27,6 +27,7 @@ namespace inspire {
 
    void Service::initService()
    {
+      _async->init();
       _async->bindAndListen();
       _ioservice = new IOService();
       if (NULL == _ioservice)

@@ -9,6 +9,7 @@ namespace inspire {
       MOD_LOG    = (1 << 17) | 1 << 0,
       MOD_NET    = (1 << 18) | 1 << 0,
       MOD_CTRL   = (1 << 19) | 1 << 0,
+      MOD_THREAD = (1 << 20) | 1 << 0,
    };
 
 //    inline bool isApp(IControl* ctrl)

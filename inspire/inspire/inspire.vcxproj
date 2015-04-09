@@ -113,6 +113,8 @@
     <ClInclude Include="util\contextBuffer.h" />
     <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
+    <ClInclude Include="util\lock.h" />
+    <ClInclude Include="util\mutex.h" />
     <ClInclude Include="util\noncopyable.h" />
     <ClInclude Include="util\oss\ossFile.h" />
     <ClInclude Include="util\oss\system.h" />
@@ -134,7 +136,12 @@
     <ClCompile Include="stream\basestream.cpp" />
     <ClCompile Include="stream\iostream.cpp" />
     <ClCompile Include="test\main.cpp" />
+    <ClCompile Include="thread\entry\threadentry.cpp" />
+    <ClCompile Include="thread\thread.cpp" />
+    <ClCompile Include="thread\threadController.cpp" />
     <ClCompile Include="util\contextBuffer.cpp" />
+    <ClCompile Include="util\lock.cpp" />
+    <ClCompile Include="util\mutex.cpp" />
     <ClCompile Include="util\oss\ossFile.cpp" />
     <ClCompile Include="util\refStream.cpp" />
   </ItemGroup>

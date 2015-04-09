@@ -1,6 +1,8 @@
 #ifndef _INSPIRE_THREAD_H_
 #define _INSPIRE_THREAD_H_
 
+#include "inspire.h"
+
 namespace inspire {
 
    typedef void (*THREAD_ENTRY)(void*);
@@ -8,6 +10,7 @@ namespace inspire {
    class threadEntity
    {
    public:
+      threadEntity(const int64 type);
       virtual ~threadEntity() {}
 
       HANDLE handle() const

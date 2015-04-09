@@ -9,7 +9,7 @@
 namespace inspire {
 
    class threadEntity;
-   typedef std::map<int64, threadEntity*> controlMap;
+   typedef std::map<int64, threadEntity*> threadMap;
 
    class threadController : public IControl
    {
@@ -17,11 +17,19 @@ namespace inspire {
       threadController();
       ~threadController();
 
-      void createEntity(THREAD_TYPES t, void* argv);
+      void createEntity(THREAD_TYPES t, void* argv, int64& id);
 
-      void active(const int64 id);
+      void destroyEntity(const int64 id);
 
-      threadEntity* getThreadEntity(const int64 id);
+      void registerEntity(const int64 id);
+
+      void activeEntity(const int64 id);
+
+      threadEntity* getEntity(const int64 id);
+
+   private:
+      threadMap _mapSystemThread;
+      threadMap _mapCustomThread;
    };
 }
 #endif
