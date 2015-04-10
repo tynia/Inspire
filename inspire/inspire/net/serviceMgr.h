@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_NET_SERVICE_CONTROLLER_H_
-#define _INSPIRE_NET_SERVICE_CONTROLLER_H_
+#ifndef _INSPIRE_NET_SERVICE_MANAGER_H_
+#define _INSPIRE_NET_SERVICE_MANAGER_H_
 
 #include "inspire.h"
 #include "control.h"
@@ -11,10 +11,10 @@ namespace inspire {
    class IProcessor;
    typedef std::map<int64, ISession> SessionList;
 
-   class SessionController : public IControl
+   class insSessionMgr : public IControl
    {
    public:
-      virtual ~SessionController() {}
+      virtual ~insSessionMgr() {}
 
    private:
       IProcessor* _processor;

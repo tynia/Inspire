@@ -12,30 +12,33 @@ namespace inspire {
    {
    public:
       virtual ~ISession() {};
+
+      virtual void init() = 0;
       virtual void run(IProcessor* processor) = 0;
+      virtual void destroy() = 0;
    };
 
-   class Session : public ISession, public threadEntity
+   class OverlappedContext;
+   class Session : public ISession//, public threadEntity
    {
    public:
+      Session(OverlappedContext* lpContext);
       Session(const int socket);
       virtual ~Session();
 
    public:
       // ISession
-      virtual void run(IProcessor* processor);
-
-      // IThread
       virtual void init();
-      virtual void run();
+      virtual void run(IProcessor* processor);
       virtual void destroy();
 
-      // INetHandler
-      virtual void SendEvent(CEvent& ev);
-      virtual void OnEvent(CEvent& ev);
+      // INetAsyncEventHandler
+      virtual void sendEvent(CEvent& ev);
+      virtual void onEvent(CEvent& ev);
 
    protected:
-      IAsyncConnection *_conn;
+      IAsyncConnection* _conn;
+      threadEntity*     _entity;
 #ifdef _WIN32
       HANDLE  _hIOCP;
 #else

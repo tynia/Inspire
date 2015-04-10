@@ -22,6 +22,7 @@ typedef void* HANDLE;
 // include socket
 #include <Winsock2.h>
 #include <ws2tcpip.h>
+#include <mswsock.h>
 #pragma comment(lib, "Ws2_32.lib")
 // include windows.h
 #include <windows.h>

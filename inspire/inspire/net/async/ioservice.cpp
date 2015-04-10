@@ -1,18 +1,25 @@
 #include "ioservice.h"
 #include "assert.h"
 #include "async.h"
+#include "thread.h"
+#include "threadMgr.h"
 
 namespace inspire {
 
-   IOService::IOService() : _conn(NULL)
+   IOService::IOService(IThreadMgr* threadMgr) : _conn(NULL), _threadMgr(threadMgr)
    {}
 
-   IOService::IOService(IAsyncConnection* conn) : _conn(conn)
-   {}
+//    IOService::IOService(IAsyncConnection* conn) : _conn(conn)
+//    {}
 
    IOService::~IOService()
    {
       _conn = NULL;
+      if (0 != _threadCount && NULL != _threadID)
+      {
+         delete [] _threadID;
+         _threadID = NULL ;
+      }
    }
 
    void IOService::init(const unsigned int threadCount)
@@ -23,7 +30,7 @@ namespace inspire {
       _hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0/*threadCount*/);
       if (NULL == _hIOCP)
       {
-         LogError("Failed to create iocp handle, rc = d%", GetLastError());
+         LogError("Failed to create iocp handle, errno = d%", GetLastError());
       }
    }
 
@@ -37,8 +44,25 @@ namespace inspire {
          INSPIRE_ASSERT((_hIOCP == h));
          if (GetLastError())
          {
-            LogError("Failed to bind socket to iocp handle, rc = ", GetLastError());
+            LogError("Failed to bind socket to iocp handle, errno = ", GetLastError());
          }
+      }
+
+      DWORD bytes = 0 ;
+      GUID guidAcceptEx = WSAID_ACCEPTEX;  
+      GUID guidGetAcceptExSockAddrs = WSAID_GETACCEPTEXSOCKADDRS; 
+      int rc = WSAIoctl(_conn->socket(), SIO_GET_EXTENSION_FUNCTION_POINTER,
+                        &guidAcceptEx, sizeof(guidAcceptEx), &_lpfnAcceptEx,
+                        sizeof(_lpfnAcceptEx), &bytes, NULL, NULL) ;
+      if (SOCKET_ERROR == rc)
+      {
+         LogError("Failed to get AcceptEx addr");
+         return;
+      }
+
+      for (int idx = 0; idx < MAX_POST_ACCEPT; ++idx)
+      {
+         postEvent(&_overlappedContext[idx], IOE_ACCEPT);
       }
    }
 
@@ -46,12 +70,10 @@ namespace inspire {
    {
       _initWorkThread();
 
-      // start a listen thread for accept remote session
-      _threadMgr
       // active thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
-         ResumeThread(_ctxThread[idx].hThread);
+         _threadMgr->activeEntity(_threadID[idx]);
       }
    }
 
@@ -65,23 +87,87 @@ namespace inspire {
       // destroy thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
-         CloseHandle(_ctxThread[idx].hThread);
+         _threadMgr->destroyEntity(_threadID[idx]);
       }
    }
 
    void IOService::_initWorkThread()
    {
-      _ctxThread = new threadContext[_threadCount];
+      THREAD_TYPES t = THREAD_SERVICE_ACCEPTOR;
+      
+      _threadID = new int64[_threadCount];
       // create thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
-         _ctxThread[idx].hThread = (HANDLE)_beginthreadex(NULL, 0, /*callback*/NULL, &_ctxThread[idx], CREATE_SUSPENDED, NULL);
-         if (INVALID_HANDLE_VALUE == _ctxThread[idx].hThread)
+         int64 id = 0;
+         threadEntity* entity = _threadMgr->createEntity(t, this, id);
+         if (NULL == entity)
          {
-            LogError("Failed to create work thread");
+            LogError("Failed to create thread entity, idx = %d", idx);
+            return;
          }
-         _ctxThread[idx].idx = idx;
-         _ctxThread[idx]._ioservice = this;
+         _threadID[idx] = id;
+      }
+   }
+
+   void IOService::associate(OverlappedContext* ctx)
+   {
+      HANDLE h = CreateIoCompletionPort((HANDLE)ctx->_fd, _hIOCP, (DWORD)ctx, 0);
+      if (NULL == h)
+      {
+         LogError("Failed to associate with iocp, errno = %d", WSAGetLastError());
+      }
+   }
+
+   void IOService::postEvent( OverlappedContext* ctx, IOEvent ioe )
+   {
+      if (IOE_ACCEPT == ioe)
+      {
+         DWORD   dwBytes = 0;
+         WSABUF* wsabuf  = &ctx->_wsabuf;
+         OVERLAPPED* pOverlapped = &ctx->_overlapped;
+         ctx->zero();
+         ctx->_eventType = ioe;
+
+         ctx->_fd = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0, WSA_FLAG_OVERLAPPED);
+         if (INVALID_SOCKET == ctx->_fd)
+         {
+            LogError("Failed to init acceptable socket, errno = %d", WSAGetLastError());
+            return;
+         }
+
+         int rc = _lpfnAcceptEx( _conn->socket(), ctx->_fd, wsabuf->buf,
+                                 wsabuf->len - ((sizeof(SOCKADDR_IN) + 16) * 2),
+                                 sizeof(SOCKADDR_IN) + 16, sizeof(SOCKADDR_IN) + 16, &dwBytes, pOverlapped);
+         if (SOCKET_ERROR == rc && WSA_IO_PENDING != WSAGetLastError())
+         {
+            LogError("Failed to accept remote session");
+            return;
+         }
+      }
+      else if (IOE_SEND == ioe)
+      {
+         
+      }
+      else if (IOE_RECV == ioe)
+      {
+         DWORD   dwFlags = 0;
+         DWORD   dwBytes = 0;
+         WSABUF* wsabuf  = &ctx->_wsabuf;
+         OVERLAPPED* pOverlapped = &ctx->_overlapped;
+         ctx->zero();
+         ctx->_eventType = ioe;
+
+         int nBytesRecv = WSARecv( ctx->_fd, wsabuf, 1, &dwBytes, &dwFlags, pOverlapped, NULL );
+         if ((SOCKET_ERROR == nBytesRecv) && (WSA_IO_PENDING != WSAGetLastError()))
+         {
+            LogError("Post RECV event error, errno = %d", WSAGetLastError());
+            return;
+         }
+      }
+      else
+      {
+         LogError("Error IO event post, event=%d", ioe);
       }
    }
 

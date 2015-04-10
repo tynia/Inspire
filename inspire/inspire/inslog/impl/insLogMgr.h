@@ -24,12 +24,12 @@ namespace inspire {
 
    static const char* DEFAULT_LOG = "./appLogs/";
 
-   class insLogController : public ILogControl
+   class insLogMgr : public ILog, public IControl
    {
    public:
-      insLogController();
+      insLogMgr();
 
-      virtual ~insLogController();
+      virtual ~insLogMgr();
 
       virtual void initialize();
 
@@ -44,8 +44,8 @@ namespace inspire {
       std::map<unsigned int, IWriteLog*> _logMap;
    };
 
-   extern insLogController extLogMgr;
-   inline ILogControl* getLogController()
+   extern insLogMgr extLogMgr;
+   inline ILog* getLogMgr()
    {
       return &extLogMgr;
    }

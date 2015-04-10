@@ -15,15 +15,6 @@ namespace inspire {
       return info.dwNumberOfProcessors ;
    }
 
-   struct OverlappedContext
-   {
-      OVERLAPPED _overlapped;
-      HANDLE     _hIOCP;
-      WSABUF     _buf;
-      DWORD      _bufSize;
-   };
-   typedef OverlappedContext *lpOverlappedContext;
-
    class IOService;
    struct threadContext
    {

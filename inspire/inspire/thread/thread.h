@@ -5,17 +5,23 @@
 
 namespace inspire {
 
-   typedef void (*THREAD_ENTRY)(void*);
+   enum THREAD_TYPES
+   {
+      THREAD_SERVICE_ACCEPTOR,
+      THREAD_SERVICE_SESSION,
+   };
+
+   class threadEntryPoint;
 
    class threadEntity
    {
    public:
-      threadEntity(const int64 type);
+      threadEntity(THREAD_TYPES t, void* argv);
       virtual ~threadEntity() {}
 
       HANDLE handle() const
       {
-         return _hThread;
+         return _thdl;
       }
 
       const int64 id() const
@@ -23,22 +29,27 @@ namespace inspire {
          return _id;
       }
 
-      const int64 type() const
+      const THREAD_TYPES type() const
       {
          return _type;
       }
 
-      virtual void init   () = 0;
-      virtual void run    () = 0;
-      virtual void stop   () = 0;
-      virtual void pause  () = 0;
-      virtual void resume () = 0;
-      virtual void destroy() = 0;
+      void attach(threadEntryPoint* ep, void* argv);
+
+      void init   ();
+      void run    ();
+      void stop   ();
+      void pause  ();
+      void resume ();
+      void destroy();
 
    protected:
-      int64  _type;
-      int64  _id;
-      HANDLE _hThread;
+      bool         _stop;
+      THREAD_TYPES _type;
+      int64        _id;
+      HANDLE       _thdl;
+      threadEntryPoint* _entryPoint;
+      void* _argv;
    };
 }
 #endif

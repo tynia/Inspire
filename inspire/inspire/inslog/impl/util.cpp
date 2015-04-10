@@ -30,7 +30,7 @@ namespace inspire {
                 otm.tm_hour, otm.tm_min, otm.tm_sec,
                 typeString(level), //GetCurrentProcessId(), GetCurrentThreadId(),
                 func, file, line, userInfo);
-      getLogController()->writeLog(level, buffer);
+      getLogMgr()->writeLog(level, buffer);
    }
 
    const char* typeString(const int type)

@@ -2,8 +2,9 @@
 
 namespace inspire {
 
-   Session::Session(const int sock) : ISession(sock)
+   Session::Session(const int sock) : _conn(NULL)
    {
+      _conn = new AsyncConnection(sock);
    }
 
    Session::~Session()
@@ -22,6 +23,6 @@ namespace inspire {
 
    void Session::destroy()
    {
-      close();
+      _conn->close();
    }
 }

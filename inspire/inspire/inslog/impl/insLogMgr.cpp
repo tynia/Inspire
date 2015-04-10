@@ -15,36 +15,36 @@
    
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
-#include "insLogController.h"
+#include "insLogMgr.h"
 
 namespace inspire {
 
-   insLogController::insLogController() : ILogControl(), _path(NULL)
+   insLogMgr::insLogMgr() : IControl(MOD_LOG), _path(NULL)
    {
    }
 
-   insLogController::~insLogController()
+   insLogMgr::~insLogMgr()
    {
       _path = NULL;
    }
 
-   void insLogController::initialize()
+   void insLogMgr::initialize()
    {
       _path = DEFAULT_LOG;
    }
 
-   void insLogController::active()
+   void insLogMgr::active()
    {
       // init member
    }
 
-   void insLogController::destroy()
+   void insLogMgr::destroy()
    {
       // destroy member
       _path = NULL;
    }
 
-   void insLogController::writeLog(const int priority, const char* data)
+   void insLogMgr::writeLog(const int priority, const char* data)
    {
       IWriteLog* inst = _logMap[priority];
       if (NULL != inst)
@@ -54,6 +54,5 @@ namespace inspire {
    }
 
    //////////////////////////////////////////////////////////////////////////
-   // globle controller
-   insLogController extLogMgr;
+   insLogMgr extLogMgr;
 }

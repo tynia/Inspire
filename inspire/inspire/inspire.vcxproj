@@ -86,7 +86,7 @@
     <ClInclude Include="bson\include\element.h" />
     <ClInclude Include="bson\util\bson.h" />
     <ClInclude Include="inslog\impl\insLogFile.h" />
-    <ClInclude Include="inslog\impl\insLogController.h" />
+    <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
     <ClInclude Include="inslog\platform.h" />
     <ClInclude Include="net\async\async.h" />
@@ -98,7 +98,7 @@
     <ClInclude Include="net\event\eventid.h" />
     <ClInclude Include="net\helper\nethelper.h" />
     <ClInclude Include="net\service.h" />
-    <ClInclude Include="net\servicecontroller.h" />
+    <ClInclude Include="net\serviceMgr.h" />
     <ClInclude Include="net\session.h" />
     <ClInclude Include="net\tcpconnection.h" />
     <ClInclude Include="processor\processor.h" />
@@ -108,7 +108,7 @@
     <ClInclude Include="stream\stream.h" />
     <ClInclude Include="thread\entry\threadentry.h" />
     <ClInclude Include="thread\thread.h" />
-    <ClInclude Include="thread\threadController.h" />
+    <ClInclude Include="thread\threadMgr.h" />
     <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\contextBuffer.h" />
     <ClInclude Include="util\insLog.h" />
@@ -125,7 +125,7 @@
     <ClCompile Include="bson\impl\bsonobj.cpp" />
     <ClCompile Include="bson\impl\element.cpp" />
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
-    <ClCompile Include="inslog\impl\insLogController.cpp" />
+    <ClCompile Include="inslog\impl\insLogMgr.cpp" />
     <ClCompile Include="inslog\impl\util.cpp" />
     <ClCompile Include="net\async\asyncconnection.cpp" />
     <ClCompile Include="net\async\ioservice.cpp" />
@@ -138,7 +138,7 @@
     <ClCompile Include="test\main.cpp" />
     <ClCompile Include="thread\entry\threadentry.cpp" />
     <ClCompile Include="thread\thread.cpp" />
-    <ClCompile Include="thread\threadController.cpp" />
+    <ClCompile Include="thread\threadMgr.cpp" />
     <ClCompile Include="util\contextBuffer.cpp" />
     <ClCompile Include="util\lock.cpp" />
     <ClCompile Include="util\mutex.cpp" />

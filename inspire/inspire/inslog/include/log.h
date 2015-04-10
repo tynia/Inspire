@@ -23,12 +23,10 @@ namespace inspire {
       LOG_DEFAULT  = LOG_DEBUG,
    };
 
-   class ILogControl : public IControl
+   class ILog
    {
    public:
-      ILogControl() : IControl(MOD_LOG)
-      {}
-      virtual ~ILogControl() {}
+      virtual ~ILog() {}
 
       virtual void writeLog(const int priority, const char* data) = 0;
    };
@@ -38,6 +36,6 @@ namespace inspire {
                     const char* file, const int line,
                     const char* fmt, ...);
 
-   extern ILogControl* getLogController();
+   extern ILog* getLogMgr();
 }
 #endif

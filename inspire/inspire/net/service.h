@@ -18,27 +18,34 @@ namespace inspire {
    public:
       virtual ~IService() {}
 
-      virtual void run(IProcessor* processor) {};
+      virtual void init() = 0;
 
-      virtual void notifyEvent( CEvent *ev) {};
+      virtual void run() = 0;
+
+      virtual void destroy() = 0;
    };
 
    class IOService;
-   class Service : public IService, public threadEntity
+   class IThreadMgr;
+   class Service : public IService//, public threadEntity
    {
    public:
-      Service(const unsigned int servicePort, IControl* threadMng);
+      Service(const unsigned int servicePort, IThreadMgr* threadMgr);
       virtual ~Service();
 
       void initService();
       void stop();
 
-      virtual void run(IProcessor* processor);
+      virtual void init();
+      virtual void run();
+      virtual void destroy();
+
    protected:
       bool              _stop;
-      IControl*         _threadMng;
+      IThreadMgr*       _threadMgr;
       IAsyncConnection* _async;
       IOService*        _ioservice;
+      threadEntity*     _entity;
       SessionList       _sessions;
    };
 
