@@ -18,6 +18,8 @@ namespace inspire {
    public:
       virtual ~IService() {}
 
+      virtual bool stopped() const;
+
       virtual void init() = 0;
 
       virtual void run() = 0;
@@ -41,13 +43,11 @@ namespace inspire {
       virtual void destroy();
 
    protected:
-      bool              _stop;
       IThreadMgr*       _threadMgr;
       IAsyncConnection* _async;
       IOService*        _ioservice;
       threadEntity*     _entity;
       SessionList       _sessions;
    };
-
 }
 #endif

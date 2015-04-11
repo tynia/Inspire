@@ -3,14 +3,15 @@
 #include "async.h"
 #include "thread.h"
 #include "threadMgr.h"
+#include "entry/entry.h"
 
 namespace inspire {
 
-   IOService::IOService(IThreadMgr* threadMgr) : _conn(NULL), _threadMgr(threadMgr)
-   {}
-
-//    IOService::IOService(IAsyncConnection* conn) : _conn(conn)
-//    {}
+   IOService::IOService(IThreadMgr* threadMgr) : _stopService(true), _hIOCP(NULL), _threadCount(0),
+                                                 _conn(NULL), _threadMgr(threadMgr), _threadID(NULL), _lpfnAcceptEx(NULL)
+   {
+      
+   }
 
    IOService::~IOService()
    {
@@ -32,6 +33,8 @@ namespace inspire {
       {
          LogError("Failed to create iocp handle, errno = d%", GetLastError());
       }
+
+      _initWorkThread();
    }
 
    void IOService::bind(IAsyncConnection* conn)
@@ -68,8 +71,7 @@ namespace inspire {
 
    void IOService::run()
    {
-      _initWorkThread();
-
+      _stopService = false;
       // active thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
@@ -79,7 +81,7 @@ namespace inspire {
 
    void IOService::stop()
    {
-
+      _stopService = true;
    }
 
    void IOService::destroy()
@@ -93,7 +95,7 @@ namespace inspire {
 
    void IOService::_initWorkThread()
    {
-      THREAD_TYPES t = THREAD_SERVICE_ACCEPTOR;
+      THREAD_ENTRY_TYPES t = THREAD_SERVICE_ACCEPTOR;
       
       _threadID = new int64[_threadCount];
       // create thread
@@ -169,6 +171,26 @@ namespace inspire {
       {
          LogError("Error IO event post, event=%d", ioe);
       }
+   }
+
+   bool IOService::stopped() const
+   {
+      return _stopService;
+   }
+
+   void IOService::_doAccept()
+   {
+
+   }
+
+   void IOService::_doSend()
+   {
+
+   }
+
+   void IOService::_doRecv()
+   {
+
    }
 
 }

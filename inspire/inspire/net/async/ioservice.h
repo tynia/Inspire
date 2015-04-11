@@ -61,6 +61,8 @@ namespace inspire {
 
       void postEvent(OverlappedContext* ctx, IOEvent ioe);
 
+      bool stopped() const;
+
    protected:
       void _initWorkThread();
       void _doAccept();
@@ -68,15 +70,14 @@ namespace inspire {
       void _doRecv();
 
    protected:
+      bool              _stopService;
+      HANDLE            _hIOCP;
+      unsigned int      _threadCount;
       IAsyncConnection* _conn;
       IThreadMgr*       _threadMgr;
-      unsigned int  _threadCount;
-      LPFN_ACCEPTEX _lpfnAcceptEx;
-#ifdef _WIN32
-      HANDLE _hIOCP;
-#else
-#endif
-      int64* _threadID;
+      int64*            _threadID;
+      LPFN_ACCEPTEX     _lpfnAcceptEx;
+      
    private:
       OverlappedContext _overlappedContext[MAX_POST_ACCEPT];
    };

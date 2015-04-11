@@ -5,7 +5,7 @@
 
 namespace inspire {
 
-   enum THREAD_TYPES
+   enum THREAD_ENTRY_TYPES
    {
       THREAD_SERVICE_ACCEPTOR,
       THREAD_SERVICE_SESSION,
@@ -16,7 +16,7 @@ namespace inspire {
    class threadEntity
    {
    public:
-      threadEntity(THREAD_TYPES t, void* argv);
+      threadEntity(THREAD_ENTRY_TYPES t, void* argv);
       virtual ~threadEntity() {}
 
       HANDLE handle() const
@@ -29,7 +29,7 @@ namespace inspire {
          return _id;
       }
 
-      const THREAD_TYPES type() const
+      const THREAD_ENTRY_TYPES type() const
       {
          return _type;
       }
@@ -45,7 +45,7 @@ namespace inspire {
 
    protected:
       bool         _stop;
-      THREAD_TYPES _type;
+      THREAD_ENTRY_TYPES _type;
       int64        _id;
       HANDLE       _thdl;
       threadEntryPoint* _entryPoint;

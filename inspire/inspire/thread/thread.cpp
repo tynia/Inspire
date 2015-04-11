@@ -1,9 +1,9 @@
 #include "thread.h"
-#include "entry/threadentry.h"
+#include "entry/entry.h"
 
 namespace inspire {
 
-   threadEntity::threadEntity(THREAD_TYPES t, void* argv)
+   threadEntity::threadEntity(THREAD_ENTRY_TYPES t, void* argv)
       : _stop(false), _type(t), _id(0), _thdl(NULL), _entryPoint(NULL), _argv(argv)
    {}
 

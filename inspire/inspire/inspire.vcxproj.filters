@@ -174,9 +174,6 @@
     <ClInclude Include="net\async\ioservice.h">
       <Filter>net\async</Filter>
     </ClInclude>
-    <ClInclude Include="thread\entry\threadentry.h">
-      <Filter>thread\entry</Filter>
-    </ClInclude>
     <ClInclude Include="util\mutex.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -191,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="net\serviceMgr.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\entryPoint.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\entry\entry.h">
+      <Filter>thread\entry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +245,6 @@
     <ClCompile Include="net\tcpconnection.cpp">
       <Filter>net</Filter>
     </ClCompile>
-    <ClCompile Include="thread\entry\threadentry.cpp">
-      <Filter>thread\entry</Filter>
-    </ClCompile>
     <ClCompile Include="util\mutex.cpp">
       <Filter>util</Filter>
     </ClCompile>
@@ -259,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="thread\threadMgr.cpp">
       <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\entryPoint.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\entry\entry.cpp">
+      <Filter>thread\entry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

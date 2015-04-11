@@ -2,7 +2,7 @@
 #define _INSPIRE_THREAD_MANAGER_H_
 
 #include "application.h"
-#include "entry/threadentry.h"
+#include "entry/entry.h"
 
 #include <map>
 
@@ -16,7 +16,7 @@ namespace inspire {
    public:
       virtual ~IThreadMgr();
 
-      virtual threadEntity* createEntity(THREAD_TYPES t, void* argv, int64& id) = 0;
+      virtual threadEntity* createEntity(THREAD_ENTRY_TYPES t, void* argv, int64& id) = 0;
 
       virtual void destroyEntity(const int64 id) = 0;
 
@@ -33,7 +33,7 @@ namespace inspire {
       threadMgr();
       ~threadMgr();
 
-      virtual threadEntity* createEntity(THREAD_TYPES t, void* argv, int64& id);
+      virtual threadEntity* createEntity(THREAD_ENTRY_TYPES t, void* argv, int64& id);
 
       virtual void destroyEntity(const int64 id);
 

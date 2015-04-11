@@ -106,7 +106,8 @@
     <ClInclude Include="stream\endian\endian.h" />
     <ClInclude Include="stream\iostream.h" />
     <ClInclude Include="stream\stream.h" />
-    <ClInclude Include="thread\entry\threadentry.h" />
+    <ClInclude Include="thread\entryPoint.h" />
+    <ClInclude Include="thread\entry\entry.h" />
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\threadMgr.h" />
     <ClInclude Include="util\assert.h" />
@@ -136,7 +137,8 @@
     <ClCompile Include="stream\basestream.cpp" />
     <ClCompile Include="stream\iostream.cpp" />
     <ClCompile Include="test\main.cpp" />
-    <ClCompile Include="thread\entry\threadentry.cpp" />
+    <ClCompile Include="thread\entryPoint.cpp" />
+    <ClCompile Include="thread\entry\entry.cpp" />
     <ClCompile Include="thread\thread.cpp" />
     <ClCompile Include="thread\threadMgr.cpp" />
     <ClCompile Include="util\contextBuffer.cpp" />

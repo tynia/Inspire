@@ -4,11 +4,12 @@
 namespace inspire {
 
    const static char *logFmt = "%04d-%02d-%02d-%02d.%02d.%02d"NEWLINE
+                               "PID: %-37lldTID: %lld"NEWLINE
                                "Level: %s"NEWLINE
                                "Function: %-32s"NEWLINE
                                "File: %s"NEWLINE"Line: %d"NEWLINE
                                "Message:"NEWLINE"%s"NEWLINE NEWLINE;
-   //                               "PID: %-37lldTID: %lld"NEWLINE
+                               
 
    void flushToFile(const int level, const char* func,
                     const char* file, const int line,
@@ -28,7 +29,7 @@ namespace inspire {
       sprintf_s(buffer, LOG_BUFFER_SIZE, logFmt,
                 otm.tm_year + 1900, otm.tm_mon + 1, otm.tm_mday,
                 otm.tm_hour, otm.tm_min, otm.tm_sec,
-                typeString(level), //GetCurrentProcessId(), GetCurrentThreadId(),
+                typeString(level), (int64)GetCurrentProcessId(), (int64)GetCurrentThreadId(),
                 func, file, line, userInfo);
       getLogMgr()->writeLog(level, buffer);
    }

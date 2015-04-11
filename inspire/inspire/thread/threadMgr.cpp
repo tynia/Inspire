@@ -29,7 +29,7 @@ namespace inspire {
       }
    }
 
-   threadEntity* threadMgr::createEntity(THREAD_TYPES t, void* argv, int64& id)
+   threadEntity* threadMgr::createEntity(THREAD_ENTRY_TYPES t, void* argv, int64& id)
    {
 #ifdef _DEBUG
       threadMap::iterator it = _mapSystemThread.begin();
