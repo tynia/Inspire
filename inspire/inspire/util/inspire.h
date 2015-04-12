@@ -36,6 +36,8 @@ typedef void* HANDLE;
 #else
 #endif
 
+// include base header
+#include "kernel.h"
 #include "assert.h"
 #include "insLog.h"
 

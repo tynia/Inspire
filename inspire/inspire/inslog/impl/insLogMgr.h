@@ -44,6 +44,9 @@ namespace inspire {
       std::map<unsigned int, IWriteLog*> _logMap;
    };
 
+   /*
+    * logMgr should be static and create before app enter main
+    */
    extern insLogMgr extLogMgr;
    inline ILog* getLogMgr()
    {

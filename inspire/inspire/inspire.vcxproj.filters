@@ -195,6 +195,9 @@
     <ClInclude Include="thread\entry\entry.h">
       <Filter>thread\entry</Filter>
     </ClInclude>
+    <ClInclude Include="util\kernel.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -265,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="thread\entry\entry.cpp">
       <Filter>thread\entry</Filter>
+    </ClCompile>
+    <ClCompile Include="util\kernel.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

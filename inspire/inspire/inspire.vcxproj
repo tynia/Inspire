@@ -112,6 +112,7 @@
     <ClInclude Include="thread\threadMgr.h" />
     <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\contextBuffer.h" />
+    <ClInclude Include="util\kernel.h" />
     <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
     <ClInclude Include="util\lock.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="thread\thread.cpp" />
     <ClCompile Include="thread\threadMgr.cpp" />
     <ClCompile Include="util\contextBuffer.cpp" />
+    <ClCompile Include="util\kernel.cpp" />
     <ClCompile Include="util\lock.cpp" />
     <ClCompile Include="util\mutex.cpp" />
     <ClCompile Include="util\oss\ossFile.cpp" />
