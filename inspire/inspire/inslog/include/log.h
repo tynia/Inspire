@@ -16,11 +16,12 @@ namespace inspire {
       LOG_FATAL    = 200,
       LOG_CRITICAL = 300,
       LOG_ERROR    = 400,
-      LOG_WARNING  = 500,
-      LOG_DEBUG    = 600,
-      LOG_NOTICE   = 700, // for expected
-      LOG_INFO     = 800,
-      LOG_DEFAULT  = LOG_DEBUG,
+      LOG_EVENT    = 500,
+      LOG_WARNING  = 600,
+      LOG_DEBUG    = 700,
+      LOG_NOTICE   = 800, // for expected
+      LOG_INFO     = 900,
+      LOG_DEFAULT  = LOG_WARNING,
    };
 
    class ILog

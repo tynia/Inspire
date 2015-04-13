@@ -8,18 +8,17 @@ namespace inspire {
 
    class threadMgr;
 
-   class krControl : public IControl, public noncopyable
+   class krControl : public IControl
    {
    public:
       krControl();
       ~krControl();
 
-      // IControl
       virtual void initialize();
-      virtual void active();
-      virtual void destroy();
 
-      void registerCTRL(modType t);
+      virtual void active();
+
+      virtual void destroy();
 
       threadMgr* getThreadMgr() const
       {
@@ -31,22 +30,10 @@ namespace inspire {
       std::vector<IControl*> _mapCTRL;
    };
 
-   extern krControl _kernel;
+   extern krControl _krCTRL;
    inline krControl* getKernel()
    {
-      return &_kernel;
+      return &_krCTRL;
    }
-
-   inline void regModule(modType t)
-   {
-      getKernel()->registerCTRL(t);
-   }
-
-#define REGISTER_MOD(type) \
-do                         \
-{                          \
-   regModule(type);        \
-} while (false)
-   
 }
 #endif

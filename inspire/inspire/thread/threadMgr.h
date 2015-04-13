@@ -9,7 +9,8 @@
 namespace inspire {
 
    class threadEntity;
-   typedef std::map<int64, threadEntity*> threadMap;
+   typedef std::vector<int64, threadEntity*> threadContainer;
+   typedef std::vector<THREAD_ENTRY_TYPES> systemThreadContainer;
 
    class IThreadMgr
    {
@@ -19,8 +20,6 @@ namespace inspire {
       virtual threadEntity* createEntity(THREAD_ENTRY_TYPES t, void* argv, int64& id) = 0;
 
       virtual void destroyEntity(const int64 id) = 0;
-
-      virtual void registerEntity(const int64 id) = 0;
 
       virtual void activeEntity(const int64 id) = 0;
 
@@ -33,19 +32,24 @@ namespace inspire {
       threadMgr();
       ~threadMgr();
 
+      // IControl
+      virtual void initialize() {};
+      virtual void active() {};
+      virtual void destroy() {};
+
+      // IThreadMgr
       virtual threadEntity* createEntity(THREAD_ENTRY_TYPES t, void* argv, int64& id);
 
       virtual void destroyEntity(const int64 id);
-
-      virtual void registerEntity(const int64 id);
 
       virtual void activeEntity(const int64 id);
 
       virtual threadEntity* getEntity(const int64 id);
 
    private:
-      threadMap _mapSystemThread;
-      threadMap _mapIdleThread;
+      systemThreadContainer _mapSystemThread;
+      threadContainer _mapIdleThread;
+      threadContainer _mapRunningThread;
    };
 }
 #endif

@@ -89,6 +89,7 @@
     <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
     <ClInclude Include="inslog\platform.h" />
+    <ClInclude Include="net\acceptor.h" />
     <ClInclude Include="net\async\async.h" />
     <ClInclude Include="net\async\asyncconnection.h" />
     <ClInclude Include="net\async\ioservice.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
     <ClCompile Include="inslog\impl\insLogMgr.cpp" />
     <ClCompile Include="inslog\impl\util.cpp" />
+    <ClCompile Include="net\acceptor.cpp" />
     <ClCompile Include="net\async\asyncconnection.cpp" />
     <ClCompile Include="net\async\ioservice.cpp" />
     <ClCompile Include="net\connection.cpp" />

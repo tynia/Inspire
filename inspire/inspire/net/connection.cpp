@@ -90,7 +90,7 @@ namespace inspire {
 
          if (*(int64*)pRecv != eventID)
          {
-            LogWarning("Received a none matched msg, id:%lld", *(int64*)pRecv);
+            LogEvent("Received a none matched msg, id:%lld", *(int64*)pRecv);
             continue;
          }
       }

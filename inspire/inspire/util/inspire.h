@@ -33,6 +33,7 @@ typedef void* HANDLE;
 #include <cstring>
 #include <fstream>
 #include <map>
+#include <vector>
 #else
 #endif
 

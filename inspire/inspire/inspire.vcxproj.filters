@@ -198,6 +198,9 @@
     <ClInclude Include="util\kernel.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="net\acceptor.h">
+      <Filter>net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -271,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="util\kernel.cpp">
       <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="net\acceptor.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

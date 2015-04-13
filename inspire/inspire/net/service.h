@@ -32,7 +32,7 @@ namespace inspire {
    class Service : public IService//, public threadEntity
    {
    public:
-      Service(const unsigned int servicePort, IThreadMgr* threadMgr);
+      Service(const unsigned int servicePort);
       virtual ~Service();
 
       void initService();
@@ -43,7 +43,7 @@ namespace inspire {
       virtual void destroy();
 
    protected:
-      IThreadMgr*       _threadMgr;
+      bool              _initialized;
       IAsyncConnection* _async;
       IOService*        _ioservice;
       threadEntity*     _entity;

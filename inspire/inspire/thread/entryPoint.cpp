@@ -1,6 +1,7 @@
 #include "entryPoint.h"
 #include "entry/entry.h"
 #include "async/ioservice.h"
+#include "acceptor.h"
 
 namespace inspire {
 
@@ -17,7 +18,7 @@ namespace inspire {
    threadEntryPoint* getEntryPoint(THREAD_ENTRY_TYPES t)
    {
       static threadEntryInfo entryInfo[] = {
-         ON_THREAD_ENTRY_POINT(true, THREAD_SERVICE_ACCEPTOR, SERVICE_ACCEPTOR, "Service name"),
+         ON_THREAD_ENTRY_POINT(true, THREAD_SERVICE_ACCEPTOR, SERVICE_ACCEPTOR, "Service Acceptor"),
       };
       return threadEntryPointMgr::instance()->getEntryPonit(t);
    }

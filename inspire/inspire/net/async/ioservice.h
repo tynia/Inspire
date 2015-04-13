@@ -44,7 +44,7 @@ namespace inspire {
    class IOService
    {
    public:
-      IOService(IThreadMgr* threadMgr);
+      IOService();
       virtual ~IOService();
 
       void init(const unsigned int threadCount = 0);
@@ -74,7 +74,6 @@ namespace inspire {
       HANDLE            _hIOCP;
       unsigned int      _threadCount;
       IAsyncConnection* _conn;
-      IThreadMgr*       _threadMgr;
       int64*            _threadID;
       LPFN_ACCEPTEX     _lpfnAcceptEx;
       

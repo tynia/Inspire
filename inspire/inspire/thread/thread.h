@@ -42,6 +42,13 @@ namespace inspire {
       void pause  ();
       void resume ();
       void destroy();
+      void kill(int64& exitCode);
+
+      bool isStopped() const;
+
+      bool isSystemThread() const;
+
+      const char* desc() const;
 
    protected:
       bool         _stop;

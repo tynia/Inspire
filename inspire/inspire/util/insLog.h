@@ -36,6 +36,9 @@ do                                                             \
 #define LogDebug(fmt, ...)                                  \
    __LOG_WRAPPER(inspire::LOG_DEBUG, fmt, __VA_ARGS__)
 
+#define LogEvent(fmt, ...)                                  \
+   __LOG_WRAPPER(inspire::LOG_EVENT, fmt, __VA_ARGS__)
+
 #define LogWarning(fmt, ...)                                \
    __LOG_WRAPPER(inspire::LOG_WARNING, fmt, __VA_ARGS__)
 

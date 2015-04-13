@@ -6,9 +6,8 @@
 
 namespace inspire {
 
-   Service::Service(const unsigned int servicePort, IThreadMgr* threadMgr) : _threadMgr(threadMgr)
+   Service::Service(const unsigned int servicePort) : _initialized(false)
    {
-      INSPIRE_ASSERT((NULL != threadMgr));
       _async = new AsyncConnection(servicePort);
       if (NULL == _async)
       {
@@ -27,18 +26,25 @@ namespace inspire {
 
    void Service::init()
    {
-      _async->init();
-      _async->bindAndListen();
-      _ioservice = new IOService(_threadMgr);
-      if (NULL == _ioservice)
+      if (!_initialized)
       {
-         LogError("Failed to create IOService");
-         return;
+         _async->init();
+         _async->bindAndListen();
+
+         _ioservice = new IOService();
+         if (NULL == _ioservice)
+         {
+            LogError("Failed to create IOService");
+            return;
+         }
+         _initialized = true;
       }
    }
 
    void Service::initService()
    {
+      init();
+
       if (_ioservice)
       {
          _ioservice->init();

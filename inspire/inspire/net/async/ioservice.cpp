@@ -7,8 +7,8 @@
 
 namespace inspire {
 
-   IOService::IOService(IThreadMgr* threadMgr) : _stopService(true), _hIOCP(NULL), _threadCount(0),
-                                                 _conn(NULL), _threadMgr(threadMgr), _threadID(NULL), _lpfnAcceptEx(NULL)
+   IOService::IOService() : _stopService(true), _hIOCP(NULL), _threadCount(0),
+                            _conn(NULL), _threadID(NULL), _lpfnAcceptEx(NULL)
    {
       
    }
@@ -71,6 +71,8 @@ namespace inspire {
 
    void IOService::run()
    {
+      threadMgr* _threadMgr = getKernel()->getThreadMgr();
+      INSPIRE_ASSERT((NULL != _threadMgr));
       _stopService = false;
       // active thread
       for (int idx = 0; idx < _threadCount; ++idx)
@@ -86,6 +88,8 @@ namespace inspire {
 
    void IOService::destroy()
    {
+      threadMgr* _threadMgr = getKernel()->getThreadMgr();
+      INSPIRE_ASSERT((NULL != _threadMgr));
       // destroy thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
@@ -95,6 +99,9 @@ namespace inspire {
 
    void IOService::_initWorkThread()
    {
+      threadMgr* _threadMgr = getKernel()->getThreadMgr();
+      INSPIRE_ASSERT((NULL != _threadMgr));
+
       THREAD_ENTRY_TYPES t = THREAD_SERVICE_ACCEPTOR;
       
       _threadID = new int64[_threadCount];

@@ -5,17 +5,31 @@ namespace inspire {
 
    enum modType
    {
-      MOD_APP    = (1 << 16) | 1 << 0,
-      MOD_LOG    = (1 << 17) | 1 << 0,
-      MOD_NET    = (1 << 18) | 1 << 0,
-      MOD_CTRL   = (1 << 19) | 1 << 0,
-      MOD_THREAD = (1 << 20) | 1 << 0,
+      MOD_APP,
+      MOD_KERNEL,
+      MOD_LOG,
+      MOD_NET,
+      MOD_THREAD,
    };
 
-//    inline bool isApp(IControl* ctrl)
-//    {
-//       return ctrl->id() & (1 << 16) ;
-//    }
+   inline const char* moduleTypeString(modType t)
+   {
+      switch (t)
+      {
+      case MOD_APP:
+         return "Application";
+      case MOD_KERNEL:
+         return "Kernel module";
+      case MOD_LOG:
+         return "Log module";
+      case MOD_NET:
+         return "Net module";
+      case MOD_THREAD:
+         return "Thread module";
+      default:
+         return "Unknown module";
+      }
+   }
 
    class IControl
    {
