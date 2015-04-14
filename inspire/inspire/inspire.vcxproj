@@ -122,6 +122,7 @@
     <ClInclude Include="util\oss\ossFile.h" />
     <ClInclude Include="util\oss\system.h" />
     <ClInclude Include="util\refStream.h" />
+    <ClInclude Include="util\syncMutex.h" />
     <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClCompile Include="util\mutex.cpp" />
     <ClCompile Include="util\oss\ossFile.cpp" />
     <ClCompile Include="util\refStream.cpp" />
+    <ClCompile Include="util\syncMutex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

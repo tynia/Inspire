@@ -1,8 +1,9 @@
 #include "lock.h"
+#include "mutex.h"
 
 namespace inspire {
 
-   scopeLock(ossMutex* mx) : _mutex(mx)
+   scopeLock(mutex* mtx) : _mutex(mtx)
    {
       _mutex.lock();
    }

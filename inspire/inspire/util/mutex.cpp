@@ -2,24 +2,70 @@
 
 namespace inspire {
 
-   ossMutex::ossMutex()
+   mutex::mutex()
    {
-      ::InitializeCriticalSection(&cs);
+#ifdef _WIN32
+      ::InitializeCriticalSection(&_cs);
+#else
+      int ret = pthread_mutex_init(&_mtx, NULL);
+      if (ret)
+      {
+         LogError("Failed to create mutex");
+         return;
+      }
+#endif
+      LogDebug("Create mutex success");
    }
 
-   ossMutex::~ossMutex()
+   mutex::~mutex()
    {
-      ::DeleteCriticalSection(&cs);
+#ifdef _WIN32
+      ::DeleteCriticalSection(&_cs);
+#else
+      int ret = 0;
+      do
+      {
+         ret = pthread_mutex_destroy(&_mtx);
+      } while (ret);
+#endif
+      LogDebug("Destroy mutex");
    }
 
-   void ossMutex::lock()
+   void mutex::lock()
    {
-      ::EnterCriticalSection(&cs);
+#ifdef _WIN32
+      ::EnterCriticalSection(&_cs);
+#else
+      int ret = 0;
+      do
+      {
+         ret = pthread_mutex_lock(&_mtx);
+      } while (ret);
+#endif
+      LogDebug("get lock");
    }
 
-   void ossMutex::unlock()
+   void mutex::unlock()
    {
-      ::LeaveCriticalSection(&cs);
+#ifdef _WIN32
+      ::LeaveCriticalSection(&_cs);
+#else
+      int ret = 0;
+      do
+      {
+         ret = pthread_mutex_unlock(&_mtx);
+      } while (ret);
+#endif
+      LogDebug("release lock");
+   }
+
+   bool mutex::tryLock()
+   {
+#ifdef _WIN32
+      return ::TryEnterCriticalSection(&_cs);
+#else
+      return EBUSY != pthread_mutex_trylock(&_mtx);
+#endif
    }
 
 }

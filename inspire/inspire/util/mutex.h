@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_INSPIRE_MUTEX_H_
-#define _INSPIRE_INSPIRE_MUTEX_H_
+#ifndef _INSPIRE_UTIL_MUTEX_H_
+#define _INSPIRE_UTIL_MUTEX_H_
 
 #include "inspire.h"
 
@@ -11,17 +11,23 @@ namespace inspire {
       EXCLUSIVE,
    };
 
-   class ossMutex
+   class mutex
    {
    public:
-      ossMutex();
-      ~ossMutex();
+      mutex();
+      ~mutex();
 
       void lock();
       void unlock();
+      bool tryLock();
 
    private:
-      CRITICAL_SECTION cs;
+#ifdef _WIN32
+      CRITICAL_SECTION _cs;
+#else
+      pthread_mutex_t _mtx;
+#endif
    };
+
 }
 #endif

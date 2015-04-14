@@ -1,18 +1,18 @@
 #ifndef _INSPIRE_UTIL_LOCK_H_
 #define _INSPIRE_UTIL_LOCK_H_
 
-namespace inspire {
+#include "mutex.h"
 
-   class ossMutex;
+namespace inspire {
 
    class scopeLock
    {
    public:
-      scopeLock(ossMutex* mx);
+      scopeLock(mutex* mtx);
       ~scopeLock();
 
    private:
-      ossMutex* _mutex;
+      mutex* _mutex;
    };
 }
 #endif

@@ -201,6 +201,9 @@
     <ClInclude Include="net\acceptor.h">
       <Filter>net</Filter>
     </ClInclude>
+    <ClInclude Include="util\syncMutex.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -277,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="net\acceptor.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="util\syncMutex.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
