@@ -14,7 +14,7 @@ namespace inspire {
    template<class T>
    int64 atomicSigned64::_swapPredicated(int64 val, const T& predVal)
    {
-      int prev = peek();
+      int64 prev = peek();
       for (;;)
       {
          int64 newVal = prev;
