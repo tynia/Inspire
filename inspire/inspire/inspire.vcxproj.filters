@@ -67,6 +67,9 @@
     <Filter Include="thread\entry">
       <UniqueIdentifier>{7b786268-e4d1-43d1-bc93-be7bf6f14fd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\atomic">
+      <UniqueIdentifier>{1562a028-41bd-43e8-83c2-c821fa893c38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\application.h">
@@ -204,6 +207,15 @@
     <ClInclude Include="util\syncMutex.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="util\atomic\atomic.h">
+      <Filter>util\atomic</Filter>
+    </ClInclude>
+    <ClInclude Include="util\atomic\atomic64.h">
+      <Filter>util\atomic</Filter>
+    </ClInclude>
+    <ClInclude Include="util\atomic\atomic32.h">
+      <Filter>util\atomic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -283,6 +295,12 @@
     </ClCompile>
     <ClCompile Include="util\syncMutex.cpp">
       <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\atomic\atomic32.cpp">
+      <Filter>util\atomic</Filter>
+    </ClCompile>
+    <ClCompile Include="util\atomic\atomic64.cpp">
+      <Filter>util\atomic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

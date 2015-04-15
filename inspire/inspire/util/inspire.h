@@ -11,11 +11,15 @@
 // defined int64
 #ifdef _WIN32
 typedef __int64 int64;
+typedef unsigned __int64 uint64;
 #define NEWLINE "\r\n"
+#define fmt64 "%l64d"
 #else
-typedef long long int int64;
+typedef long long int64;
+typedef unsigned long long uint64;
 typedef void* HANDLE;
 #define NEWLINE "\n"
+#define fmt64 "%lld"
 #endif
 
 #ifdef _WIN32

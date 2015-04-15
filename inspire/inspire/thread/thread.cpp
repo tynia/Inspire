@@ -33,7 +33,7 @@ namespace inspire {
 
    void threadEntity::stop()
    {
-      LogEvent("stop thread, type: %d, id: %lld, name: %s",
+      LogEvent("stop thread, type: %d, id: "fmt64", name: %s",
                _type, _id, _entryPoint->_desc);
       _stop = true;
       ::WaitForSingleObject(_thdl, WAIT_OBJECT_0);
@@ -51,7 +51,7 @@ namespace inspire {
 
    void threadEntity::destroy()
    {
-      LogEvent("destroy thread, id: %lld, name: %s", _id, getEntryPointName(_type));
+      LogEvent("destroy thread, id: "fmt64", name: %s", _id, getEntryPointName(_type));
       if (!_stop)
       {
          stop();
@@ -64,7 +64,7 @@ namespace inspire {
 
    void threadEntity::kill(int64& exitCode)
    {
-      LogEvent("kill thread, id: %lld, name: %s", _id, getEntryPointName(_type));
+      LogEvent("kill thread, id: "fmt64", name: %s", _id, getEntryPointName(_type));
       ::TerminateThread(_thdl, 0);
       ::WaitForSingleObject(_thdl, WAIT_OBJECT_0);
    }

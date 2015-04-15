@@ -72,7 +72,7 @@ namespace inspire {
          if (id == entity->id())
          {
             entity->destroy();
-            LogEvent("destroy running thread, thread id: %lld", id);
+            LogEvent("destroy running thread, thread id: "fmt64, id);
             return;
          }
       }
@@ -85,7 +85,7 @@ namespace inspire {
          {
             entity->resume();
             entity->destroy();
-            LogEvent("destroy idle thread, thread id: %lld", id);
+            LogEvent("destroy idle thread, thread id: "fmt64, id);
             return;
          }
       }
@@ -101,7 +101,7 @@ namespace inspire {
          {
             entity->run();
             threadEntryPoint* info = getEntryPoint(entity->type());
-            LogEvent("run thread, thread id: %lld, name: %s, system: %s", id,
+            LogEvent("run thread, thread id: "fmt64", name: %s, system: %s", id,
                      info->_desc, entity->isSystemThread() ? "Yes" : "No");
             return;
          }
@@ -113,12 +113,12 @@ namespace inspire {
       {
          if (id == (*it)->id())
          {
-            LogEvent("thread is running, id: %lld", id);
+            LogEvent("thread is running, id: "fmt64, id);
             break;
          }
       }
 #endif
-      LogError("cannot find thread, id: %lld", id);
+      LogError("cannot find thread, id: "fmt64, id);
    }
 
    threadEntity* threadMgr::getEntity( const int64 id )
@@ -144,7 +144,7 @@ namespace inspire {
          }
       }
 #endif
-      LogError("cannot find thread, id: %lld", id);
+      LogError("cannot find thread, id: "fmt64, id);
    }
 
 }

@@ -4,7 +4,7 @@
 namespace inspire {
 
    const static char *logFmt = "%04d-%02d-%02d-%02d.%02d.%02d"NEWLINE
-                               "PID: %-37lldTID: %lld"NEWLINE
+                               "PID: %"fmt64"TID: "fmt64 NEWLINE
                                "Level: %s"NEWLINE
                                "Function: %-32s"NEWLINE
                                "File: %s"NEWLINE"Line: %d"NEWLINE

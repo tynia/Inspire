@@ -2,10 +2,12 @@
 #define _INSPIRE_LOG_H_
 
 #include "control.h"
-#include "platform.h"
 
 namespace inspire {
 
+   // macros
+   #define LOG_BUFFER_SIZE 4096
+   #define MAX_LOG_FILE_NAME 255
    /*
    * the bigger of value, the more logs
    **/
