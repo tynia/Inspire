@@ -1,7 +1,7 @@
 #include "ioservice.h"
 #include "assert.h"
 #include "async.h"
-#include "thread.h"
+#include "threadentity.h"
 #include "threadMgr.h"
 #include "entry/entry.h"
 

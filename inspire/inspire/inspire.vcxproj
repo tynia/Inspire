@@ -110,6 +110,7 @@
     <ClInclude Include="thread\entryPoint.h" />
     <ClInclude Include="thread\entry\entry.h" />
     <ClInclude Include="thread\thread.h" />
+    <ClInclude Include="thread\threadentity.h" />
     <ClInclude Include="thread\threadMgr.h" />
     <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\atomic\atomic.h" />
@@ -146,7 +147,7 @@
     <ClCompile Include="test\main.cpp" />
     <ClCompile Include="thread\entryPoint.cpp" />
     <ClCompile Include="thread\entry\entry.cpp" />
-    <ClCompile Include="thread\thread.cpp" />
+    <ClCompile Include="thread\threadentity.cpp" />
     <ClCompile Include="thread\threadMgr.cpp" />
     <ClCompile Include="util\atomic\atomic32.cpp" />
     <ClCompile Include="util\atomic\atomic64.cpp" />

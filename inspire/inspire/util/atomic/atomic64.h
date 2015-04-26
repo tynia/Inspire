@@ -10,7 +10,8 @@ namespace inspire {
    class atomicSigned64
    {
    public:
-      explicit atomicSigned64(int64 val);
+      typedef long long int64;
+      atomicSigned64(int64 val);
       ~atomicSigned64();
 
       friend class atomic64;

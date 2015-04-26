@@ -105,9 +105,6 @@
     <ClInclude Include="stream\endian\endian.h">
       <Filter>stream\endian</Filter>
     </ClInclude>
-    <ClInclude Include="thread\thread.h">
-      <Filter>thread</Filter>
-    </ClInclude>
     <ClInclude Include="util\contextBuffer.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -216,6 +213,12 @@
     <ClInclude Include="util\atomic\atomic32.h">
       <Filter>util\atomic</Filter>
     </ClInclude>
+    <ClInclude Include="thread\threadentity.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -272,9 +275,6 @@
     <ClCompile Include="util\lock.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="thread\thread.cpp">
-      <Filter>thread</Filter>
-    </ClCompile>
     <ClCompile Include="inslog\impl\insLogMgr.cpp">
       <Filter>insLog\impl</Filter>
     </ClCompile>
@@ -301,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="util\atomic\atomic64.cpp">
       <Filter>util\atomic</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\threadentity.cpp">
+      <Filter>thread</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

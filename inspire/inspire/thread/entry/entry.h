@@ -3,7 +3,7 @@
 
 #include "inspire.h"
 #include "async/async.h"
-#include "thread.h"
+#include "threadentity.h"
 
 namespace inspire {
    /*

@@ -5,58 +5,37 @@
 
 namespace inspire {
 
-   enum THREAD_ENTRY_TYPES
+   typedef unsigned int(__stdcall *THREAD_ENTRY)(void*);
+
+   enum threadState
    {
-      THREAD_SERVICE_ACCEPTOR,
-      THREAD_SERVICE_SESSION,
+      THREAD_CREATING,
+      THREAD_RUNNING,
+      THREAD_STOPPED,
+      THREAD_DESTROY,
    };
 
-   class threadEntryPoint;
-
-   class threadEntity
+   class thread
    {
    public:
-      threadEntity(THREAD_ENTRY_TYPES t, void* argv);
-      virtual ~threadEntity() {}
+      thread(THREAD_ENTRY entry, void* argv);
+      ~thread();
 
-      HANDLE handle() const
-      {
-         return _thdl;
-      }
+   public:
+      int run();
 
-      const int64 id() const
-      {
-         return _id;
-      }
+      bool isRunning();
 
-      const THREAD_ENTRY_TYPES type() const
-      {
-         return _type;
-      }
+      const int stopped();
 
-      void attach(threadEntryPoint* ep, void* argv);
+   private:
+      HANDLE create();
+      void stop();
 
-      void init   ();
-      void run    ();
-      void stop   ();
-      void pause  ();
-      void resume ();
-      void destroy();
-      void kill(int64& exitCode);
-
-      bool isStopped() const;
-
-      bool isSystemThread() const;
-
-      const char* desc() const;
-
-   protected:
+   private:
       bool         _stop;
-      THREAD_ENTRY_TYPES _type;
-      int64        _id;
-      HANDLE       _thdl;
-      threadEntryPoint* _entryPoint;
-      void* _argv;
+      void*        _entryParam;
+      THREAD_ENTRY _entryFunc;
    };
 }
 #endif

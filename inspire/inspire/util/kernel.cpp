@@ -16,6 +16,12 @@ namespace inspire {
    void krControl::initialize()
    {
       _threadMgr = new threadMgr();
+      if (NULL == _threadMgr)
+      {
+         LogError("Failed to allocate thread manager, out of memory");
+         return;
+      }
+      LogEvent("Success to create thread manager");
    }
 
    //////////////////////////////////////////////////////////////////////////

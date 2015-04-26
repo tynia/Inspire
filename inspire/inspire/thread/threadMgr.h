@@ -9,7 +9,7 @@
 namespace inspire {
 
    class threadEntity;
-   typedef std::vector<int64, threadEntity*> threadContainer;
+   typedef std::vector<threadEntity*> threadContainer;
    typedef std::vector<THREAD_ENTRY_TYPES> systemThreadContainer;
 
    class IThreadMgr

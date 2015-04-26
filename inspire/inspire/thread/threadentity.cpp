@@ -1,4 +1,4 @@
-#include "thread.h"
+#include "threadentity.h"
 #include "entry/entry.h"
 #include "entryPoint.h"
 

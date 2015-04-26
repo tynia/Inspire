@@ -2,7 +2,7 @@
 #define _INSPIRE_NET_SERVICE_H_
 
 #include "inspire.h"
-#include "thread.h"
+#include "threadentity.h"
 
 namespace inspire {
 

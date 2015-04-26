@@ -1,5 +1,5 @@
 #include "threadMgr.h"
-#include "thread.h"
+#include "threadentity.h"
 #include "entryPoint.h"
 
 namespace inspire {
