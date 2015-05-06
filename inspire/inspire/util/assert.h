@@ -7,7 +7,9 @@
 #define INSPIRE_ASSERT(condition)                           \
 do                                                          \
 {                                                           \
-   if (!condition)                                          \
+   if (condition)                                           \
+   {}                                                       \
+   else                                                     \
    {                                                        \
       inspire::Panic();                                     \
    }                                                        \

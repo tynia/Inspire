@@ -51,14 +51,14 @@ namespace inspire {
        }
     }
 
-    void ossFile::read(char* buffer, const int bufferLen, const int toRead, int& readed)
+    const int ossFile::read(char* buffer, const int bufferLen, const int toRead)
     {
-
+       return 0;
     }
 
-    void ossFile::write(char* buffer, const int bufferLen, const int toWrite, int& readed)
+    const int ossFile::write(char* buffer, const int bufferLen, const int toWrite)
     {
-
+       return 0;
     }
 
     void ossFile::close()
@@ -77,4 +77,20 @@ namespace inspire {
       }
 #endif
     }
+
+    void ossFile::seek(const size_t offset)
+    {
+
+    }
+
+    const int ossFile::seekAndRead(const size_t offset, const int toRead, const char* buffer, const int bufferLen)
+    {
+       return 0;
+    }
+
+    const int ossFile::seekAndWrite(const size_t offset, const int toWrite, const char* buffer, const int bufferLen)
+    {
+       return 0;
+    }
+
 }

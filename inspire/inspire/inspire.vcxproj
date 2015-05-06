@@ -147,6 +147,7 @@
     <ClCompile Include="test\main.cpp" />
     <ClCompile Include="thread\entryPoint.cpp" />
     <ClCompile Include="thread\entry\entry.cpp" />
+    <ClCompile Include="thread\thread.cpp" />
     <ClCompile Include="thread\threadentity.cpp" />
     <ClCompile Include="thread\threadMgr.cpp" />
     <ClCompile Include="util\atomic\atomic32.cpp" />

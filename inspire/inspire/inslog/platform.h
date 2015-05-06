@@ -9,7 +9,7 @@
 #endif // _CXX_11
 
 // defined int64
-typedef long long int64;
+#define INT64 long long
 
 #ifdef _WIN32
 #define NEWLINE "\r\n"

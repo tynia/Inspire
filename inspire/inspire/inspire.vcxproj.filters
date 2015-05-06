@@ -305,5 +305,8 @@
     <ClCompile Include="thread\threadentity.cpp">
       <Filter>thread</Filter>
     </ClCompile>
+    <ClCompile Include="thread\thread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

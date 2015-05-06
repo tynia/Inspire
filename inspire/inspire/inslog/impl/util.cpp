@@ -1,4 +1,5 @@
 #include "include/log.h"
+#include "platform.h"
 #include <wchar.h>
 
 namespace inspire {

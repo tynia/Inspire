@@ -2,6 +2,7 @@
 #define _INSPIRE_THREAD_H_
 
 #include "inspire.h"
+#include "noncopyable.h"
 
 namespace inspire {
 
@@ -15,25 +16,24 @@ namespace inspire {
       THREAD_DESTROY,
    };
 
-   class thread
+   class thread : public noncopyable
    {
    public:
       thread(THREAD_ENTRY entry, void* argv);
-      ~thread();
+      virtual ~thread();
 
    public:
-      int run();
+      virtual unsigned int run();
 
-      bool isRunning();
-
-      const int stopped();
+   public:
+      const int64 id() const;
 
    private:
       HANDLE create();
-      void stop();
 
    private:
-      bool         _stop;
+      int64        _id;
+      HANDLE       _hThread;
       void*        _entryParam;
       THREAD_ENTRY _entryFunc;
    };
