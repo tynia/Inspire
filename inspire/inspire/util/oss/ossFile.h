@@ -19,8 +19,10 @@ namespace inspire {
       const int read(char* buffer, const int bufferLen, const int toRead);
       const int write(char* buffer, const int bufferLen, const int toWrite);
       void close();
+      const int64 filesize();
 
-      void seek(const size_t offset);
+      void rseek(const size_t offset);
+      void wseek(const size_t offset);
       const int seekAndRead(const size_t offset, const int toRead, const char* buffer, const int bufferLen);
       const int seekAndWrite(const size_t offset, const int toWrite, const char* buffer, const int bufferLen);
 

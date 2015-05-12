@@ -92,35 +92,89 @@ namespace inspire {
    const int ossFile::read(char* buffer, const int bufferLen, const int toRead)
    {
       INSPIRE_ASSERT(buffer, "buffer cannot be NULL");
-      return 0;
+      INSPIRE_ASSERT(bufferLen >= toRead, "buffer size cannot less than bytes to read");
+      int64 totalRead = 0;
+#ifdef _WIN32
+      bool bSuccess = ::ReadFile(_handle, buffer, toRead, (LPDWORD)&totalRead, NULL);
+      if (!bSuccess)
+      {
+         unsigned int err = GetLastError();
+         LogError("Failed to read file to buffer, rc = %d", GetLastError());
+         return 0;
+      }
+#else
+#endif
+      _roffset += totalRead;
+      return (int)totalRead;
    }
 
    const int ossFile::write(char* buffer, const int bufferLen, const int toWrite)
    {
-      return 0;
+      INSPIRE_ASSERT(bufferLen >= toWrite, "buffer size cannot less than bytes to write");
+      if (NULL == buffer)
+      {
+         return 0;
+      }
+      int64 totalWritten = 0;
+#ifdef _WIN32
+      bool bSuccess = ::WriteFile(_handle, buffer, toWrite, (LPDWORD)&totalWritten, NULL);
+      if (!bSuccess)
+      {
+         LogError("Failed to write buffer to file, rc = %d", GetLastError());
+         return 0;
+      }
+#else
+#endif
+      _woffset += totalWritten;
+      return (int)totalWritten;
    }
 
    void ossFile::close()
    {
-#ifdef _WIN32
-      if (INVALID_HANDLE_VALUE == _handle)
+      if (isOpened())
       {
+#ifdef _WIN32
          ::CloseHandle(_handle);
          _handle = INVALID_HANDLE_VALUE;
-      }
 #else
-     if (isOpened())
-     {
+     
         ::close(_fd);
         _fd = 0;
-     }
 #endif
+      }
+      _roffset = 0;
+      _woffset = 0;
    }
 
-   void ossFile::seek(const size_t offset)
+   const int64 ossFile::filesize()
    {
+      int64 totalSize = 0;
+#ifdef _WIN32
+      DWORD low = 0;
+      DWORD high = 0;
+      low = ::GetFileSize(_handle, &high);
+      if (0 != high)
+      {
+         totalSize += high << 16;
+      }
+      totalSize += low;
+#else
 
+#endif
+      return totalSize;
    }
+
+   void ossFile::rseek(const size_t offset)
+   {
+      _roffset += offset;
+   }
+
+
+   void ossFile::wseek(const size_t offset)
+   {
+      _woffset += offset;
+   }
+
 
    const int ossFile::seekAndRead(const size_t offset, const int toRead, const char* buffer, const int bufferLen)
    {
