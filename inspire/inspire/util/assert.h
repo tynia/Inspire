@@ -3,21 +3,22 @@
 
 #include <iostream>
 #include "util.h"
+#include "insLog.h"
 
 #ifdef _DEBUG
-#define INSPIRE_ASSERT(condition, str)                      \
+#define INSPIRE_ASSERT(condition, fmt, ...)                 \
 do                                                          \
 {                                                           \
    if (!(condition))                                        \
    {                                                        \
-      std::cout << " Assert Failed: " << str << std::endl;  \
+      LogError(fmt, __VA_ARGS__);                           \
       inspire::Panic();                                     \
    }                                                        \
    else                                                     \
    {}                                                       \
 }while(false)
 #else
-#define INSPIRE_ASSERT(condition)                           \
+#define INSPIRE_ASSERT(condition, fmt, ...)                 \
 do                                                          \
 {                                                           \
    if (condition)                                           \

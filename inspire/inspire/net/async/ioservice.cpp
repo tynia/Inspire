@@ -39,12 +39,12 @@ namespace inspire {
 
    void IOService::bind(IAsyncConnection* conn)
    {
-      INSPIRE_ASSERT((NULL == conn));
+      INSPIRE_ASSERT(NULL == conn, "Connection should not be NULL");
       if (NULL != conn)
       {
          _conn = conn;
          HANDLE h = CreateIoCompletionPort((HANDLE)_conn->socket(), _hIOCP, (ULONG_PTR)_conn->socket(), _threadCount);
-         INSPIRE_ASSERT((_hIOCP == h));
+         INSPIRE_ASSERT(_hIOCP == h, "Failed to bind IO complete port to socket");
          if (GetLastError())
          {
             LogError("Failed to bind socket to iocp handle, errno = ", GetLastError());
@@ -72,7 +72,7 @@ namespace inspire {
    void IOService::run()
    {
       threadMgr* _threadMgr = getKernel()->getThreadMgr();
-      INSPIRE_ASSERT((NULL != _threadMgr));
+      INSPIRE_ASSERT(NULL != _threadMgr, "Failed to get thread manager");
       _stopService = false;
       // active thread
       for (int idx = 0; idx < _threadCount; ++idx)
@@ -89,7 +89,7 @@ namespace inspire {
    void IOService::destroy()
    {
       threadMgr* _threadMgr = getKernel()->getThreadMgr();
-      INSPIRE_ASSERT((NULL != _threadMgr));
+      INSPIRE_ASSERT(NULL != _threadMgr, "Failed to get thread manager");
       // destroy thread
       for (int idx = 0; idx < _threadCount; ++idx)
       {
@@ -100,7 +100,7 @@ namespace inspire {
    void IOService::_initWorkThread()
    {
       threadMgr* _threadMgr = getKernel()->getThreadMgr();
-      INSPIRE_ASSERT((NULL != _threadMgr));
+      INSPIRE_ASSERT(NULL != _threadMgr, "Failed to get thread manager");
 
       THREAD_ENTRY_TYPES t = THREAD_SERVICE_ACCEPTOR;
       

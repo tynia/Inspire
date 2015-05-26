@@ -3,7 +3,6 @@
 
 namespace inspire {
 
-
 #ifdef _WIN32
    const DWORD ossGetCurrentThreadId()
    {
@@ -43,5 +42,6 @@ namespace inspire {
       return errno;
 #endif
    }
+
 }
 #endif

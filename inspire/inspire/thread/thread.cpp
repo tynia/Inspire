@@ -1,4 +1,5 @@
 #include "thread.h"
+#include "assert.h"
 
 namespace inspire {
 
@@ -24,7 +25,7 @@ namespace inspire {
 
    HANDLE thread::create()
    {
-      INSPIRE_ASSERT(NULL != _hThread);
+      INSPIRE_ASSERT(NULL != _hThread, "Thread handle is NULL");
 
 #ifdef _WIN32
       _hThread = (HANDLE)::_beginthreadex(NULL, 0, _entryFunc, _entryParam, CREATE_SUSPENDED, NULL);

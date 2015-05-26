@@ -79,7 +79,7 @@ namespace inspire {
 
    void threadEntryPointMgr::_addEntryPoint(threadEntryPoint* pEntryPoint)
    {
-      INSPIRE_ASSERT((NULL != pEntryPoint));
+      INSPIRE_ASSERT(NULL != pEntryPoint, "Thread entry point is NULL");
 
       _mapEntryPoint[pEntryPoint->_type] = pEntryPoint;
    }
