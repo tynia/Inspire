@@ -1,13 +1,13 @@
 #include "include/log.h"
 #include "platform.h"
 #include <wchar.h>
+#include "oss/system.h"
 
 namespace inspire {
 
    const static char *logFmt = "%04d-%02d-%02d-%02d.%02d.%02d"NEWLINE
-                               "PID: %"fmt64"TID: "fmt64 NEWLINE
-                               "Level: %s"NEWLINE
-                               "Function: %-32s"NEWLINE
+                               "PID: %-37dTID: %d"NEWLINE
+                               "Level: %s"NEWLINE"Function: %-32s"NEWLINE
                                "File: %s"NEWLINE"Line: %d"NEWLINE
                                "Message:"NEWLINE"%s"NEWLINE NEWLINE;
                                
@@ -30,7 +30,7 @@ namespace inspire {
       sprintf_s(buffer, LOG_BUFFER_SIZE, logFmt,
                 otm.tm_year + 1900, otm.tm_mon + 1, otm.tm_mday,
                 otm.tm_hour, otm.tm_min, otm.tm_sec,
-                typeString(level), (int64)GetCurrentProcessId(), (int64)GetCurrentThreadId(),
+                typeString(level), ossGetCurrentProcessId(), ossGetCurrentThreadId(),
                 func, file, line, userInfo);
       getLogMgr()->writeLog(level, buffer);
    }

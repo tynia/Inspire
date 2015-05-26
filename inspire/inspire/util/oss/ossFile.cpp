@@ -8,10 +8,10 @@ namespace inspire {
 #ifdef _WIN32
    ossFile::ossFile() : _handle(NULL)
 #else
-   ossFile::ossFile() : _fd(-1)
+   ossFile::ossFile() : _fd(0)
 #endif
    {
-      memset(_filename, 0, MAX_LOG_FILE_NAME + 1);
+      memset(_filename, 0, MAX_FILE_NAME_SIZE + 1);
    }
 
    ossFile::~ossFile()
@@ -89,28 +89,32 @@ namespace inspire {
 #endif
    }
 
-   const int ossFile::read(char* buffer, const int bufferLen, const int toRead)
+   const int ossFile::read(const char* buffer, const int bufferLen, const int toRead)
    {
       INSPIRE_ASSERT(buffer, "buffer cannot be NULL");
       INSPIRE_ASSERT(bufferLen >= toRead, "buffer size cannot less than bytes to read");
       int64 totalRead = 0;
 #ifdef _WIN32
-      bool bSuccess = ::ReadFile(_handle, buffer, toRead, (LPDWORD)&totalRead, NULL);
+      bool bSuccess = ::ReadFile(_handle, (LPVOID)buffer, toRead, (LPDWORD)&totalRead, NULL);
       if (!bSuccess)
       {
-         unsigned int err = GetLastError();
-         LogError("Failed to read file to buffer, rc = %d", GetLastError());
-         return 0;
+         LogError("Failed to read file:%s to buffer, error = %d", _filename, ossGetLastError());
+         return -1;
       }
 #else
+      int totalRead = read(_fd, buffer, toRead);
+      if (-1 == totalRead)
+      {
+         LogError("Failed to read file:%s to buffer, error = %d", _filename, ossGetLastError());
+         return -1;
+      }
 #endif
-      _roffset += totalRead;
       return (int)totalRead;
    }
 
-   const int ossFile::write(char* buffer, const int bufferLen, const int toWrite)
+   const int ossFile::write(const char* buffer, const int bufferLen, const int toWrite)
    {
-      INSPIRE_ASSERT(bufferLen >= toWrite, "buffer size cannot less than bytes to write");
+      INSPIRE_ASSERT(bufferLen <= toWrite, "buffer size cannot less than bytes to write");
       if (NULL == buffer)
       {
          return 0;
@@ -121,11 +125,16 @@ namespace inspire {
       if (!bSuccess)
       {
          LogError("Failed to write buffer to file, rc = %d", GetLastError());
-         return 0;
+         return -1;
       }
 #else
+      int totalWritten = write(_fd, buffer, toWrite);
+      if (-1 == totalWritten)
+      {
+         LogError("Failed to read file:%s to buffer, error = %d", _filename, ossGetLastError());
+         return -1;
+      }
 #endif
-      _woffset += totalWritten;
       return (int)totalWritten;
    }
 
@@ -137,58 +146,77 @@ namespace inspire {
          ::CloseHandle(_handle);
          _handle = INVALID_HANDLE_VALUE;
 #else
-     
         ::close(_fd);
         _fd = 0;
 #endif
       }
-      _roffset = 0;
-      _woffset = 0;
    }
 
    const int64 ossFile::filesize()
    {
       int64 totalSize = 0;
 #ifdef _WIN32
-      DWORD low = 0;
-      DWORD high = 0;
-      low = ::GetFileSize(_handle, &high);
-      if (0 != high)
+      LARGE_INTEGER li;
+      if (!GetFileSizeEx(_handle, &li))
       {
-         totalSize += high << 16;
+         LogError("Filed to get file size, GetFileSizeEx()");
       }
-      totalSize += low;
+      totalSize = li.QuadPart;
 #else
-
+      struct stat sb;
+      int rc = 0;
+      rc = fstat(_fd, &sb);
+      if (-1 == rc)
+      {
+         LogError("Failed to get file size, fstat(), error: %d", ossGetLastError());
+      }
+      else
+      {
+         switch (sb.st_mode & S_IFMT)
+         {
+         case S_IFLNK:
+         case S_IFREG:
+            totalSize = sb.st_size;
+            break;
+         default:
+            LogError("Invalid file type, file:%s", _filename);
+            break;
+         }
+      }
 #endif
       return totalSize;
    }
 
-   void ossFile::rseek(const size_t offset)
+   const char* ossFile::filename()
    {
-      _roffset += offset;
+      return _filename;
    }
 
-
-   void ossFile::wseek(const size_t offset)
+   void ossFile::seek( const int64 offset, SEEK_MOD whence )
    {
-      _woffset += offset;
+#ifdef _WIN32
+      INSPIRE_ASSERT(_handle, "File should be opened first");
+      LARGE_INTEGER li;
+      li.QuadPart = offset;
+      li.LowPart = SetFilePointer( _handle, li.LowPart, &li.HighPart, (DWORD)whence );
+      if (INVALID_SET_FILE_POINTER == li.LowPart && NO_ERROR == ossGetLastError())
+      {
+         LogError("io exception occurred when seek, file:%s", _filename);
+      }
+#else
+      INSPIRE_ASSERT(_fd, "File should be opened first");
+      int64 seekoff = 0;
+      seekoff = lseek(_fd, offset, whence);
+      if (-1 == seekoff)
+      {
+         LogError("Failed to lseek, file:%s", _filename);
+      }
+#endif
    }
 
-
-   const int ossFile::seekAndRead(const size_t offset, const int toRead, const char* buffer, const int bufferLen)
+   void ossFile::seekToEnd()
    {
-      return 0;
-   }
-
-   const int ossFile::seekAndWrite(const size_t offset, const int toWrite, const char* buffer, const int bufferLen)
-   {
-      return 0;
-   }
-
-   void ossFile::_reset()
-   {
-
+      seek(0, INSPIRE_SEEK_END);
    }
 
 #ifdef _WIN32
@@ -272,9 +300,9 @@ namespace inspire {
       }
    }
 #else
-   const int ossFile::_matchMode(const int mode)
+   const int ossFile::_matchMode(const int mode, int& iMode)
    {
-      int iMode = 0;
+      iMode = 0;
       // create/open mode
       switch (mode & MODE_CREATE)
       {
@@ -342,5 +370,4 @@ namespace inspire {
       }
       return permission;
    }
-
 }

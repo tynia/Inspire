@@ -124,6 +124,7 @@
     <ClInclude Include="util\mutex.h" />
     <ClInclude Include="util\noncopyable.h" />
     <ClInclude Include="util\oss\ossFile.h" />
+    <ClInclude Include="util\oss\ossHelper.h" />
     <ClInclude Include="util\oss\system.h" />
     <ClInclude Include="util\oss\string_t.h" />
     <ClInclude Include="util\refStream.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="util\lock.cpp" />
     <ClCompile Include="util\mutex.cpp" />
     <ClCompile Include="util\oss\ossFile.cpp" />
+    <ClCompile Include="util\oss\ossHelper.cpp" />
     <ClCompile Include="util\refStream.cpp" />
     <ClCompile Include="util\syncMutex.cpp" />
   </ItemGroup>

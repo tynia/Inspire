@@ -10,14 +10,13 @@
 
 // defined int64
 typedef long long int64;
+#define fmt64 "%lld"
 
 #ifdef _WIN32
 #define NEWLINE "\r\n"
-#define fmt64 "%l64d"
 #else
 typedef void* HANDLE;
 #define NEWLINE "\n"
-#define fmt64 "%lld"
 #endif
 
 #ifdef _WIN32
@@ -27,6 +26,8 @@ typedef void* HANDLE;
 #include <mswsock.h>
 #pragma comment(lib, "Ws2_32.lib")
 // include windows.h
+#include <io.h>
+#include <winbase.h>
 #include <windows.h>
 #include <process.h>
 // include STL

@@ -222,6 +222,9 @@
     <ClInclude Include="util\oss\string_t.h">
       <Filter>util\oss</Filter>
     </ClInclude>
+    <ClInclude Include="util\oss\ossHelper.h">
+      <Filter>util\oss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -310,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="thread\thread.cpp">
       <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="util\oss\ossHelper.cpp">
+      <Filter>util\oss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
