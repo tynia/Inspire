@@ -93,9 +93,6 @@
     <ClInclude Include="net\session.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="net\helper\nethelper.h">
-      <Filter>net\helper</Filter>
-    </ClInclude>
     <ClInclude Include="stream\basestream.h">
       <Filter>stream</Filter>
     </ClInclude>
@@ -158,9 +155,6 @@
     </ClInclude>
     <ClInclude Include="net\event\eventhandler.h">
       <Filter>net\event</Filter>
-    </ClInclude>
-    <ClInclude Include="net\connection.h">
-      <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="net\tcpconnection.h">
       <Filter>net</Filter>
@@ -225,6 +219,9 @@
     <ClInclude Include="util\oss\ossHelper.h">
       <Filter>util\oss</Filter>
     </ClInclude>
+    <ClInclude Include="net\helper\util.h">
+      <Filter>net\helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
@@ -262,9 +259,6 @@
     </ClCompile>
     <ClCompile Include="test\main.cpp">
       <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="net\connection.cpp">
-      <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="net\async\asyncconnection.cpp">
       <Filter>net\async</Filter>
@@ -316,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="util\oss\ossHelper.cpp">
       <Filter>util\oss</Filter>
+    </ClCompile>
+    <ClCompile Include="net\serviceMgr.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ namespace inspire {
 
    void Connection::init()
    {
-      initNetModule();
+      util::initNetwork();
       _fd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
       if (INVALID_SOCKET == _fd)
       {

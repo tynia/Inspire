@@ -11,10 +11,20 @@ namespace inspire {
    class IProcessor;
    typedef std::map<int64, ISession> SessionList;
 
-   class insSessionMgr : public IControl
+   class insServiceMgr// : public IControl
    {
+   private:
+      insServiceMgr();
+      virtual ~insServiceMgr() {}
+
    public:
-      virtual ~insSessionMgr() {}
+      static insServiceMgr* instance();
+
+
+
+      ISession* createSession(const int64 sid = 0);
+      ISession* destorySession(const int64 sid);
+      ISession* destorySession(ISession* session);
 
    private:
       IProcessor* _processor;

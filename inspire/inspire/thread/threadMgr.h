@@ -28,7 +28,8 @@ namespace inspire {
 
    class threadMgr : public IControl, public IThreadMgr
    {
-   public:
+      friend class krControl;
+   private:
       threadMgr();
       ~threadMgr();
 

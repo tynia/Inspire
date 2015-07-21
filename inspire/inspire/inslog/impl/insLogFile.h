@@ -44,6 +44,8 @@ namespace inspire {
    protected:
       int  _priority;
       // mutexLock
+      //ossMutex _mtx;
+      //ossFile _file;
       char _filename[MAX_LOG_FILE_NAME + 1];
    };
 

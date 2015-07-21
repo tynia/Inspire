@@ -11,8 +11,8 @@ namespace inspire {
    {
       IOE_INVALID,
       IOE_ACCEPT,
-      IOE_RECV,
-      IOE_SEND,
+      IOE_READ,
+      IOE_WRITE,
    };
 
    static const unsigned int MAX_BUFFER_SIZE = 8192;
