@@ -114,9 +114,7 @@
     <ClInclude Include="thread\threadMgr.h" />
     <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\atomic\atomic.h" />
-    <ClInclude Include="util\atomic\atomic64.h" />
     <ClInclude Include="util\atomic\atomic32.h" />
-    <ClInclude Include="util\contextBuffer.h" />
     <ClInclude Include="util\kernel.h" />
     <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
@@ -153,8 +151,6 @@
     <ClCompile Include="thread\threadentity.cpp" />
     <ClCompile Include="thread\threadMgr.cpp" />
     <ClCompile Include="util\atomic\atomic32.cpp" />
-    <ClCompile Include="util\atomic\atomic64.cpp" />
-    <ClCompile Include="util\contextBuffer.cpp" />
     <ClCompile Include="util\kernel.cpp" />
     <ClCompile Include="util\lock.cpp" />
     <ClCompile Include="util\mutex.cpp" />

@@ -6,11 +6,10 @@
 
 namespace inspire {
 
-   class IApplication : public IControl
+   class IApplication
    {
    public:
-      IApplication(modType id) : IControl(id)
-      {}
+      IApplication() {}
       virtual ~IApplication() {}
 
       virtual void run() = 0;

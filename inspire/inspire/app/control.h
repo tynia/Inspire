@@ -10,9 +10,10 @@ namespace inspire {
       MOD_LOG,
       MOD_NET,
       MOD_THREAD,
+      MOD_SERVICE,
    };
 
-   inline const char* moduleTypeString(modType t)
+   inline const char* toString(modType t)
    {
       switch (t)
       {
@@ -26,6 +27,8 @@ namespace inspire {
          return "Net module";
       case MOD_THREAD:
          return "Thread module";
+      case MOD_SERVICE:
+         return "Service";
       default:
          return "Unknown module";
       }
@@ -43,9 +46,16 @@ namespace inspire {
          return _id;
       }
 
-      virtual void initialize() = 0;
+      const char* name() const
+      {
+         return toString(_id);
+      }
 
-      virtual void active() = 0;
+      virtual int initialize() = 0;
+
+      virtual int active() = 0;
+
+      virtual int deactive() = 0;
 
       virtual void destroy() = 0;
 

@@ -102,9 +102,6 @@
     <ClInclude Include="stream\endian\endian.h">
       <Filter>stream\endian</Filter>
     </ClInclude>
-    <ClInclude Include="util\contextBuffer.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="util\noncopyable.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -198,9 +195,6 @@
     <ClInclude Include="util\atomic\atomic.h">
       <Filter>util\atomic</Filter>
     </ClInclude>
-    <ClInclude Include="util\atomic\atomic64.h">
-      <Filter>util\atomic</Filter>
-    </ClInclude>
     <ClInclude Include="util\atomic\atomic32.h">
       <Filter>util\atomic</Filter>
     </ClInclude>
@@ -244,9 +238,6 @@
     </ClCompile>
     <ClCompile Include="stream\iostream.cpp">
       <Filter>stream</Filter>
-    </ClCompile>
-    <ClCompile Include="util\contextBuffer.cpp">
-      <Filter>util</Filter>
     </ClCompile>
     <ClCompile Include="util\refStream.cpp">
       <Filter>util</Filter>
@@ -297,9 +288,6 @@
       <Filter>util</Filter>
     </ClCompile>
     <ClCompile Include="util\atomic\atomic32.cpp">
-      <Filter>util\atomic</Filter>
-    </ClCompile>
-    <ClCompile Include="util\atomic\atomic64.cpp">
       <Filter>util\atomic</Filter>
     </ClCompile>
     <ClCompile Include="thread\threadentity.cpp">

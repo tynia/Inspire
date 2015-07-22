@@ -13,18 +13,27 @@ namespace inspire {
       virtual ~Reactor();
 
    public:
-      virtual int initailize();
+      virtual int initailize(unsigned int evCount);
+      virtual int active();
+      virtual int deactive();
       virtual int add(netEvent& nev);
       virtual int modify(netEvent& nev);
       virtual int remove(netEvent& nev);
-      virtual int destroy();
+      virtual void destroy();
+
+   protected:
+      int _createReactor();
 
    private:
+      bool _stop;
+      unsigned int _maxEventCount;
 #ifdef _WIN32
       HANDLE _hIOCP; // IOCP handle
 #else
-      int _fd;       // epoll handle
+      int _epoll;    // epoll handle
+      struct epoll_event* _events;
 #endif
+      std::map<int, fdData*> _fdDataList;
    };
 }
 #endif

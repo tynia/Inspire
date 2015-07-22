@@ -6,14 +6,12 @@
 
 namespace inspire {
 
-   class IProcessor;
-   class Connection;
    class IControl;
    class ISession;
 
    typedef std::map<int64, ISession*> SessionList;
 
-   class IService : 
+   class IService : public IControl
    {
    public:
       virtual ~IService() {}
