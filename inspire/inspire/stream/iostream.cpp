@@ -82,7 +82,7 @@ namespace inspire {
       return *this;
    }
 
-   CIStream& CIStream::operator>> (context& ctx)
+   CIStream& CIStream::operator>> (binData& ctx)
    {
       int len = 0;
       _read((char*)&len, sizeof(int), true);
@@ -166,7 +166,7 @@ namespace inspire {
       return *this;
    }
 
-   COStream& COStream::operator<< (const context& ctx)
+   COStream& COStream::operator<< (const binData& ctx)
    {
       unsigned int len = ENDIAN::H2N(ctx._len);
       _write((const char *)&len, sizeof(int), true);

@@ -5,20 +5,21 @@
 
 namespace inspire {
 
-   struct context
+   struct binData
    {
-      context() : owned(false), _data(NULL), _len(0)
+      binData() : owned(false), _data(NULL), _len(0)
       {}
-      context(const char *data, const int len) : owned(false),
+      binData(const char *data, const int len) : owned(false),
                                                  _data(const_cast<char*>(data)),
                                                  _len(len)
       {}
 
-      ~context()
+      ~binData()
       {
          if (owned)
          {
             delete [] _data;
+            owned = false;
          }
          _data = NULL;
          _len = 0;
@@ -50,6 +51,7 @@ namespace inspire {
 
       bool owned;
       size_t _len;
+      size_t _offset;
       char *_data;
    };
 

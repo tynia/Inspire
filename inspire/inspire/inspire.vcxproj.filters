@@ -192,9 +192,6 @@
     <ClInclude Include="util\kernel.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="net\acceptor.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="util\syncMutex.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -221,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="net\helper\util.h">
       <Filter>net\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="net\engine.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\reactor.h">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +293,6 @@
     <ClCompile Include="util\kernel.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="net\acceptor.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="util\syncMutex.cpp">
       <Filter>util</Filter>
     </ClCompile>
@@ -312,6 +312,9 @@
       <Filter>util\oss</Filter>
     </ClCompile>
     <ClCompile Include="net\serviceMgr.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\reactor.cpp">
       <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>

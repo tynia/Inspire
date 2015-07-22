@@ -54,7 +54,7 @@ namespace inspire {
       CIStream& operator>> (int& var);
       CIStream& operator>> (unsigned int& var);
       CIStream& operator>> (int64& var);
-      CIStream& operator>> (context& ctx);
+      CIStream& operator>> (binData& ctx);
 
    };
 
@@ -83,7 +83,7 @@ namespace inspire {
       COStream& operator<< (const int& val);
       COStream& operator<< (const unsigned int& val);
       COStream& operator<< (const int64& val);
-      COStream& operator<< (const context& ctx);
+      COStream& operator<< (const binData& ctx);
    };
 }
 #endif

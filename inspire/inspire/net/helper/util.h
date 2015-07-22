@@ -5,8 +5,14 @@
 
 namespace inspire {
 
-   namespace util {
+#ifndef _WIN32
+   enum
+   {
+      INVALID_FILE_DESCRIPTION = -1;
+   };
+#endif
 
+   namespace util {
       /**
        * init network of windows
        */

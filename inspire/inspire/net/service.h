@@ -13,10 +13,14 @@ namespace inspire {
 
    typedef std::map<int64, ISession*> SessionList;
 
-   class IService
+   class IService : 
    {
    public:
       virtual ~IService() {}
+
+      virtual int addSession(ISession* s);
+
+      virtual int removeSession(ISession* s);
 
       virtual bool stopped() const;
 
