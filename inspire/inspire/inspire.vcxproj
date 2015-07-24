@@ -125,6 +125,7 @@
     <ClInclude Include="util\oss\ossHelper.h" />
     <ClInclude Include="util\oss\system.h" />
     <ClInclude Include="util\oss\string_t.h" />
+    <ClInclude Include="util\refPointer.h" />
     <ClInclude Include="util\refStream.h" />
     <ClInclude Include="util\syncMutex.h" />
     <ClInclude Include="util\util.h" />

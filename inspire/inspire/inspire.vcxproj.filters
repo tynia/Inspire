@@ -219,6 +219,9 @@
     <ClInclude Include="net\reactor.h">
       <Filter>net</Filter>
     </ClInclude>
+    <ClInclude Include="util\refPointer.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bson\impl\bsonobj.cpp">
