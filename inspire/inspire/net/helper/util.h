@@ -38,25 +38,6 @@ namespace inspire {
       }
 
       /**
-       * check endian of local
-       */
-      inline bool isBigEndian()
-      {
-         union
-         {
-            short __sNum;
-            char __ca[2];
-         } endian;
-         endian.__sNum = 0x0109;
-
-         if ( endian.__ca[0] == 0x09 )
-         {
-            return false;
-         }
-         return true;
-      }
-
-      /**
        * return network error
        */
       inline int netError()

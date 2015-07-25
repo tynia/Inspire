@@ -122,6 +122,7 @@ namespace inspire {
                      LogError("Failed to read msg length, errno: %d", util::netError());
                      //remove(fdd->_fd);
                   }
+                  // need import memory pool to alloc buffer
                   char* buf = new char[msgLen];
                   *(int*)buf = msgLen;
                   pos += sizeof(int);

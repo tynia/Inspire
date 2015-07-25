@@ -2,70 +2,82 @@
 
 namespace inspire {
 
-   mutex::mutex()
+   syncMutex::syncMutex()
    {
 #ifdef _WIN32
-      ::InitializeCriticalSection(&_cs);
+      _mutex = ::CreateMutex(NULL, FALSE, NULL);
+      if (INVALID_HANDLE_VALUE == _mutex)
+      {
+         LogError("Failed to create sync mutex");
+         return;
+      }
 #else
-      int ret = pthread_mutex_init(&_mtx, NULL);
+      int ret = pthread_mutex_init(&_mutex, NULL);
       if (ret)
       {
-         LogError("Failed to create mutex");
+         LogError("Failed to create sync mutex");
          return;
       }
 #endif
-      LogDebug("Create mutex success");
+      LogEvent("Create sync mutex success");
    }
 
-   mutex::~mutex()
+   syncMutex::~syncMutex()
    {
 #ifdef _WIN32
-      ::DeleteCriticalSection(&_cs);
+      ::WaitForSingleObject(_mutex, INFINITE);
+      ::CloseHandle(_mutex);
 #else
       int ret = 0;
       do
       {
-         ret = pthread_mutex_destroy(&_mtx);
-      } while (ret);
+         ret = pthread_mutex_destroy(&_mutex);
+      }while (ret)
 #endif
-      LogDebug("Destroy mutex");
+      LogEvent("Destroy sync mutex success");
    }
 
-   void mutex::lock()
+   void syncMutex::lock()
    {
 #ifdef _WIN32
-      ::EnterCriticalSection(&_cs);
+      ::WaitForSingleObject(_mutex, INFINITE);
 #else
       int ret = 0;
       do
       {
-         ret = pthread_mutex_lock(&_mtx);
-      } while (ret);
+         ret = pthread_mutex_lock(&_mutex);
+      }while (ret)
 #endif
-      LogDebug("get lock");
    }
 
-   void mutex::unlock()
+   void syncMutex::unlock()
    {
 #ifdef _WIN32
-      ::LeaveCriticalSection(&_cs);
+      ::SetEvent(_mutex);
 #else
-      int ret = 0;
-      do
+      int ret = pthread_mutex_unlock(&_mutex);
+      if (ret)
       {
-         ret = pthread_mutex_unlock(&_mtx);
-      } while (ret);
+         LogError("Failed to release sync mutex");
+      }
 #endif
-      LogDebug("release lock");
    }
 
-   bool mutex::tryLock()
+   bool syncMutex::tryLock()
    {
 #ifdef _WIN32
-      return ::TryEnterCriticalSection(&_cs);
+      DWORD dwRet = ::WaitForSingleObject(_mutex, 1000);
+      if (WAIT_OBJECT_0 != dwRet)
+      {
+         return false;
+      }
 #else
-      return EBUSY != pthread_mutex_trylock(&_mtx);
+      int ret = pthread_mutex_trylock(&_mutex);
+      if (ret)
+      {
+         return false;
+      }
 #endif
+      return true;
    }
-
 }

@@ -6,17 +6,27 @@ namespace inspire {
    class refCounter
    {
    public:
-   protected:
       refCounter() : _referCount(0)
+      {}
+
+      refCounter(unsigned int c) : _referCount(c)
       {}
 
       refCounter(const refCounter* rhs) : _referCount(rhs->_referCount)
       {}
 
-      ~refCounter()
+      refCounter operator= (const refCounter& rhs)
       {
-
+         _referCount = rhs._referCount;
       }
+
+      const unsigned int get() const
+      {
+         return _referCount;
+      }
+
+      ~refCounter()
+      {}
 
       void _inc()
       {

@@ -55,7 +55,6 @@ namespace inspire {
       CIStream& operator>> (unsigned int& var);
       CIStream& operator>> (int64& var);
       CIStream& operator>> (binData& ctx);
-
    };
 
    class COStream : virtual public FixedStream

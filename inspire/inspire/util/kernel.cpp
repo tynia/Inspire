@@ -4,14 +4,10 @@
 namespace inspire {
 
    krControl::krControl() : IControl(MOD_KERNEL)
-   {
-      
-   }
+   {}
 
    krControl::~krControl()
-   {
-      
-   }
+   {}
 
    void krControl::initialize()
    {

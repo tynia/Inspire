@@ -84,6 +84,7 @@ namespace inspire {
    extern bool g_endian;
    class Endian
    {
+      // do not handle endian, use local
    public:
       // bool
       static const bool N2H(const bool& v)
@@ -326,7 +327,6 @@ namespace inspire {
          CONVERT_ENDIAN_8(v, out, g_endian);
          return out;
       }
-
    };
 
 }

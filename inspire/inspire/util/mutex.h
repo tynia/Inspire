@@ -1,21 +1,15 @@
-#ifndef _INSPIRE_UTIL_MUTEX_H_
-#define _INSPIRE_UTIL_MUTEX_H_
+#ifndef _INSPIRE_UTIL_SYNV_MUTEX_H_
+#define _INSPIRE_UTIL_SYNV_MUTEX_H_
 
 #include "inspire.h"
 
 namespace inspire {
 
-   enum RWType
-   {
-      SHARED,
-      EXCLUSIVE,
-   };
-
-   class mutex
+   class syncMutex
    {
    public:
-      mutex();
-      ~mutex();
+      syncMutex();
+      ~syncMutex();
 
       void lock();
       void unlock();
@@ -23,11 +17,10 @@ namespace inspire {
 
    private:
 #ifdef _WIN32
-      CRITICAL_SECTION _cs;
+      HANDLE  _mutex;
 #else
-      pthread_mutex_t _mtx;
+      pthread_mutex_t _mutex;
 #endif
    };
-
 }
 #endif

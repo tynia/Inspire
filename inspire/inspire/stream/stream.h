@@ -3,7 +3,26 @@
 
 namespace inspire {
 
-#ifndef _INSPIRE_SERVER_
+#ifdef _INSPIRE_SERVER_
+   /**
+   * check endian of local
+   */
+   inline bool isBigEndian()
+   {
+      union
+      {
+         short __sNum;
+         char __ca[2];
+      } endian;
+      endian.__sNum = 0x0109;
+
+      if (endian.__ca[0] == 0x09)
+      {
+         return false;
+      }
+      return true;
+   }
+#else
    static bool g_endian = false;
 
    inline void setEndian(bool endian)

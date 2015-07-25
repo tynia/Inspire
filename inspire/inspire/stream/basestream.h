@@ -9,9 +9,9 @@ namespace inspire {
    {
       binData() : owned(false), _data(NULL), _len(0)
       {}
-      binData(const char *data, const int len) : owned(false),
-                                                 _data(const_cast<char*>(data)),
-                                                 _len(len)
+      binData(const char *data, const unsigned len) : owned(false),
+                                                      _data(const_cast<char*>(data)),
+                                                      _len(len)
       {}
 
       ~binData()
@@ -25,7 +25,7 @@ namespace inspire {
          _len = 0;
       }
 
-      void reverse(size_t size)
+      void reverse(const unsigned size)
       {
          if (_len > size)
          {
@@ -49,10 +49,9 @@ namespace inspire {
          }
       }
 
-      bool owned;
-      size_t _len;
-      size_t _offset;
-      char *_data;
+      bool     owned;
+      unsigned _len;
+      char    *_data;
    };
 
    class baseStream : virtual public refStream
@@ -68,6 +67,7 @@ namespace inspire {
       const size_t size() const;
       bool empty() const;
       bool readable() const;
+      bool writeable() const;
 
    protected:
       void _skipRead(const size_t size);
@@ -79,8 +79,9 @@ namespace inspire {
       void _write(const char* data, const size_t size, bool align = false, const int bytes = 4);
 
    private:
-      size_t   _wOffset;
-      size_t   _rOffset;
+      bool   _writeable;
+      size_t _wOffset;
+      size_t _rOffset;
    };
 
 }

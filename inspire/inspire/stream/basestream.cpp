@@ -4,22 +4,24 @@
 
 namespace inspire {
 
-   baseStream::baseStream() : refStream(), _wOffset(0), _rOffset(0)
+   baseStream::baseStream() : refStream(), _writeable(true), _wOffset(0), _rOffset(0)
    {
    }
 
-   baseStream::baseStream(const char* data, const size_t len) : refStream(data, len), _wOffset(0), _rOffset(0)
+   baseStream::baseStream(const char* data, const size_t len) : refStream(data, len), _writeable(false), _wOffset(0), _rOffset(0)
    {
    }
 
    baseStream::baseStream(const baseStream* rhs) : refStream(*rhs)
    {
+      _writeable = rhs->_writeable;
       _wOffset = rhs->_wOffset;
       _rOffset = rhs->_rOffset;
    }
 
    baseStream::baseStream(const baseStream& rhs) : refStream(rhs)
    {
+      _writeable = rhs._writeable;
       _wOffset = rhs._wOffset;
       _rOffset = rhs._rOffset;
    }
@@ -52,7 +54,12 @@ namespace inspire {
 
    bool baseStream::readable() const
    {
-      return _rOffset < _wOffset;
+      return (!_writeable) || (_rOffset < _wOffset);
+   }
+
+   bool baseStream::writeable() const
+   {
+      return _writeable;
    }
 
    void baseStream::_skipRead(const size_t size)
