@@ -81,9 +81,6 @@
   <ItemGroup>
     <ClInclude Include="app\application.h" />
     <ClInclude Include="app\control.h" />
-    <ClInclude Include="bson\bson.h" />
-    <ClInclude Include="bson\bsonobj.h" />
-    <ClInclude Include="bson\element.h" />
     <ClInclude Include="inslog\impl\insLogFile.h" />
     <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
@@ -113,6 +110,7 @@
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\threadentity.h" />
     <ClInclude Include="thread\threadMgr.h" />
+    <ClInclude Include="util\allocator.h" />
     <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\atomic\atomic.h" />
     <ClInclude Include="util\atomic\atomic32.h" />
@@ -131,8 +129,6 @@
     <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bson\bsonobj.cpp" />
-    <ClCompile Include="bson\element.cpp" />
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
     <ClCompile Include="inslog\impl\insLogMgr.cpp" />
     <ClCompile Include="inslog\impl\util.cpp" />
@@ -152,6 +148,7 @@
     <ClCompile Include="thread\thread.cpp" />
     <ClCompile Include="thread\threadentity.cpp" />
     <ClCompile Include="thread\threadMgr.cpp" />
+    <ClCompile Include="util\allocator.cpp" />
     <ClCompile Include="util\atomic\atomic32.cpp" />
     <ClCompile Include="util\kernel.cpp" />
     <ClCompile Include="util\lock.cpp" />

@@ -89,7 +89,7 @@ namespace inspire {
          {
             if ( (   (_events[idx].events & EPOLLERR)
                   || (_events[idx].events & EPOLLHUP) )
-                 && !(_events[idx].events & EPOLLIN) )
+                  || !(_events[idx].events & EPOLLIN) )
             {
                LogError("Error occurred when wait epoll event");
                remove(_events[idx].data.fd);

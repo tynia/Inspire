@@ -204,17 +204,11 @@
     <ClInclude Include="stream\refStream.h">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="bson\bson.h">
-      <Filter>bson</Filter>
-    </ClInclude>
-    <ClInclude Include="bson\bsonobj.h">
-      <Filter>bson</Filter>
-    </ClInclude>
-    <ClInclude Include="bson\element.h">
-      <Filter>bson</Filter>
-    </ClInclude>
     <ClInclude Include="json.h">
-      <Filter>bson\json</Filter>
+      <Filter>bson</Filter>
+    </ClInclude>
+    <ClInclude Include="util\allocator.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -296,11 +290,8 @@
     <ClCompile Include="stream\refStream.cpp">
       <Filter>stream</Filter>
     </ClCompile>
-    <ClCompile Include="bson\bsonobj.cpp">
-      <Filter>bson</Filter>
-    </ClCompile>
-    <ClCompile Include="bson\element.cpp">
-      <Filter>bson</Filter>
+    <ClCompile Include="util\allocator.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

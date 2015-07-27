@@ -1,9 +1,6 @@
 #ifndef _INSPIRE_BSON_OBJ_H_
 #define _INSPIRE_BSON_OBJ_H_
 
-#include "util/bson.h"
-#include "binary.h"
-
 namespace inspire {
 
    class BSONElement;
