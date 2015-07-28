@@ -29,7 +29,7 @@ namespace inspire {
       char* _ptrBegin;
       char* _ptrEnd;
       char* _ptrCurrent;
-      char _data[szBlock];
+      char  _data[szBlock];
    };
 }
 #endif

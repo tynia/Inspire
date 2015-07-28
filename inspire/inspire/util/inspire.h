@@ -10,7 +10,8 @@
 
 // defined int64
 typedef long long int64;
-typedef unsigned long long size_t;
+typedef unsigned long long uint64;
+typedef uint64 size_t;
 #define fmt64 "%lld"
 
 #ifdef _WIN32

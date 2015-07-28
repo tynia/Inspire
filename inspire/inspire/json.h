@@ -129,6 +129,7 @@ namespace inspire {
          Element* _e;
          Element* _end;
          allocator *_pool;
+         baseStream _stream;
       };
    }
 }
