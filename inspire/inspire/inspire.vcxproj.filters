@@ -61,9 +61,6 @@
     <Filter Include="util\atomic">
       <UniqueIdentifier>{1562a028-41bd-43e8-83c2-c821fa893c38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="bson\json">
-      <UniqueIdentifier>{d4d46bff-1aba-41ca-b726-ad20df534535}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\application.h">
@@ -204,10 +201,19 @@
     <ClInclude Include="stream\refStream.h">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="json.h">
+    <ClInclude Include="util\allocator.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\element.h">
       <Filter>bson</Filter>
     </ClInclude>
-    <ClInclude Include="util\allocator.h">
+    <ClInclude Include="object.h">
+      <Filter>bson</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\bson.h">
+      <Filter>bson</Filter>
+    </ClInclude>
+    <ClInclude Include="util\mempool.h">
       <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
@@ -292,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="util\allocator.cpp">
       <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="bson\bson.cpp">
+      <Filter>bson</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

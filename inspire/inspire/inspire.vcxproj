@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -81,11 +81,13 @@
   <ItemGroup>
     <ClInclude Include="app\application.h" />
     <ClInclude Include="app\control.h" />
+    <ClInclude Include="bson\bson.h" />
+    <ClInclude Include="bson\element.h" />
     <ClInclude Include="inslog\impl\insLogFile.h" />
     <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
     <ClInclude Include="inslog\platform.h" />
-    <ClInclude Include="json.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="net\engine.h" />
     <ClInclude Include="net\async\async.h" />
     <ClInclude Include="net\async\asyncconnection.h" />
@@ -118,6 +120,7 @@
     <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
     <ClInclude Include="util\lock.h" />
+    <ClInclude Include="util\mempool.h" />
     <ClInclude Include="util\mutex-dep.h" />
     <ClInclude Include="util\noncopyable.h" />
     <ClInclude Include="util\oss\ossFile.h" />
@@ -129,6 +132,7 @@
     <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bson\bson.cpp" />
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
     <ClCompile Include="inslog\impl\insLogMgr.cpp" />
     <ClCompile Include="inslog\impl\util.cpp" />

@@ -8,7 +8,7 @@ namespace inspire {
    static const unsigned int szBlock = 4096;
    static const unsigned int szAlignment = sizeof(void*);
 
-   class allocator
+   class allocator : public noncopyable
    {
    public:
       allocator();
@@ -31,5 +31,7 @@ namespace inspire {
       char* _ptrCurrent;
       char  _data[szBlock];
    };
+
+   
 }
 #endif
