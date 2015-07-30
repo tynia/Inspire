@@ -10,17 +10,18 @@ namespace inspire {
       class Allocator : public noncopyable
       {
       public:
-         Allocator();
-         virtual ~Allocator();
+         static Allocator* instance();
 
          char* alloc(const unsigned int size);
          void dealloc(const char* ptr);
 
       protected:
-         char* _align(char* origin);
-         void* _addMemory(const size_t size);
+         Allocator();
+         virtual ~Allocator();
 
       private:
+         bool _check(const char* ptr);
+
          struct header
          {
             unsigned int size;
@@ -28,7 +29,6 @@ namespace inspire {
          };
          header* _hdr;
       };
-
    }
 }
 #endif
