@@ -201,9 +201,6 @@
     <ClInclude Include="stream\refStream.h">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="util\allocator.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="bson\element.h">
       <Filter>bson</Filter>
     </ClInclude>
@@ -215,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="util\mempool.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\allocator.h">
+      <Filter>bson</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -296,10 +296,10 @@
     <ClCompile Include="stream\refStream.cpp">
       <Filter>stream</Filter>
     </ClCompile>
-    <ClCompile Include="util\allocator.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="bson\bson.cpp">
+      <Filter>bson</Filter>
+    </ClCompile>
+    <ClCompile Include="bson\allocator.cpp">
       <Filter>bson</Filter>
     </ClCompile>
   </ItemGroup>

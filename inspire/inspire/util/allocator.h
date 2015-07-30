@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_UTIL_ALLOCATOR_H_
-#define _INSPIRE_UTIL_ALLOCATOR_H_
+#ifndef _INSPIRE_UTIL_MEMORY_POOL_H_
+#define _INSPIRE_UTIL_MEMORY_POOL_H_
 
 #include "inspire.h"
 
