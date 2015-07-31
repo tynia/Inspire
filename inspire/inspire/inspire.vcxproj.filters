@@ -216,6 +216,9 @@
     <ClInclude Include="bson\allocator.h">
       <Filter>bson</Filter>
     </ClInclude>
+    <ClInclude Include="bson\writer.h">
+      <Filter>bson</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="net\service.cpp">
@@ -300,6 +303,9 @@
       <Filter>bson</Filter>
     </ClCompile>
     <ClCompile Include="bson\allocator.cpp">
+      <Filter>bson</Filter>
+    </ClCompile>
+    <ClCompile Include="bson\writer.cpp">
       <Filter>bson</Filter>
     </ClCompile>
   </ItemGroup>

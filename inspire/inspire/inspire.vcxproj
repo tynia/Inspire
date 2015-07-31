@@ -84,6 +84,7 @@
     <ClInclude Include="bson\allocator.h" />
     <ClInclude Include="bson\bson.h" />
     <ClInclude Include="bson\element.h" />
+    <ClInclude Include="bson\writer.h" />
     <ClInclude Include="inslog\impl\insLogFile.h" />
     <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="bson\allocator.cpp" />
     <ClCompile Include="bson\bson.cpp" />
+    <ClCompile Include="bson\writer.cpp" />
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
     <ClCompile Include="inslog\impl\insLogMgr.cpp" />
     <ClCompile Include="inslog\impl\util.cpp" />

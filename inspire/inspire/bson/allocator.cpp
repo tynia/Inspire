@@ -4,21 +4,14 @@ namespace inspire {
 
    namespace bson {
 
-      Allocator::Allocator() : _hdr(NULL)
+      Allocator::Allocator()
       {
-         _hdr = new header();
-         _hdr->next = NULL;
-         _hdr->size = 0;
+         _setSanity((void*)&_hdr, 0);
       }
 
       Allocator::~Allocator()
       {
-         while (NULL != _hdr)
-         {
-            header* ptr = _hdr->next;
-            _hdr = ptr->next;
-            ::free((void*)ptr);
-         }
+         _resetRest();
       }
 
       Allocator* Allocator::instance()
@@ -32,7 +25,7 @@ namespace inspire {
          //
          // mutex lock
 
-         header* hdr = _hdr;
+         header* hdr = &_hdr;
          while (NULL != hdr->next)
          {
             header* toReturn = hdr->next;
@@ -55,14 +48,7 @@ namespace inspire {
             return NULL;
          }
 
-         ::memset(ptr, 0x00, sizeof(header));
-         hdr = (header*)ptr;
-         hdr->size = size;
-         hdr->next = 0;
-         ++hdr->used;
-         ::memset(hdr->eyecatcher, "inspire", 8);
-         ::memset(hdr->padding, 0xfe, 8);
-
+         _setSanity(ptr, size);
          return (ptr + sizeof(header));
       }
 
@@ -70,28 +56,63 @@ namespace inspire {
       {
          //
          // mutex lock
-         bool ok = _check(ptr);
+         bool ok = _checkSanity(ptr);
          if (!ok)
          {
-            LogError("ptr:0x%x checked failed, it may not be a buffer "
+            LogError("pointer: 0x%x sanity checked failed, it may not be "
                      "allocated by allocator", (unsigned long long*)ptr);
-            ::free(ptr);
+            //::free(ptr);
+#ifdef _DEBUG
+            Panic();
+#endif
             return;
          }
 
          header* hdr = (header*)(ptr - sizeof(header));
-         ::memset(ptr, 0xfe, hdr->size);
-         hdr->next = _hdr->next;
-         _hdr->next = hdr;
+         ::memset((void*)ptr, 0xfe, hdr->size);
+         hdr->next = _hdr.next;
+         _hdr.next = hdr;
       }
 
-      bool Allocator::_check(const char* ptr)
+      void Allocator::pray()
+      {
+         //
+         // mutex lock
+         _resetRest();
+      }
+
+      bool Allocator::_checkSanity(const char* ptr)
       {
          header* hdr = (header*)(ptr - sizeof(header));
-         bool eq1 = ::memcmp(hdr->eyecatcher, "inspire", 8);
-         bool eq2 = ::memcmp(hdr->padding, 0xfe, 8);
+         bool eq1 = ::memcmp(hdr->eyecatcher, "inspired", 8);
+         bool eq2 = true;
+#ifdef _DEBUG
+         eq2 = (debug == hdr->debug);
+#endif
+         return !(eq1 && eq2);
+      }
 
-         return !(eq1 & eq2);
+      void Allocator::_setSanity(void* ptr, const unsigned size)
+      {
+         ::memset(ptr, 0x0, sizeof(header));
+         header* hdr = (header*)ptr;
+         ::memmove(hdr->eyecatcher, "inspired", 8);
+         hdr->used = 0;
+         hdr->size = size;
+         hdr->next = NULL;
+#ifdef _DEBUG
+         hdr->debug = debug;
+#endif
+      }
+
+      void Allocator::_resetRest()
+      {
+         while (NULL != _hdr.next)
+         {
+            header* ptr = _hdr.next;
+            _hdr.next = ptr->next;
+            ::free((void*)ptr);
+         }
       }
    }
 }

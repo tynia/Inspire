@@ -7,6 +7,8 @@ namespace inspire {
 
    namespace bson {
 
+      static const unsigned debug = 0xFFFAFBFE;
+
       class Allocator : public noncopyable
       {
       public:
@@ -14,20 +16,28 @@ namespace inspire {
 
          char* alloc(const unsigned int size);
          void dealloc(const char* ptr);
+         void pray();
 
       protected:
          Allocator();
          virtual ~Allocator();
 
       private:
-         bool _check(const char* ptr);
+         bool _checkSanity(const char* ptr);
+         void _setSanity(void* ptr, const unsigned size);
+         void _resetRest();
 
          struct header
          {
-            unsigned int size;
+            char eyecatcher[8];
+            unsigned used;
+            unsigned size;
             header* next;
+#ifdef _DEBUG
+            unsigned debug;
+#endif
          };
-         header* _hdr;
+         header _hdr;
       };
    }
 }
