@@ -36,6 +36,7 @@ namespace inspire {
       class binData;
       class kvMap
       {
+         friend class Element;
       public:
          const char* toString();
 

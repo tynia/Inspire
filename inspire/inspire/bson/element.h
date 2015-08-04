@@ -8,12 +8,14 @@ namespace inspire {
    namespace bson {
 
       class Object;
-      class Element : virtual public kvMap
+      class Element
       {
       public:
          Element();
          Element(const Element& rhs);
          virtual ~Element();
+
+         Element& operator= (const Element& rhs);
 
          void replace(const Element& e);
 
@@ -35,7 +37,9 @@ namespace inspire {
          void put(const char* k, T& v);
 
       protected:
-         Element* _next;
+         kvMap*      _e;
+         refCounter* _counter;
+         Element*    _next;
       };
    }
 }

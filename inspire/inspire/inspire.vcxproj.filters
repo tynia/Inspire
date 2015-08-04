@@ -308,5 +308,8 @@
     <ClCompile Include="bson\writer.cpp">
       <Filter>bson</Filter>
     </ClCompile>
+    <ClCompile Include="bson\element.cpp">
+      <Filter>bson</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

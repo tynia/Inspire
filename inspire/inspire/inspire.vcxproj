@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="bson\allocator.cpp" />
     <ClCompile Include="bson\bson.cpp" />
+    <ClCompile Include="bson\element.cpp" />
     <ClCompile Include="bson\writer.cpp" />
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
     <ClCompile Include="inslog\impl\insLogMgr.cpp" />

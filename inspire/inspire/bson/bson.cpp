@@ -18,8 +18,6 @@ namespace inspire {
          fmt += ":";
          switch (_vtype)
          {
-         case inspire::bson::VT_MINKEY:
-            break;
          case inspire::bson::VT_DOUBLE:
             //TODO:
             break;
@@ -56,8 +54,6 @@ namespace inspire {
          case inspire::bson::VT_TIMESTAMP:
             break;
          case inspire::bson::VT_LONG:
-            break;
-         case inspire::bson::VT_MAXKEY:
             break;
          default:
             break;
