@@ -1,64 +1,114 @@
 #include "allocator.h"
-#include "insLog.h"
 
 namespace inspire {
 
    allocator::allocator()
-   {}
+   {
+      _setSanity((void*)&_hdr, 0);
+   }
 
    allocator::~allocator()
-   {}
-
-   char* allocator::_align(char* ptr)
    {
-      unsigned int offset = ((szAlignment - (size_t(ptr) & (szAlignment - 1))) & (szAlignment - 1));
-      return ptr + offset;
-   }
-   
-   void* allocator::alloc(const unsigned int size)
-   {
-      char* ptr = NULL;
-      if ((_ptrEnd - _ptrCurrent < szAlignment) || (ptr + size > _ptrEnd))
-      {
-         size_t toAlloc = 0;
-         if (size > szBlock)
-         {
-            toAlloc = ((size/szBlock) + 1)*szBlock;
-         }
-
-         char* newAddr = (char*)_addMemory(toAlloc);
-         if (NULL == newAddr)
-         {
-            LogError("Failed to add memory to pool");
-         }
-
-         char* begin = _align(newAddr);
-         header* hd = reinterpret_cast<header*>(begin);
-         hd->_hdBlock = _ptrBegin;
-         _ptrBegin = newAddr;
-         _ptrCurrent = begin + sizeof(header);
-         _ptrEnd = newAddr + toAlloc;
-
-         ptr = _align(_ptrCurrent);
-      }
-      else
-      {
-         ptr = _align(_ptrCurrent);
-      }
-
-      _ptrCurrent = ptr + size;
-      return ptr;
+      _resetRest();
    }
 
-   void* allocator::_addMemory( const size_t size )
+   allocator* allocator::instance()
    {
-      void* ptr = new char[size];
-      if(NULL == ptr)
+      static allocator allocator;
+      return &allocator;
+   }
+
+   char* allocator::alloc(const unsigned int size)
+   {
+      //
+      // mutex lock
+      header* hdr = &_hdr;
+      while (NULL != hdr->next)
       {
-         LogError("Failed to alloc memory for pool, out of memory");
+         header* toReturn = hdr->next;
+         if (toReturn->size >= size)
+         {
+            hdr->next = toReturn->next;
+            toReturn->next = NULL;
+            return ((char*)toReturn) + sizeof(header);
+         }
+         else
+         {
+            hdr = hdr->next;
+         }
+      }
+
+      char* ptr = (char*)::malloc(size + sizeof(header));
+      if (NULL == ptr)
+      {
+         LogError("Failed to alloc memory, size = d%", size + sizeof(header));
+         return NULL;
+      }
+
+      _setSanity(ptr, size);
+      return (ptr + sizeof(header));
+   }
+
+   void allocator::dealloc(const char* ptr)
+   {
+      //
+      // mutex lock
+      bool ok = _checkSanity(ptr);
+      if (!ok)
+      {
+         LogError("pointer: 0x%x sanity checked failed, it may not be "
+                  "allocated by allocator", (unsigned long long*)ptr);
+         //::free(ptr);
+#ifdef _DEBUG
          Panic();
+#endif
+         return;
       }
-      return ptr;
+
+      header* hdr = (header*)(ptr - sizeof(header));
+      ::memset((void*)ptr, 0xfe, hdr->size);
+      hdr->next = _hdr.next;
+      _hdr.next = hdr;
    }
 
+   void allocator::pray()
+   {
+      //
+      // mutex lock
+      _resetRest();
+   }
+
+   bool allocator::_checkSanity(const char* ptr)
+   {
+      header* hdr = (header*)(ptr - sizeof(header));
+      bool eq1 = ::memcmp(hdr->eyecatcher, "inspired", 8);
+      bool eq2 = true;
+#ifdef _DEBUG
+      eq2 = (debug == hdr->debug);
+#endif
+      return !(eq1 && eq2);
+   }
+
+   void allocator::_setSanity(void* ptr, const unsigned size)
+   {
+      ::memset(ptr, 0x0, sizeof(header));
+      header* hdr = (header*)ptr;
+      ::memmove(hdr->eyecatcher, "inspired", 8);
+      hdr->used = 0;
+      hdr->size = size;
+      hdr->next = NULL;
+#ifdef _DEBUG
+      hdr->debug = debug;
+#endif
+   }
+
+   void allocator::_resetRest()
+   {
+      while (NULL != _hdr.next)
+      {
+         header* ptr = _hdr.next;
+         _hdr.next = ptr->next;
+         ::free((void*)ptr);
+      }
+   }
 }

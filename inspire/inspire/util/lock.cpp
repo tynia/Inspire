@@ -3,7 +3,7 @@
 
 namespace inspire {
 
-   scopeLock(mutex* mtx) : _mutex(mtx)
+   scopeLock::scopeLock(mutex* mtx) : _mutex(mtx)
    {
       _mutex.lock();
    }

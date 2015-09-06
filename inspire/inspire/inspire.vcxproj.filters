@@ -213,10 +213,13 @@
     <ClInclude Include="util\mempool.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="bson\allocator.h">
+    <ClInclude Include="bson\writer.h">
       <Filter>bson</Filter>
     </ClInclude>
-    <ClInclude Include="bson\writer.h">
+    <ClInclude Include="util\allocator.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\kvMap.h">
       <Filter>bson</Filter>
     </ClInclude>
   </ItemGroup>
@@ -299,16 +302,19 @@
     <ClCompile Include="stream\refStream.cpp">
       <Filter>stream</Filter>
     </ClCompile>
-    <ClCompile Include="bson\bson.cpp">
-      <Filter>bson</Filter>
-    </ClCompile>
-    <ClCompile Include="bson\allocator.cpp">
-      <Filter>bson</Filter>
-    </ClCompile>
     <ClCompile Include="bson\writer.cpp">
       <Filter>bson</Filter>
     </ClCompile>
     <ClCompile Include="bson\element.cpp">
+      <Filter>bson</Filter>
+    </ClCompile>
+    <ClCompile Include="util\allocator.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="bson\kvMap.cpp">
+      <Filter>bson</Filter>
+    </ClCompile>
+    <ClCompile Include="bson\bson.cpp">
       <Filter>bson</Filter>
     </ClCompile>
   </ItemGroup>

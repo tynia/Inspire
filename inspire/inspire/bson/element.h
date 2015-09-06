@@ -2,13 +2,15 @@
 #define _INSPIRE_BSON_ELEMENT_H_
 
 #include "bson.h"
+#include "kvMap.h"
 
 namespace inspire {
 
+   class refCounter;
    namespace bson {
 
       class Object;
-      class Element
+      class Element : public kvMap
       {
       public:
          Element();
@@ -26,10 +28,12 @@ namespace inspire {
 
          const char* valuestr();
 
-         Object& toObject();
+         Object toObject();
 
       protected:
          bool _checkValid();
+
+         void _release();
 
          void put(const Element& e);
 
@@ -37,10 +41,24 @@ namespace inspire {
          void put(const char* k, T& v);
 
       protected:
-         kvMap*      _e;
+         bool        _owned;
          refCounter* _counter;
          Element*    _next;
       };
+
+      template <class T>
+      void inspire::bson::Element::put(const char* k, T& v)
+      {
+         put(k, v);
+      }
+
+      template <class T>
+      void inspire::bson::Element::replace(const char* k, T& v)
+      {
+         _release();
+         put(k, v);
+      }
+
    }
 }
 #endif

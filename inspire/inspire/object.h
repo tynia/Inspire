@@ -5,7 +5,7 @@
 #include "basestream.h"
 
 namespace inspire {
-   namespace json {
+   namespace bson {
 
       class allocator;
       class Object

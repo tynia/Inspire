@@ -1,37 +1,41 @@
-#ifndef _INSPIRE_UTIL_MEMORY_POOL_H_
-#define _INSPIRE_UTIL_MEMORY_POOL_H_
+#ifndef _INSPIRE_MEMORY_ALLOCATOR_H_
+#define _INSPIRE_MEMORY_ALLOCATOR_H_
 
 #include "inspire.h"
 
 namespace inspire {
 
-   static const unsigned int szBlock = 4096;
-   static const unsigned int szAlignment = sizeof(void*);
+   static const unsigned debug = 0xFFFAFBFE;
 
    class allocator : public noncopyable
    {
    public:
+      static allocator* instance();
+
+      char* alloc(const unsigned int size);
+      void dealloc(const char* ptr);
+      void pray();
+
+   protected:
       allocator();
       virtual ~allocator();
 
-      void* alloc(const unsigned int size);
-      void dealloc(const char* ptr);
+      private:
+      bool _checkSanity(const char* ptr);
+      void _setSanity(void* ptr, const unsigned size);
+      void _resetRest();
 
-   protected:
-      char* _align(char* origin);
-      void* _addMemory(const size_t size);
-
-   private:
       struct header
       {
-         char* _hdBlock;
+         char eyecatcher[8];
+         unsigned used;
+         unsigned size;
+         header* next;
+#ifdef _DEBUG
+         unsigned debug;
+#endif
       };
-      char* _ptrBegin;
-      char* _ptrEnd;
-      char* _ptrCurrent;
-      char  _data[szBlock];
+      header _hdr;
    };
-
-   
 }
 #endif

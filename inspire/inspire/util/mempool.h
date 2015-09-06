@@ -42,8 +42,7 @@ namespace inspire {
          return new(entity)TEntity;
       }
 
-      TEntity* create(const TEntity* entity);
-      TEntity* create()
+      TEntity* create(const TEntity* entity)
       {
          scope_lock(&_variable);
          ++count;
