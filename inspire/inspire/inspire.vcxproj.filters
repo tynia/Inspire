@@ -204,9 +204,6 @@
     <ClInclude Include="bson\element.h">
       <Filter>bson</Filter>
     </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>bson</Filter>
-    </ClInclude>
     <ClInclude Include="bson\bson.h">
       <Filter>bson</Filter>
     </ClInclude>
@@ -220,6 +217,15 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="bson\kvMap.h">
+      <Filter>bson</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\object.h">
+      <Filter>bson</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\oid.h">
+      <Filter>bson</Filter>
+    </ClInclude>
+    <ClInclude Include="bson\hex.h">
       <Filter>bson</Filter>
     </ClInclude>
   </ItemGroup>

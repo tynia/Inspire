@@ -5,17 +5,24 @@ namespace inspire {
    namespace bson {
 
       /// bson element writer
-      Writer::Writer(const char* ptr, const unsigned len) : _ptr(ptr), _cur(ptr), _end(ptr + len)
+      writer::writer() : _ptr(NULL), _cur(NULL), _end(NULL)
       {}
 
-      Writer::~Writer()
+      writer::~writer()
       {
          _ptr = NULL;
          _cur = NULL;
          _end = NULL;
       }
 
-      void Writer::appendChar(char c)
+      void writer::init(const char* ptr, const unsigned len)
+      {
+         _ptr = ptr;
+         _cur = ptr;
+         _end = _ptr + len;
+      }
+
+      void writer::appendChar(char c)
       {
          _verify(sizeof(char));
 
@@ -23,7 +30,7 @@ namespace inspire {
          _cur += sizeof(char);
       }
 
-      void Writer::appendUChar(unsigned char uc)
+      void writer::appendUChar(unsigned char uc)
       {
          _verify(sizeof(unsigned char));
 
@@ -31,12 +38,12 @@ namespace inspire {
          _cur += sizeof(unsigned char);
       }
 
-      void Writer::appendBool(bool b)
+      void writer::appendBool(bool b)
       {
          appendChar((char)(b ? 1 : 0));
       }
 
-      void Writer::appendShort(short s)
+      void writer::appendShort(short s)
       {
          _verify(sizeof(short));
 
@@ -44,7 +51,7 @@ namespace inspire {
          _cur += sizeof(short);
       }
 
-      void Writer::appendInt(int i)
+      void writer::appendInt(int i)
       {
          _verify(sizeof(int));
 
@@ -52,7 +59,7 @@ namespace inspire {
          _cur += sizeof(int);
       }
 
-      void Writer::appendUInt(unsigned ui)
+      void writer::appendUInt(unsigned ui)
       {
          _verify(sizeof(unsigned));
 
@@ -60,7 +67,7 @@ namespace inspire {
          _cur += sizeof(unsigned);
       }
 
-      void Writer::appendInt64(int64 i64)
+      void writer::appendInt64(int64 i64)
       {
          _verify(sizeof(int64));
 
@@ -68,7 +75,7 @@ namespace inspire {
          _cur += sizeof(int64);
       }
 
-      void Writer::appendUInt64(uint64 ui64)
+      void writer::appendUInt64(uint64 ui64)
       {
          _verify(sizeof(uint64));
 
@@ -76,7 +83,7 @@ namespace inspire {
          _cur += sizeof(uint64);
       }
 
-      void Writer::appendDouble(double d)
+      void writer::appendDouble(double d)
       {
          _verify(sizeof(double));
 
@@ -84,15 +91,24 @@ namespace inspire {
          _cur += sizeof(double);
       }
 
-      void Writer::appendBin(const char* str, unsigned len)
+      void writer::appendString(const char* str, unsigned len)
+      {
+         _verify(len + 1);
+
+         memcpy((void*)_cur, str, len);
+         memset((void*)_cur, 0, 1);
+         _cur += len + 1;
+      }
+
+      void writer::appendBin(const char* bin, unsigned len)
       {
          _verify(len);
 
-         memcpy((void*)_cur, str, len);
+         memcpy((void*)_cur, bin, len);
          _cur += len;
       }
 
-      void Writer::_verify(unsigned size)
+      void writer::_verify(unsigned size)
       {
          if (_cur >= _end || _cur + size > _end)
          {

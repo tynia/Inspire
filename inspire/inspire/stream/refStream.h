@@ -11,21 +11,18 @@ namespace inspire {
 
    class refStream
    {
-   public:
+   protected:
       refStream();
       refStream(const char* data, const unsigned len);
       refStream(const refStream& rhs);
+      ~refStream();
+      void _release();
+      refStream& operator= (const refStream& rhs);
 
-   public:
       bool  shared() const;
       void  reverse(const unsigned size);
       char* data() const;
       const unsigned capacity() const;
-
-   protected:
-      ~refStream();
-      void _release();
-      refStream& operator= (const refStream& rhs);
 
    private:
       void  _inc();

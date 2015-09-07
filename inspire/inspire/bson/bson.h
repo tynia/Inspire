@@ -35,9 +35,22 @@ namespace inspire {
          VT_MAXKEY           = 0x7F,  /* max key */
       };
 
-      extern inspire::allocator* GetAllocator();
+      enum
+      {
+         SUB_GENERIC  = 0x00,
+         SUB_FUNCTION = 0x01,
+         SUB_BINARY   = 0x02,
+         SUB_UUID_OLD = 0x03,
+         SUB_UUID     = 0x04,
+         SUB_MD5      = 0x05,
+         SUB_USER     = 0x80,
+      };
+
+      extern inspire::allocator* memMgr();
 
       class ObjectId;
+
+
    }
 }
 

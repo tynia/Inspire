@@ -8,13 +8,19 @@ namespace inspire {
 
    namespace bson {
 
-      class Writer : public noncopyable
+      class writer : public noncopyable
       {
       public:
-         Writer(const char* ptr, const unsigned len);
-         ~Writer();
+         writer();
+         ~writer();
 
       public:
+         void init(const char* ptr, const unsigned len);
+         const char* curPtr() const
+         {
+            return _cur;
+         }
+
          void appendChar(char c);
          void appendUChar(unsigned char uc);
          void appendBool(bool b);
@@ -24,7 +30,8 @@ namespace inspire {
          void appendInt64(int64 i64);
          void appendUInt64(uint64 ui64);
          void appendDouble(double d);
-         void appendBin(const char* str, unsigned len);
+         void appendString(const char* str, unsigned len);
+         void appendBin(const char* bin, unsigned len);
 
       private:
          void _verify(unsigned toWriteSize);

@@ -6,7 +6,7 @@ namespace inspire {
 
    namespace bson {
 
-      inspire::allocator* _allocator = GetAllocator();
+      inspire::allocator* _allocator = memMgr();
 
       const char* kvMap::toString()
       {
@@ -62,80 +62,121 @@ namespace inspire {
          }
       }
 
-      kvMap::kvMap() : _vtype(VT_EOO)
+      kvMap::kvMap() : _vtype(VT_EOO), _totalSize(0), _key(NULL), _value(NULL), _ptr(NULL)
       {}
 
       kvMap::~kvMap()
-      {}
+      {
+         _vtype = VT_EOO;
+         _totalSize = 0;
+         _key = NULL;
+         _value = NULL;
+
+         // release memory to pool
+         _allocator->dealloc(_ptr);
+         _ptr = NULL;
+      }
 
       void kvMap::put(const char* k, bool v)
       {
-         _value = _allocator->alloc(sizeof(v));
-         Writer writer(_value, sizeof(v));
-         writer.appendChar(VT_BOOL);
-         writer.appendBin(k, strlen(k));
-         writer.appendBool(v);
+         _vtype = VT_BOOL;
+         /* ----------|***type***|---|*key size*|---|*value size*| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(bool);
+
+         _ptr = _allocator->alloc(_totalSize);
+         INSPIRE_ASSERT(NULL != _ptr, "Failed to allocate memory, size = %d", _totalSize);
+
+         _prepare(k);
+
+         _w.appendBool(v);
       }
 
       void kvMap::put(const char* k, int v)
       {
-         _value = _allocator->alloc(sizeof(v));
-         Writer writer(_value, sizeof(v));
-         writer.appendInt(VT_INT);
-         writer.appendBin(k, strlen(k));
-         writer.appendInt(v);
+         _vtype = VT_INT;
+         /* ----------|***type***|---|*key size*|---|*value size*| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(int);
+
+         _prepare(k);
+
+         _w.appendInt(v);
       }
 
       void kvMap::put(const char* k, int64 v)
       {
-         _value = _allocator->alloc(sizeof(v));
-         Writer writer(_value, sizeof(v));
-         writer.appendInt64(VT_LONG);
-         writer.appendBin(k, strlen(k));
-         writer.appendInt64(v);
+         _vtype = VT_LONG;
+         /* ----------|***type***|---|*key size*|---|*value size*| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(int64);
+
+         _prepare(k);
+
+         _w.appendInt64(v);
       }
 
       void kvMap::put(const char* k, double v)
       {
-         _value = _allocator->alloc(sizeof(v));
-         Writer writer(_value, sizeof(v));
-         writer.appendInt64(VT_DOUBLE);
-         writer.appendBin(k, strlen(k));
-         writer.appendDouble(v);
+         _vtype = VT_DOUBLE;
+         /* ----------|***type***|---|*key size*|---|*value size*| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(double);
+
+         _prepare(k);
+
+         _w.appendDouble(v);
       }
 
       void kvMap::put(const char* k, const char* v)
       {
-         _value = _allocator->alloc(sizeof(v));
-         Writer writer(_value, sizeof(v));
-         writer.appendInt64(VT_STRING);
-         writer.appendBin(k, strlen(k));
-         writer.appendInt(strlen(v) + 1);
-         writer.appendBin(v, strlen(v) + 1);
+         _vtype = VT_STRING;
+         /* ----------|***type***|---|*key size*|---|*value size*| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + strlen(v) + 1;
+
+         _prepare(k);
+
+         _w.appendString(v, strlen(v));
       }
 
       void kvMap::put(const char* k, const std::string& v)
       {
-         _value = _allocator->alloc(sizeof(v));
-         Writer writer(_value, sizeof(v));
-         writer.appendInt64(VT_STRING);
-         writer.appendBin(k, strlen(k));
-         writer.appendInt(v.length());
-         writer.appendBin(v.c_str(), v.length() + 1);
+         _vtype = VT_STRING;
+         /* ----------|***type***|---|*key size*|---|**value size**| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + v.length() + 1;
+
+         _prepare(k);
+
+         _w.appendString(v.c_str(), v.length());
       }
 
-      void kvMap::put(const char type, const char* k, const char* pValue, unsigned len)
+      void kvMap::put(const char type, const char* k, const char* v, unsigned len)
       {
-         unsigned keyLen = strlen(k);
-         unsigned total = sizeof(char) + (keyLen + 1) + sizeof(int) + len;
+         _vtype = VT_BINDATA;
+         /* ----------|***type***|---|*key size*|---|**value size**| */
+         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(int) + 1 + len;
 
-         _value = _allocator->alloc(total);
-         Writer writer(_value, total);
-
-         writer.appendInt64(type);
-         writer.appendBin(k, strlen(k));
-         writer.appendInt(len);
-         writer.appendBin(pValue, len);
+         _prepare(k);
+         _w.appendInt(len);
+         _w.appendChar(type);
+         _w.appendBin(v, len);
       }
+
+      void kvMap::_verify(unsigned toWriteSize)
+      {
+
+      }
+
+      void kvMap::_prepare(const char* k)
+      {
+         _ptr = _allocator->alloc(_totalSize);
+         INSPIRE_ASSERT(NULL != _ptr, "Failed to allocate memory, size = %d", _totalSize);
+
+         _w.init(_ptr, _totalSize);
+
+         _w.appendChar(_vtype);
+
+         _key = _w.curPtr();
+         _w.appendString(k, strlen(k));
+
+         _value = _w.curPtr();
+      }
+
    }
 }

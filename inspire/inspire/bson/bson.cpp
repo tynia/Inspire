@@ -6,7 +6,7 @@ namespace inspire {
 
       inspire::allocator _allocator;
 
-      inspire::allocator* GetAllocator()
+      inspire::allocator* memMgr()
       {
          return &_allocator;
       }

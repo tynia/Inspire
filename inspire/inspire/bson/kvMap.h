@@ -2,6 +2,7 @@
 #define _INSPIRE_BSON_KVMAP_H_
 
 #include "inspire.h"
+#include "writer.h"
 
 namespace inspire {
 
@@ -15,21 +16,6 @@ namespace inspire {
          virtual ~kvMap();
 
          const char* toString();
-
-         const unsigned vSize() const
-         {
-            return 0;
-         }
-
-         const unsigned kSize() const
-         {
-            return strlen(_key);
-         }
-
-         const int _type() const
-         {
-            return _vtype;
-         }
 
          void put(const char* k, bool v);
          void put(const char* k, int v);
@@ -45,10 +31,18 @@ namespace inspire {
          void put(const char type, const char* k,
                   const char* pValue, const unsigned len);
 
+      private:
+         void _verify(unsigned toWriteSize);
+         void _prepare(const char* k);
+
       protected:
          char _vtype;
+         unsigned _totalSize;
          const char* _key;
-         char* _value;
+         const char* _value;
+      private:
+         const char* _ptr;
+         writer      _w;
       };
    }
 }

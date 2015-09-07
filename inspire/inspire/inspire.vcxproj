@@ -83,13 +83,15 @@
     <ClInclude Include="app\control.h" />
     <ClInclude Include="bson\bson.h" />
     <ClInclude Include="bson\element.h" />
+    <ClInclude Include="bson\hex.h" />
     <ClInclude Include="bson\kvMap.h" />
+    <ClInclude Include="bson\object.h" />
+    <ClInclude Include="bson\oid.h" />
     <ClInclude Include="bson\writer.h" />
     <ClInclude Include="inslog\impl\insLogFile.h" />
     <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
     <ClInclude Include="inslog\platform.h" />
-    <ClInclude Include="object.h" />
     <ClInclude Include="net\engine.h" />
     <ClInclude Include="net\async\async.h" />
     <ClInclude Include="net\async\asyncconnection.h" />

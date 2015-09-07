@@ -5,6 +5,7 @@
 #include "basestream.h"
 
 namespace inspire {
+
    namespace bson {
 
       class allocator;
