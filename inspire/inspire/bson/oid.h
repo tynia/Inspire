@@ -9,9 +9,25 @@ namespace inspire {
       {
       public:
          ObjectId();
+         ObjectId(const char* oid);
          virtual ~ObjectId();
 
          static ObjectId genOid();
+
+         const char* toString();
+
+         bool operator ==(const ObjectId& rhs);
+         bool operator <(const ObjectId& rhs);
+         bool operator >(const ObjectId& rhs);
+         bool operator <=(const ObjectId& rhs);
+         bool operator >=(const ObjectId& rhs);
+         ObjectId& operator =(const ObjectId& rhs);
+
+      private:
+         void _generate();
+
+      private:
+         unsigned char _data[12];
       };
    }
 }

@@ -83,7 +83,8 @@
     <ClInclude Include="app\control.h" />
     <ClInclude Include="bson\bson.h" />
     <ClInclude Include="bson\element.h" />
-    <ClInclude Include="bson\hex.h" />
+    <ClInclude Include="bson\inner\hex.h" />
+    <ClInclude Include="bson\inner\md5.h" />
     <ClInclude Include="bson\kvMap.h" />
     <ClInclude Include="bson\object.h" />
     <ClInclude Include="bson\oid.h" />

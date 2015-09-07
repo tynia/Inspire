@@ -4,7 +4,7 @@ namespace inspire {
 
    namespace bson {
 
-      inspire::allocator _allocator;
+      static inspire::allocator _allocator;
 
       inspire::allocator* memMgr()
       {
