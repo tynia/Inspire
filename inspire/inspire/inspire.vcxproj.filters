@@ -329,5 +329,8 @@
     <ClCompile Include="bson\bson.cpp">
       <Filter>bson</Filter>
     </ClCompile>
+    <ClCompile Include="stream\stream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

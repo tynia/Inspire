@@ -22,13 +22,7 @@ namespace inspire {
       }
       return true;
    }
-#else
-   static bool g_endian = false;
-
-   inline void setEndian(bool endian)
-   {
-      g_endian = endian;
-   }
 #endif
+   extern void setEndian(bool endian);
 }
 #endif

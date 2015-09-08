@@ -22,6 +22,9 @@ typedef void* HANDLE;
 #define NEWLINE "\n"
 #endif
 
+#define EXPORT_C_API_BEGIN extern "C" {
+#define EXPORT_C_API_END }
+
 #ifdef _WIN32
 // include socket
 #include <Winsock2.h>

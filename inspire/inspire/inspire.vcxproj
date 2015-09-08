@@ -154,6 +154,7 @@
     <ClCompile Include="stream\basestream.cpp" />
     <ClCompile Include="stream\iostream.cpp" />
     <ClCompile Include="stream\refStream.cpp" />
+    <ClCompile Include="stream\stream.cpp" />
     <ClCompile Include="test\main.cpp" />
     <ClCompile Include="thread\entryPoint.cpp" />
     <ClCompile Include="thread\entry\entry.cpp" />
