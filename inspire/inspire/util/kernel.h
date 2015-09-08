@@ -30,10 +30,6 @@ namespace inspire {
       std::vector<IControl*> _mapCTRL;
    };
 
-   extern krControl _krCTRL;
-   inline krControl* getKernel()
-   {
-      return &_krCTRL;
-   }
+   extern krControl* kernel();
 }
 #endif

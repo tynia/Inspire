@@ -5,11 +5,11 @@
 
 namespace inspire {
 
-   class syncMutex
+   class insMutex
    {
    public:
-      syncMutex();
-      ~syncMutex();
+      insMutex();
+      ~insMutex();
 
       void lock();
       void unlock();

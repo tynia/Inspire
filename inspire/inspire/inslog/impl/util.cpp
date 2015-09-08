@@ -1,5 +1,5 @@
 #include "include/log.h"
-#include "platform.h"
+#include "inspire.h"
 #include <wchar.h>
 #include "oss/system.h"
 

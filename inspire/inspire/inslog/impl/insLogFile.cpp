@@ -16,7 +16,7 @@
    Any problem, please ping xduilib@gmail.com, free service may be supported.
 *******************************************************************************/
 #include "insLogFile.h"
-#include "platform.h"
+#include "inspire.h"
 
 namespace inspire {
 

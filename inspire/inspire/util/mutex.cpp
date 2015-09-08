@@ -2,7 +2,7 @@
 
 namespace inspire {
 
-   syncMutex::syncMutex()
+   insMutex::insMutex()
    {
 #ifdef _WIN32
       _mutex = ::CreateMutex(NULL, FALSE, NULL);
@@ -22,7 +22,7 @@ namespace inspire {
       LogEvent("Create sync mutex success");
    }
 
-   syncMutex::~syncMutex()
+   insMutex::~insMutex()
    {
 #ifdef _WIN32
       ::WaitForSingleObject(_mutex, INFINITE);
@@ -37,7 +37,7 @@ namespace inspire {
       LogEvent("Destroy sync mutex success");
    }
 
-   void syncMutex::lock()
+   void insMutex::lock()
    {
 #ifdef _WIN32
       ::WaitForSingleObject(_mutex, INFINITE);
@@ -50,7 +50,7 @@ namespace inspire {
 #endif
    }
 
-   void syncMutex::unlock()
+   void insMutex::unlock()
    {
 #ifdef _WIN32
       ::SetEvent(_mutex);
@@ -63,7 +63,7 @@ namespace inspire {
 #endif
    }
 
-   bool syncMutex::tryLock()
+   bool insMutex::tryLock()
    {
 #ifdef _WIN32
       DWORD dwRet = ::WaitForSingleObject(_mutex, 1000);

@@ -19,7 +19,7 @@
 #define _INSPIRE_LOG_MANAGER_H_
 
 #include "insLogFile.h"
-#include "platform.h"
+#include "inspire.h"
 
 namespace inspire {
 

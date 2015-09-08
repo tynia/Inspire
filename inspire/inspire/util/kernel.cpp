@@ -22,5 +22,10 @@ namespace inspire {
 
    //////////////////////////////////////////////////////////////////////////
    // !!!@ a global kernel control instance
-   krControl _krCTRL;
+   static krControl _krCTRL;
+
+   krControl* kernel()
+   {
+      return &_krCTRL;
+   }
 }

@@ -92,7 +92,6 @@
     <ClInclude Include="inslog\impl\insLogFile.h" />
     <ClInclude Include="inslog\impl\insLogMgr.h" />
     <ClInclude Include="inslog\include\log.h" />
-    <ClInclude Include="inslog\platform.h" />
     <ClInclude Include="net\engine.h" />
     <ClInclude Include="net\async\async.h" />
     <ClInclude Include="net\async\asyncconnection.h" />
@@ -124,14 +123,13 @@
     <ClInclude Include="util\kernel.h" />
     <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
-    <ClInclude Include="util\lock.h" />
+    <ClInclude Include="util\scopeLock.h" />
     <ClInclude Include="util\mempool.h" />
-    <ClInclude Include="util\mutex-dep.h" />
     <ClInclude Include="util\noncopyable.h" />
+    <ClInclude Include="util\oss\charConvertor.h" />
     <ClInclude Include="util\oss\ossFile.h" />
     <ClInclude Include="util\oss\ossHelper.h" />
     <ClInclude Include="util\oss\system.h" />
-    <ClInclude Include="util\oss\string_t.h" />
     <ClInclude Include="util\refPointer.h" />
     <ClInclude Include="util\mutex.h" />
     <ClInclude Include="util\util.h" />
@@ -164,8 +162,6 @@
     <ClCompile Include="util\allocator.cpp" />
     <ClCompile Include="util\atomic\atomic32.cpp" />
     <ClCompile Include="util\kernel.cpp" />
-    <ClCompile Include="util\lock.cpp" />
-    <ClCompile Include="util\mutex-dep.cpp" />
     <ClCompile Include="util\oss\ossFile.cpp" />
     <ClCompile Include="util\oss\ossHelper.cpp" />
     <ClCompile Include="util\mutex.cpp" />

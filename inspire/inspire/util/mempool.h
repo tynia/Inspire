@@ -1,6 +1,8 @@
 #ifndef _INSPIRE_UTIL_ENTITY_ALLOCATOR_H_
 #define _INSPIRE_UTIL_ENTITY_ALLOCATOR_H_
 
+#include "mutex.h"
+
 namespace inspire {
 
    template <class TEntity>
@@ -24,7 +26,7 @@ namespace inspire {
 
       TEntity* create()
       {
-         scope_lock(&_variable);
+         scopeLock(&_mtx);
          ++count;
          if (NULL == _hdrFree)
          {
@@ -44,7 +46,7 @@ namespace inspire {
 
       TEntity* create(const TEntity* entity)
       {
-         scope_lock(&_variable);
+         scopeLock(&_mtx);
          ++count;
          if (NULL == _hdrFree)
          {
@@ -67,7 +69,7 @@ namespace inspire {
          entity->~TEntity();
          do
          {
-            scope_lock(&_variable);
+            scopeLock(&_mtx);
             ::memset(entity, 0xfe, _entitySize);
             --_count;
             INSPIRE_ASSERT(_count >= 0);
@@ -80,7 +82,7 @@ namespace inspire {
       unsigned int _count;
       unsigned int _entitySize;
       TEntity*     _hdrFree;
-      ossMutex     _variable;
+      insMutex     _mtx;
    };
 
 }

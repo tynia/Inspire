@@ -5,11 +5,11 @@
 
 namespace inspire {
 
-   class inspire_string_t
+   class UTFConvertor
    {
 #ifdef _WIN32
    public:
-      inspire_string_t(const char* pstr) : _wstr(NULL)
+      UTFConvertor(const char* pstr) : _wstr(NULL)
       {
          int uLen = ::MultiByteToWideChar(CP_ACP, 0, pstr, -1, NULL, 0);
          wchar_t* wstr = new wchar_t[uLen + 1];
@@ -23,7 +23,7 @@ namespace inspire {
          _wstr = wstr;
       }
 
-      ~inspire_string_t()
+      ~UTFConvertor()
       {
          if (_wstr)
          {
@@ -37,7 +37,7 @@ namespace inspire {
          return _wstr;
       }
 
-      const size_t length() const
+      const uint length() const
       {
          return wcslen(_wstr);
       }
@@ -45,7 +45,7 @@ namespace inspire {
    private:
       const wchar_t* _wstr;
 #else
-      inspire_string_t(const char* pstr) : _str(pstr)
+      UTFConvertor(const char* pstr) : _str(pstr)
       {
          size_t len = strlen(pstr);
          _str = new char[len + 1];
@@ -57,7 +57,7 @@ namespace inspire {
          memcpy(_str, pstr, len);
       }
 
-      ~inspire_string_t()
+      ~UTFConvertor()
       {
          if (_str)
          {
@@ -71,7 +71,7 @@ namespace inspire {
          return _str;
       }
 
-      const size_t length() const
+      const uint length() const
       {
          return strlen(_str);
       }

@@ -120,9 +120,6 @@
     <ClInclude Include="util\insLog.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="inslog\platform.h">
-      <Filter>insLog</Filter>
-    </ClInclude>
     <ClInclude Include="inslog\impl\insLogFile.h">
       <Filter>insLog\impl</Filter>
     </ClInclude>
@@ -143,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="net\async\ioservice.h">
       <Filter>net\async</Filter>
-    </ClInclude>
-    <ClInclude Include="util\lock.h">
-      <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="inslog\impl\insLogMgr.h">
       <Filter>insLog\impl</Filter>
@@ -177,9 +171,6 @@
     <ClInclude Include="thread\thread.h">
       <Filter>thread</Filter>
     </ClInclude>
-    <ClInclude Include="util\oss\string_t.h">
-      <Filter>util\oss</Filter>
-    </ClInclude>
     <ClInclude Include="util\oss\ossHelper.h">
       <Filter>util\oss</Filter>
     </ClInclude>
@@ -193,9 +184,6 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="util\refPointer.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="util\mutex-dep.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="util\mutex.h">
@@ -234,6 +222,12 @@
     <ClInclude Include="bson\inner\hex.h">
       <Filter>bson\inner</Filter>
     </ClInclude>
+    <ClInclude Include="util\oss\charConvertor.h">
+      <Filter>util\oss</Filter>
+    </ClInclude>
+    <ClInclude Include="util\scopeLock.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="net\service.cpp">
@@ -269,9 +263,6 @@
     <ClCompile Include="net\tcpconnection.cpp">
       <Filter>net</Filter>
     </ClCompile>
-    <ClCompile Include="util\lock.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="inslog\impl\insLogMgr.cpp">
       <Filter>insLog\impl</Filter>
     </ClCompile>
@@ -304,9 +295,6 @@
     </ClCompile>
     <ClCompile Include="net\reactor.cpp">
       <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="util\mutex-dep.cpp">
-      <Filter>util</Filter>
     </ClCompile>
     <ClCompile Include="util\mutex.cpp">
       <Filter>util</Filter>
