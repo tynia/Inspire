@@ -26,9 +26,18 @@ namespace inspire {
          return (char)((fromHex(*p) << 4) | fromHex(*(p + 1)));
       }
 
-      inline const char* toHex(const void* in, unsigned int len)
+      inline const char* toHex(const void* in, unsigned int len, bool lower = false)
       {
-
+         const char* standard = lower ? lower : upper;
+         const char* ptr = reinterpret_cast<const char*>(in);
+         for (int i = 0; i < len; ++i)
+         {
+            char c = *(ptr + len);
+            char hi = standard[(c & 0xF0) >> 4];
+            char lo = standard[c & 0x0F];
+            os << hi << lo;
+         }
+         return os.c_str();
       }
    }
 }
