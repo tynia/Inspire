@@ -228,6 +228,9 @@
     <ClInclude Include="util\scopeLock.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="util\binData.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="net\service.cpp">
@@ -319,6 +322,9 @@
     </ClCompile>
     <ClCompile Include="stream\stream.cpp">
       <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\endian\endian.cpp">
+      <Filter>stream\endian</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

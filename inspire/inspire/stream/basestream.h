@@ -1,59 +1,36 @@
 #ifndef _INSPIRE_NET_BASE_STREAM_H_
 #define _INSPIRE_NET_BASE_STREAM_H_
 
-#include "refStream.h"
+#include "inspire.h"
 
 namespace inspire {
 
-   struct binData
+   class baseStream
    {
-      binData() : owned(false), _data(NULL), _len(0)
-      {}
-      binData(const char *data, const unsigned len) : owned(false),
-                                                      _data(const_cast<char*>(data)),
-                                                      _len(len)
-      {}
+   public:
+      const char* data() const { return _data; }
+      const uint64 capacity() const { return _capacity; }
 
-      ~binData()
-      {
-         if (owned)
-         {
-            delete [] _data;
-            owned = false;
-         }
-         _data = NULL;
-         _len = 0;
-      }
+   protected:
+      baseStream();
+      virtual ~baseStream();
 
-      void reverse(const unsigned size)
-      {
-         if (_len > size)
-         {
-            return;
-         }
-         else
-         {
-            if (owned)
-            {
-               delete [] _data;
-               _data = NULL;
-            }
-            else
-            {
-               _data = NULL;
-            }
+      void _zero();
 
-            owned = true;
-            _data = new char[ size + 1 ];
-            _data[size] = '\0';
-         }
-      }
+      uint64 _read(const uint64 offset, const uint64 toRead,
+                   const char* buffer, const uint64 bufferLen);
+      void   _write(const uint64 offset, const char* buffer, const uint64 toWrite);
+      
+   private:
+      void _reverse();
 
-      bool     owned;
-      unsigned _len;
-      char    *_data;
+   protected:
+      const char* _data;
+      const char* _cur;
+      uint64      _capacity;
    };
 
+   /*
    class baseStream : virtual public refStream
    {
    public:
@@ -82,7 +59,7 @@ namespace inspire {
       bool   _writeable;
       size_t _wOffset;
       size_t _rOffset;
-   };
+   };*/
 
 }
 #endif

@@ -1,9 +1,101 @@
 #include "basestream.h"
 #include "stream.h"
 #include "util.h"
+#include "allocator.h"
 
 namespace inspire {
 
+   static allocator* _allocator = allocator::instance();
+
+   baseStream::baseStream() : _data(NULL), _capacity(0)
+   {
+
+   }
+
+   baseStream::baseStream()
+   {
+      _allocator->dealloc(_data);
+      _data = NULL;
+      _capacity = 0;
+   }
+
+   void baseStream::_zero()
+   {
+#ifdef DEBUG
+      memset(_data, 0xfe, _capacity);
+#else
+      memset((void*)_data, 0x0, _capacity);
+#endif // DEBUG
+   }
+
+   uint64 baseStream::_read(const uint64 offset, const uint64 toRead,
+                            const char* buffer, const uint64 bufferLen)
+   {
+      INSPIRE_ASSERT(_capacity > offset, "read offset gt than capacity");
+      INSPIRE_ASSERT(NULL != buffer, "read buffer cannot be NULL");
+
+      if (toRead == 0)
+      {
+         return 0;
+      }
+
+      uint64 realSize = 0;
+      const char* ptr = _data + offset;
+      if (_cur < ptr + toRead)
+      {
+         uint64 readSize = _cur - ptr;
+         realSize = readSize > bufferLen ? bufferLen : readSize;
+         memcpy((void*)buffer, _data + offset, realSize);
+      }
+      else
+      {
+         realSize = toRead > bufferLen ? bufferLen : toRead;
+         memcpy((void*)buffer, _data + offset, realSize);
+      }
+      return realSize;
+   }
+
+   void baseStream::_write(const uint64 offset, const char* buffer, const uint64 toWrite)
+   {
+      INSPIRE_ASSERT(_capacity > offset, "write offset gt than capacity");
+      if (NULL == buffer)
+      {
+         return;
+      }
+
+      while (_cur + toWrite > _data + _capacity)
+      {
+         _reverse();
+      }
+
+
+   }
+
+   void baseStream::_reverse()
+   {
+      uint64 oldSize = _capacity;
+      uint64 allocSize = _capacity;
+      char* ptr = NULL;
+      bool  done = false;
+      do
+      {
+         allocSize *= 2;
+         char* ptr = _allocator->alloc(allocSize);
+         if (NULL == ptr)
+         {
+            _allocator->pray();
+            done = true;
+         }
+      } while (NULL == ptr && done);
+
+      memmove(ptr, _data, oldSize);
+      _capacity = allocSize;
+      _cur = ptr + (_cur - _data);
+      _allocator->dealloc(_data);
+      _data = ptr;
+   }
+
+   /*
    baseStream::baseStream() : refStream(), _writeable(true), _wOffset(0), _rOffset(0)
    {
    }
@@ -129,4 +221,5 @@ namespace inspire {
          _wOffset += size;
       }
    }
+   */
 }

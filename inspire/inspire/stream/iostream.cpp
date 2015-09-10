@@ -15,7 +15,7 @@ namespace inspire {
       _skipRead(size);
    }
 
-   ///< operator>>
+   // operator>>
    CIStream& CIStream::operator>> (bool& var)
    {
       _read((char*)&var, sizeof(bool), true);

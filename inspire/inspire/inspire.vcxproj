@@ -120,6 +120,7 @@
     <ClInclude Include="util\assert.h" />
     <ClInclude Include="util\atomic\atomic.h" />
     <ClInclude Include="util\atomic\atomic32.h" />
+    <ClInclude Include="util\binData.h" />
     <ClInclude Include="util\kernel.h" />
     <ClInclude Include="util\insLog.h" />
     <ClInclude Include="util\inspire.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="net\session.cpp" />
     <ClCompile Include="net\tcpconnection.cpp" />
     <ClCompile Include="stream\basestream.cpp" />
+    <ClCompile Include="stream\endian\endian.cpp" />
     <ClCompile Include="stream\iostream.cpp" />
     <ClCompile Include="stream\refStream.cpp" />
     <ClCompile Include="stream\stream.cpp" />

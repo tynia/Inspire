@@ -2,10 +2,9 @@
 
 namespace inspire {
 
-   static bool g_endian = false;
-
-   void setEndian(bool endian)
+   OStream& OStream::operator<<(const bool& val)
    {
-      g_endian = endian;
+
    }
+
 }

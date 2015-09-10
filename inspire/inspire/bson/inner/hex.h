@@ -2,12 +2,17 @@
 #define _INSPIRE_BSON_HEX_H_
 
 #include "util.h"
+#include "bson.h"
+#include "allocator.h"
 
 namespace inspire {
 
    namespace bson {
+
       static const char upper[] = "0123456789ABCDEF";
       static const char lower[] = "0123456789abcdef";
+
+      inspire::allocator* _allocator = memMgr();
 
       inline int fromHex(const char c)
       {
@@ -26,9 +31,10 @@ namespace inspire {
          return (char)((fromHex(*p) << 4) | fromHex(*(p + 1)));
       }
 
-      inline const char* toHex(const void* in, unsigned int len, bool lower = false)
+      inline const char* toHex(const void* in, unsigned int len, bool upcase = false)
       {
-         const char* standard = lower ? lower : upper;
+         char* buffer = _allocator->alloc(len * 2);
+         const char* standard = upcase ? lower : upper;
          const char* ptr = reinterpret_cast<const char*>(in);
          for (int i = 0; i < len; ++i)
          {

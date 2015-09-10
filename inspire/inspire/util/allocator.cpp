@@ -46,6 +46,7 @@ namespace inspire {
       }
 
       _setSanity(ptr, size);
+      memset(ptr + sizeof(header), 0, size);
       return (ptr + sizeof(header));
    }
 

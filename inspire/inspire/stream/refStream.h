@@ -17,6 +17,9 @@ namespace inspire {
       refStream(const refStream& rhs);
       ~refStream();
       void _release();
+
+      // when call operator=, please check it is shared first
+      // operator may release its buffer
       refStream& operator= (const refStream& rhs);
 
       bool  shared() const;
@@ -31,8 +34,8 @@ namespace inspire {
       void  _realloc(const unsigned size);
 
    protected:
-      unsigned _capacity;
-      char*    _refData;
+      unsigned    _capacity;
+      char*       _refData;
       refCounter* _refCount;
    };
 }
