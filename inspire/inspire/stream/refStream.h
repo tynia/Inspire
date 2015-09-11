@@ -2,25 +2,36 @@
 #define _INSPIRE_REF_STREAM_H_
 
 #include "inspire.h"
+#include "ostream.h"
 
 namespace inspire {
 
-   static const int BLOCK_SIZE = 1024;
-
    class refCounter;
 
-   class refStream
+   class IReference
    {
    protected:
-      refStream();
-      refStream(const char* data, const unsigned len);
-      refStream(const refStream& rhs);
-      ~refStream();
+      IReference();
+      virtual ~IReference(); 
+
+   public:
+      bool shared() const { return 0 != _refCounter->get(); }
+   protected:
+      refCounter* _refCounter;
+   };
+
+   class refOStream : public OStream
+   {
+   protected:
+      refOStream();
+      refOStream(const char* data, const unsigned len);
+      refOStream(const refOStream& rhs);
+      ~refOStream();
       void _release();
 
       // when call operator=, please check it is shared first
       // operator may release its buffer
-      refStream& operator= (const refStream& rhs);
+      refOStream& operator= (const refOStream& rhs);
 
       bool  shared() const;
       void  reverse(const unsigned size);

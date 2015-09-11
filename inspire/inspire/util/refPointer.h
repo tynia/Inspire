@@ -3,44 +3,6 @@
 
 namespace inspire {
 
-   class refCounter
-   {
-   public:
-      refCounter() : _referCount(0)
-      {}
-
-      refCounter(unsigned int c) : _referCount(c)
-      {}
-
-      refCounter(const refCounter* rhs) : _referCount(rhs->_referCount)
-      {}
-
-      refCounter operator= (const refCounter& rhs)
-      {
-         _referCount = rhs._referCount;
-      }
-
-      const unsigned int get() const
-      {
-         return _referCount;
-      }
-
-      ~refCounter()
-      {}
-
-      void _inc()
-      {
-         ++_referCount;
-      }
-
-      void _dec()
-      {
-         --_referCount;
-      }
-
-      unsigned int _referCount;
-   };
-
    template<class T>
    class refPointer
    {

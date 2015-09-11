@@ -13,7 +13,9 @@ typedef long long int64;
 typedef unsigned long long uint64;
 #define fmt64 "%lld"
 
+typedef unsigned char uchar;
 typedef unsigned int uint;
+typedef unsigned short ushort;
 
 #ifdef _WIN32
 #define NEWLINE "\r\n"

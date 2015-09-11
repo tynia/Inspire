@@ -75,9 +75,6 @@
     <ClInclude Include="net\session.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="stream\basestream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
     <ClInclude Include="stream\iostream.h">
       <Filter>stream</Filter>
     </ClInclude>
@@ -101,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="util\inspire.h">
       <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="stream\stream.h">
-      <Filter>stream</Filter>
     </ClInclude>
     <ClInclude Include="util\oss\system.h">
       <Filter>util\oss</Filter>
@@ -231,6 +225,21 @@
     <ClInclude Include="util\binData.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="stream\istream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\baseStream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\ostream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="util\refCounter.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\reference.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="net\service.cpp">
@@ -238,9 +247,6 @@
     </ClCompile>
     <ClCompile Include="net\session.cpp">
       <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="stream\basestream.cpp">
-      <Filter>stream</Filter>
     </ClCompile>
     <ClCompile Include="stream\iostream.cpp">
       <Filter>stream</Filter>
@@ -320,11 +326,17 @@
     <ClCompile Include="bson\bson.cpp">
       <Filter>bson</Filter>
     </ClCompile>
-    <ClCompile Include="stream\stream.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
     <ClCompile Include="stream\endian\endian.cpp">
       <Filter>stream\endian</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\baseStream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\ostream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\istream.cpp">
+      <Filter>stream</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

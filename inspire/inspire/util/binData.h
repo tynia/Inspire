@@ -10,27 +10,27 @@ namespace inspire {
 
    struct binData
    {
-      binData() : owned(false), _data(NULL), _len(0)
+      binData() : owned(true), data(NULL), len(0)
       {}
-      binData(const char *data, const unsigned len) : owned(false),
-         _data(const_cast<char*>(data)),
-         _len(len)
+      binData(const char *data, const uint len) : owned(false),
+         data(const_cast<char*>(data)),
+         len(len)
       {}
 
       ~binData()
       {
          if (owned)
          {
-            delete[] _data;
+            delete[] data;
             owned = false;
          }
-         _data = NULL;
-         _len = 0;
+         data = NULL;
+         len = 0;
       }
 
-      void reverse(const unsigned size)
+      void reverse(const uint size)
       {
-         if (_len > size)
+         if (len > size)
          {
             return;
          }
@@ -38,23 +38,23 @@ namespace inspire {
          {
             if (owned)
             {
-               delete[] _data;
-               _data = NULL;
+               delete[] data;
+               data = NULL;
             }
             else
             {
-               _data = NULL;
+               data = NULL;
             }
 
             owned = true;
-            _data = new char[size + 1];
-            _data[size] = '\0';
+            data = new char[size + 1];
+            data[size] = '\0';
          }
       }
 
-      bool     owned;
-      unsigned _len;
-      char    *_data;
+      bool  owned;
+      uint  len;
+      char *data;
    };
 }
 #endif

@@ -1,15 +1,15 @@
 #include "refStream.h"
-#include "refPointer.h"
+#include "refCounter.h"
 
 namespace inspire {
 
-   refStream::refStream() : _refCount(NULL), _capacity(0), _refData(NULL)
+   refOStream::refOStream() : _refCount(NULL), _capacity(0), _refData(NULL)
    {
       _refCount = new refCounter();
       _refCount->_inc();
    }
 
-   refStream::refStream(const char* data, const size_t len)
+   refOStream::refOStream(const char* data, const size_t len)
    {
       _refData  = const_cast<char*>(data);
       _capacity = len;
@@ -17,7 +17,7 @@ namespace inspire {
       _refCount->_inc();
    }
 
-   refStream::refStream(const refStream& rhs)
+   refOStream::refOStream(const refOStream& rhs)
    {
       _capacity = rhs._capacity;
       _refData  = rhs._refData;
@@ -25,27 +25,27 @@ namespace inspire {
       _refCount->_inc();
    }
 
-   refStream::~refStream()
+   refOStream::~refOStream()
    {
       _release();
    }
 
-   bool refStream::shared() const
+   bool refOStream::shared() const
    {
       return (_refCount->get() > 0);
    }
 
-   char* refStream::data() const
+   char* refOStream::data() const
    {
       return _refData;
    }
 
-   const size_t refStream::capacity() const
+   const size_t refOStream::capacity() const
    {
       return _capacity;
    }
 
-   void refStream::_release()
+   void refOStream::_release()
    {
       _refCount->_dec();
       if (0 == _refCount->get())
@@ -60,7 +60,7 @@ namespace inspire {
       }
    }
 
-   void refStream::reverse(const size_t size)
+   void refOStream::reverse(const size_t size)
    {
       if (size <= _capacity)
       {
@@ -77,7 +77,7 @@ namespace inspire {
       }
    }
 
-   refStream& refStream::operator= (const refStream& rhs)
+   refOStream& refOStream::operator= (const refOStream& rhs)
    {
       _release();
       _capacity = rhs._capacity;
@@ -88,7 +88,7 @@ namespace inspire {
       return *this;
    }
 
-   void refStream::_alloc(const size_t size)
+   void refOStream::_alloc(const size_t size)
    {
       char* ptr = (char*)::malloc(size);
       if (NULL == ptr)
@@ -98,7 +98,7 @@ namespace inspire {
       _refData = ptr;
    }
 
-   void refStream::_realloc(const size_t size)
+   void refOStream::_realloc(const size_t size)
    {
       char* ptr = (char*)::realloc(_refData, size);
       if (NULL == ptr)

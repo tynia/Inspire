@@ -5,29 +5,37 @@
 
 namespace inspire {
 
+   class refCounter;
+   class allocator;
+
    class baseStream
    {
    public:
-      const char* data() const { return _data; }
-      const uint64 capacity() const { return _capacity; }
-
+      void skip(uint64 w) { _wOffset += w; }
    protected:
-      baseStream();
+      baseStream(allocator* al, const uint unitSize);
+      baseStream(const char* data, const uint64 len);
+      baseStream(baseStream& rhs);
       virtual ~baseStream();
 
       void _zero();
 
       uint64 _read(const uint64 offset, const uint64 toRead,
-                   const char* buffer, const uint64 bufferLen);
-      void   _write(const uint64 offset, const char* buffer, const uint64 toWrite);
+                   void* buffer, const uint64 bufferLen);
+      void   _write(void* data, const uint64 toWrite);
       
    private:
-      void _reverse();
+      void _initialize();
+      void _extCapacity(const uint64 size = 0);
 
    protected:
       const char* _data;
-      const char* _cur;
       uint64      _capacity;
+      uint64      _wOffset;
+   private:
+      uint        _blockSize;
+      refCounter* _refCounter;
+      allocator*  _allocator;
    };
 
    /*

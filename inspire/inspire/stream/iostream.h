@@ -1,8 +1,9 @@
 #ifndef _INSPIRE_NET_IO_STREAM_H_
 #define _INSPIRE_NET_IO_STREAM_H_
 
-#include "basestream.h"
 #include "endian/endian.h"
+#include "istream.h"
+#include "ostream.h"
 
 namespace inspire {
 
@@ -12,6 +13,11 @@ namespace inspire {
 #else
    typedef FixedEndian ENDIAN;
 #endif
+
+   class IOStream : public IStream, public OStream
+   {
+
+   };
 
    class FixedStream : public baseStream
    {

@@ -1,98 +1,144 @@
 #include "basestream.h"
-#include "stream.h"
 #include "util.h"
 #include "allocator.h"
+#include "refCounter.h"
 
 namespace inspire {
 
-   static allocator* _allocator = allocator::instance();
-
-   baseStream::baseStream() : _data(NULL), _capacity(0)
+   baseStream::baseStream(allocator* al, const uint unitSize) 
+      : _data(NULL), _capacity(0), _wOffset(0), _blockSize(unitSize), _refCounter(NULL), _allocator(NULL)
    {
-
+      _allocator = (NULL == al ? allocator::instance() : al);
+      _initialize();
+      _refCounter = new refCounter();
+      INSPIRE_ASSERT(NULL != _refCounter, "Failed to allocate refCounter");
    }
 
-   baseStream::baseStream()
+   baseStream::baseStream(const char* data, const uint64 len)
+      : _data(data), _capacity(len), _wOffset(len), _blockSize(0), _refCounter(NULL), _allocator(NULL)
    {
-      _allocator->dealloc(_data);
+      _refCounter = new refCounter();
+      INSPIRE_ASSERT(NULL != _refCounter, "Failed to allocate refCounter");
+   }
+
+   baseStream::baseStream(baseStream& rhs)
+      : _data(rhs._data), _capacity(rhs._capacity), _wOffset(rhs._wOffset)
+      , _blockSize(rhs._blockSize), _refCounter(rhs._refCounter), _allocator(rhs._allocator)
+   {
+      _refCounter->_inc();
+   }
+
+   baseStream::~baseStream()
+   {
+      _refCounter->_dec();
+      if (0 == _refCounter->get())
+      {
+         _allocator->dealloc(_data);
+         _allocator = NULL;
+         _blockSize = 0;
+      }
       _data = NULL;
       _capacity = 0;
+      _wOffset = 0;
+      
    }
 
    void baseStream::_zero()
    {
 #ifdef DEBUG
-      memset(_data, 0xfe, _capacity);
+      memset((void*)_data, 0xfe, _capacity);
 #else
       memset((void*)_data, 0x0, _capacity);
 #endif // DEBUG
    }
 
    uint64 baseStream::_read(const uint64 offset, const uint64 toRead,
-                            const char* buffer, const uint64 bufferLen)
+                            void* buffer, const uint64 bufferLen)
    {
-      INSPIRE_ASSERT(_capacity > offset, "read offset gt than capacity");
-      INSPIRE_ASSERT(NULL != buffer, "read buffer cannot be NULL");
-
-      if (toRead == 0)
+      if (NULL == buffer || toRead == 0)
       {
+         return 0;
+      }
+
+      if (offset > _wOffset)
+      {
+         LogEvent("Attempt to read invalid buffer");
          return 0;
       }
 
       uint64 realSize = 0;
       const char* ptr = _data + offset;
-      if (_cur < ptr + toRead)
+      if (_data + _wOffset < ptr + toRead)
       {
-         uint64 readSize = _cur - ptr;
+         uint64 readSize = _data + _wOffset - ptr;
          realSize = readSize > bufferLen ? bufferLen : readSize;
          memcpy((void*)buffer, _data + offset, realSize);
       }
       else
       {
          realSize = toRead > bufferLen ? bufferLen : toRead;
-         memcpy((void*)buffer, _data + offset, realSize);
+         memcpy(buffer, _data + offset, realSize);
       }
       return realSize;
    }
 
-   void baseStream::_write(const uint64 offset, const char* buffer, const uint64 toWrite)
+   void baseStream::_write(void* data, const uint64 toWrite)
    {
-      INSPIRE_ASSERT(_capacity > offset, "write offset gt than capacity");
-      if (NULL == buffer)
+      if (NULL == data)
       {
          return;
       }
 
-      while (_cur + toWrite > _data + _capacity)
+      if (_wOffset + toWrite > _capacity)
       {
-         _reverse();
+         uint64 newCapacity = _capacity;
+         do
+         {
+            newCapacity += _blockSize;
+         } while (_wOffset + toWrite > newCapacity);
+
+         _extCapacity(newCapacity);
       }
 
-
+      memcpy((void*)(_data + _wOffset), data, toWrite);
+      _wOffset += toWrite;
    }
 
-   void baseStream::_reverse()
+   void baseStream::_initialize()
    {
-      uint64 oldSize = _capacity;
-      uint64 allocSize = _capacity;
-      char* ptr = NULL;
+      _extCapacity(_blockSize);
+   }
+
+   void baseStream::_extCapacity(const uint64 size)
+   {
       bool  done = false;
-      do
+      uint64 allocSize = 0;
+      char* ptr = NULL;
+
+      while (NULL == ptr)
       {
-         allocSize *= 2;
-         char* ptr = _allocator->alloc(allocSize);
+         allocSize = (0 == size ? 2 * _capacity : size);
+         ptr = _allocator->alloc(allocSize);
          if (NULL == ptr)
          {
+            if (done)
+            {
+               // failed to allocate memory although released some
+               Panic();
+            }
             _allocator->pray();
             done = true;
          }
-      } while (NULL == ptr && done);
+      }
 
-      memmove(ptr, _data, oldSize);
-      _capacity = allocSize;
-      _cur = ptr + (_cur - _data);
-      _allocator->dealloc(_data);
+      // succeed to allocate memory,
+      if (_data)
+      {
+         memmove(ptr, _data, _wOffset);
+         _allocator->dealloc(_data);
+      }
       _data = ptr;
+      _capacity = allocSize;
    }
 
    /*

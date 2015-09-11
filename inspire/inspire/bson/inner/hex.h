@@ -4,6 +4,7 @@
 #include "util.h"
 #include "bson.h"
 #include "allocator.h"
+#include "ostream.h"
 
 namespace inspire {
 
@@ -31,9 +32,15 @@ namespace inspire {
          return (char)((fromHex(*p) << 4) | fromHex(*(p + 1)));
       }
 
-      inline const char* toHex(const void* in, unsigned int len, bool upcase = false)
+      inline const char* toHex(const void* in, uint len, bool upcase = false)
       {
-         char* buffer = _allocator->alloc(len * 2);
+         INSPIRE_ASSERT(NULL != in, "Data to be exchanged to hex is NULL");
+         if (0 == len)
+         {
+            return NULL;
+         }
+
+         OStream os(_allocator);
          const char* standard = upcase ? lower : upper;
          const char* ptr = reinterpret_cast<const char*>(in);
          for (int i = 0; i < len; ++i)
@@ -43,7 +50,7 @@ namespace inspire {
             char lo = standard[c & 0x0F];
             os << hi << lo;
          }
-         return os.c_str();
+         return os.data();
       }
    }
 }
