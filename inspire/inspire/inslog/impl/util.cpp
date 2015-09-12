@@ -1,6 +1,6 @@
+#include <wchar.h>
 #include "include/log.h"
 #include "inspire.h"
-#include <wchar.h>
 #include "oss/system.h"
 
 namespace inspire {
@@ -12,8 +12,8 @@ namespace inspire {
                                "Message:"NEWLINE"%s"NEWLINE NEWLINE;
                                
 
-   void flushToFile(const int level, const char* func,
-                    const char* file, const int line,
+   void flushToFile(const uint level, const char* func,
+                    const char* file, const uint line,
                     const char* fmt, ...)
    {
       struct tm otm;
@@ -35,7 +35,7 @@ namespace inspire {
       getLogMgr()->writeLog(level, buffer);
    }
 
-   const char* typeString(const int type)
+   const char* typeString(const uint type)
    {
       const char *str = NULL ;
       switch (type)

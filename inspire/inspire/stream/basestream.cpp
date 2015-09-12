@@ -84,6 +84,9 @@ namespace inspire {
 
    void baseStream::_write(void* data, const uint64 toWrite)
    {
+      // may be locked
+      // TODO:
+
       if (NULL == data)
       {
          return;
@@ -123,7 +126,7 @@ namespace inspire {
          {
             if (done)
             {
-               // failed to allocate memory although released some
+               LogError("Out of memory although prayed");
                Panic();
             }
             _allocator->pray();

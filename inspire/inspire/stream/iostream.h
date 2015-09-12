@@ -7,16 +7,42 @@
 
 namespace inspire {
 
-   // define ENDIAN
-#ifdef _INSPIRE_SERVER_
-   typedef Endian ENDIAN;
-#else
-   typedef FixedEndian ENDIAN;
-#endif
-
    class IOStream : public IStream, public OStream
    {
+   public:
+      IOStream() : OStream(), IStream() {}
+      IOStream(IOStream& rhs) {}
+      virtual ~IOStream();
 
+      IOStream operator= (IOStream& rhs);
+      // istream
+      IStream& operator>> (bool& b);
+      IStream& operator>> (char& c);
+      IStream& operator>> (uchar& uc);
+      IStream& operator>> (short& s);
+      IStream& operator>> (ushort& us);
+      IStream& operator>> (float& f);
+      IStream& operator>> (double& d);
+      IStream& operator>> (int& i);
+      IStream& operator>> (uint& ui);
+      IStream& operator>> (int64& i64);
+      IStream& operator>> (uint64& ui64);
+      IStream& operator>> (binData& bin);
+
+      // ostream
+      OStream& operator<< (const bool b);
+      OStream& operator<< (const char c);
+      OStream& operator<< (const uchar uc);
+      OStream& operator<< (const short s);
+      OStream& operator<< (const ushort us);
+      OStream& operator<< (const float f);
+      OStream& operator<< (const double d);
+      OStream& operator<< (const int i);
+      OStream& operator<< (const uint ui);
+      OStream& operator<< (const int64& i64);
+      OStream& operator<< (const uint64& ui64);
+      OStream& operator<< (const binData& bin);
+      OStream& operator<< (const std::string& str);
    };
 
    class FixedStream : public baseStream

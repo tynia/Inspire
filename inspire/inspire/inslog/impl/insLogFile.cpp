@@ -17,6 +17,7 @@
 *******************************************************************************/
 #include "insLogFile.h"
 #include "inspire.h"
+#include "scopeLock.h"
 
 namespace inspire {
 
@@ -33,6 +34,7 @@ namespace inspire {
          return;
       }
 
+      scopeLock lock(&_mtx);
       std::fstream file;
       file.open(_filename, std::ios::out | std::ios::app) ;
       if (file.is_open())

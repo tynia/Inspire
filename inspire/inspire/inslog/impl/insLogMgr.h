@@ -25,7 +25,7 @@ namespace inspire {
 
    static const char* DEFAULT_LOG = "./appLogs/";
 
-   class insLogMgr : public ILog, public IControl
+   class insLogMgr : public ILog//, public IControl
    {
    public:
       insLogMgr();
@@ -46,13 +46,9 @@ namespace inspire {
    };
 
    /*
-    * logMgr should be static and create before app enter main
+    * global instance
     */
-   extern insLogMgr extLogMgr;
-   inline ILog* getLogMgr()
-   {
-      return &extLogMgr;
-   }
+   extern ILog* getLogMgr();
 }
 
 #endif

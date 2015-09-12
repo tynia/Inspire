@@ -1,4 +1,5 @@
 #include "istream.h"
+#include "endian/endian.h"
 
 namespace inspire {
 
@@ -48,55 +49,73 @@ namespace inspire {
 
    IStream& IStream::operator>>(short& s)
    {
-      _readBuffer(&s, sizeof(short), sizeof(short));
+      short tmp = 0;
+      _readBuffer(&tmp, sizeof(short), sizeof(short));
+      s = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(ushort& us)
    {
-      _readBuffer(&us, sizeof(ushort), sizeof(ushort));
+      ushort tmp = 0;
+      _readBuffer(&tmp, sizeof(ushort), sizeof(ushort));
+      us = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(float& f)
    {
-      _readBuffer(&f, sizeof(float), sizeof(float));
+      float tmp = 0.0f;
+      _readBuffer(&tmp, sizeof(float), sizeof(float));
+      f = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(double& d)
    {
-      _readBuffer(&d, sizeof(double), sizeof(double));
+      double tmp = 0.0f;
+      _readBuffer(&tmp, sizeof(double), sizeof(double));
+      d = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(int& i)
    {
-      _readBuffer(&i, sizeof(int), sizeof(int));
+      int tmp = 0;
+      _readBuffer(&tmp, sizeof(int), sizeof(int));
+      i = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(uint& ui)
    {
-      _readBuffer(&ui, sizeof(uint), sizeof(uint));
+      uint tmp = 0;
+      _readBuffer(&tmp, sizeof(uint), sizeof(uint));
+      ui = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(int64& i64)
    {
-      _readBuffer(&i64, sizeof(int64), sizeof(int64));
+      uint64 tmp = 0;
+      _readBuffer(&tmp, sizeof(int64), sizeof(int64));
+      i64 = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(uint64& ui64)
    {
-      _readBuffer(&ui64, sizeof(uint64), sizeof(uint64));
+      uint64 tmp = 0;
+      _readBuffer(&tmp, sizeof(uint64), sizeof(uint64));
+      ui64 = ENDIAN::N2H(tmp);
       return *this;
    }
 
    IStream& IStream::operator>>(binData& bin)
    {
-      _readBuffer(&bin.len, sizeof(uint), sizeof(uint));
+      uint tmp = 0;
+      _readBuffer(&tmp, sizeof(uint), sizeof(uint));
+      bin.len = ENDIAN::N2H(tmp);
       bin.reverse(bin.len);
       _readBuffer(&bin.data, bin.len, bin.len);
       return *this;

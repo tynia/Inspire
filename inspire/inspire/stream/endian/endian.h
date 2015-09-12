@@ -102,7 +102,6 @@ do                                              \
 // Endian used for server
 // client convert the data to match server
 // so server do not need to convert any data
-#include "stream.h"
 
 namespace inspire {
 
@@ -139,11 +138,11 @@ namespace inspire {
          return v;
       }
       // unsigned short
-      static const unsigned short N2H(const unsigned short& v)
+      static const unsigned short N2H(const ushort& v)
       {
          return v;
       }
-      static const unsigned short H2N(const unsigned short& v)
+      static const unsigned short H2N(const ushort& v)
       {
          return v;
       }
@@ -157,11 +156,11 @@ namespace inspire {
          return v;
       }
       // unsigned int
-      static const unsigned int N2H(const unsigned int& v)
+      static const unsigned int N2H(const uint& v)
       {
          return v;
       }
-      static const unsigned int H2N(const unsigned int& v)
+      static const unsigned int H2N(const uint& v)
       {
          return v;
       }
@@ -175,11 +174,11 @@ namespace inspire {
          return v;
       }
       // unsigned long
-      static const unsigned long N2H(const unsigned long& v)
+      static const unsigned long N2H(const ulong& v)
       {
          return v;
       }
-      static const unsigned long H2N(const unsigned long& v)
+      static const unsigned long H2N(const ulong& v)
       {
          return v;
       }
@@ -189,6 +188,15 @@ namespace inspire {
          return v;
       }
       static const int64 H2N(const int64& v)
+      {
+         return v;
+      }
+      // uint64
+      static const uint64 N2H(const uint64& v)
+      {
+         return v;
+      }
+      static const uint64 H2N(const uint64& v)
       {
          return v;
       }
@@ -249,13 +257,13 @@ namespace inspire {
          return out;
       }
       // unsigned short
-      static const unsigned short N2H(const unsigned short& v)
+      static const unsigned short N2H(const ushort& v)
       {
          unsigned short out = 0;
          CONVERT_ENDIAN_2(v, out, g_endian);
          return out;
       }
-      static const unsigned short H2N(const unsigned short& v)
+      static const unsigned short H2N(const ushort& v)
       {
          unsigned short out = 0;
          CONVERT_ENDIAN_2(v, out, g_endian);
@@ -275,13 +283,13 @@ namespace inspire {
          return out;
       }
       // unsigned int
-      static const unsigned int N2H(const unsigned int& v)
+      static const unsigned int N2H(const uint& v)
       {
          unsigned int out = 0;
          CONVERT_ENDIAN_4(v, out, g_endian);
          return out;
       }
-      static const unsigned int H2N(const unsigned int& v)
+      static const unsigned int H2N(const uint& v)
       {
          unsigned int out = 0;
          CONVERT_ENDIAN_4(v, out, g_endian);
@@ -301,13 +309,13 @@ namespace inspire {
          return out;
       }
       // unsigned long
-      static const unsigned long N2H(const unsigned long& v)
+      static const unsigned long N2H(const ulong& v)
       {
          unsigned long out = 0;
          CONVERT_ENDIAN(v, out, g_endian);
          return out;
       }
-      static const unsigned long H2N(const unsigned long& v)
+      static const unsigned long H2N(const ulong& v)
       {
          unsigned long out = 0;
          CONVERT_ENDIAN(v, out, g_endian);
@@ -321,6 +329,19 @@ namespace inspire {
          return out;
       }
       static const int64 H2N(const int64& v)
+      {
+         int64 out = 0;
+         CONVERT_ENDIAN_8(v, out, g_endian);
+         return out;
+      }
+      // uint64
+      static const uint64 N2H(const uint64& v)
+      {
+         int64 out = 0;
+         CONVERT_ENDIAN_8(v, out, g_endian);
+         return out;
+      }
+      static const uint64 H2N(const uint64& v)
       {
          int64 out = 0;
          CONVERT_ENDIAN_8(v, out, g_endian);
@@ -354,5 +375,11 @@ namespace inspire {
       }
    };
 
+   // define ENDIAN
+#ifdef _INSPIRE_SERVER_
+   typedef Endian ENDIAN;
+#else
+   typedef FixedEndian ENDIAN;
+#endif
 }
 #endif

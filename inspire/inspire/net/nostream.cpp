@@ -50,42 +50,50 @@ namespace inspire {
 
    OStream& OStream::operator<<(const ushort us)
    {
-      _write((void*)&us, sizeof(ushort));
+      ushort tmp = ENDIAN::H2N(us);
+      _write((void*)&tmp, sizeof(ushort));
    }
 
    OStream& OStream::operator<<(const float f)
    {
-      _write((void*)&f, sizeof(float));
+      float tmp = ENDIAN::H2N(f);
+      _write((void*)&tmp, sizeof(float));
    }
 
    OStream& OStream::operator<<(const double d)
    {
-      _write((void*)&d, sizeof(double));
+      double tmp = ENDIAN::H2N(d);
+      _write((void*)&tmp, sizeof(double));
    }
 
    OStream& OStream::operator<<(const int i)
    {
-      _write((void*)&i, sizeof(int));
+      int tmp = ENDIAN::H2N(i);
+      _write((void*)&tmp, sizeof(int));
    }
 
    OStream& OStream::operator<<(const uint ui)
    {
-      _write((void*)&ui, sizeof(uint));
+      uint tmp = ENDIAN::H2N(ui);
+      _write((void*)&tmp, sizeof(uint));
    }
 
    OStream& OStream::operator<<(const int64& i64)
    {
-      _write((void*)&i64, sizeof(int64));
+      int64 tmp = ENDIAN::H2N(i64);
+      _write((void*)&tmp, sizeof(int64));
    }
 
    OStream& OStream::operator<<(const uint64& ui64)
    {
-      _write((void*)&ui64, sizeof(uint64));
+      uint64 tmp = ENDIAN::H2N(ui64);
+      _write((void*)&tmp, sizeof(uint64));
    }
 
    OStream& OStream::operator<<(const binData& bin)
    {
-      _write((void*)&bin.len, sizeof(uint));
+      uint tmp = ENDIAN::H2N(bin.len);
+      _write((void*)&tmp, sizeof(uint));
       _write((void*)&bin.data, bin.len);
    }
 

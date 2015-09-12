@@ -1,13 +1,13 @@
-#ifndef _INSPIRE_STREAM_ISTREAM_H_
-#define _INSPIRE_STREAM_ISTREAM_H_
+#ifndef _INSPIRE_NET_ISTREAM_H_
+#define _INSPIRE_NET_ISTREAM_H_
 
 #include "baseStream.h"
 #include "binData.h"
 
 namespace inspire {
 
-   class IStream : public baseStream
-   {s
+   class IStream : virtual public baseStream
+   {
    public:
       IStream(const char* buffer, uint64 len);
       IStream(IStream& rhs);

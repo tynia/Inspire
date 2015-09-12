@@ -100,6 +100,8 @@
     <ClInclude Include="net\event\eventhandler.h" />
     <ClInclude Include="net\event\eventid.h" />
     <ClInclude Include="net\helper\util.h" />
+    <ClInclude Include="net\nistream.h" />
+    <ClInclude Include="net\nostream.h" />
     <ClInclude Include="net\reactor.h" />
     <ClInclude Include="net\service.h" />
     <ClInclude Include="net\serviceMgr.h" />
@@ -108,7 +110,6 @@
     <ClInclude Include="processor\processor.h" />
     <ClInclude Include="stream\baseStream.h" />
     <ClInclude Include="stream\endian\endian.h" />
-    <ClInclude Include="stream\iostream.h" />
     <ClInclude Include="stream\istream.h" />
     <ClInclude Include="stream\ostream.h" />
     <ClInclude Include="stream\refStream.h" />
@@ -146,6 +147,8 @@
     <ClCompile Include="inslog\impl\insLogFile.cpp" />
     <ClCompile Include="inslog\impl\insLogMgr.cpp" />
     <ClCompile Include="inslog\impl\util.cpp" />
+    <ClCompile Include="net\nistream.cpp" />
+    <ClCompile Include="net\nostream.cpp" />
     <ClCompile Include="net\reactor.cpp" />
     <ClCompile Include="net\async\asyncconnection.cpp" />
     <ClCompile Include="net\async\ioservice.cpp" />
@@ -155,7 +158,6 @@
     <ClCompile Include="net\tcpconnection.cpp" />
     <ClCompile Include="stream\baseStream.cpp" />
     <ClCompile Include="stream\endian\endian.cpp" />
-    <ClCompile Include="stream\iostream.cpp" />
     <ClCompile Include="stream\istream.cpp" />
     <ClCompile Include="stream\ostream.cpp" />
     <ClCompile Include="stream\refStream.cpp" />

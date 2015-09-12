@@ -19,6 +19,7 @@
 #define _INSPIRE_LOG_FILE_H_
 
 #include "include/log.h"
+#include "mutex.h"
 
 namespace inspire {
 
@@ -43,9 +44,7 @@ namespace inspire {
 
    protected:
       int  _priority;
-      // mutexLock
-      //ossMutex _mtx;
-      //ossFile _file;
+      insMutex _mtx;
       char _filename[MAX_LOG_FILE_NAME + 1];
    };
 

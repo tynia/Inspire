@@ -55,5 +55,9 @@ namespace inspire {
 
    //////////////////////////////////////////////////////////////////////////
    // !!!@ a global logMgr instance is needed
-   insLogMgr extLogMgr;
+   static insLogMgr extLogMgr;
+   ILog* getLogMgr()
+   {
+      return &extLogMgr;
+   }
 }

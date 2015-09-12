@@ -1,12 +1,12 @@
-#ifndef _INSPIRE_STREAM_OSTREAM_H_
-#define _INSPIRE_STREAM_OSTREAM_H_
+#ifndef _INSPIRE_NET_OSTREAM_H_
+#define _INSPIRE_NET_OSTREAM_H_
 
 #include "baseStream.h"
 #include "binData.h"
 
 namespace inspire {
 
-   class OStream : public baseStream
+   class OStream : virtual public baseStream
    {
       static const uint BLOCKSIZE = 1024;
    public:

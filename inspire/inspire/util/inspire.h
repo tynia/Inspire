@@ -17,6 +17,8 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned short ushort;
 
+/* typedef unsigned long ulong; ******* long is deprecaed in inspire framework*/
+
 #ifdef _WIN32
 #define NEWLINE "\r\n"
 #else

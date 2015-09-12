@@ -75,9 +75,6 @@
     <ClInclude Include="net\session.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="stream\iostream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
     <ClInclude Include="stream\endian\endian.h">
       <Filter>stream\endian</Filter>
     </ClInclude>
@@ -240,6 +237,12 @@
     <ClInclude Include="util\reference.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="net\nistream.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\nostream.h">
+      <Filter>net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="net\service.cpp">
@@ -247,9 +250,6 @@
     </ClCompile>
     <ClCompile Include="net\session.cpp">
       <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="stream\iostream.cpp">
-      <Filter>stream</Filter>
     </ClCompile>
     <ClCompile Include="util\oss\ossFile.cpp">
       <Filter>util\oss</Filter>
@@ -337,6 +337,12 @@
     </ClCompile>
     <ClCompile Include="stream\istream.cpp">
       <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="net\nistream.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\nostream.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

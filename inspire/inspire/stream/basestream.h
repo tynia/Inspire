@@ -27,6 +27,8 @@ namespace inspire {
    private:
       void _initialize();
       void _extCapacity(const uint64 size = 0);
+      // disable move assignment
+      baseStream operator= (const baseStream& rhs);
 
    protected:
       const char* _data;
