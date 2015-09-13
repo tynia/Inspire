@@ -15,7 +15,7 @@ namespace inspire {
       virtual ~IReference(); 
 
    public:
-      bool shared() const { return 0 != _refCounter->get(); }
+      bool shared() const { return 0 != _refCounter->retain(); }
    protected:
       refCounter* _refCounter;
    };

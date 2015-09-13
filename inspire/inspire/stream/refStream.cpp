@@ -32,7 +32,7 @@ namespace inspire {
 
    bool refOStream::shared() const
    {
-      return (_refCount->get() > 0);
+      return (_refCount->retain() > 0);
    }
 
    char* refOStream::data() const
@@ -48,7 +48,7 @@ namespace inspire {
    void refOStream::_release()
    {
       _refCount->_dec();
-      if (0 == _refCount->get())
+      if (0 == _refCount->retain())
       {
          if (_refData)
          {

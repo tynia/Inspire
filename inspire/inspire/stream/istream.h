@@ -7,13 +7,11 @@
 namespace inspire {
 
    class IStream : public baseStream
-   {s
+   {
    public:
       IStream(const char* buffer, uint64 len);
-      IStream(IStream& rhs);
       virtual ~IStream();
 
-      IStream operator= (IStream& rhs);
       const char* data() const
       {
          return _data;

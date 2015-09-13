@@ -8,14 +8,13 @@ namespace inspire {
    class refCounter;
    class allocator;
 
-   class baseStream
+   class baseStream : public noncopyable
    {
    public:
       void skip(uint64 w) { _wOffset += w; }
    protected:
       baseStream(allocator* al, const uint unitSize);
       baseStream(const char* data, const uint64 len);
-      baseStream(baseStream& rhs);
       virtual ~baseStream();
 
       void _zero();
@@ -27,8 +26,6 @@ namespace inspire {
    private:
       void _initialize();
       void _extCapacity(const uint64 size = 0);
-      // disable move assignment
-      baseStream operator= (const baseStream& rhs);
 
    protected:
       const char* _data;

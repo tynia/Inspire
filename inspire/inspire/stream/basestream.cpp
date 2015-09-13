@@ -31,7 +31,7 @@ namespace inspire {
    baseStream::~baseStream()
    {
       _refCounter->_dec();
-      if (0 == _refCounter->get())
+      if (0 == _refCounter->retain())
       {
          _allocator->dealloc(_data);
          _allocator = NULL;

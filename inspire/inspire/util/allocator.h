@@ -14,7 +14,7 @@ namespace inspire {
 
       virtual char* alloc(const uint size) = 0;
 
-      virtual void dealloc(const void* ptr) = 0;
+      virtual void dealloc(const char* ptr) = 0;
 
       virtual void pray() = 0;
    };
@@ -25,7 +25,7 @@ namespace inspire {
       static allocator* instance();
 
       virtual char* alloc(const uint size);
-      virtual void dealloc(const void* ptr);
+      virtual void dealloc(const char* ptr);
       virtual void pray();
 
    protected:

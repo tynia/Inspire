@@ -11,7 +11,6 @@ namespace inspire {
       static const uint BLOCKSIZE = 1024;
    public:
       OStream(allocator* al = NULL, const uint blockSize = BLOCKSIZE);
-      OStream(OStream& rhs);
       virtual ~OStream();
 
       OStream operator= (OStream& rhs);

@@ -64,7 +64,7 @@ namespace inspire {
 
          if (_owned)
          {
-            if (0 == _counter->get())
+            if (0 == _counter->retain())
             {
 //             if (NULL != _e)
 //             {

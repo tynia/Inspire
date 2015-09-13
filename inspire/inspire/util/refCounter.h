@@ -21,7 +21,7 @@ namespace inspire {
          _referCount = rhs._referCount;
       }
 
-      const uint get() const
+      const uint retain() const
       {
          return _referCount;
       }

@@ -58,7 +58,7 @@ namespace inspire {
       if (!ok)
       {
          LogError("pointer: 0x%x sanity checked failed, it may not be "
-                  "allocated by allocator", (unsigned long long*)ptr);
+                  "allocated by allocator", (uint64*)ptr);
          //::free(ptr);
 #ifdef _DEBUG
          Panic();
