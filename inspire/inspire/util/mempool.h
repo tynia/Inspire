@@ -79,8 +79,8 @@ namespace inspire {
       }
 
    private:
-      unsigned int _count;
-      unsigned int _entitySize;
+      uint _count;
+      uint _entitySize;
       TEntity*     _hdrFree;
       insMutex     _mtx;
    };

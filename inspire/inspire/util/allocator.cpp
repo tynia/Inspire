@@ -18,7 +18,7 @@ namespace inspire {
       return &allocator;
    }
 
-   char* allocator::alloc(const unsigned int size)
+   char* allocator::alloc(const uint size)
    {
       //
       // mutex lock

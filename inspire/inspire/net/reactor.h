@@ -13,7 +13,7 @@ namespace inspire {
       virtual ~Reactor();
 
    public:
-      virtual int initailize(unsigned int evCount);
+      virtual int initailize(uint evCount);
       virtual int active();
       virtual int deactive();
       virtual int add(netEvent& nev);
@@ -26,7 +26,7 @@ namespace inspire {
 
    private:
       bool _stop;
-      unsigned int _maxEventCount;
+      uint _maxEventCount;
 #ifdef _WIN32
       HANDLE _hIOCP; // IOCP handle
 #else

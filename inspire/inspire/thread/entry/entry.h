@@ -13,7 +13,7 @@ namespace inspire {
 
    typedef void (*IOSERVICE_ACCEPTOR_FUNC)(void *);
    typedef void (*IOSERVICE_HANDLER_FUNC) (void *);
-   typedef unsigned int (__stdcall *THREAD_ENTRY)(void*);
+   typedef uint (__stdcall *THREAD_ENTRY)(void*);
 
    struct threadEntryInfo
    {

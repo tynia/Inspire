@@ -25,7 +25,7 @@ namespace inspire {
    }
 #endif
 
-   void ossSleep(unsigned int ms)
+   void ossSleep(uint ms)
    {
 #ifdef _WIN32
       ::Sleep(ms);
@@ -34,10 +34,10 @@ namespace inspire {
 #endif
    }
 
-   inline unsigned int ossGetLastError()
+   inline uint ossGetLastError()
    {
 #ifdef _WIN32
-      return (unsigned int)GetLastError();
+      return (uint)GetLastError();
 #else
       return errno;
 #endif

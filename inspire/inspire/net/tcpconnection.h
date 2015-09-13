@@ -8,8 +8,8 @@ namespace inspire {
    class tcpConnection
    {
    public:
-      tcpConnection(const unsigned int port);
-      tcpConnection(const char* ip, const unsigned int port);
+      tcpConnection(const uint port);
+      tcpConnection(const char* ip, const uint port);
       tcpConnection(const int sock);
       tcpConnection(const tcpConnection& conn);
       virtual ~tcpConnection();
@@ -17,18 +17,18 @@ namespace inspire {
       int socket() const { return _fd; }
       void accept(int& fd, sockaddr_in& addr);
       void bind();
-      void listen(const unsigned int maxConn = 10);
+      void listen(const uint maxConn = 10);
       void connect();
       void close();
 
    protected:
       void _initAddr(sockaddr_in& addr);
-      void _initAddr(const char* ip, const unsigned int port);
+      void _initAddr(const char* ip, const uint port);
       void _init();
 
    protected:
       int   _fd;
-      unsigned int _port;  // port for local
+      uint  _port;  // port for local
       sockaddr_in  _addr;  // addr for peer
    };
 }

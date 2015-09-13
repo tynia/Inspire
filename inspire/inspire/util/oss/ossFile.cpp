@@ -42,7 +42,7 @@ namespace inspire {
       _handle = ::CreateFile(fname.toString(), rwMode, sharedMode, NULL, crMode, attri, NULL );
       if (INVALID_HANDLE_VALUE == _handle)
       {
-         unsigned int err = (unsigned int)GetLastError();
+         uint err = (uint)GetLastError();
          if (ERROR_SHARING_VIOLATION == err)
          {
             LogError("Failed to open file, filename = %s, no permission", _filename);
@@ -58,7 +58,7 @@ namespace inspire {
       _fd = open(_filename, iMode, iPermission);
       if (-1 == _fd)
       {
-         unsigned int err = errno;
+         uint err = errno;
          if (EINVAL == err)
          {
             LogError("Failed to open file, filename = %s, direct io exist", _filename);

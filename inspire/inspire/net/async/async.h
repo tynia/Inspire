@@ -28,7 +28,7 @@ namespace inspire {
    public:
       IAsyncConnection(const int port) : tcpConnection(port)
       {}
-      IAsyncConnection(const char* ip, const unsigned int port) : tcpConnection(ip, port)
+      IAsyncConnection(const char* ip, const uint port) : tcpConnection(ip, port)
       {}
       IAsyncConnection(const int sock) : tcpConnection(sock)
       {}

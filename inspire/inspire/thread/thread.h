@@ -6,7 +6,7 @@
 
 namespace inspire {
 
-   typedef unsigned int(__stdcall *THREAD_ENTRY)(void*);
+   typedef uint(__stdcall *THREAD_ENTRY)(void*);
 
    enum threadState
    {
@@ -23,7 +23,7 @@ namespace inspire {
       virtual ~thread();
 
    public:
-      virtual unsigned int run();
+      virtual uint run();
 
    public:
       const int64 id() const;

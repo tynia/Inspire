@@ -7,20 +7,32 @@ namespace inspire {
 
    static const unsigned debug = 0xFFFAFBFE;
 
-   class allocator : public noncopyable
+   class IAllocator
+   {
+   public:
+      virtual ~IAllocator() {}
+
+      virtual char* alloc(const uint size) = 0;
+
+      virtual void dealloc(const void* ptr) = 0;
+
+      virtual void pray() = 0;
+   };
+
+   class allocator : public IAllocator, public noncopyable
    {
    public:
       static allocator* instance();
 
-      char* alloc(const unsigned int size);
-      void dealloc(const char* ptr);
-      void pray();
+      virtual char* alloc(const uint size);
+      virtual void dealloc(const void* ptr);
+      virtual void pray();
 
    protected:
       allocator();
       virtual ~allocator();
 
-      private:
+   private:
       bool _checkSanity(const char* ptr);
       void _setSanity(void* ptr, const unsigned size);
       void _resetRest();
@@ -28,8 +40,8 @@ namespace inspire {
       struct header
       {
          char eyecatcher[8];
-         unsigned used;
-         unsigned size;
+         uint used;
+         uint size;
          header* next;
 #ifdef _DEBUG
          unsigned debug;

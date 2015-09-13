@@ -9,8 +9,8 @@ namespace inspire {
    class AsyncConnection : public IAsyncConnection
    {
    public:
-      AsyncConnection(const unsigned int port);
-      AsyncConnection(const char* ip, const unsigned int port);
+      AsyncConnection(const uint port);
+      AsyncConnection(const char* ip, const uint port);
       AsyncConnection(const int sock);
       AsyncConnection(const AsyncConnection& rhs);
       virtual ~AsyncConnection();

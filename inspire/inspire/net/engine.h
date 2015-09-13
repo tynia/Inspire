@@ -7,7 +7,7 @@ namespace inspire {
     * accept callback for service
     * @param fd: service for listening
     **/
-   unsigned int (*SERVICE_ACCEPTOR)(int fd);
+   uint (*SERVICE_ACCEPTOR)(int fd);
 
    class IService;
 

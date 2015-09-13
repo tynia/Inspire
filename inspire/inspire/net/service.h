@@ -34,7 +34,7 @@ namespace inspire {
    class Service : public IService//, public threadEntity
    {
    public:
-      Service(const unsigned int servicePort);
+      Service(const uint servicePort);
       virtual ~Service();
 
       void initService();

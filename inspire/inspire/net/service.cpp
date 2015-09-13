@@ -6,7 +6,7 @@
 
 namespace inspire {
 
-   Service::Service(const unsigned int servicePort) : _initialized(false)
+   Service::Service(const uint servicePort) : _initialized(false)
    {
       _async = new AsyncConnection(servicePort);
       if (NULL == _async)

@@ -41,7 +41,7 @@ namespace inspire {
 
    }
 
-   int Reactor::initailize(unsigned int evCount)
+   int Reactor::initailize(uint evCount)
    {
       if (0 != evCount)
       {

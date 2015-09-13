@@ -121,8 +121,8 @@ namespace inspire {
    }
 
    //////////////////////////////////////////////////////////////////////////
-   // unsigned int
-   atomic32::atomic32(unsigned int val) : _value((int)val)
+   // uint
+   atomic32::atomic32(uint val) : _value((int)val)
    {
    }
 
@@ -130,7 +130,7 @@ namespace inspire {
    {
    }
 
-   void atomic32::initialize(unsigned int val)
+   void atomic32::initialize(uint val)
    {
       _value.initialize((int)val);
    }
@@ -140,77 +140,77 @@ namespace inspire {
       return _value.size();
    }
 
-   unsigned int atomic32::peek()
+   uint atomic32::peek()
    {
-      return (unsigned int)_value.peek();
+      return (uint)_value.peek();
    }
 
-   unsigned int atomic32::add(unsigned int val)
+   uint atomic32::add(uint val)
    {
-      return (unsigned int)_value.add((int)val);
+      return (uint)_value.add((int)val);
    }
 
-   unsigned int atomic32::sub(unsigned int val)
+   uint atomic32::sub(uint val)
    {
-      return (unsigned int)_value.add((int)val);
+      return (uint)_value.add((int)val);
    }
 
-   unsigned int atomic32::bitOR(unsigned int val)
+   uint atomic32::bitOR(uint val)
    {
-      return (unsigned int)_value.bitOR((int)val);
+      return (uint)_value.bitOR((int)val);
    }
 
-   unsigned int atomic32::bitAND(unsigned int val)
+   uint atomic32::bitAND(uint val)
    {
-      return (unsigned int)_value.bitAND((int)val);
+      return (uint)_value.bitAND((int)val);
    }
 
-   unsigned int atomic32::fetch()
+   uint atomic32::fetch()
    {
-      return (unsigned int)_value.fetch();
+      return (uint)_value.fetch();
    }
 
-   unsigned int atomic32::inc()
+   uint atomic32::inc()
    {
-      return (unsigned int)_value.inc();
+      return (uint)_value.inc();
    }
 
-   unsigned int atomic32::dec()
+   uint atomic32::dec()
    {
-      return (unsigned int)_value.dec();
+      return (uint)_value.dec();
    }
 
-   unsigned int atomic32::swap(unsigned int val)
+   uint atomic32::swap(uint val)
    {
-      return (unsigned int)_value.swap((int)val);
+      return (uint)_value.swap((int)val);
    }
 
-   bool atomic32::compareAndSwap(unsigned int comVal, unsigned int val)
+   bool atomic32::compareAndSwap(uint comVal, uint val)
    {
-      return (unsigned int)_value.compareAndSwap((int)comVal, (int)val);
+      return (uint)_value.compareAndSwap((int)comVal, (int)val);
    }
 
-   unsigned int atomic32::compareAndSwapWithReturn(unsigned int comVal, unsigned int val)
+   uint atomic32::compareAndSwapWithReturn(uint comVal, uint val)
    {
-      return (unsigned int)_value.compareAndSwapWithReturn((int)comVal, (int)val);
+      return (uint)_value.compareAndSwapWithReturn((int)comVal, (int)val);
    }
 
-   unsigned int atomic32::swapGreater(unsigned int val)
+   uint atomic32::swapGreater(uint val)
    {
-      return (unsigned int)_value._swapPredicated((int)val, predicatedGreater<unsigned int>());
+      return (uint)_value._swapPredicated((int)val, predicatedGreater<uint>());
    }
 
-   unsigned int atomic32::swapLess(unsigned int val)
+   uint atomic32::swapLess(uint val)
    {
-      return (unsigned int)_value._swapPredicated((int)val, predicatedLess<unsigned int>());
+      return (uint)_value._swapPredicated((int)val, predicatedLess<uint>());
    }
 
-   bool atomic32::compare(unsigned int comVal)
+   bool atomic32::compare(uint comVal)
    {
-      return (unsigned int)_value.compare((int)comVal);
+      return (uint)_value.compare((int)comVal);
    }
 
-   void atomic32::poke(unsigned int val)
+   void atomic32::poke(uint val)
    {
       _value.poke((int)val);
    }

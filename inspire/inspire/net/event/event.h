@@ -29,7 +29,7 @@ namespace inspire {
       }
 
    public:
-      unsigned int msgLen;
+      uint msgLen;
    private:
       int64 _eventId;
    };

@@ -42,7 +42,7 @@ namespace inspire {
 
    private:
       const char* _path;
-      std::map<unsigned int, IWriteLog*> _logMap;
+      std::map<uint, IWriteLog*> _logMap;
    };
 
    /*

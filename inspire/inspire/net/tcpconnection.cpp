@@ -3,13 +3,13 @@
 
 namespace inspire {
 
-   tcpConnection::tcpConnection(const unsigned int port) : _port(port)
+   tcpConnection::tcpConnection(const uint port) : _port(port)
    {
       _init();
       memset(&_addr, 0, sizeof(_addr));
    }
 
-   tcpConnection::tcpConnection(const char* ip, const unsigned int port) : _port(0)
+   tcpConnection::tcpConnection(const char* ip, const uint port) : _port(0)
    {
       _init();
       _initAddr(ip, port);
@@ -62,7 +62,7 @@ namespace inspire {
       }
    }
 
-   void tcpConnection::listen(const unsigned int maxConn /*= 10*/)
+   void tcpConnection::listen(const uint maxConn /*= 10*/)
    {
       int rc = ::listen(_fd, maxConn);
       if (SOCKET_ERROR == rc)
@@ -106,7 +106,7 @@ namespace inspire {
       util::initLocalAddr(_port, addr);
    }
 
-   void tcpConnection::_initAddr(const char* ip, const unsigned int port)
+   void tcpConnection::_initAddr(const char* ip, const uint port)
    {
       util::initRemoteAddr(ip, port, _addr);
    }

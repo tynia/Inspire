@@ -8,7 +8,7 @@ namespace inspire {
    namespace bson {
 
       typedef unsigned char md5_byte_t;
-      typedef unsigned int  md5_word_t;
+      typedef uint          md5_word_t;
 
       struct md5_state_t
       {
@@ -23,7 +23,7 @@ namespace inspire {
       static
       inline void md5_init();
 
-      inline void genMD5(const char* out, const char* in, const unsigned int len)
+      inline void genMD5(const char* out, const char* in, const uint len)
       {
          INSPIRE_ASSERT(NULL != out, "buffer to store md5 value cannot be NULL");
          INSPIRE_ASSERT(NULL != in, "buffer to crypted cannot be NULL");

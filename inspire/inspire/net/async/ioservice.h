@@ -15,8 +15,8 @@ namespace inspire {
       IOE_WRITE,
    };
 
-   static const unsigned int MAX_BUFFER_SIZE = 8192;
-   static const unsigned int MAX_POST_ACCEPT = 20;
+   static const uint MAX_BUFFER_SIZE = 8192;
+   static const uint MAX_POST_ACCEPT = 20;
 
    struct OverlappedContext
    {
@@ -47,7 +47,7 @@ namespace inspire {
       IOService();
       virtual ~IOService();
 
-      void init(const unsigned int threadCount = 0);
+      void init(const uint threadCount = 0);
 
       void bind(IAsyncConnection* conn);
 
@@ -72,7 +72,7 @@ namespace inspire {
    protected:
       bool              _stopService;
       HANDLE            _hIOCP;
-      unsigned int      _threadCount;
+      uint              _threadCount;
       IAsyncConnection* _conn;
       int64*            _threadID;
       LPFN_ACCEPTEX     _lpfnAcceptEx;

@@ -23,7 +23,7 @@ namespace inspire {
       }
    }
 
-   void IOService::init(const unsigned int threadCount)
+   void IOService::init(const uint threadCount)
    {
       _threadCount = (0 == threadCount ? 2 * cpuCount() : threadCount);
 

@@ -155,12 +155,12 @@ namespace inspire {
       {
          return v;
       }
-      // unsigned int
-      static const unsigned int N2H(const uint& v)
+      // uint
+      static const uint N2H(const uint& v)
       {
          return v;
       }
-      static const unsigned int H2N(const uint& v)
+      static const uint H2N(const uint& v)
       {
          return v;
       }
@@ -282,16 +282,16 @@ namespace inspire {
          CONVERT_ENDIAN_4(v, out, g_endian);
          return out;
       }
-      // unsigned int
-      static const unsigned int N2H(const uint& v)
+      // uint
+      static const uint N2H(const uint& v)
       {
-         unsigned int out = 0;
+         uint out = 0;
          CONVERT_ENDIAN_4(v, out, g_endian);
          return out;
       }
-      static const unsigned int H2N(const uint& v)
+      static const uint H2N(const uint& v)
       {
-         unsigned int out = 0;
+         uint out = 0;
          CONVERT_ENDIAN_4(v, out, g_endian);
          return out;
       }

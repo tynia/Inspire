@@ -13,7 +13,7 @@ namespace inspire {
       _entryParam = NULL;
    }
 
-   unsigned int thread::run()
+   uint thread::run()
    {
       return this->_entryFunc(_entryParam);
    }

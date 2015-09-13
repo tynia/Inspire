@@ -65,7 +65,7 @@ namespace inspire {
    inline int ossCompareAndSwap32(volatile int* pVal, int comVal, int newVal)
    {
 #ifdef _WIN32
-      return (unsigned int)comVal == InterlockedCompareExchange((long*)pVal, (long)newVal, (long)comVal);
+      return (uint)comVal == InterlockedCompareExchange((long*)pVal, (long)newVal, (long)comVal);
 #else
       return comVal == __sync_val_compare_and_swap((volatile int*)pVal, comVal, newVal);
 #endif
@@ -143,7 +143,7 @@ namespace inspire {
    inline int64 ossCompareAndSwap64(volatile int64* pVal, int64 comVal, int64 newVal)
    {
 #ifdef _WIN32
-      return (unsigned int)comVal == InterlockedCompareExchange64((int64*)pVal, newVal, comVal);
+      return (uint)comVal == InterlockedCompareExchange64((int64*)pVal, newVal, comVal);
 #else
       return comVal == __sync_val_compare_and_swap((volatile int64*)pVal, comVal, newVal);
 #endif

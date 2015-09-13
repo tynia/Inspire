@@ -3,11 +3,11 @@
 
 namespace inspire {
 
-   AsyncConnection::AsyncConnection(const unsigned int port) : IAsyncConnection(port)
+   AsyncConnection::AsyncConnection(const uint port) : IAsyncConnection(port)
    {
    }
 
-   AsyncConnection::AsyncConnection(const char* ip, const unsigned int port) : IAsyncConnection(ip, port)
+   AsyncConnection::AsyncConnection(const char* ip, const uint port) : IAsyncConnection(ip, port)
    {
    }
 

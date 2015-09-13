@@ -32,15 +32,15 @@ namespace inspire {
 
       refPointer<T>& operator= (const refPointer<T>& rhs)
       {
-         if (_ptr == rhs._ptr)
+         if (_ptr != rhs._ptr)
          {
-            return *this;
+            _ptrCounter->_dec();
+            _ptr = rhs._ptr;
+            _ptrCounter = rhs._ptrCounter;
+            _ptrCounter->_inc();
          }
 
-         _ptrCounter->_dec();
-         _ptr = rhs._ptr;
-         _ptrCounter = rhs._ptrCounter;
-         _ptrCounter->_inc();
+         return *this;
       }
 
       T& operator* ()
