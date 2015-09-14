@@ -11,7 +11,7 @@ namespace inspire {
    class baseStream : public noncopyable
    {
    public:
-      void skip(uint64 w) { _wOffset += w; }
+      virtual void skip(uint64 w) = 0;
    protected:
       baseStream(allocator* al, const uint unitSize);
       baseStream(const char* data, const uint64 len);

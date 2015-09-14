@@ -12,6 +12,9 @@ namespace inspire {
       IStream(const char* buffer, uint64 len);
       virtual ~IStream();
 
+      virtual void skip(uint64 w) { _rOffset += w; }
+
+   public:
       const char* data() const
       {
          return _data;

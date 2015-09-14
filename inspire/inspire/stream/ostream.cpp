@@ -8,18 +8,8 @@ namespace inspire {
    {
    }
 
-   OStream::OStream(OStream& rhs) : baseStream(rhs)
-   {
-   }
-
    OStream::~OStream()
    {
-   }
-
-   OStream OStream::operator=(OStream& rhs)
-   {
-      OStream os(rhs);
-      return os;
    }
 
    void OStream::put(const char c)

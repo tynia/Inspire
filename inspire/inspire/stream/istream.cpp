@@ -6,19 +6,9 @@ namespace inspire {
       : baseStream(buffer, len), _rOffset(0)
    {}
 
-   IStream::IStream(IStream& rhs) : baseStream(rhs), _rOffset(rhs._rOffset)
-   {
-   }
-
    IStream::~IStream()
    {
       _rOffset = 0;
-   }
-
-   IStream IStream::operator=(IStream& rhs)
-   {
-      IStream is(rhs);
-      return is;
    }
 
    char IStream::get()

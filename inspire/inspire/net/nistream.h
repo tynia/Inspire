@@ -1,19 +1,19 @@
-#ifndef _INSPIRE_NET_ISTREAM_H_
-#define _INSPIRE_NET_ISTREAM_H_
+#ifndef _INSPIRE_NET_NIStream_H_
+#define _INSPIRE_NET_NIStream_H_
 
 #include "baseStream.h"
 #include "binData.h"
 
 namespace inspire {
 
-   class IStream : virtual public baseStream
+   class NIStream : virtual public baseStream
    {
    public:
-      IStream(const char* buffer, uint64 len);
-      IStream(IStream& rhs);
-      virtual ~IStream();
+      NIStream(const char* buffer, uint64 len);
+      virtual ~NIStream();
 
-      IStream operator= (IStream& rhs);
+      virtual void skip(uint64 w) { _rOffset += w; }
+   public:
       const char* data() const
       {
          return _data;
@@ -26,18 +26,18 @@ namespace inspire {
 
       char get();
 
-      IStream& operator>> (bool& b);
-      IStream& operator>> (char& c);
-      IStream& operator>> (uchar& uc);
-      IStream& operator>> (short& s);
-      IStream& operator>> (ushort& us);
-      IStream& operator>> (float& f);
-      IStream& operator>> (double& d);
-      IStream& operator>> (int& i);
-      IStream& operator>> (uint& ui);
-      IStream& operator>> (int64& i64);
-      IStream& operator>> (uint64& ui64);
-      IStream& operator>> (binData& bin);
+      NIStream& operator>> (bool& b);
+      NIStream& operator>> (char& c);
+      NIStream& operator>> (uchar& uc);
+      NIStream& operator>> (short& s);
+      NIStream& operator>> (ushort& us);
+      NIStream& operator>> (float& f);
+      NIStream& operator>> (double& d);
+      NIStream& operator>> (int& i);
+      NIStream& operator>> (uint& ui);
+      NIStream& operator>> (int64& i64);
+      NIStream& operator>> (uint64& ui64);
+      NIStream& operator>> (binData& bin);
 
    private:
       void _readBuffer(void* buffer, const uint len, const uint toRead);

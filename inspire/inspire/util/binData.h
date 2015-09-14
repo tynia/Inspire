@@ -12,9 +12,8 @@ namespace inspire {
    {
       binData() : owned(true), data(NULL), len(0)
       {}
-      binData(const char *data, const uint len) : owned(false),
-         data(const_cast<char*>(data)),
-         len(len)
+      binData(const char *data, const uint len)
+         : owned(false), data(const_cast<char*>(data)), len(len)
       {}
 
       ~binData()

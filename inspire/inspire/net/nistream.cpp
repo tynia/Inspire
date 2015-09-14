@@ -1,53 +1,43 @@
-#include "istream.h"
+#include "nistream.h"
 #include "endian/endian.h"
 
 namespace inspire {
 
-   IStream::IStream(const char* buffer, uint64 len)
+   NIStream::NIStream(const char* buffer, uint64 len)
       : baseStream(buffer, len), _rOffset(0)
    {}
 
-   IStream::IStream(IStream& rhs) : baseStream(rhs), _rOffset(rhs._rOffset)
-   {
-   }
-
-   IStream::~IStream()
+   NIStream::~NIStream()
    {
       _rOffset = 0;
    }
 
-   IStream IStream::operator=(IStream& rhs)
-   {
-      IStream is(rhs);
-      return is;
-   }
-
-   char IStream::get()
+   char NIStream::get()
    {
       char c;
       _readBuffer(&c, sizeof(char), sizeof(char));
       return c;
    }
 
-   IStream& IStream::operator>>(bool& b)
+   NIStream& NIStream::operator>>(bool& b)
    {
       _readBuffer(&b, sizeof(bool), sizeof(bool));
       return *this;
    }
 
-   IStream& IStream::operator>>(char& c)
+   NIStream& NIStream::operator>>(char& c)
    {
       _readBuffer(&c, sizeof(char), sizeof(char));
       return *this;
    }
 
-   IStream& IStream::operator>>(uchar& uc)
+   NIStream& NIStream::operator>>(uchar& uc)
    {
       _readBuffer(&uc, sizeof(uchar), sizeof(uchar));
       return *this;
    }
 
-   IStream& IStream::operator>>(short& s)
+   NIStream& NIStream::operator>>(short& s)
    {
       short tmp = 0;
       _readBuffer(&tmp, sizeof(short), sizeof(short));
@@ -55,7 +45,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(ushort& us)
+   NIStream& NIStream::operator>>(ushort& us)
    {
       ushort tmp = 0;
       _readBuffer(&tmp, sizeof(ushort), sizeof(ushort));
@@ -63,7 +53,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(float& f)
+   NIStream& NIStream::operator>>(float& f)
    {
       float tmp = 0.0f;
       _readBuffer(&tmp, sizeof(float), sizeof(float));
@@ -71,7 +61,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(double& d)
+   NIStream& NIStream::operator>>(double& d)
    {
       double tmp = 0.0f;
       _readBuffer(&tmp, sizeof(double), sizeof(double));
@@ -79,7 +69,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(int& i)
+   NIStream& NIStream::operator>>(int& i)
    {
       int tmp = 0;
       _readBuffer(&tmp, sizeof(int), sizeof(int));
@@ -87,7 +77,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(uint& ui)
+   NIStream& NIStream::operator>>(uint& ui)
    {
       uint tmp = 0;
       _readBuffer(&tmp, sizeof(uint), sizeof(uint));
@@ -95,7 +85,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(int64& i64)
+   NIStream& NIStream::operator>>(int64& i64)
    {
       uint64 tmp = 0;
       _readBuffer(&tmp, sizeof(int64), sizeof(int64));
@@ -103,7 +93,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(uint64& ui64)
+   NIStream& NIStream::operator>>(uint64& ui64)
    {
       uint64 tmp = 0;
       _readBuffer(&tmp, sizeof(uint64), sizeof(uint64));
@@ -111,7 +101,7 @@ namespace inspire {
       return *this;
    }
 
-   IStream& IStream::operator>>(binData& bin)
+   NIStream& NIStream::operator>>(binData& bin)
    {
       uint tmp = 0;
       _readBuffer(&tmp, sizeof(uint), sizeof(uint));
@@ -121,7 +111,7 @@ namespace inspire {
       return *this;
    }
 
-   void IStream::_readBuffer(void* buffer, const uint len, const uint toRead)
+   void NIStream::_readBuffer(void* buffer, const uint len, const uint toRead)
    {
       uint64 r = _read(_rOffset, toRead, buffer, len);
       if (r < toRead)

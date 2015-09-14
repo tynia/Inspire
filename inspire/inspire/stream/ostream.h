@@ -13,7 +13,8 @@ namespace inspire {
       OStream(allocator* al = NULL, const uint blockSize = BLOCKSIZE);
       virtual ~OStream();
 
-      OStream operator= (OStream& rhs);
+      virtual void skip(uint64 w) { _wOffset += w; }
+
    public:
       const char* data() const { return _data; }
 

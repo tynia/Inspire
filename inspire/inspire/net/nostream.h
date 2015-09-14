@@ -1,20 +1,17 @@
-#ifndef _INSPIRE_NET_OSTREAM_H_
-#define _INSPIRE_NET_OSTREAM_H_
+#ifndef _INSPIRE_NET_NOStream_H_
+#define _INSPIRE_NET_NOStream_H_
 
 #include "baseStream.h"
 #include "binData.h"
 
 namespace inspire {
 
-   class OStream : virtual public baseStream
+   class NOStream : virtual public baseStream
    {
       static const uint BLOCKSIZE = 1024;
    public:
-      OStream(allocator* al = NULL, const uint blockSize = BLOCKSIZE);
-      OStream(OStream& rhs);
-      virtual ~OStream();
-
-      OStream operator= (OStream& rhs);
+      NOStream(allocator* al = NULL, const uint blockSize = BLOCKSIZE);
+      virtual ~NOStream();
    public:
       const char* data() const { return _data; }
 
@@ -24,19 +21,19 @@ namespace inspire {
 
       void put(const char c);
 
-      OStream& operator<< (const bool b);
-      OStream& operator<< (const char c);
-      OStream& operator<< (const uchar uc);
-      OStream& operator<< (const short s);
-      OStream& operator<< (const ushort us);
-      OStream& operator<< (const float f);
-      OStream& operator<< (const double d);
-      OStream& operator<< (const int i);
-      OStream& operator<< (const uint ui);
-      OStream& operator<< (const int64& i64);
-      OStream& operator<< (const uint64& ui64);
-      OStream& operator<< (const binData& bin);
-      OStream& operator<< (const std::string& str);
+      NOStream& operator<< (const bool b);
+      NOStream& operator<< (const char c);
+      NOStream& operator<< (const uchar uc);
+      NOStream& operator<< (const short s);
+      NOStream& operator<< (const ushort us);
+      NOStream& operator<< (const float f);
+      NOStream& operator<< (const double d);
+      NOStream& operator<< (const int i);
+      NOStream& operator<< (const uint ui);
+      NOStream& operator<< (const int64& i64);
+      NOStream& operator<< (const uint64& ui64);
+      NOStream& operator<< (const binData& bin);
+      NOStream& operator<< (const std::string& str);
    };
 }
 #endif
