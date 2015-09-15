@@ -8,15 +8,11 @@ namespace inspire {
    class refCounter
    {
    public:
-      refCounter() : _referCount(0)
-      {
-         _inc();
-      }
+      refCounter() : _referCount(0) {}
 
-      refCounter(const refCounter* rhs) : _referCount(rhs->_referCount)
-      {}
+      refCounter(const refCounter& rhs) : _referCount(rhs._referCount) {}
 
-      refCounter operator= (const refCounter& rhs)
+      refCounter& operator= (const refCounter& rhs)
       {
          _referCount = rhs._referCount;
       }
