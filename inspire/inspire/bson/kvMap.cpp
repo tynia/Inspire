@@ -146,16 +146,16 @@ namespace inspire {
          _w.appendString(v.c_str(), v.length());
       }
 
-      void kvMap::put(const char type, const char* k, const char* v, unsigned len)
+      void kvMap::put(const char type, const char* k, const binData& bin)
       {
-         _vtype = VT_BINDATA;
+         _vtype = type;
          /* ----------|***type***|---|*key size*|---|**value size**| */
-         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(int) + 1 + len;
+         _totalSize = sizeof(char) + strlen(k) + 1 + sizeof(int) + 1 + bin.len;
 
          _prepare(k);
-         _w.appendInt(len);
+         _w.appendInt(bin.len);
          _w.appendChar(type);
-         _w.appendBin(v, len);
+         _w.appendBin(bin.data, bin.len);
       }
 
       void kvMap::_verify(unsigned toWriteSize)

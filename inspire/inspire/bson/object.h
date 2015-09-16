@@ -9,6 +9,8 @@ namespace inspire {
    namespace bson {
 
       class allocator;
+      class Element;
+
       class Object
       {
       public:
@@ -28,14 +30,15 @@ namespace inspire {
          template <class T>
          void append(const char* k, T& v);
 
-         Object& operator== (const Object& rhs);
+         Object operator= (const Object& rhs);
+         bool   isEqual(const Object& rhs);
 
       protected:
          bool        _done;
          Element*    _e;
          Element*    _end;
          allocator*  _pool;
-         refCounter* _counter;
+         refCounter* _refCounter;
          const char* _serializedData;
       };
    }

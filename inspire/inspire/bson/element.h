@@ -17,7 +17,7 @@ namespace inspire {
          Element(const Element& rhs);
          virtual ~Element();
 
-         Element& operator= (const Element& rhs);
+         Element operator= (const Element& rhs);
 
          void replace(const Element& e);
 
@@ -42,7 +42,7 @@ namespace inspire {
 
       protected:
          bool        _owned;
-         refCounter* _counter;
+         refCounter* _refCounter;
          Element*    _next;
       };
 

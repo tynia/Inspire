@@ -2,13 +2,13 @@
 #define _INSPIRE_BSON_KVMAP_H_
 
 #include "inspire.h"
+#include "binData.h"
 #include "writer.h"
 
 namespace inspire {
 
    namespace bson {
 
-      class binData;
       class kvMap
       {
       protected:
@@ -28,16 +28,15 @@ namespace inspire {
          // object id
          // array
          // null
-         void put(const char type, const char* k,
-                  const char* pValue, const unsigned len);
+         void put(const char type, const char* k, const binData& bin);
 
       private:
          void _verify(unsigned toWriteSize);
          void _prepare(const char* k);
 
       protected:
-         char _vtype;
-         unsigned _totalSize;
+         char        _vtype;
+         unsigned    _totalSize;
          const char* _key;
          const char* _value;
       private:

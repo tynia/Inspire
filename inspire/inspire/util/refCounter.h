@@ -12,9 +12,10 @@ namespace inspire {
 
       refCounter(const refCounter& rhs) : _referCount(rhs._referCount) {}
 
-      refCounter& operator= (const refCounter& rhs)
+      refCounter operator= (const refCounter& rhs)
       {
-         _referCount = rhs._referCount;
+         refCounter ref(rhs);
+         return ref;
       }
 
       const uint retain() const

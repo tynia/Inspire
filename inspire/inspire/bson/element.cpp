@@ -1,20 +1,20 @@
 #include "element.h"
-#include "refPointer.h"
+#include "refCounter.h"
 
 namespace inspire {
 
    namespace bson {
 
-      Element::Element() : kvMap(), _owned(true), _counter(NULL), _next(NULL)
+      Element::Element() : kvMap(), _owned(true), _refCounter(NULL), _next(NULL)
       {
-         _counter = new refCounter();
+         _refCounter = new refCounter();
       }
 
       Element::Element(const Element& rhs) : kvMap(), _owned(false)
       {
-         _counter = rhs._counter;
+         _refCounter = rhs._refCounter;
          _next = rhs._next;
-         _counter->_inc();
+         _refCounter->_inc();
       }
 
       Element::~Element()
@@ -24,7 +24,7 @@ namespace inspire {
 
       void Element::replace(const Element& e)
       {
-         if (_next == e._next && _counter == e._counter)
+         if (_next == e._next && _refCounter == e._refCounter)
          {
             return;
          }
@@ -32,8 +32,8 @@ namespace inspire {
          _release();
 
          _next = e._next;
-         _counter = e._counter;
-         _counter->_inc();
+         _refCounter = e._refCounter;
+         _refCounter->_inc();
       }
 
       void Element::putNull(const char* k)
@@ -60,11 +60,11 @@ namespace inspire {
 
       void Element::_release()
       {
-         _counter->_dec();
+         _refCounter->_dec();
 
          if (_owned)
          {
-            if (0 == _counter->retain())
+            if (0 == _refCounter->retain())
             {
 //             if (NULL != _e)
 //             {
@@ -81,18 +81,18 @@ namespace inspire {
 
       }
 
-      Element& Element::operator=(const Element& rhs)
+      Element Element::operator=(const Element& rhs)
       {
-         if (_next == rhs._next && _counter == rhs._counter)
+         if (_next == rhs._next && _refCounter == rhs._refCounter)
          {
             return *this;
          }
 
-         _counter->_dec();
+         _refCounter->_dec();
 
          _next = rhs._next;
-         _counter = rhs._counter;
-         _counter->_inc();
+         _refCounter = rhs._refCounter;
+         _refCounter->_inc();
       }
 
    }

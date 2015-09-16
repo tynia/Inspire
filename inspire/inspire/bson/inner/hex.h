@@ -23,7 +23,8 @@ namespace inspire {
             return c - 'a' + 10;
          else if ('A' <= c && 'F' >= c)
             return c - 'A' + 10;
-         inspire::Panic();
+
+         INSPIRE_ASSERT(false, "Invalid char");
          return 0xff;
       }
 
@@ -32,7 +33,7 @@ namespace inspire {
          return (char)((fromHex(*p) << 4) | fromHex(*(p + 1)));
       }
 
-      inline const char* toHex(const void* in, uint len, bool upcase = false)
+      inline std::string toHex(const void* in, uint len, bool upcase = false)
       {
          INSPIRE_ASSERT(NULL != in, "Data to be exchanged to hex is NULL");
          if (0 == len)

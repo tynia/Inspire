@@ -3,26 +3,18 @@
 
 namespace inspire {
 
-   refOStream::refOStream() : _refCount(NULL), _capacity(0), _refData(NULL)
+   refOStream::refOStream() : _refCounter(NULL), _capacity(0), _refData(NULL)
    {
-      _refCount = new refCounter();
-      _refCount->_inc();
-   }
-
-   refOStream::refOStream(const char* data, const size_t len)
-   {
-      _refData  = const_cast<char*>(data);
-      _capacity = len;
-      _refCount = new refCounter();
-      _refCount->_inc();
+      _refCounter = new refCounter();
+      _refCounter->_inc();
    }
 
    refOStream::refOStream(const refOStream& rhs)
    {
       _capacity = rhs._capacity;
       _refData  = rhs._refData;
-      _refCount = rhs._refCount;
-      _refCount->_inc();
+      _refCounter = rhs._refCounter;
+      _refCounter->_inc();
    }
 
    refOStream::~refOStream()
@@ -32,7 +24,7 @@ namespace inspire {
 
    bool refOStream::shared() const
    {
-      return (_refCount->retain() > 0);
+      return (_refCounter->retain() > 0);
    }
 
    char* refOStream::data() const
@@ -47,16 +39,16 @@ namespace inspire {
 
    void refOStream::_release()
    {
-      _refCount->_dec();
-      if (0 == _refCount->retain())
+      _refCounter->_dec();
+      if (0 == _refCounter->retain())
       {
          if (_refData)
          {
             ::free(_refData);
             _refData = NULL;
          }
-         delete _refCount;
-         _refCount = NULL;
+         delete _refCounter;
+         _refCounter = NULL;
       }
    }
 
@@ -82,8 +74,8 @@ namespace inspire {
       _release();
       _capacity = rhs._capacity;
       _refData = rhs._refData;
-      _refCount = rhs._refCount;
-      _refCount->_inc();
+      _refCounter = rhs._refCounter;
+      _refCounter->_inc();
 
       return *this;
    }

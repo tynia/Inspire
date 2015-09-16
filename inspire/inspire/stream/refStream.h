@@ -8,23 +8,10 @@ namespace inspire {
 
    class refCounter;
 
-   class IReference
-   {
-   protected:
-      IReference();
-      virtual ~IReference(); 
-
-   public:
-      bool shared() const { return 0 != _refCounter->retain(); }
-   protected:
-      refCounter* _refCounter;
-   };
-
    class refOStream : public OStream
    {
    protected:
       refOStream();
-      refOStream(const char* data, const unsigned len);
       refOStream(const refOStream& rhs);
       ~refOStream();
       void _release();
@@ -47,7 +34,7 @@ namespace inspire {
    protected:
       unsigned    _capacity;
       char*       _refData;
-      refCounter* _refCount;
+      refCounter* _refCounter;
    };
 }
 #endif

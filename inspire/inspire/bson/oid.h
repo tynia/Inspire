@@ -21,7 +21,7 @@ namespace inspire {
          bool operator >(const ObjectId& rhs);
          bool operator <=(const ObjectId& rhs);
          bool operator >=(const ObjectId& rhs);
-         ObjectId& operator =(const ObjectId& rhs);
+         ObjectId operator =(const ObjectId& rhs);
 
       private:
          void _generate();
