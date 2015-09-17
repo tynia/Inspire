@@ -15,7 +15,7 @@ namespace inspire {
          _end = NULL;
       }
 
-      void writer::init(const char* ptr, const unsigned len)
+      void writer::init(const char* ptr, const uint len)
       {
          _ptr = ptr;
          _cur = ptr;
@@ -30,12 +30,12 @@ namespace inspire {
          _cur += sizeof(char);
       }
 
-      void writer::appendUChar(unsigned char uc)
+      void writer::appendUChar(uchar uc)
       {
-         _verify(sizeof(unsigned char));
+         _verify(sizeof(uchar));
 
-         memcpy((void*)_cur, &uc, sizeof(unsigned char));
-         _cur += sizeof(unsigned char);
+         memcpy((void*)_cur, &uc, sizeof(uchar));
+         _cur += sizeof(uchar);
       }
 
       void writer::appendBool(bool b)
@@ -59,12 +59,12 @@ namespace inspire {
          _cur += sizeof(int);
       }
 
-      void writer::appendUInt(unsigned ui)
+      void writer::appendUInt(uint ui)
       {
-         _verify(sizeof(unsigned));
+         _verify(sizeof(uint));
 
-         memcpy((void*)_cur, &ui, sizeof(unsigned));
-         _cur += sizeof(unsigned);
+         memcpy((void*)_cur, &ui, sizeof(uint));
+         _cur += sizeof(uint);
       }
 
       void writer::appendInt64(int64 i64)
@@ -91,7 +91,7 @@ namespace inspire {
          _cur += sizeof(double);
       }
 
-      void writer::appendString(const char* str, unsigned len)
+      void writer::appendString(const char* str, uint len)
       {
          _verify(len + 1);
 
@@ -100,7 +100,7 @@ namespace inspire {
          _cur += len + 1;
       }
 
-      void writer::appendBin(const char* bin, unsigned len)
+      void writer::appendBin(const char* bin, uint len)
       {
          _verify(len);
 
@@ -108,7 +108,7 @@ namespace inspire {
          _cur += len;
       }
 
-      void writer::_verify(unsigned size)
+      void writer::_verify(uint size)
       {
          if (_cur >= _end || _cur + size > _end)
          {

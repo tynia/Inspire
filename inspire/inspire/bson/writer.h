@@ -15,26 +15,26 @@ namespace inspire {
          ~writer();
 
       public:
-         void init(const char* ptr, const unsigned len);
+         void init(const char* ptr, const uint len);
          const char* curPtr() const
          {
             return _cur;
          }
 
          void appendChar(char c);
-         void appendUChar(unsigned char uc);
+         void appendUChar(uchar uc);
          void appendBool(bool b);
          void appendShort(short s);
          void appendInt(int i);
-         void appendUInt(unsigned ui);
+         void appendUInt(uint ui);
          void appendInt64(int64 i64);
          void appendUInt64(uint64 ui64);
          void appendDouble(double d);
-         void appendString(const char* str, unsigned len);
-         void appendBin(const char* bin, unsigned len);
+         void appendString(const char* str, uint len);
+         void appendBin(const char* bin, uint len);
 
       private:
-         void _verify(unsigned toWriteSize);
+         void _verify(uint toWriteSize);
 
       private:
          const char* _end;
