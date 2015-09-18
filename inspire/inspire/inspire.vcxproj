@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\app;$(ProjectDir)\bson;$(ProjectDir)\event;$(ProjectDir)\insLog;$(ProjectDir)\net;$(ProjectDir)\processor;$(ProjectDir)\stream;$(ProjectDir)\thread;$(ProjectDir)\util;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\app;$(ProjectDir)\bson;$(ProjectDir)\event;$(ProjectDir)\logger;$(ProjectDir)\net;$(ProjectDir)\processor;$(ProjectDir)\stream;$(ProjectDir)\thread;$(ProjectDir)\util;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
