@@ -34,7 +34,6 @@ namespace inspire {
 
    OStream& OStream::operator<<(const short s)
    {
-      short tmp = ENDIAN::H2N(s);
       _write((void*)&tmp, sizeof(short));
    }
 
