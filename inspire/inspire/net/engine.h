@@ -1,6 +1,8 @@
 #ifndef _INSPIRE_NET_ENGINE_H_
 #define _INSPIRE_NET_ENGINE_H_
 
+#include "inspire.h"
+
 namespace inspire {
 
    /*

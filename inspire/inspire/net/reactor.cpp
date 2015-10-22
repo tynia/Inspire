@@ -22,17 +22,17 @@ namespace inspire {
    }
 
 #else
-   Reactor::Reactor() : _stop(false), _maxEventCount(EPOLL_MAX_EVENT_COUNT), _fd(INVALID_FILE_DESCRIPTION)
+   Reactor::Reactor() : _stop(false), _maxEventCount(EPOLL_MAX_EVENT_COUNT), _fd(INVALID_FD)
    {
 
    }
 
    Reactor::~Reactor()
    {
-      if (INVALID_FILE_DESCRIPTION != _fd)
+      if (INVALID_FD != _fd)
       {
          close(_fd);
-         _fd = INVALID_FILE_DESCRIPTION;
+         _fd = INVALID_FD;
       }
    }
 

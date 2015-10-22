@@ -24,7 +24,7 @@ namespace inspire {
 
       virtual void init() = 0;
 
-      virtual void run() = 0;
+      virtual void run(uint service) = 0;
 
       virtual void destroy() = 0;
    };
@@ -34,14 +34,14 @@ namespace inspire {
    class Service : public IService//, public threadEntity
    {
    public:
-      Service(const uint servicePort);
+      Service();
       virtual ~Service();
 
       void initService();
       void stop();
 
       virtual void init();
-      virtual void run();
+      virtual void run(uint service);
       virtual void destroy();
 
    protected:

@@ -26,4 +26,16 @@ do                                                          \
 }while(false)
 #endif
 
+// STRONG ASSERT
+// abort even though release when checked failed
+#define ASSERT_STRONG(condition, fmt, ...)                  \
+do                                                          \
+{                                                           \
+   if (!(condition))                                        \
+   {                                                        \
+      LogError(fmt, __VA_ARGS__);                           \
+      inspire::Panic();                                     \
+   }                                                        \
+} while (false);
+
 #endif

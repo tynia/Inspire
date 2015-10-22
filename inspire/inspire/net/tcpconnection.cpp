@@ -2,11 +2,10 @@
 #include "helper/util.h"
 
 namespace inspire {
-
-   tcpConnection::tcpConnection(const uint port) : _port(port)
+   
+   tcpConnection::tcpConnection() : _fd(INVALID_FD), _port(0)
    {
-      _init();
-      memset(&_addr, 0, sizeof(_addr));
+      ASSERT_STRONG(util::netok(), "Failed to init network");
    }
 
    tcpConnection::tcpConnection(const char* ip, const uint port) : _port(0)
@@ -37,17 +36,14 @@ namespace inspire {
    void tcpConnection::_init()
    {
 #ifdef _WIN32
-      if ( !util::initNetwork() )
+      if ( !util::netok() )
       {
          LogError("Init network module Failed, errno: %d", util::netError());
          return;
       }
 #endif // _WIN32
       _fd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-      if (INVALID_SOCKET == _fd)
-      {
-         LogError("Failed to create socket");
-      }
+      ASSERT_STRONG(INVALID_SOCKET != _fd, "Failed to create socket");
    }
 
    void tcpConnection::bind()
@@ -56,38 +52,86 @@ namespace inspire {
       _initAddr(local);
 
       int rc = ::bind(_fd, (sockaddr*)&local, sizeof(local));
-      if (SOCKET_ERROR == rc)
-      {
-         LogError("Failed to bind on port: %d, rc = %d", _port, util::netError());
-      }
+      ASSERT_STRONG(SOCKET_ERROR != rc,
+                    "Failed to bind on port: %d, net error: %d", _port, util::netError());
    }
 
-   void tcpConnection::listen(const uint maxConn /*= 10*/)
+   void tcpConnection::listen(const uint maxConn /*= 20*/)
    {
       int rc = ::listen(_fd, maxConn);
-      if (SOCKET_ERROR == rc)
-      {
-         LogError("Failed to listen, errno = %d", util::netError());
-      }
+      ASSERT_STRONG(SOCKET_ERROR != rc,
+                    "Failed to listen, net error: %d", util::netError());
    }
 
-   void tcpConnection::accept( int& fd, sockaddr_in& addr )
+   void tcpConnection::accept(int& fd, sockaddr_in& addr)
    {
       int len = sizeof(addr);
       fd = ::accept(_fd, (sockaddr*)&addr, &len);
-      if (INVALID_SOCKET == fd)
-      {
-         LogError("accept an remote connection failed, errno: %d", util::netError());
-      }
+         ASSERT_STRONG((INVALID_SOCKET != fd),
+                        "Failed to accept a remote connection, net error: %d",
+                        util::netError());
    }
 
-   void tcpConnection::connect()
+   bool tcpConnection::connected()
    {
+      int rc = 0;
+#if defined(_WINDOWS)
+      rc = ::send(_fd, "", 0, 0);
+      if (SOCKET_ERROR == rc)
+#elif defined(_AIX)
+      rc = ::send(_fd, "", 0, 0);
+      if (0 == rc)
+#else
+      rc = ::recv(_fd, NULL, 0, MSG_DONTWAIT);
+      if (0 == rc)
+#endif
+      {
+         return false;
+      }
+      return true;
+   }
+
+   void tcpConnection::connect(const char* ip, const uint port)
+   {
+      close();
+      _initAddr(ip, port);
       int rc = ::connect(_fd, (struct sockaddr*)&_addr, sizeof(sockaddr_in));
       if (SOCKET_ERROR == rc)
       {
          LogError("Failed to connect to %s:%d, errno: d%",
                   util::ip(&_addr), util::port(&_addr), util::netError());
+      }
+   }
+
+   void tcpConnection::send(const char* data, const uint len)
+   {
+      INSPIRE_ASSERT(NULL != data, "data to send cannot be NULL");
+      uint sent = 0;
+      while (sent < len)
+      {
+         int sendLen = ::send(_fd, data + sent, len - sent, 0);
+         if (-1 == sendLen)
+         {
+            LogError("Failed to send data, net error: %d", util::netError());
+            break;
+         }
+         sent += sendLen;
+      }
+   }
+
+   void tcpConnection::recv(char* buffer, const uint toRecv, uint &recvLen)
+   {
+      INSPIRE_ASSERT(NULL != buffer, "buffer cannot be NULL");
+      recvLen = 0;
+      while (recvLen < toRecv)
+      {
+         int len = ::recv(_fd, buffer, toRecv - recvLen, 0);
+         if (0 == len)
+         {
+            LogError("peer unexpected shutdown");
+            break;
+         }
+         recvLen += len;
       }
    }
 

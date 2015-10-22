@@ -31,7 +31,7 @@ namespace inspire {
 
    void AsyncConnection::init()
    {
-      util::initNetwork();
+      util::netok();
       _fd = WSASocket(AF_INET, SOCK_STREAM, 0, NULL, 0, WSA_FLAG_OVERLAPPED);
       if (INVALID_SOCKET == _fd)
       {

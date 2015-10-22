@@ -5,18 +5,16 @@
 
 namespace inspire {
 
-#ifndef _WIN32
    enum
    {
-      INVALID_FILE_DESCRIPTION = -1;
+      INVALID_FD = -1,
    };
-#endif
 
    namespace util {
       /**
        * init network of windows
        */
-      inline bool initNetwork()
+      inline bool netok()
       {
          int rc = NO_ERROR;
 #ifdef _WIN32
@@ -75,8 +73,10 @@ namespace inspire {
       {
          if ( port <= 1024)
          {
+            
             return false;
          }
+         ASSERT_STRONG(port > 1024, "port");
          memset(&addr, 0, sizeof(sockaddr_in));
          addr.sin_family = AF_INET;
          addr.sin_addr.s_addr = htonl(INADDR_ANY);
