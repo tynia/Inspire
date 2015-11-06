@@ -1,7 +1,7 @@
-#ifndef _INSPIRE_UTIL_OSS_FILE_H_
-#define _INSPIRE_UTIL_OSS_FILE_H_
+#ifndef _INSPIRE_UTIL_FILE_H_
+#define _INSPIRE_UTIL_FILE_H_
 
-#include "inspire.h"
+#include "threads.h"
 
 namespace inspire {
 
@@ -14,22 +14,25 @@ namespace inspire {
       INSPIRE_SEEK_END,
    };
 
-   enum
+   enum RW_MOD
    {
-      MODE_DEFAULT     = 0,
-      MODE_CREATEONLY  = 1 << 0,
-      MODE_REPLACE     = 1 << 1,
-      MODE_CREATE      = MODE_CREATEONLY | MODE_REPLACE,
+      MODE_DEFAULT = 0,
+      MODE_CREATEONLY = 1 << 0,
+      MODE_REPLACE = 1 << 1,
+      MODE_CREATE = MODE_CREATEONLY | MODE_REPLACE,
+   };
 
+   enum ACCESS_MODE
+   {
       ACCESS_READONLY  = 1 << 2,
       ACCESS_WRITEONLY = 1 << 3,
       ACCESS_READWRITE = ACCESS_READONLY | ACCESS_WRITEONLY
    };
 
-   enum
+   enum SHARE_MODE
    {
       EXCLUSIVE    = 0,
-      SHAREDREAD   = 1 << 1,
+      SHAREDREAD   = 1 << 4,
       SHAREDWRITE  = 1 << 5 | SHAREDREAD,
       WRITETHROUGH = 1 << 6,
       DIRECTIO     = 1 << 7,
@@ -91,15 +94,16 @@ namespace inspire {
       virtual ~ossFile();
 
    public:
-      bool isOpened() const;
-      bool openFile(const char* filename, const int mode, const int permission);
-      const int read(const char* buffer, const int bufferLen, const int toRead);
-      const int write(const char* buffer, const int bufferLen, const int toWrite);
+      bool isOpen() const;
+      int open(const char* filename, const unsigned mode = 0, const unsigned permission = 0);
+      int read(const char* buffer, const unsigned bufferLen,
+               const unsigned toRead, unsigned& totalRead);
+      int write(const char* buffer, const unsigned bufferLen,
+                const unsigned toWrite, unsigned& totalRead);
       void close();
-      const int64 filesize();
-      const char* filename();
-      void seek(const int64 offset, SEEK_MOD seek);
-      void seekToEnd();
+      const unsigned long long filesize();
+      int seek(const unsigned long long offset, SEEK_MOD seek);
+      int seekToEnd();
 
    protected:
 #ifdef _WIN32
@@ -115,9 +119,6 @@ namespace inspire {
 #else
       int _fd;
 #endif
-      char _filename[MAX_FILE_NAME_SIZE + 1];
-      // TODO:
-      // a lock is needed to thread safe
    };
 }
 #endif

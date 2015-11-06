@@ -1,7 +1,7 @@
 #include "ossFile.h"
-#include "assert.h"
-#include "string_t.h"
-#include "system.h"
+#include "util.hpp"
+#include "charConvertor.h"
+#include "spinlock.h"
 
 namespace inspire {
 
@@ -11,7 +11,6 @@ namespace inspire {
    ossFile::ossFile() : _fd(0)
 #endif
    {
-      memset(_filename, 0, MAX_FILE_NAME_SIZE + 1);
    }
 
    ossFile::~ossFile()
@@ -19,7 +18,7 @@ namespace inspire {
       close();
    }
 
-   bool ossFile::isOpened() const
+   bool ossFile::isOpen() const
    {
 #ifdef _WIN32
       return INVALID_HANDLE_VALUE != _handle;
@@ -28,12 +27,17 @@ namespace inspire {
 #endif
    }
 
-   bool ossFile::openFile(const char* filename, const int mode, const int permission)
+   int ossFile::open(const char* filename, const unsigned mode, const unsigned permission)
    {
-      memcpy(_filename, filename, MAX_LOG_FILE_NAME);
+      int rc = 0;
+      if (NULL == filename)
+      {
+         return -1;
+      }
+
       int iPermission = _matchPermission(permission);
 #ifdef _WIN32
-      inspire_string_t fname(_filename);
+      CharConvertor fname(filename);
       int crMode = 0;
       int rwMode = 0;
       int sharedMode = 0;
@@ -42,105 +46,119 @@ namespace inspire {
       _handle = ::CreateFile(fname.toString(), rwMode, sharedMode, NULL, crMode, attri, NULL );
       if (INVALID_HANDLE_VALUE == _handle)
       {
-         uint err = (uint)GetLastError();
-         if (ERROR_SHARING_VIOLATION == err)
-         {
-            LogError("Failed to open file, filename = %s, no permission", _filename);
-         }
-         else
-         {
-            LogError("Failed to open file, filename = %s, io exception", _filename);
-         }
-         return false;
+         rc = FetchLastError();
+//          if (ERROR_SHARING_VIOLATION == rc)
+//          {
+//             LogError("Failed to open file, filename = %s, no permission", _filename);
+//          }
+//          else
+//          {
+//             LogError("Failed to open file, filename = %s, io exception", _filename);
+//          }
       }
 #else
       int iMode = _matchMode(mode);
-      _fd = open(_filename, iMode, iPermission);
+      _fd = open(filename, iMode, iPermission);
       if (-1 == _fd)
       {
-         uint err = errno;
-         if (EINVAL == err)
-         {
-            LogError("Failed to open file, filename = %s, direct io exist", _filename);
-         }
-         else if (ETXTBSY == err)
-         {
-            LogError("Failed to open file, filename = %s, system busy", _filename);
-         }
-         else if (ENOENT == err)
-         {
-            LogError("Failed to open file, filename = %s, file not exist", _filename);
-         }
-         else if (EEXIST == err)
-         {
-            LogError("Failed to open file, filename = %s, file existed", _filename);
-         }
-         else if (EACCES == err)
-         {
-            LogError("Failed to open file, filename = %s, no permission", _filename);
-         }
-         else
-         {
-            LogError("Failed to open file, filename = %s, io exception", _filename);
-         }
-         return false;
+         return FetchLastError();
+//          uint rc = errno;
+//          if (EINVAL == rc)
+//          {
+//             LogError("Failed to open file, filename = %s, direct io exist", _filename);
+//          }
+//          else if (ETXTBSY == rc)
+//          {
+//             LogError("Failed to open file, filename = %s, system busy", _filename);
+//          }
+//          else if (ENOENT == rc)
+//          {
+//             LogError("Failed to open file, filename = %s, file not exist", _filename);
+//          }
+//          else if (EEXIST == rc)
+//          {
+//             LogError("Failed to open file, filename = %s, file existed", _filename);
+//          }
+//          else if (EACCES == rc)
+//          {
+//             LogError("Failed to open file, filename = %s, no permission", _filename);
+//          }
+//          else
+//          {
+//             LogError("Failed to open file, filename = %s, io exception", _filename);
+//          }
       }
-      return true;
 #endif
+      return rc;
    }
 
-   const int ossFile::read(const char* buffer, const int bufferLen, const int toRead)
+   int ossFile::read(const char* buffer, const unsigned bufferLen,
+                     const unsigned toRead, unsigned& totalRead)
    {
-      INSPIRE_ASSERT(buffer, "buffer cannot be NULL");
-      INSPIRE_ASSERT(bufferLen >= toRead, "buffer size cannot less than bytes to read");
-      int64 totalRead = 0;
+      int rc = 0;
+      if (NULL == buffer)
+      {
+         return -1; // INVALID ARGUMENT
+      }
+
+      if (bufferLen < toRead)
+      {
+         return -1;
+      }
+
 #ifdef _WIN32
-      bool bSuccess = ::ReadFile(_handle, (LPVOID)buffer, toRead, (LPDWORD)&totalRead, NULL);
+      DWORD bytes = 0;
+      bool bSuccess = ::ReadFile(_handle, (LPVOID)buffer, toRead, (LPDWORD)&bytes, NULL);
       if (!bSuccess)
       {
-         LogError("Failed to read file:%s to buffer, error = %d", _filename, ossGetLastError());
-         return -1;
+         return FetchLastError();
       }
 #else
-      int totalRead = read(_fd, buffer, toRead);
-      if (-1 == totalRead)
+      int bytes = read(_fd, buffer, toRead);
+      if (-1 == bytes)
       {
-         LogError("Failed to read file:%s to buffer, error = %d", _filename, ossGetLastError());
-         return -1;
+         return FetchLastError();
       }
 #endif
-      return (int)totalRead;
+      totalRead = (unsigned)bytes;
+      return rc;
    }
 
-   const int ossFile::write(const char* buffer, const int bufferLen, const int toWrite)
+   int ossFile::write(const char* buffer, const unsigned bufferLen,
+                      const unsigned toWrite, unsigned& totalWrite)
    {
-      INSPIRE_ASSERT(bufferLen <= toWrite, "buffer size cannot less than bytes to write");
+      int rc = 0;
+      if (NULL == buffer)
+      {
+         return -1;
+      }
+
       if (NULL == buffer)
       {
          return 0;
       }
-      int64 totalWritten = 0;
+
 #ifdef _WIN32
-      bool bSuccess = ::WriteFile(_handle, buffer, toWrite, (LPDWORD)&totalWritten, NULL);
+      DWORD bytes = 0;
+      bool bSuccess = ::WriteFile(_handle, buffer, toWrite, (LPDWORD)&bytes, NULL);
       if (!bSuccess)
       {
-         LogError("Failed to write buffer to file, rc = %d", GetLastError());
-         return -1;
+         return FetchLastError();
       }
 #else
-      int totalWritten = write(_fd, buffer, toWrite);
-      if (-1 == totalWritten)
+      int bytes = write(_fd, buffer, toWrite);
+      if (-1 == bytes)
       {
-         LogError("Failed to read file:%s to buffer, error = %d", _filename, ossGetLastError());
-         return -1;
+         return FetchLastError();
       }
 #endif
-      return (int)totalWritten;
+      totalWrite = (unsigned)bytes;
+      return rc;
    }
 
    void ossFile::close()
    {
-      if (isOpened())
+      if (isOpen())
       {
 #ifdef _WIN32
          ::CloseHandle(_handle);
@@ -152,14 +170,14 @@ namespace inspire {
       }
    }
 
-   const int64 ossFile::filesize()
+   const unsigned long long ossFile::filesize()
    {
       int64 totalSize = 0;
 #ifdef _WIN32
       LARGE_INTEGER li;
       if (!GetFileSizeEx(_handle, &li))
       {
-         LogError("Filed to get file size, GetFileSizeEx()");
+         return FetchLastError();
       }
       totalSize = li.QuadPart;
 #else
@@ -168,7 +186,7 @@ namespace inspire {
       rc = fstat(_fd, &sb);
       if (-1 == rc)
       {
-         LogError("Failed to get file size, fstat(), error: %d", ossGetLastError());
+         return FetchLastError();
       }
       else
       {
@@ -179,7 +197,7 @@ namespace inspire {
             totalSize = sb.st_size;
             break;
          default:
-            LogError("Invalid file type, file:%s", _filename);
+            rc = -1;
             break;
          }
       }
@@ -187,21 +205,17 @@ namespace inspire {
       return totalSize;
    }
 
-   const char* ossFile::filename()
+   int ossFile::seek( const unsigned long long offset, SEEK_MOD whence )
    {
-      return _filename;
-   }
-
-   void ossFile::seek( const int64 offset, SEEK_MOD whence )
-   {
+      int rc = 0;
 #ifdef _WIN32
-      INSPIRE_ASSERT(_handle, "File should be opened first");
       LARGE_INTEGER li;
       li.QuadPart = offset;
       li.LowPart = SetFilePointer( _handle, li.LowPart, &li.HighPart, (DWORD)whence );
-      if (INVALID_SET_FILE_POINTER == li.LowPart && NO_ERROR == ossGetLastError())
+      if (INVALID_SET_FILE_POINTER == li.LowPart && NO_ERROR == FetchLastError())
       {
-         LogError("io exception occurred when seek, file:%s", _filename);
+         // I/O exception occurred when seek
+         rc = -1;
       }
 #else
       INSPIRE_ASSERT(_fd, "File should be opened first");
@@ -209,14 +223,15 @@ namespace inspire {
       seekoff = lseek(_fd, offset, whence);
       if (-1 == seekoff)
       {
-         LogError("Failed to lseek, file:%s", _filename);
+         rc = -1;
       }
 #endif
+      return rc;
    }
 
-   void ossFile::seekToEnd()
+   int ossFile::seekToEnd()
    {
-      seek(0, INSPIRE_SEEK_END);
+     return seek(0, INSPIRE_SEEK_END);
    }
 
 #ifdef _WIN32
@@ -268,7 +283,7 @@ namespace inspire {
       }
 
       // shared mode
-      switch (mode | SHAREDWRITE)
+      switch (mode & SHAREDWRITE)
       {
       case EXCLUSIVE:
          sharedMode = 0;
@@ -300,7 +315,7 @@ namespace inspire {
       }
    }
 #else
-   const int ossFile::_matchMode(const int mode, int& iMode)
+   void ossFile::_matchMode(const int mode, int& iMode)
    {
       iMode = 0;
       // create/open mode
@@ -322,7 +337,7 @@ namespace inspire {
       }
 
       // read/write access
-      switch (mode | ACCESS_READWRITE)
+      switch (mode & ACCESS_READWRITE)
       {
       case ACCESS_WRITEONLY:
          if(mode | SHAREDREAD)
@@ -357,8 +372,6 @@ namespace inspire {
       {
          iMode |= O_SYNC;
       }
-
-      return iMode;
    }
 #endif
 
