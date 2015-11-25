@@ -94,13 +94,12 @@ namespace inspire {
    {
       ::memset(ptr, 0x0, sizeof(header));
       header* hdr = (header*)ptr;
-      ::memmove(hdr->eyecatcher, "inspired", 8);
-      hdr->used = 0;
+      ::memmove(hdr->eyecatcher, "inspire", 7);
+      hdr->magic = debug;
+      hdr->tSize = size + sizeof(header);
       hdr->size = size;
+      hdr->used = 0;
       hdr->next = NULL;
-#ifdef _DEBUG
-      hdr->debug = debug;
-#endif
    }
 
    void allocator::_resetRest()
