@@ -1,41 +1,35 @@
-#ifndef _INSPIRE_ASSERT_H_
-#define _INSPIRE_ASSERT_H_
+#ifndef _INSPIRE_UTIL_ASSERT_H_
+#define _INSPIRE_UTIL_ASSERT_H_
 
-#include <iostream>
-#include "util.h"
-#include "insLog.h"
+#include "logger/logger.h"
+#include "util.hpp"
 
 #ifdef _DEBUG
-#define INSPIRE_ASSERT(condition, fmt, ...)                 \
-do                                                          \
-{                                                           \
-   if (!(condition))                                        \
-   {                                                        \
-      LogError(fmt, __VA_ARGS__);                           \
-      inspire::Panic();                                     \
-   }                                                        \
-   else                                                     \
-   {}                                                       \
-}while(false)
+#define INSPIRE_ASSERT(cond, fmt, ...) \
+do                                     \
+{                                      \
+   if (!(cond))                        \
+   {                                   \
+      LogError(fmt, ##__VA_ARGS__);    \
+      Panic();                         \
+   }                                   \
+} while (false);
 #else
-#define INSPIRE_ASSERT(condition, fmt, ...)                 \
-do                                                          \
-{                                                           \
-   if (condition)                                           \
-   {}                                                       \
-}while(false)
+#define INSPIRE_ASSERT(cond, fmt, ...) \
+do                                     \
+{                                      \
+   if (!(cond))                        \
+   {}                                  \
+} while (false);
 #endif
 
-// STRONG ASSERT
-// abort even though release when checked failed
-#define ASSERT_STRONG(condition, fmt, ...)                  \
-do                                                          \
-{                                                           \
-   if (!(condition))                                        \
-   {                                                        \
-      LogError(fmt, __VA_ARGS__);                           \
-      inspire::Panic();                                     \
-   }                                                        \
+#define STRONG_ASSERT(cond, fmt, ...)  \
+do                                     \
+{                                      \
+   if (!(cond))                        \
+   {                                   \
+      LogError(fmt, ##__VA_ARGS__);    \
+      Panic();                         \
+   }                                   \
 } while (false);
-
 #endif
