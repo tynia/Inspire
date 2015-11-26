@@ -149,9 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\util\allocator.cpp" />
-    <ClCompile Include="..\..\inspire\util\contextBuffer.cpp" />
-    <ClCompile Include="..\..\inspire\util\kernel.cpp" />
-    <ClCompile Include="..\..\inspire\util\utilFile.cpp" />
+    <ClCompile Include="..\..\inspire\util\IO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\util\allocator.h" />
@@ -160,10 +158,9 @@
     <ClInclude Include="..\..\inspire\util\binData.h" />
     <ClInclude Include="..\..\inspire\util\charConvertor.h" />
     <ClInclude Include="..\..\inspire\util\condition.h" />
-    <ClInclude Include="..\..\inspire\util\contextBuffer.h" />
     <ClInclude Include="..\..\inspire\util\deque.h" />
     <ClInclude Include="..\..\inspire\util\inspire.h" />
-    <ClInclude Include="..\..\inspire\util\kernel.h" />
+    <ClInclude Include="..\..\inspire\util\IO.h" />
     <ClInclude Include="..\..\inspire\util\lock.h" />
     <ClInclude Include="..\..\inspire\util\map.h" />
     <ClInclude Include="..\..\inspire\util\mutex.h" />
@@ -173,8 +170,7 @@
     <ClInclude Include="..\..\inspire\util\refPointer.h" />
     <ClInclude Include="..\..\inspire\util\set.h" />
     <ClInclude Include="..\..\inspire\util\spinlock.h" />
-    <ClInclude Include="..\..\inspire\util\util.hpp" />
-    <ClInclude Include="..\..\inspire\util\utilFile.h" />
+    <ClInclude Include="..\..\inspire\util\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

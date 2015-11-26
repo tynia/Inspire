@@ -2,6 +2,7 @@
 #define _INSPIRE_UTIL_REFERENCE_H_
 
 #include "refCounter.h"
+#include "assert.h"
 
 namespace inspire {
 

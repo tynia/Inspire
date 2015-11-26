@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_LOGGER_UTIL_H_
-#define _INSPIRE_LOGGER_UTIL_H_
+#ifndef _INSPIRE_UTIL_H_
+#define _INSPIRE_UTIL_H_
 
 #include <stdarg.h>
 #include <stdio.h>

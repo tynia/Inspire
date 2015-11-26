@@ -42,7 +42,7 @@ namespace inspire {
       }
 
       _setSanity(ptr, size);
-      memset(ptr + sizeof(header), 0, size);
+      ::memset(ptr + sizeof(header), 0, size);
       return (ptr + sizeof(header));
    }
 
@@ -78,11 +78,8 @@ namespace inspire {
    bool allocator::_checkSanity(const char* ptr)
    {
       header* hdr = (header*)(ptr - sizeof(header));
-      bool eq1 = ::memcmp(hdr->eyecatcher, "inspire", 8);
-      bool eq2 = true;
-#ifdef _DEBUG
-      eq2 = (magic == hdr->magic);
-#endif
+      bool eq1 = (0 == ::memcmp(hdr->eyecatcher, "inspire", 8));
+      bool eq2 = (magic == hdr->magic);
       return !(eq1 && eq2);
    }
 

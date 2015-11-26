@@ -150,7 +150,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\inspire\logger\base.cpp" />
     <ClCompile Include="..\..\inspire\logger\writer.cpp" />
-    <ClCompile Include="..\..\inspire\util\utilFile.cpp" />
+    <ClCompile Include="..\..\inspire\util\IO.cpp" />
     <ClCompile Include="..\..\sample\logger.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,9 +159,9 @@
     <ClInclude Include="..\..\inspire\logger\writer.h" />
     <ClInclude Include="..\..\inspire\util\condition.h" />
     <ClInclude Include="..\..\inspire\util\inspire.h" />
+    <ClInclude Include="..\..\inspire\util\IO.h" />
     <ClInclude Include="..\..\inspire\util\mutex.h" />
     <ClInclude Include="..\..\inspire\util\util.hpp" />
-    <ClInclude Include="..\..\inspire\util\utilFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,9 +24,6 @@
     <ClCompile Include="..\..\inspire\thread\thread.cpp">
       <Filter>thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\util\utilFile.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\logger\base.cpp">
       <Filter>logger</Filter>
     </ClCompile>
@@ -41,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="..\..\sample\threads.cpp">
       <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\IO.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +95,6 @@
     <ClInclude Include="..\..\inspire\util\util.hpp">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\utilFile.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\logger\base.h">
       <Filter>logger</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h">
       <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\IO.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

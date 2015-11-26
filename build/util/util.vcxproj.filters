@@ -9,13 +9,7 @@
     <ClCompile Include="..\..\inspire\util\allocator.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\util\contextBuffer.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\util\kernel.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\util\utilFile.cpp">
+    <ClCompile Include="..\..\inspire\util\IO.cpp">
       <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,16 +32,10 @@
     <ClInclude Include="..\..\inspire\util\condition.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\contextBuffer.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\util\deque.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\inspire.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\kernel.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\lock.h">
@@ -77,10 +65,10 @@
     <ClInclude Include="..\..\inspire\util\spinlock.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\util.hpp">
+    <ClInclude Include="..\..\inspire\util\util.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\utilFile.h">
+    <ClInclude Include="..\..\inspire\util\IO.h">
       <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
