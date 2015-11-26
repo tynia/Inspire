@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="util">
+      <UniqueIdentifier>{1b3507d5-8a71-4da1-8d2e-5d6a9096241f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\inspire\util\allocator.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\contextBuffer.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\kernel.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\utilFile.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inspire\util\allocator.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\assert.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\atomic.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\binData.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\charConvertor.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\condition.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\contextBuffer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\deque.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\inspire.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\kernel.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\lock.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\map.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\mutex.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\noncopyable.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\refCounter.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\reference.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\refPointer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\set.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\spinlock.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\util.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\utilFile.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
