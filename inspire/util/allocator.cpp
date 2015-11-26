@@ -70,8 +70,6 @@ namespace inspire {
 
    void allocator::pray()
    {
-      //
-      // mutex lock
       _resetRest();
    }
 

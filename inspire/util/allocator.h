@@ -1,45 +1,18 @@
-#ifndef _INSPIRE_MEMORY_ALLOCATOR_H_
-#define _INSPIRE_MEMORY_ALLOCATOR_H_
+#ifndef _INSPIRE_UTIL_ALLOCATOR_H_
+#define _INSPIRE_UTIL_ALLOCATOR_H_
 
 #include "inspire.h"
 #include "noncopyable.h"
 
 namespace inspire {
 
-   class IAllocator
-   {
-   public:
-      virtual ~IAllocator() {}
-
-      virtual char* alloc(const uint size) = 0;
-
-      virtual void dealloc(const char* ptr) = 0;
-
-      virtual void pray() = 0;
-   };
-
-#define TRAITS_NAME(CLS_NAME) #CLS_NAME
-
-   class allocator// : public IAllocator, public noncopyable
+   class allocator// public noncopyable
    {
       static const uint64 magic = 0xFFFFFFFFFFFAFBFE;
    public:
       virtual char* alloc(const uint size);
       virtual void dealloc(const char* ptr);
       virtual void pray();
-
-      template<class T>
-      T* create()
-      {
-         uint size = sizeof(T);
-         char* ptr = alloc(size);
-         if (NULL == ptr)
-         {
-            LogError("Failed to allocate an object");
-            return NULL;
-         }
-         return new(ptr) T();
-      }
 
    protected:
       allocator();

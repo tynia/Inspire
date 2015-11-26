@@ -4,19 +4,19 @@
     <Filter Include="util">
       <UniqueIdentifier>{1b3507d5-8a71-4da1-8d2e-5d6a9096241f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\allocator">
+      <UniqueIdentifier>{87e8bdf4-f9fe-46bc-a55b-808253b08086}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\inspire\util\allocator.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\util\IO.cpp">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\util\allocator.cpp">
+      <Filter>util\allocator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\inspire\util\allocator.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\util\assert.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -70,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\IO.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\allocator.h">
+      <Filter>util\allocator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
