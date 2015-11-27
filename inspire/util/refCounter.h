@@ -2,6 +2,7 @@
 #define _INSPIRE_UTIL_REF_COUNTER_H_
 
 #include "inspire.h"
+#include "atomic.h"
 
 namespace inspire {
 
@@ -18,7 +19,7 @@ namespace inspire {
          return ref;
       }
 
-      const uint retain() const
+      const int retain() const
       {
          return _referCount;
       }
@@ -28,16 +29,16 @@ namespace inspire {
 
       void _inc()
       {
-         ++_referCount;
+         utilFetchAndAdd32(&_referCount, 1);
       }
 
       void _dec()
       {
-         --_referCount;
+         utilFetchAndAdd32(&_referCount, -1);
       }
 
    private:
-      volatile uint _referCount;
+      volatile int _referCount;
    };
 }
 #endif

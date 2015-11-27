@@ -29,7 +29,6 @@ namespace inspire {
          }
 
          unsigned len = strlen(data);
-         unsigned written = 0;
          condition_t cond(&_mtx);
          int rc = cpsOpen(_handle, _filename, MODE_CREATE | ACCESS_READWRITE, DEFAULT_FILE_ACCESS);
          STRONG_ASSERT(-1 != rc, "Failed to open log file: %s", _filename);

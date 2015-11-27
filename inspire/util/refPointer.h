@@ -43,6 +43,12 @@ namespace inspire {
          return *this;
       }
 
+      refPointer<T> operator= (const T*& pt)
+      {
+         refPointer<T> ptr(pt);
+         return ptr;
+      }
+
       T& operator* ()
       {
          return *_ptr;
