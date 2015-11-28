@@ -7,6 +7,9 @@
 
 namespace inspire {
 
+#define INSPIRE_ALLOC_OBJECT(cls, file, line) \
+       return CAllocator()->create<cls>(file, line)
+
    class CAllocator
    {
    public:
@@ -18,6 +21,25 @@ namespace inspire {
       void  dealloc(const char* ptr);
       void  reorganize();
 
+      template<class T>
+      T* create(const char* file, const int line)
+      {
+         char* ptr = alloc(sizeof(T), file, line);
+         if (NULL == ptr)
+         {
+            reorganize();
+            ptr = alloc(sizeof(T), file, line);
+         }
+
+         if (NULL == ptr)
+         {
+            LogError("Failed to allocate memory, size: %d", sizeof(T));
+            return NULL;
+         }
+
+         return new(ptr) T;
+      }
+
    private:
       uint locate(const uint size)
       {
@@ -27,17 +49,13 @@ namespace inspire {
          uint point = count / 2;
          while (true)
          {
-            if (( size >> (point + 3)) > 8)
+            if (( size >> (point + 3)) > 0)
             {
-               point += (count - point) / 2;
-            }
-            else if (( size >> (point + 3)) < 0)
-            {
-               point = point / 2;
+               point = (count + point) / 2;
             }
             else
             {
-               point = 0;//
+               point = point / 2;
             }
          }
       }
