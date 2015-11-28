@@ -7,40 +7,46 @@
 
 namespace inspire {
 
-   class IAllocator
-   {
-   public:
-      virtual ~IAllocator() {}
-
-      virtual char* alloc(const uint size, const char* fine, const int line)  = 0;
-      virtual void  dealloc(const char* ptr) = 0;
-      virtual void  reorganize()  = 0;
-   };
-
-   class CAllocator : public IAllocator
+   class CAllocator
    {
    public:
       CAllocator() {}
       virtual ~CAllocator() {}
 
    public:
-      virtual char* alloc(const uint size, const char* fine, const int line);
-      virtual void  dealloc(const char* ptr);
-      virtual void  reorganize();
+      char* alloc(const uint size, const char* fine, const int line);
+      void  dealloc(const char* ptr);
+      void  reorganize();
 
    private:
-      void locate(const uint size)
+      uint locate(const uint size)
       {
-         int tmp = 0;
-         while (size >> 3)
+         // we need find which allocator should allocate the size
+         // and we use binary search
+         uint count = 9;
+         uint point = count / 2;
+         while (true)
          {
-            tmp = size;
+            if (( size >> (point + 3)) > 8)
+            {
+               point += (count - point) / 2;
+            }
+            else if (( size >> (point + 3)) < 0)
+            {
+               point = point / 2;
+            }
+            else
+            {
+               point = 0;//
+            }
          }
       }
 
    private:
-      // 8 16 32 64 128 256 512 1024
-      IAllocator* _allocators[8];
+      //  0   1   2   3   4   5   6   7    8
+      // 2^3 2^4 2^5 2^6 2^7 2^8 2^9 2^10 2^11+ 
+      //  8   16  32  64 128 256 512 1024  x
+      IAllocator* _allocators[9];
    };
 
    class allocator// public noncopyable
