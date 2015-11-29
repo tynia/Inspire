@@ -1,12 +1,13 @@
 #include "allocator.h"
 #include "util.h"
-#include "logger\logger.h"
+#include "logger/logger.h"
+#include "condition.h"
 
 namespace inspire {
 
    allocator::allocator()
    {
-      _setSanity((void*)&_hdr, 0);
+      _setSanity((void*)&_hdr, NULL, 0);
    }
 
    allocator::~allocator()
@@ -18,16 +19,36 @@ namespace inspire {
    {
       //
       // mutex lock
-      uint locate = _locate(size);
-      header* hdr = &_alloc[locate].hdr;
-      while (NULL != hdr->next)
+      char* ptr = _alloc(size);
+      if (NULL == ptr)
       {
-         header* toReturn = hdr->next;
+         pray();
+         ptr = _alloc(size);
+      }
+
+      if (NULL != ptr)
+      {
+         _setSanity(ptr, file, line);
+         ::memset(ptr + sizeof(header), 0, size);
+         return (ptr + sizeof(header));
+      }
+
+      LogError("Failed to allocate memory, size: %d", size);
+      return NULL;
+   }
+
+   char* allocator::_alloc(const uint size)
+   {
+      condition_t cond(&_mtx);
+      header* hdr = _hdr;
+      while (NULL != hdr)
+      {
+         header* toReturn = hdr;
          if (NULL != toReturn)
          {
-            hdr->next = toReturn->next;
+            hdr = toReturn->next;
             toReturn->next = NULL;
-            return ((char*)toReturn) + sizeof(header);
+            return (char*)toReturn;
          }
          else
          {
@@ -41,10 +62,6 @@ namespace inspire {
          LogError("Failed to alloc memory, size = d%", size + sizeof(header));
          return NULL;
       }
-
-      _setSanity(ptr, file, line);
-      ::memset(ptr + sizeof(header), 0, size);
-      return (ptr + sizeof(header));
    }
 
    void allocator::dealloc(const char* ptr)
@@ -63,10 +80,11 @@ namespace inspire {
          return;
       }
 
+      condition_t cond(&_mtx);
       header* hdr = (header*)(ptr - sizeof(header));
-      ::memset((void*)ptr, 0xfe, hdr->size);
-      hdr->next = _hdr.next;
-      _hdr.next = hdr;
+      ::memset((void*)ptr, 0xfe, _size);
+      hdr->next = _hdr;
+      _hdr = hdr;
    }
 
    void allocator::pray()
@@ -87,16 +105,18 @@ namespace inspire {
       ::memset(ptr, 0x0, sizeof(header));
       header* hdr = (header*)ptr;
       ::memmove(hdr->eyecatcher, "inspire", 7);
-      hdr->magic = magic;
+      hdr->file = file;
+      hdr->line = line;
       hdr->next = NULL;
+      hdr->magic = magic;
    }
 
    void allocator::_resetRest()
    {
-      while (NULL != _hdr.next)
+      while (NULL != _hdr)
       {
-         header* ptr = _hdr.next;
-         _hdr.next = ptr->next;
+         header* ptr = _hdr;
+         _hdr = _hdr->next;
          ::free((void*)ptr);
       }
    }

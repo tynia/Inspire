@@ -10,9 +10,9 @@ namespace inspire {
 #define INSPIRE_ALLOC_OBJECT(cls, file, line) \
        return CAllocator()->create<cls>(file, line)
 
+   class allocator;
    class CAllocator
    {
-      
    public:
       CAllocator() {}
       virtual ~CAllocator() {}
@@ -23,10 +23,37 @@ namespace inspire {
       void  reorganize();
 
    private:
+      #define MAX_HEADER_COUNT 9
+      uint _locate(const uint size)
+      {
+         // we need find which allocator should allocate the size
+         // and we use binary search
+         uint high = MAX_HEADER_COUNT - 1;
+         uint low = 0;
+         uint point = 0;
+         while (true)
+         {
+            point = (high + low) / 2;
+            if (size >= 2 * _als[point]->size())
+            {
+               low = point;
+            }
+            else if (size < _als[point]->size())
+            {
+               high = point;
+            }
+            else
+            {
+               break;
+            }
+         }
+      }
+
+   private:
       //  0   1   2   3   4   5   6   7    8
       // 2^3 2^4 2^5 2^6 2^7 2^8 2^9 2^10 2^11+ 
       //  8   16  32  64 128 256 512 1024  x
-      IAllocator* _allocators[9];
+      static allocator* _als[9];
    };
 
    class allocator// public noncopyable
@@ -37,6 +64,7 @@ namespace inspire {
       virtual void dealloc(const char* ptr);
       virtual void pray();
 
+      const uint size() { return _size; }
       template<class T>
       T* create(const char* file, const int line)
       {
@@ -60,34 +88,10 @@ namespace inspire {
       virtual ~allocator();
 
    private:
-      #define MAX_HEADER_COUNT 9
       bool _checkSanity(const char* ptr);
       void _setSanity(void* ptr, const char* file, const int line);
       void _resetRest();
-      uint _locate(const uint size)
-      {
-         // we need find which allocator should allocate the size
-         // and we use binary search
-         uint high  = MAX_HEADER_COUNT - 1;
-         uint low   = 0;
-         uint point = 0;
-         while (true)
-         {
-            point = (high + low) / 2;
-            if (size >= 2 * _alloc[point].size)
-            {
-               low = point;
-            }
-            else if (size < _alloc[point].size)
-            {
-               high = point;
-            }
-            else
-            {
-               break;
-            }
-         }
-      }
+      char* _alloc(const uint size);
 
    private:
       struct header
@@ -95,20 +99,15 @@ namespace inspire {
          char eyecatcher[8]; // inspire + '\0'                       8 bytes
 #ifdef _DEBUG
          const char* file;
-         const uint  line;
+         uint  line;
 #endif
          header* next;       // next buffer header                 4/8 bytes
-         uint64 magic;       // magic number                         8 bytes
+         uint64  magic;      // magic number                         8 bytes
       };
 
-      struct unit
-      {
-         uint size;
-         header hdr;
-      };
-
-      unit _alloc[MAX_HEADER_COUNT];
+      uint    _size;
       mutex_t _mtx;
+      header* _hdr;
    };
 }
 #endif
