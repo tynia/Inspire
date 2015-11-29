@@ -14,15 +14,16 @@ namespace inspire {
       _resetRest();
    }
 
-   char* allocator::alloc(const uint size)
+   char* allocator::alloc(const uint size, const char* file, const int line)
    {
       //
       // mutex lock
-      header* hdr = &_hdr;
+      uint locate = _locate(size);
+      header* hdr = &_alloc[locate].hdr;
       while (NULL != hdr->next)
       {
          header* toReturn = hdr->next;
-         if (toReturn->size >= size)
+         if (NULL != toReturn)
          {
             hdr->next = toReturn->next;
             toReturn->next = NULL;
@@ -41,7 +42,7 @@ namespace inspire {
          return NULL;
       }
 
-      _setSanity(ptr, size);
+      _setSanity(ptr, file, line);
       ::memset(ptr + sizeof(header), 0, size);
       return (ptr + sizeof(header));
    }
@@ -81,15 +82,12 @@ namespace inspire {
       return !(eq1 && eq2);
    }
 
-   void allocator::_setSanity(void* ptr, const unsigned size)
+   void allocator::_setSanity(void* ptr, const char* file, const int line)
    {
       ::memset(ptr, 0x0, sizeof(header));
       header* hdr = (header*)ptr;
       ::memmove(hdr->eyecatcher, "inspire", 7);
       hdr->magic = magic;
-      hdr->tSize = size + sizeof(header);
-      hdr->size = size;
-      hdr->used = 0;
       hdr->next = NULL;
    }
 
