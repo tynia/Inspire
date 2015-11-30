@@ -16,16 +16,7 @@ namespace inspire {
 
    AllocatorMgr::~AllocatorMgr()
    {
-      for (int idx = 0; idx < MAX_ALLOCATOR_COUNT; ++idx)
-      {
-         header* hdr = _fls[idx].hdr;
-         while (NULL != hdr)
-         {
-            header* next = hdr;
-            hdr = hdr->next;
-            ::free((char*)next);
-         }
-      }
+      pray();
    }
 
    AllocatorMgr* AllocatorMgr::instance()
@@ -71,7 +62,7 @@ namespace inspire {
       if (!ok)
       {
          LogError("pointer: 0x%x sanity checked failed, it may not be "
-            "allocated by allocator", (uint64*)ptr);
+                  "allocated by allocator", (uint64*)ptr);
          //::free(ptr);
 #ifdef _DEBUG
          Panic();
@@ -107,7 +98,16 @@ namespace inspire {
 
    void AllocatorMgr::pray()
    {
-
+      for (int idx = 0; idx < MAX_ALLOCATOR_COUNT; ++idx)
+      {
+         header* hdr = _fls[idx].hdr;
+         while (NULL != hdr)
+         {
+            header* next = hdr;
+            hdr = hdr->next;
+            ::free((char*)next);
+         }
+      }
    }
 
    char* AllocatorMgr::_alloc(const uint size, const char* file, const uint line)
