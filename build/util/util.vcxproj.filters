@@ -12,7 +12,7 @@
     <ClCompile Include="..\..\inspire\util\IO.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\util\allocator.cpp">
+    <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp">
       <Filter>util\allocator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClInclude Include="..\..\inspire\util\IO.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\allocator.h">
+    <ClInclude Include="..\..\inspire\util\AllocatorMgr.h">
       <Filter>util\allocator</Filter>
     </ClInclude>
   </ItemGroup>

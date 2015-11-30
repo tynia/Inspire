@@ -148,11 +148,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\inspire\util\allocator.cpp" />
+    <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp" />
     <ClCompile Include="..\..\inspire\util\IO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\inspire\util\allocator.h" />
+    <ClInclude Include="..\..\inspire\util\AllocatorMgr.h" />
     <ClInclude Include="..\..\inspire\util\assert.h" />
     <ClInclude Include="..\..\inspire\util\atomic.h" />
     <ClInclude Include="..\..\inspire\util\binData.h" />
