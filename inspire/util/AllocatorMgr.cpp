@@ -7,7 +7,7 @@ namespace inspire {
    AllocatorMgr::AllocatorMgr()
    {
       // TODO: select a efficient size to use memory
-      for (int idx = 0, size = 0; idx < MAX_ALLOCATOR_COUNT; ++idx)
+      for (int idx = 0, size = 8; idx < MAX_ALLOCATOR_COUNT; ++idx, size *= 2)
       {
          _fls[idx].size = size;
          _fls[idx].hdr  = NULL;
@@ -25,6 +25,7 @@ namespace inspire {
       return &mgr;
    }
 
+#ifdef _DEBUG
    char* AllocatorMgr::alloc(const uint size, const char* file, const uint line)
    {
       char* ptr = _alloc(size, file, line);
@@ -41,8 +42,28 @@ namespace inspire {
       }
 
       return ptr;
-   }
+}
+#else
+   char* AllocatorMgr::alloc(const uint size)
+   {
+      char* ptr = _alloc(size);
+      if (NULL == ptr)
+      {
+         pray();
+         ptr = _alloc(size);
+      }
 
+      if (NULL == ptr)
+      {
+         LogError("Failed to allocate memory, size: %d", size);
+         return NULL;
+      }
+
+      return ptr;
+   }
+#endif
+   
+#ifdef _DEBUG
    char* AllocatorMgr::realloc(char*& ptr, const uint size, const char* file, const uint line)
    {
       char* reptr = alloc(size, file, line);
@@ -55,6 +76,20 @@ namespace inspire {
       ptr = reptr;
       return ptr;
    }
+#else
+   char* AllocatorMgr::realloc(char*& ptr, const uint size)
+   {
+      char* reptr = alloc(size);
+      if (NULL == reptr)
+      {
+         return NULL;
+      }
+
+      dealloc(ptr);
+      ptr = reptr;
+      return ptr;
+   }
+#endif // _DEBUG
 
    void AllocatorMgr::dealloc(const char* ptr)
    {
@@ -93,7 +128,7 @@ namespace inspire {
          fhdr = hdr;
       }
       // now we clear the expired data in memory block
-      ::memset((void*)ptr, 0x00, fl->size);
+      ::memset((void*)ptr, 0x0, fl->size);
    }
 
    void AllocatorMgr::pray()
@@ -110,7 +145,11 @@ namespace inspire {
       }
    }
 
+#ifdef _DEBUG
    char* AllocatorMgr::_alloc(const uint size, const char* file, const uint line)
+#else
+   char* _alloc(const uint size)
+#endif
    {
       char* ptr = NULL;
       // first we pick memory block stored in free list
@@ -141,14 +180,14 @@ namespace inspire {
          // if we find no match block in free list
          // then we use malloc to alloc memory from system
          ptr = (char*)::malloc(fl->size + sizeof(header));
-         if (NULL != ptr)
+         if (NULL == ptr)
          {
             LogError("Failed to allocate memory, size :%d", fl->size);
             return NULL;
          }
          // fill mete data recorded in header 
          _setSanity(ptr, fl->size);
-         ::memset(ptr + sizeof(header), 0, size);
+         ::memset(ptr + sizeof(header), 0, fl->size);
          return ptr + sizeof(header);
       }
 
@@ -164,6 +203,7 @@ namespace inspire {
    {
       // we need find which allocator should allocate the size
       // and we use binary search
+      // TODO: bug in the code block
       uint high = MAX_ALLOCATOR_COUNT - 1;
       uint low = 0;
       uint locate = 0;

@@ -148,14 +148,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\inspire\logger\base.cpp" />
+    <ClCompile Include="..\..\inspire\logger\writer.cpp" />
     <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp" />
     <ClCompile Include="..\..\inspire\util\IO.cpp" />
+    <ClCompile Include="..\..\inspire\util\ObjectMgr.cpp" />
+    <ClCompile Include="..\..\sample\sample_ObjectMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\inspire\logger\base.h" />
+    <ClInclude Include="..\..\inspire\logger\logger.h" />
+    <ClInclude Include="..\..\inspire\logger\writer.h" />
     <ClInclude Include="..\..\inspire\util\AllocatorMgr.h" />
     <ClInclude Include="..\..\inspire\util\assert.h" />
     <ClInclude Include="..\..\inspire\util\atomic.h" />
-    <ClInclude Include="..\..\inspire\util\binData.h" />
     <ClInclude Include="..\..\inspire\util\charConvertor.h" />
     <ClInclude Include="..\..\inspire\util\condition.h" />
     <ClInclude Include="..\..\inspire\util\deque.h" />
@@ -165,6 +171,7 @@
     <ClInclude Include="..\..\inspire\util\map.h" />
     <ClInclude Include="..\..\inspire\util\mutex.h" />
     <ClInclude Include="..\..\inspire\util\noncopyable.h" />
+    <ClInclude Include="..\..\inspire\util\ObjectMgr.h" />
     <ClInclude Include="..\..\inspire\util\refCounter.h" />
     <ClInclude Include="..\..\inspire\util\reference.h" />
     <ClInclude Include="..\..\inspire\util\refPointer.h" />

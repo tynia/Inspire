@@ -4,16 +4,31 @@
     <Filter Include="util">
       <UniqueIdentifier>{1b3507d5-8a71-4da1-8d2e-5d6a9096241f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="util\allocator">
-      <UniqueIdentifier>{87e8bdf4-f9fe-46bc-a55b-808253b08086}</UniqueIdentifier>
+    <Filter Include="sample">
+      <UniqueIdentifier>{4a1f8614-ca38-48e5-9221-8fbcc0a9a3af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{93c2f2db-063e-44ae-8215-085c4c63b49f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\util\IO.cpp">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\util\ObjectMgr.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp">
-      <Filter>util\allocator</Filter>
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sample\sample_ObjectMgr.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\logger\base.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\logger\writer.cpp">
+      <Filter>logger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -21,9 +36,6 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\atomic.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\binData.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\charConvertor.h">
@@ -71,8 +83,20 @@
     <ClInclude Include="..\..\inspire\util\IO.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\inspire\util\ObjectMgr.h">
+      <Filter>util</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\inspire\util\AllocatorMgr.h">
-      <Filter>util\allocator</Filter>
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\logger\base.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\logger\logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\logger\writer.h">
+      <Filter>logger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
