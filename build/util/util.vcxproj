@@ -167,6 +167,7 @@
     <ClInclude Include="..\..\inspire\util\deque.h" />
     <ClInclude Include="..\..\inspire\util\inspire.h" />
     <ClInclude Include="..\..\inspire\util\IO.h" />
+    <ClInclude Include="..\..\inspire\util\iObject.h" />
     <ClInclude Include="..\..\inspire\util\lock.h" />
     <ClInclude Include="..\..\inspire\util\map.h" />
     <ClInclude Include="..\..\inspire\util\mutex.h" />
