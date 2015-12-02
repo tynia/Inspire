@@ -2,51 +2,121 @@
 #define _INSPIRE_UTIL_OBJECT_MGR_H_
 
 #include "AllocatorMgr.h"
+#include "deque.h"
 
 namespace inspire {
 
+   template<class O>
    class ObjectMgr
    {
-   private:
-      ObjectMgr(AllocatorMgr* mgr);
-      ~ObjectMgr();
+   public:
+      ObjectMgr()
+      {
+         _alMgr = AllocatorMgr::instance();
+         STRONG_ASSERT(NULL != _alMgr, "AllocatorMgr cannot be NULL");
+      }
+
+      ~ObjectMgr()
+      {
+         _destroy();
+         _alMgr = NULL;
+      }
 
    public:
-      template<class T>
-#ifdef _DEBUG
-      T* create(const char* file, const uint line)
+      O* create()
       {
-         char* ptr = _alMgr->alloc(sizeof(T), file, line);
-         if (NULL == ptr)
+         O* obj = _require();
+         if (NULL == obj)
          {
-            return NULL;
+            char* ptr = _alMgr->alloc(sizeof(O));
+            if (NULL == ptr)
+            {
+               return NULL;
+            }
+            return new(ptr) O;
          }
-
-         return new(ptr) T();
+         return obj;
       }
-#else
-      T* create()
-      {
-         char* ptr = _alMgr->alloc(sizeof(T));
-         if (NULL == ptr)
-         {
-            return NULL;
-         }
-
-         return new(ptr) T();
-      }
-#endif
 
       template<class T>
-      void destroy(T* pt)
+      O* create(T& t)
       {
-         pt->~T();
-         _alMgr->dealloc((const char*)pt);
+         O* obj = _require();
+         if (NULL == obj)
+         {
+            char* ptr = _alMgr->alloc(sizeof(O));
+            if (NULL == ptr)
+            {
+               return NULL;
+            }
+            return new(ptr) O(t1);
+         }
+         return obj;
       }
 
-      static ObjectMgr* instance();
+      template<class T1, class T2>
+      O* create(T1& t1, T2& t2)
+      {
+         O* obj = _require();
+         if (NULL == obj)
+         {
+            char* ptr = _alMgr->alloc(sizeof(O));
+            if (NULL == ptr)
+            {
+               return NULL;
+            }
+            return new(ptr) O(t1, t2);
+         }
+         return obj;
+      }
+
+      template<class T1, class T2, class T3>
+      O* create(T1& t1, T2& t2, T3& t3)
+      {
+         O* obj = _require();
+         if (NULL == obj)
+         {
+            char* ptr = _alMgr->alloc(sizeof(O));
+            if (NULL == ptr)
+            {
+               return NULL;
+            }
+            return new(ptr) O(t1, t2, t3);
+         }
+         return obj;
+      }
+
+      void destroy(O* obj)
+      {
+         obj->~O();
+         ::memset((void*)obj, 0x0, sizeof(O));
+         _objs.push_back(obj);
+      }
+
+   private:
+      void _destroy()
+      {
+         while (!_objs.empty())
+         {
+            O* obj = _objs.pop_front();
+            INSPIRE_ASSERT(NULL != obj, "Get an invalid obj");
+            _alMgr->dealloc(obj);
+         }
+      }
+
+      O* _require()
+      {
+         O* obj = NULL;
+         if (_objs.pop_front(obj))
+         {
+            return obj;
+         }
+         return NULL;
+      }
+
    private:
       AllocatorMgr* _alMgr;
+      deque<O*>     _objs;
    };
 }
 

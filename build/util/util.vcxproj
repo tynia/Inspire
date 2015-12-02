@@ -152,7 +152,6 @@
     <ClCompile Include="..\..\inspire\logger\writer.cpp" />
     <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp" />
     <ClCompile Include="..\..\inspire\util\IO.cpp" />
-    <ClCompile Include="..\..\inspire\util\ObjectMgr.cpp" />
     <ClCompile Include="..\..\sample\sample_ObjectMgr.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -15,9 +15,6 @@
     <ClCompile Include="..\..\inspire\util\IO.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\util\ObjectMgr.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp">
       <Filter>util</Filter>
     </ClCompile>
