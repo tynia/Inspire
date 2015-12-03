@@ -6,7 +6,6 @@ namespace inspire {
 
    AllocatorMgr::AllocatorMgr()
    {
-      // TODO: select a efficient size to use memory
       for (int idx = 0, size = 8; idx < MAX_ALLOCATOR_COUNT; ++idx, size *= 2)
       {
          _fls[idx].size = size;
@@ -25,10 +24,9 @@ namespace inspire {
       return &mgr;
    }
 
-#ifdef _DEBUG
-   char* AllocatorMgr::alloc(const uint size, const char* file, const uint line)
+   void* AllocatorMgr::alloc(const uint size, const char* file, const uint line)
    {
-      char* ptr = _alloc(size, file, line);
+      void* ptr = _alloc(size, file, line);
       if (NULL == ptr)
       {
          pray();
@@ -42,62 +40,27 @@ namespace inspire {
       }
 
       return ptr;
-}
-#else
-   char* AllocatorMgr::alloc(const uint size)
-   {
-      char* ptr = _alloc(size);
-      if (NULL == ptr)
-      {
-         pray();
-         ptr = _alloc(size);
-      }
-
-      if (NULL == ptr)
-      {
-         LogError("Failed to allocate memory, size: %d", size);
-         return NULL;
-      }
-
-      return ptr;
    }
-#endif
    
-#ifdef _DEBUG
-   char* AllocatorMgr::realloc(char*& ptr, const uint size, const char* file, const uint line)
+   void* AllocatorMgr::realloc(void* ptr, const uint size, const char* file, const uint line)
    {
-      char* reptr = alloc(size, file, line);
+      void* reptr = alloc(size, file, line);
       if (NULL == reptr)
       {
          return NULL;
       }
 
       dealloc(ptr);
-      ptr = reptr;
       return ptr;
    }
-#else
-   char* AllocatorMgr::realloc(char*& ptr, const uint size)
-   {
-      char* reptr = alloc(size);
-      if (NULL == reptr)
-      {
-         return NULL;
-      }
 
-      dealloc(ptr);
-      ptr = reptr;
-      return ptr;
-   }
-#endif // _DEBUG
-
-   void AllocatorMgr::dealloc(const char* ptr)
+   void AllocatorMgr::dealloc(void* ptr)
    {
       bool ok = _checkSanity(ptr);
       if (!ok)
       {
          LogError("pointer: 0x%x sanity checked failed, it may not be "
-                  "allocated by allocator", (uint64*)ptr);
+                  "allocated by allocator", (uint64)ptr);
          //::free(ptr);
 #ifdef _DEBUG
          Panic();
@@ -105,7 +68,7 @@ namespace inspire {
          return;
       }
 
-      header* hdr = (header*)(ptr - sizeof(header));
+      header* hdr = (header*)((char*)ptr - sizeof(header));
       uint locate = _locate(hdr->size);
       freelist* fl = &_fls[locate];
 
@@ -145,13 +108,9 @@ namespace inspire {
       }
    }
 
-#ifdef _DEBUG
-   char* AllocatorMgr::_alloc(const uint size, const char* file, const uint line)
-#else
-   char* _alloc(const uint size)
-#endif
+   void* AllocatorMgr::_alloc(const uint size, const char* file, const uint line)
    {
-      char* ptr = NULL;
+      void* ptr = NULL;
       // first we pick memory block stored in free list
       uint locate = _locate(size);
       freelist* fl = &_fls[locate];
@@ -179,7 +138,7 @@ namespace inspire {
       {
          // if we find no match block in free list
          // then we use malloc to alloc memory from system
-         ptr = (char*)::malloc(fl->size + sizeof(header));
+         ptr = ::malloc(fl->size + sizeof(header));
          if (NULL == ptr)
          {
             LogError("Failed to allocate memory, size :%d", fl->size);
@@ -187,8 +146,8 @@ namespace inspire {
          }
          // fill mete data recorded in header 
          _setSanity(ptr, fl->size);
-         ::memset(ptr + sizeof(header), 0, fl->size);
-         return ptr + sizeof(header);
+         ::memset((char*)ptr + sizeof(header), 0, fl->size);
+         return (char*)ptr + sizeof(header);
       }
 
       // means we find memory block in free list
@@ -196,7 +155,7 @@ namespace inspire {
       // now we should resign the file and line to record where calls alloc
       _debug(ptr, file, line);
 #endif
-      return ptr + sizeof(header);
+      return (char*)ptr + sizeof(header);
    }
 
    uint AllocatorMgr::_locate(const uint size)
@@ -235,16 +194,16 @@ namespace inspire {
       hdr->magic = magic;
    }
 
-   bool AllocatorMgr::_checkSanity(const char* ptr)
+   bool AllocatorMgr::_checkSanity(void* ptr)
    {
-      header* hdr = (header*)(ptr - sizeof(header));
+      header* hdr = (header*)((char*)ptr - sizeof(header));
       bool eq1 = (0 == ::memcmp(hdr->eyecatcher, "inspire", 8));
       bool eq2 = (magic == hdr->magic);
       return !(eq1 && eq2);
    }
 
 #ifdef _DEBUG
-   void AllocatorMgr::_debug(char* ptr, const char* file, const uint line)
+   void AllocatorMgr::_debug(void* ptr, const char* file, const uint line)
    {
       INSPIRE_ASSERT(NULL != ptr, "ptr cannot be NULL");
       header* hdr = (header*)ptr;

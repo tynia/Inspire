@@ -15,28 +15,18 @@ namespace inspire {
 
    public:
       static AllocatorMgr* instance();
-#ifdef _DEBUG
-      char* alloc(const uint size, const char* file, const uint line);
-      char* realloc(char*& ptr, const uint size, const char* file, const uint line);
-#else
-      char* alloc(const uint size);
-      char* realloc(char*& ptr, const uint size);
-#endif
-      void  dealloc(const char* ptr);
+      void* alloc(const uint size, const char* file, const uint line);
+      void* realloc(void* ptr, const uint size, const char* file, const uint line);
+      void  dealloc(void* ptr);
       void  pray();
 
    private:
-      #define MAX_ALLOCATOR_COUNT 9
-#ifdef _DEBUG
-      char* _alloc(const uint size, const char* file, const uint line);
-#else
-      char* _alloc(const uint size);
-#endif
+      void* _alloc(const uint size, const char* file, const uint line);
       uint  _locate(const uint size);
       void  _setSanity(void* ptr, const uint size);
-      bool  _checkSanity(const char* ptr);
+      bool  _checkSanity(void* ptr);
 #ifdef _DEBUG
-      void  _debug(char* ptr, const char* file, const uint line);
+      void  _debug(void* ptr, const char* file, const uint line);
 #endif
 
       static const uint64 magic = 0xFFFAFBFE;
@@ -58,6 +48,10 @@ namespace inspire {
          uint    size;
          mutex_t mtx;
          header* hdr;
+      };
+
+      enum {
+         MAX_ALLOCATOR_COUNT = 9,
       };
       //  0   1   2   3   4   5   6   7    8
       // 2^3 2^4 2^5 2^6 2^7 2^8 2^9 2^10 2^11+

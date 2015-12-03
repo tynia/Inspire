@@ -6,10 +6,14 @@
 
 namespace inspire {
 
+   #define INSPIRE_NEW new(__FILE__, __LINE__, std::nothrow)
+   #define INSPIRE_DEL delete
+
    class iObject
    {
-#define INSPIRE_MALLOC(x) AllocatorMgr::instance()->alloc(size, __FILE__, __LINE__)
-#define INSPIRE_FREE(p)   AllocatorMgr::instance()->dealloc(p)
+      #define INSPIRE_INNER_MALLOC(x, y, z) AllocatorMgr::instance()->alloc(x, y, z)
+      #define INSPIRE_MALLOC(x) INSPIRE_INNER_MALLOC(x, __FILE__, __LINE__)
+      #define INSPIRE_FREE(p)   AllocatorMgr::instance()->dealloc(p)
    protected:
       iObject() {}
       virtual ~iObject() {}
@@ -45,17 +49,19 @@ namespace inspire {
          INSPIRE_FREE(p);
       }
 
-      void * operator new (size_t size, const char *file, uint line) throw (const char *)
+      void * operator new (uint size, const char *file, uint line) throw (const char *)
       {
-         void *p = INSPIRE_MALLOC(size, file, line);
-      if (!p) throw "Allocate Failed";
-      return p;
+         void *p = INSPIRE_INNER_MALLOC(size, file, line);
+         if (!p)
+            throw "Allocate Failed";
+         return p;
       }
 
-      void * operator new[](size_t size, const char *file, uint line) throw (const char *)
+      void * operator new[](uint size, const char *file, uint line) throw (const char *)
       {
-         void *p = INSPIRE_MALLOC(size, file, line);
-         if (!p) throw "Allocate Failed";
+         void *p = INSPIRE_INNER_MALLOC(size, file, line);
+         if (!p)
+            throw "Allocate Failed";
          return p;
       }
 
@@ -69,12 +75,12 @@ namespace inspire {
          INSPIRE_FREE(p);
       }
 
-      void * operator new (size_t size, const std::nothrow_t &)
+      void * operator new (uint size, const std::nothrow_t &)
       {
          return INSPIRE_MALLOC(size);
       }
 
-      void * operator new[](size_t size, const std::nothrow_t &)
+      void * operator new[](uint size, const std::nothrow_t &)
       {
          return INSPIRE_MALLOC(size);
       }
@@ -89,20 +95,20 @@ namespace inspire {
          INSPIRE_FREE(p);
       }
 
-      void * operator new (size_t size, const char *file,
+      void * operator new (uint size, const char *file,
                            uint line, const std::nothrow_t &)
       {
-         return INSPIRE_MALLOC(size, file, line);
+         return INSPIRE_INNER_MALLOC(size, file, line);
       }
 
-      void * operator new[](size_t size, const char *file,
+      void * operator new[](uint size, const char *file,
                             uint line, const std::nothrow_t &)
       {
-         return INSPIRE_MALLOC(size, file, line);
+         return INSPIRE_INNER_MALLOC(size, file, line);
       }
 
-      void operator delete (void *p, const char *file,
-                            uint line, const std::nothrow_t &)
+      void operator delete(void *p, const char *file,
+                           uint line, const std::nothrow_t &)
       {
          INSPIRE_FREE(p);
       }
