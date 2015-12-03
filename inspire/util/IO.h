@@ -2,6 +2,7 @@
 #define _INSPIRE_UTIL_IO_H_
 
 #include <fcntl.h>
+#include <new>
 #ifdef _WINDOWS
 #include <windows.h>
 #else

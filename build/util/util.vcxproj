@@ -155,6 +155,7 @@
     <ClCompile Include="..\..\sample\sample_ObjectMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\inspire\ctrl\control.h" />
     <ClInclude Include="..\..\inspire\logger\base.h" />
     <ClInclude Include="..\..\inspire\logger\logger.h" />
     <ClInclude Include="..\..\inspire\logger\writer.h" />

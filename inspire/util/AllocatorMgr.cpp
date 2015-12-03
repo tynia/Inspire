@@ -188,7 +188,7 @@ namespace inspire {
    {
       ::memset(ptr, 0x0, size + sizeof(header));
       header* hdr = (header*)ptr;
-      ::memmove(hdr->eyecatcher, "inspire", 7);
+      ::memmove(hdr->eyecatcher, "inspire", 8);
       hdr->next = NULL;
       hdr->size = size;
       hdr->magic = magic;

@@ -10,6 +10,9 @@
     <Filter Include="logger">
       <UniqueIdentifier>{93c2f2db-063e-44ae-8215-085c4c63b49f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ctrl">
+      <UniqueIdentifier>{2462c2c9-375e-474a-9b3d-a588f333ef6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\util\IO.cpp">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\iObject.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\ctrl\control.h">
+      <Filter>ctrl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

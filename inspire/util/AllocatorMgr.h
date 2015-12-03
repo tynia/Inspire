@@ -6,7 +6,6 @@
 
 namespace inspire {
 
-   class allocator;
    class AllocatorMgr
    {
    private:

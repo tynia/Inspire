@@ -24,7 +24,28 @@ namespace inspire {
          _refCounter->_inc();
       }
 
+      IReference& operator= (IReference& rhs)
+      {
+         if (this == &rhs)
+         {
+            return;
+         }
+
+         release();
+         _refCounter->_dec();
+         _refCounter = rhs._refCounter;
+
+         _refCounter->_inc();
+      }
+
       virtual ~IReference()
+      {
+         release();
+      }
+
+   public:
+      bool shared() const { return 0 != _refCounter->retain(); }
+      void release()
       {
          _refCounter->_dec();
          if (0 == _refCounter->retain())
@@ -33,9 +54,6 @@ namespace inspire {
             _refCounter = NULL;
          }
       }
-
-   public:
-      bool shared() const { return 0 != _refCounter->retain(); }
 
    protected:
       refCounter* _refCounter;
