@@ -9,7 +9,7 @@
 
 #include "util/inspire.h"
 #include "lock.h"
-#include "util.h"
+#include "system/util.h"
 #include "charConvertor.h"
 
 namespace inspire {

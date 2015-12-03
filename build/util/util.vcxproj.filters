@@ -13,14 +13,20 @@
     <Filter Include="ctrl">
       <UniqueIdentifier>{2462c2c9-375e-474a-9b3d-a588f333ef6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\memory">
+      <UniqueIdentifier>{ac979598-fc03-4b9c-9ddb-86d8c8306c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\file">
+      <UniqueIdentifier>{f3cfc175-a9d0-49f1-9863-0afcb28983f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\system">
+      <UniqueIdentifier>{4cd6b5d9-8ca5-4d53-93cd-aa4b665a69f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\container">
+      <UniqueIdentifier>{78457a04-6669-470d-81ef-f2e308701aeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\inspire\util\IO.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\util\AllocatorMgr.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\sample\sample_ObjectMgr.cpp">
       <Filter>sample</Filter>
     </ClCompile>
@@ -30,12 +36,15 @@
     <ClCompile Include="..\..\inspire\logger\writer.cpp">
       <Filter>logger</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp">
+      <Filter>util\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\file\IO.cpp">
+      <Filter>util\file</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\util\assert.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\atomic.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\charConvertor.h">
@@ -44,19 +53,7 @@
     <ClInclude Include="..\..\inspire\util\condition.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\deque.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\util\inspire.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\lock.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\map.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\mutex.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\noncopyable.h">
@@ -71,24 +68,6 @@
     <ClInclude Include="..\..\inspire\util\refPointer.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\set.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\spinlock.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\util.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\IO.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\ObjectMgr.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\AllocatorMgr.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\logger\base.h">
       <Filter>logger</Filter>
     </ClInclude>
@@ -98,11 +77,44 @@
     <ClInclude Include="..\..\inspire\logger\writer.h">
       <Filter>logger</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\iObject.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\ctrl\control.h">
       <Filter>ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\memory\AllocatorMgr.h">
+      <Filter>util\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\memory\iObject.h">
+      <Filter>util\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\file\IO.h">
+      <Filter>util\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\atomic.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\condition.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\lock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\mutex.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\spinlock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\util.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\deque.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\map.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\set.h">
+      <Filter>util\container</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

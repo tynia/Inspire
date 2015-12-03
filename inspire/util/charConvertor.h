@@ -2,7 +2,7 @@
 #define _INSPIRE_UTIL_CHAR_CONVERTOR_H_
 
 #include "util/inspire.h"
-#include "util/util.h"
+#include "util/system/util.h"
 
 namespace inspire {
 
