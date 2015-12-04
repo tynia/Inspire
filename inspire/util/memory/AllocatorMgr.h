@@ -1,8 +1,8 @@
 #ifndef _INSPIRE_UTIL_ALLOCATOR_MGR_H_
 #define _INSPIRE_UTIL_ALLOCATOR_MGR_H_
 
-#include "inspire.h"
-#include "mutex.h"
+#include "util/inspire.h"
+#include "util/system/mutex.h"
 
 namespace inspire {
 

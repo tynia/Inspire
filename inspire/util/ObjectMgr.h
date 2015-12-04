@@ -1,8 +1,8 @@
 #ifndef _INSPIRE_UTIL_OBJECT_MGR_H_
 #define _INSPIRE_UTIL_OBJECT_MGR_H_
 
-#include "AllocatorMgr.h"
-#include "deque.h"
+#include "memory/AllocatorMgr.h"
+#include "container/deque.h"
 
 namespace inspire {
 

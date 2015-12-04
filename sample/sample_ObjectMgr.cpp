@@ -1,8 +1,8 @@
 #include <iostream>
-#include "util/ObjectMgr.h"
 #include "util/assert.h"
+#include "util/memory/iObject.h"
 
-class AObject
+class AObject : public inspire::iObject
 {
 public:
    AObject() { std::cout << "A Object constructor" << std::endl; }
@@ -13,10 +13,9 @@ public:
 
 int main(int argc, char* argv)
 {
-   inspire::ObjectMgr* mgr = inspire::ObjectMgr::instance();
-   AObject* obj = INSPIRE_CREATE_OBJECT(AObject);
+   AObject* obj = INSPIRE_NEW AObject;
    INSPIRE_ASSERT(NULL != obj, "obj cannot be NULL");
    obj->say();
-   INSPIRE_DESTROY_OBJECT(AObject, obj);
+   INSPIRE_DEL obj;
    return 0;
 }

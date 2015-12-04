@@ -50,9 +50,6 @@
     <ClInclude Include="..\..\inspire\util\charConvertor.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\condition.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\util\inspire.h">
       <Filter>util</Filter>
     </ClInclude>

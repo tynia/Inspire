@@ -1,6 +1,6 @@
 #include "AllocatorMgr.h"
-#include "assert.h"
-#include "condition.h"
+#include "util/system/condition.h"
+#include "util/assert.h"
 
 namespace inspire {
 

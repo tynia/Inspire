@@ -161,7 +161,6 @@
     <ClInclude Include="..\..\inspire\logger\writer.h" />
     <ClInclude Include="..\..\inspire\util\assert.h" />
     <ClInclude Include="..\..\inspire\util\charConvertor.h" />
-    <ClInclude Include="..\..\inspire\util\condition.h" />
     <ClInclude Include="..\..\inspire\util\container\deque.h" />
     <ClInclude Include="..\..\inspire\util\container\map.h" />
     <ClInclude Include="..\..\inspire\util\container\set.h" />

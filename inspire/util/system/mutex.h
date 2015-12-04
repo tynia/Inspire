@@ -9,8 +9,8 @@
 
 #include "util/inspire.h"
 #include "lock.h"
-#include "system/util.h"
-#include "charConvertor.h"
+#include "util/system/util.h"
+#include "util/charConvertor.h"
 
 namespace inspire {
 

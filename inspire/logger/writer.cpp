@@ -1,7 +1,7 @@
 #include <ctime>
 #include "util/system/util.h"
 #include "writer.h"
-#include "util/condition.h"
+#include "util/system/condition.h"
 #include "util/assert.h"
 
 namespace inspire {

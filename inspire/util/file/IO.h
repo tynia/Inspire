@@ -10,7 +10,7 @@
 #include <sys/stat.h> 
 #include <unistd.h> 
 #endif
-#include "inspire.h"
+#include "util/inspire.h"
 
 enum SEEK_MOD
 {

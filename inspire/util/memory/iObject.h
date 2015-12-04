@@ -1,8 +1,8 @@
 #ifndef _INSPIRE_BASE_OBJECT_H_
 #define _INSPIRE_BASE_OBJECT_H_
 
-#include "inspire.h"
-#include "AllocatorMgr.h"
+#include "util/inspire.h"
+#include "util/memory/AllocatorMgr.h"
 
 namespace inspire {
 

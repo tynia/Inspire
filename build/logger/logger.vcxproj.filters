@@ -10,6 +10,12 @@
     <Filter Include="util">
       <UniqueIdentifier>{5c6ce279-a3c8-4a9c-8134-c41203410b39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\file">
+      <UniqueIdentifier>{27b3ece4-5b11-4d8f-a5e9-1b5fcb8e71cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\system">
+      <UniqueIdentifier>{ac9dae9d-250f-4636-affc-d454175104f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\logger\base.cpp">
@@ -21,8 +27,8 @@
     <ClCompile Include="..\..\sample\logger.cpp">
       <Filter>smaple</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\util\IO.cpp">
-      <Filter>util</Filter>
+    <ClCompile Include="..\..\inspire\util\file\IO.cpp">
+      <Filter>util\file</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,19 +41,28 @@
     <ClInclude Include="..\..\inspire\logger\writer.h">
       <Filter>logger</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\condition.h">
+    <ClInclude Include="..\..\inspire\util\file\IO.h">
+      <Filter>util\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\atomic.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\condition.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\lock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\mutex.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\util.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\charConvertor.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\inspire.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\mutex.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\util.hpp">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\IO.h">
       <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>

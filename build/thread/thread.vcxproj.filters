@@ -16,6 +16,15 @@
     <Filter Include="thread\task">
       <UniqueIdentifier>{1067d254-cb51-4d05-bae3-87bdd280c49e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\file">
+      <UniqueIdentifier>{864095cb-6038-40d9-8746-c2094d44e166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\system">
+      <UniqueIdentifier>{72be8d61-1f67-49b8-a791-883f0cbe3a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\container">
+      <UniqueIdentifier>{70002a00-281a-4b8d-9285-f23634b97aa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\thread\thdMgr.cpp">
@@ -39,8 +48,8 @@
     <ClCompile Include="..\..\sample\threads.cpp">
       <Filter>sample</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\util\IO.cpp">
-      <Filter>util</Filter>
+    <ClCompile Include="..\..\inspire\util\file\IO.cpp">
+      <Filter>util\file</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,40 +68,10 @@
     <ClInclude Include="..\..\inspire\util\assert.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\atomic.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\util\charConvertor.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\condition.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\deque.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\util\inspire.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\lock.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\map.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\mutex.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\set.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\spinlock.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\util.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\util\util.hpp">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\logger\base.h">
@@ -113,8 +92,35 @@
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h">
       <Filter>thread\task</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\util\IO.h">
-      <Filter>util</Filter>
+    <ClInclude Include="..\..\inspire\util\file\IO.h">
+      <Filter>util\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\atomic.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\condition.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\lock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\mutex.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\spinlock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\util.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\deque.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\map.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\set.h">
+      <Filter>util\container</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

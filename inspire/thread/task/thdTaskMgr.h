@@ -2,8 +2,8 @@
 #define _INSPIRE_THREAD_TASK_MANAGER_H_
 
 #include "util/inspire.h"
-#include "util/map.h"
-#include "util/deque.h"
+#include "util/container/map.h"
+#include "util/container/deque.h"
 
 namespace inspire {
 

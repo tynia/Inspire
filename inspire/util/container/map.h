@@ -2,8 +2,8 @@
 #define _INSPIRE_UTIL_MAP_H_
 
 #include "util/inspire.h"
-#include "mutex.h"
-#include "condition.h"
+#include "util/system/mutex.h"
+#include "util/system/condition.h"
 
 namespace inspire {
 

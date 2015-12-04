@@ -154,7 +154,7 @@
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thdMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thread.cpp" />
-    <ClCompile Include="..\..\inspire\util\IO.cpp" />
+    <ClCompile Include="..\..\inspire\util\file\IO.cpp" />
     <ClCompile Include="..\..\sample\threads.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,19 +169,18 @@
     <ClInclude Include="..\..\inspire\thread\thread.h" />
     <ClInclude Include="..\..\inspire\thread\threads.h" />
     <ClInclude Include="..\..\inspire\util\assert.h" />
-    <ClInclude Include="..\..\inspire\util\atomic.h" />
     <ClInclude Include="..\..\inspire\util\charConvertor.h" />
-    <ClInclude Include="..\..\inspire\util\condition.h" />
-    <ClInclude Include="..\..\inspire\util\deque.h" />
+    <ClInclude Include="..\..\inspire\util\container\deque.h" />
+    <ClInclude Include="..\..\inspire\util\container\map.h" />
+    <ClInclude Include="..\..\inspire\util\container\set.h" />
+    <ClInclude Include="..\..\inspire\util\file\IO.h" />
     <ClInclude Include="..\..\inspire\util\inspire.h" />
-    <ClInclude Include="..\..\inspire\util\IO.h" />
-    <ClInclude Include="..\..\inspire\util\lock.h" />
-    <ClInclude Include="..\..\inspire\util\map.h" />
-    <ClInclude Include="..\..\inspire\util\mutex.h" />
-    <ClInclude Include="..\..\inspire\util\set.h" />
-    <ClInclude Include="..\..\inspire\util\spinlock.h" />
-    <ClInclude Include="..\..\inspire\util\util.h" />
-    <ClInclude Include="..\..\inspire\util\util.hpp" />
+    <ClInclude Include="..\..\inspire\util\system\atomic.h" />
+    <ClInclude Include="..\..\inspire\util\system\condition.h" />
+    <ClInclude Include="..\..\inspire\util\system\lock.h" />
+    <ClInclude Include="..\..\inspire\util\system\mutex.h" />
+    <ClInclude Include="..\..\inspire\util\system\spinlock.h" />
+    <ClInclude Include="..\..\inspire\util\system\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
