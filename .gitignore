@@ -10,6 +10,7 @@
 *.so
 *.dylib
 *.dll
+*.opendb
 
 # Compiled Static libraries
 *.lai
