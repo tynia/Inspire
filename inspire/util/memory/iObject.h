@@ -55,17 +55,17 @@ namespace inspire {
          return ptr;
       }
 
-      void operator delete(void *p)
+      void operator delete(void* p)
       {
          INSPIRE_FREE(p);
       }
 
-      void operator delete[](void *p)
+      void operator delete[](void* p)
       {
          INSPIRE_FREE(p);
       }
 
-      void * operator new (uint size, const char *file, uint line) throw (const char *)
+      void* operator new (uint size, const char* file, uint line) throw (const char*)
       {
          void *p = INSPIRE_INNER_MALLOC(size, file, line);
          if (!p)
@@ -73,7 +73,7 @@ namespace inspire {
          return p;
       }
 
-      void * operator new[](uint size, const char *file, uint line) throw (const char *)
+      void* operator new[](uint size, const char* file, uint line) throw (const char*)
       {
          void *p = INSPIRE_INNER_MALLOC(size, file, line);
          if (!p)
@@ -81,56 +81,56 @@ namespace inspire {
          return p;
       }
 
-      void operator delete(void *p, const char *file, uint line)
+      void operator delete(void* p, const char* file, uint line)
       {
          INSPIRE_FREE(p);
       }
 
-      void operator delete[](void *p, const char *file, uint line)
+      void operator delete[](void*p, const char* file, uint line)
       {
          INSPIRE_FREE(p);
       }
 
-      void * operator new(uint size, const std::nothrow_t &)
+      void* operator new(uint size, const std::nothrow_t&)
       {
          return INSPIRE_MALLOC(size);
       }
 
-      void * operator new[](uint size, const std::nothrow_t &)
+      void* operator new[](uint size, const std::nothrow_t&)
       {
          return INSPIRE_MALLOC(size);
       }
 
-      void operator delete(void *p, const std::nothrow_t &)
+      void operator delete(void* p, const std::nothrow_t&)
       {
          INSPIRE_FREE(p);
       }
 
-      void operator delete[](void *p, const std::nothrow_t &)
+      void operator delete[](void* p, const std::nothrow_t&)
       {
          INSPIRE_FREE(p);
       }
 
-      void * operator new(uint size, const char *file,
-                           uint line, const std::nothrow_t &)
+      void* operator new(uint size, const char* file,
+                         uint line, const std::nothrow_t&)
       {
          return INSPIRE_INNER_MALLOC(size, file, line);
       }
 
-      void * operator new[](uint size, const char *file,
-                            uint line, const std::nothrow_t &)
+      void* operator new[](uint size, const char* file,
+                           uint line, const std::nothrow_t&)
       {
          return INSPIRE_INNER_MALLOC(size, file, line);
       }
 
-      void operator delete(void *p, const char *file,
-                           uint line, const std::nothrow_t &)
+      void operator delete(void* p, const char* file,
+                           uint line, const std::nothrow_t&)
       {
          INSPIRE_FREE(p);
       }
 
-      void operator delete[](void *p, const char *file,
-                             uint line, const std::nothrow_t &)
+      void operator delete[](void* p, const char* file,
+                             uint line, const std::nothrow_t&)
       {
          INSPIRE_FREE(p);
       }
