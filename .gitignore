@@ -3,14 +3,14 @@
 *.lo
 *.o
 *.obj
-*.sdf
-*.opensdf
 
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
 *.opendb
+*.sdf
+*.opensdf
 
 # Compiled Static libraries
 *.lai
