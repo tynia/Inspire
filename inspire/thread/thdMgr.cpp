@@ -1,8 +1,18 @@
 #include "thdMgr.h"
-#include "task/thdTask.h"
-#include "task/thdMainTask.h"
 
 namespace inspire {
+
+   const int thdMgr::thdInnerTask::run()
+   {
+      LogEvent("starting MAIN PROCESS LOOP: %s", name());
+      while (_thd->running())
+      {
+         _thdMgr->process();
+      }
+
+      LogEvent("ending MAIN PROCESS LOOP: %s", name());
+      return _thd->error();
+   }
 
    thdMgr* thdMgr::instance()
    {
@@ -22,27 +32,27 @@ namespace inspire {
 
    void thdMgr::initialize()
    {
-      thdTask* t = new thdMainTask(this);
+      thdTask* t = new thdInnerTask(this);
       STRONG_ASSERT(NULL != t, "Failed to allocate event processing task");
 
       thread* thd = create();
       STRONG_ASSERT(NULL != thd, "cannot start event processing thread, exit");
 
       detach(thd);
-      _mThd = thd;
-      _mThd->assigned(t);
+      _thdMain = thd;
+      _thdMain->assigned(t);
    }
 
    void thdMgr::active()
    {
-      STRONG_ASSERT(NULL != _mThd, "event processing thread is NULL");
-      _mThd->active();
+      STRONG_ASSERT(NULL != _thdMain, "event processing thread is NULL");
+      _thdMain->active();
    }
 
    void thdMgr::destroy()
    {
       LogEvent("signal to exit, program is going stopping");
-      _mThd->join();
+      _thdMain->join();
 
       while (!_eventQueue.empty())
       {
@@ -60,8 +70,8 @@ namespace inspire {
          }
       }
 
-      delete _mThd;
-      _mThd = NULL;
+      delete _thdMain;
+      _thdMain = NULL;
    }
 
    void thdMgr::process()
@@ -74,7 +84,7 @@ namespace inspire {
          case EVENT_DISPATCH_TASK:
          {
             thdTask* task = (thdTask*)ev.evObject;
-            dispatch(task);
+            _dispatch(task);
          }
          break;
          case EVENT_THREAD_SUSPEND:
@@ -98,7 +108,7 @@ namespace inspire {
          case EVENT_THREAD_RELEASE:
          {
             thread* thd = (thread*)ev.evObject;
-            release(thd);
+            _release(thd);
          }
          break;
          case EVENT_DUMMY:
@@ -118,7 +128,7 @@ namespace inspire {
       _maxIdleCount = maxCount;
    }
 
-   thread* thdMgr::fetchIdle()
+   thread* thdMgr::_fetchIdle()
    {
       thread* thd = NULL;
       if (_idleQueue.pop_front(thd))
@@ -128,7 +138,7 @@ namespace inspire {
             // when a thread pooled and pushed to idle queue
             // its state may not be THREAD_IDLE
             // so we need to fetch next to support request
-            enIdle(thd);
+            _enIdle(thd);
          }
          else
          {
@@ -142,7 +152,7 @@ namespace inspire {
    thread* thdMgr::create()
    {
       int rc = 0;
-      thread* thd = acquire();
+      thread* thd = _acquire();
       if (NULL == thd)
       {
          thd = new thread(this);
@@ -182,18 +192,18 @@ namespace inspire {
       if (!thd->detached())
       {
          // signal to manager to destroy the thread
-         notify(EVENT_THREAD_RELEASE, thd);
+         postEvent(EVENT_THREAD_RELEASE, thd);
          // suspend the thread
          thd->suspend();
       }
    }
 
-   bool thdMgr::notify(const char t, void* pObj)
+   bool thdMgr::postEvent(const char t, void* pObj)
    {
       INSPIRE_ASSERT(EVENT_DUMMY < t && t < EVENT_THREAD_UPBOUND,
                      "notify with an dummy or unknown type: %d", t);
       INSPIRE_ASSERT(NULL != pObj, "notify with invalid object");
-      if (!_mThd->running() && EVENT_DISPATCH_TASK == t)
+      if (!_thdMain->running() && EVENT_DISPATCH_TASK == t)
       {
          thdTask* task = (thdTask*)pObj;
          LogError("a exit signal received, do not accept task dispatch event "
@@ -209,19 +219,19 @@ namespace inspire {
       return false;
    }
 
-   void thdMgr::enIdle(thread* thd)
+   void thdMgr::_enIdle(thread* thd)
    {
       _idleQueue.push_back(thd);
    }
 
-   void thdMgr::release(thread* thd)
+   void thdMgr::_release(thread* thd)
    {
       INSPIRE_ASSERT(NULL != thd, "try to recycle a NULL thread");
-      if (_mThd->running() && _idleQueue.size() < _maxIdleCount)
+      if (_thdMain->running() && _idleQueue.size() < _maxIdleCount)
       {
          // push the thread to idle
          LogEvent("recycle a thread into idle queue, thread id: %lld", thd->tid());
-         enIdle(thd);
+         _enIdle(thd);
       }
       else
       {
@@ -234,7 +244,7 @@ namespace inspire {
       }
    }
 
-   thread* thdMgr::acquire()
+   thread* thdMgr::_acquire()
    {
       thread* thd = NULL;
       if (_thdQueue.pop_front(thd))
@@ -246,19 +256,21 @@ namespace inspire {
       return NULL;
    }
 
-   void thdMgr::dispatch(thdTask* task)
+   void thdMgr::_dispatch(thdTask* task)
    {
       INSPIRE_ASSERT(NULL != task, "try to despatch a NULL task");
       if (task)
       {
-         thread* thd = fetchIdle();
+         thread* thd = _fetchIdle();
          if (NULL == thd)
          {
             thd = create();
             if (NULL == thd)
             {
                LogError("cannot allocate a new thread object");
-               notify(EVENT_DISPATCH_TASK, task);
+               // we failed to allocate a thread object,
+               // now we should push the task into task queue
+               postEvent(EVENT_DISPATCH_TASK, task);
             }
          }
 

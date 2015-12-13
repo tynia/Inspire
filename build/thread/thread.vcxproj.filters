@@ -39,9 +39,6 @@
     <ClCompile Include="..\..\inspire\logger\writer.cpp">
       <Filter>logger</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\thread\task\thdMainTask.cpp">
-      <Filter>thread\task</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp">
       <Filter>thread\task</Filter>
     </ClCompile>
@@ -53,9 +50,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\inspire\thread\thdEvent.h">
-      <Filter>thread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\thread\thdMgr.h">
       <Filter>thread</Filter>
     </ClInclude>
@@ -82,9 +76,6 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\logger\writer.h">
       <Filter>logger</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\thread\task\thdMainTask.h">
-      <Filter>thread\task</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\thread\task\thdTask.h">
       <Filter>thread\task</Filter>

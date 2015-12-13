@@ -4,7 +4,7 @@
 #include "util/container/deque.h"
 #include "util/container/set.h"
 #include "thread.h"
-#include "thdEvent.h"
+#include "task/thdTask.h"
 
 namespace inspire {
 
@@ -12,6 +12,59 @@ namespace inspire {
    class thdTaskMgr;
    class thdMgr
    {
+   private:
+      // the event definition
+      // the event can be accepted by the thread mgr
+      enum EVENT
+      {
+         EVENT_DUMMY = -1,
+         EVENT_DISPATCH_TASK  = 0,
+         EVENT_THREAD_SUSPEND = 1,
+         EVENT_THREAD_RUNNING = 2,
+         EVENT_THREAD_RESUME  = 3,
+         EVENT_THREAD_RELEASE = 4,
+         EVENT_THREAD_UPBOUND,
+      };
+
+      class thdEvent
+      {
+      public:
+         char  evType;
+         void* evObject;
+
+         thdEvent() : evType(EVENT_DUMMY), evObject(NULL) {}
+         thdEvent(const char t, void* obj) : evType(t), evObject(obj) {}
+         virtual ~thdEvent() {}
+         thdEvent(const thdEvent& rhs) : evType(rhs.evType), evObject(rhs.evObject) {}
+         thdEvent& operator= (const thdEvent& rhs)
+         {
+            evType = rhs.evType;
+            evObject = rhs.evObject;
+            return *this;
+         }
+      };
+
+      // the main task of thread mgr
+      // all event is handle by the task
+      // the task id is solid and assigned with 0
+      // the id of user-defined tasks should start with 1
+      class thdInnerTask : public thdTask
+      {
+      public:
+         thdInnerTask(thdMgr* mgr)
+            : thdTask(0, "Event Process Task"), _thdMgr(mgr) {}
+         ~thdInnerTask() { _thdMgr = NULL; }
+
+         virtual const int run();
+
+      private:
+         thdInnerTask(const thdInnerTask& rhs);
+         thdInnerTask& operator= (const thdInnerTask& rhs);
+
+      private:
+         thdMgr* _thdMgr;
+      };
+
    public:
       void initialize();
       void active();
@@ -23,54 +76,55 @@ namespace inspire {
       */
       void process();
       /*
-      * set max count of idle thread to be stored
+      * set max count of idle thread to be stored(pooled)
       */
       void reverseIdleCount(const uint maxCount = 10);
-
       /*
       * create a thread
       */
       thread* create();
       /*
-      * notify thread manager to handle a event
-      * return false if program is going exiting
-      * more event detail, defined in thdEvent.h
+      * detach thread from thread map, so that the manager won't manager it
+      * user should join, free the thread any more
       */
-      bool notify(const char st, void* pObj);
+      void detach(thread* thd);
       /*
       * recycle a thread, it determines a thread is to be suspended or release
       */
       void recycle(thread* thd);
+      /*
+      * notify thread manager to handle a event
+      * return false if program is going exiting
+      * more event detail, defined in thdEvent.h
+      */
+      bool postEvent(const char st, void* pObj);
 
    protected:
       /*
       * peek a thread from idle queue
       * create a new thread if idle queue is empty
       */
-      thread* fetchIdle();
+      thread* _fetchIdle();
       /*
       * push a thread into idle queue for reusing
       */
-      void enIdle(thread* thd);
+      void _enIdle(thread* thd);
       /*
       * release a thread
       */
-      void release(thread* thd);
+      void _release(thread* thd);
       /*
       * before create a thread, we should get a thread entity pooled in thread queue
       * if a thread exit, the thread entity will be restored for next request
       * this strategy aims at decreasing use of new and delete
       */
-      thread* acquire();
+      thread* _acquire();
       /*
       * dispatch a task to a thread which is ready
       */
-      void dispatch(thdTask* task);
-      /*
-      * detach thread from thread map, so that the manager won't manager it
-      * user should join, free the thread any more
-      */
-      void detach(thread* thd);
+      void _dispatch(thdTask* task);
+
+   private:
 
    private:
       thdMgr();
@@ -80,7 +134,7 @@ namespace inspire {
 
    private:
       uint            _maxIdleCount;
-      thread*         _mThd;       ///< special thread for handling event
+      thread*         _thdMain;    ///< special thread for handling event
       thdTaskMgr*     _taskMgr;
       deque<thread*>  _idleQueue;  ///< the queue contains thread entity
       deque<thread*>  _thdQueue;   ///< the queue don't contains thread entity

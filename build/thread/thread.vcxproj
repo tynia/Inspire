@@ -150,7 +150,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\inspire\logger\base.cpp" />
     <ClCompile Include="..\..\inspire\logger\writer.cpp" />
-    <ClCompile Include="..\..\inspire\thread\task\thdMainTask.cpp" />
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thdMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thread.cpp" />
@@ -161,10 +160,8 @@
     <ClInclude Include="..\..\inspire\logger\base.h" />
     <ClInclude Include="..\..\inspire\logger\logger.h" />
     <ClInclude Include="..\..\inspire\logger\writer.h" />
-    <ClInclude Include="..\..\inspire\thread\task\thdMainTask.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTask.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h" />
-    <ClInclude Include="..\..\inspire\thread\thdEvent.h" />
     <ClInclude Include="..\..\inspire\thread\thdMgr.h" />
     <ClInclude Include="..\..\inspire\thread\thread.h" />
     <ClInclude Include="..\..\inspire\thread\threads.h" />
