@@ -18,10 +18,10 @@ namespace inspire {
       enum EVENT
       {
          EVENT_DUMMY = -1,
-         EVENT_DISPATCH_TASK  = 0,
+         EVENT_DISPATCH_TASK = 0,
          EVENT_THREAD_SUSPEND = 1,
          EVENT_THREAD_RUNNING = 2,
-         EVENT_THREAD_RESUME  = 3,
+         EVENT_THREAD_RESUME = 3,
          EVENT_THREAD_RELEASE = 4,
          EVENT_THREAD_UPBOUND,
       };
@@ -95,9 +95,12 @@ namespace inspire {
       /*
       * notify thread manager to handle a event
       * return false if program is going exiting
-      * more event detail, defined in thdEvent.h
       */
       bool postEvent(const char st, void* pObj);
+      /*
+      * post a task event to the thread mgr
+      */
+      bool postEvent(thdTask* task);
 
    protected:
       /*
@@ -123,6 +126,7 @@ namespace inspire {
       * dispatch a task to a thread which is ready
       */
       void _dispatch(thdTask* task);
+      
 
    private:
 
