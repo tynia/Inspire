@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_THREAD_ENTITY_H_
 #define _INSPIRE_THREAD_ENTITY_H_
 
-#include "inspire.h"
+#include "util/inspire.h"
 #include "util/system/condition.h"
 #include "util/assert.h"
 
