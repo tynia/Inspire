@@ -29,6 +29,10 @@ namespace inspire {
       virtual int active() = 0;
       virtual int deactive() = 0;
       virtual int destroy() = 0;
+
+   protected:
+      uint64 _id;
+      const char* _name;
    };
 }
 #endif
