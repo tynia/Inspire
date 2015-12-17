@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_NET_NOStream_H_
 #define _INSPIRE_NET_NOStream_H_
 
-#include "baseStream.h"
+#include "stream/baseStream.h"
 #include "binData.h"
 
 namespace inspire {

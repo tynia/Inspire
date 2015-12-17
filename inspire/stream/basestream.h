@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_NET_BASE_STREAM_H_
 #define _INSPIRE_NET_BASE_STREAM_H_
 
-#include "inspire.h"
+#include "util/inspire.h"
 
 namespace inspire {
 

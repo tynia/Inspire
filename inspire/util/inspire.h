@@ -15,6 +15,7 @@
 typedef long long int64;
 typedef unsigned long long uint64;
 typedef unsigned int uint;
+typedef unsigned short ushort;
 
 #ifdef __cplusplus
 #define INSPIRE_EXPORT_API extern "C" __declspec(dllexport)
