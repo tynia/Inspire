@@ -48,7 +48,7 @@ namespace inspire {
       bool              _initialized;
       IAsyncConnection* _async;
       IOService*        _ioservice;
-      threadEntity*     _entity;
+      thread*           _thd;
       SessionList       _sessions;
    };
 }

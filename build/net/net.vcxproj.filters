@@ -46,6 +46,12 @@
     <Filter Include="net\udp">
       <UniqueIdentifier>{e09fb2dc-80eb-4d37-a7b9-4d5754a24815}</UniqueIdentifier>
     </Filter>
+    <Filter Include="stream">
+      <UniqueIdentifier>{b0b3728b-e027-4b28-b1e4-924a87fea01c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\endian">
+      <UniqueIdentifier>{5d9105f5-5a19-4814-bd7c-2f49453fb066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\logger\base.cpp">
@@ -101,6 +107,24 @@
     </ClCompile>
     <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp">
       <Filter>util\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\basestream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\iostream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\istream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\ostream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\refStream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\endian\endian.cpp">
+      <Filter>net\endian</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +259,24 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\container\set.h">
       <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\basestream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\iostream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\istream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\ostream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\refStream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\endian\endian.h">
+      <Filter>net\endian</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

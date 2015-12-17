@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp" />
     <ClCompile Include="..\..\inspire\net\async\ioservice.cpp" />
     <ClCompile Include="..\..\inspire\net\connection.cpp" />
+    <ClCompile Include="..\..\inspire\net\endian\endian.cpp" />
     <ClCompile Include="..\..\inspire\net\nistream.cpp" />
     <ClCompile Include="..\..\inspire\net\nostream.cpp" />
     <ClCompile Include="..\..\inspire\net\reactor.cpp" />
@@ -160,6 +161,11 @@
     <ClCompile Include="..\..\inspire\net\serviceMgr.cpp" />
     <ClCompile Include="..\..\inspire\net\session.cpp" />
     <ClCompile Include="..\..\inspire\net\tcpconnection.cpp" />
+    <ClCompile Include="..\..\inspire\stream\basestream.cpp" />
+    <ClCompile Include="..\..\inspire\stream\iostream.cpp" />
+    <ClCompile Include="..\..\inspire\stream\istream.cpp" />
+    <ClCompile Include="..\..\inspire\stream\ostream.cpp" />
+    <ClCompile Include="..\..\inspire\stream\refStream.cpp" />
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thdMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thread.cpp" />
@@ -175,6 +181,7 @@
     <ClInclude Include="..\..\inspire\net\async\asyncconnection.h" />
     <ClInclude Include="..\..\inspire\net\async\ioservice.h" />
     <ClInclude Include="..\..\inspire\net\connection.h" />
+    <ClInclude Include="..\..\inspire\net\endian\endian.h" />
     <ClInclude Include="..\..\inspire\net\engine.h" />
     <ClInclude Include="..\..\inspire\net\event\event.h" />
     <ClInclude Include="..\..\inspire\net\event\eventhandler.h" />
@@ -186,6 +193,11 @@
     <ClInclude Include="..\..\inspire\net\serviceMgr.h" />
     <ClInclude Include="..\..\inspire\net\session.h" />
     <ClInclude Include="..\..\inspire\net\tcpconnection.h" />
+    <ClInclude Include="..\..\inspire\stream\basestream.h" />
+    <ClInclude Include="..\..\inspire\stream\iostream.h" />
+    <ClInclude Include="..\..\inspire\stream\istream.h" />
+    <ClInclude Include="..\..\inspire\stream\ostream.h" />
+    <ClInclude Include="..\..\inspire\stream\refStream.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTask.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h" />
     <ClInclude Include="..\..\inspire\thread\thdMgr.h" />
