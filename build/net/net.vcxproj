@@ -204,6 +204,7 @@
     <ClInclude Include="..\..\inspire\thread\thread.h" />
     <ClInclude Include="..\..\inspire\thread\threads.h" />
     <ClInclude Include="..\..\inspire\util\assert.h" />
+    <ClInclude Include="..\..\inspire\util\binData.h" />
     <ClInclude Include="..\..\inspire\util\charConvertor.h" />
     <ClInclude Include="..\..\inspire\util\container\deque.h" />
     <ClInclude Include="..\..\inspire\util\container\map.h" />

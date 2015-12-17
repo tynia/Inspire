@@ -278,5 +278,8 @@
     <ClInclude Include="..\..\inspire\net\endian\endian.h">
       <Filter>net\endian</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\inspire\util\binData.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

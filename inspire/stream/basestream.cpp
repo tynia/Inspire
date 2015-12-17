@@ -40,7 +40,6 @@ namespace inspire {
       _data = NULL;
       _capacity = 0;
       _wOffset = 0;
-      
    }
 
    void baseStream::_zero()
