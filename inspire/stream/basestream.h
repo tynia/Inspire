@@ -8,7 +8,7 @@ namespace inspire {
    class refCounter;
    class allocator;
 
-   class baseStream : public noncopyable
+   class baseStream
    {
    public:
       virtual void skip(uint64 w) = 0;
@@ -28,13 +28,9 @@ namespace inspire {
       void _extCapacity(const uint64 size = 0);
 
    protected:
+      uint        _capacity;
+      const char* _cur;
       const char* _data;
-      uint64      _capacity;
-      uint64      _wOffset;
-   private:
-      uint        _blockSize;
-      refCounter* _refCounter;
-      allocator*  _allocator;
    };
 
    /*
