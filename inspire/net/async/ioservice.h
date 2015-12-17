@@ -1,7 +1,8 @@
 #ifndef _INSPIRE_NET_IO_SERVICE_H_
 #define _INSPIRE_NET_IO_SERVICE_H_
 
-#include "inspire.h"
+#include <windows.h>
+#include "util/inspire.h"
 
 namespace inspire {
 

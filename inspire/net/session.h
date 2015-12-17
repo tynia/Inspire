@@ -2,7 +2,7 @@
 #define _INSPIRE_NET_SESSION_H_
 
 #include "async/asyncconnection.h"
-#include "threadentity.h"
+#include "thread/thread.h"
 
 namespace inspire {
 

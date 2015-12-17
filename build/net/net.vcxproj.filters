@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="logger">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="thread\task">
+      <UniqueIdentifier>{478d3890-4ffa-4cc5-ac22-c7ac158e0a36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="net\helper">
+      <UniqueIdentifier>{3c948cf2-168f-4a2b-9ede-10be556cfa78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\async">
+      <UniqueIdentifier>{e0c2d53d-4827-43ba-9349-e21ea6805ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\event">
+      <UniqueIdentifier>{b995de75-6fe9-4691-8e83-eca32914b3d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{e1bed140-23b1-464c-acf5-439b9152d83f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\file">
+      <UniqueIdentifier>{cfe1671f-b27a-433d-9b5a-f16adc2d7774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\system">
+      <UniqueIdentifier>{192e96c2-0fbf-4294-a7fa-4949864b3db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\memory">
+      <UniqueIdentifier>{85e573bd-b0bf-463e-8db0-4661e41c3c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\container">
+      <UniqueIdentifier>{015c795f-6c29-4945-818b-736f26472db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\tcp">
+      <UniqueIdentifier>{4ce2e71a-c231-4c03-9b8d-066e5d50bfdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\udp">
+      <UniqueIdentifier>{e09fb2dc-80eb-4d37-a7b9-4d5754a24815}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\inspire\logger\base.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\logger\writer.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\thread\thdMgr.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\thread\thread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp">
+      <Filter>thread\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\connection.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\nistream.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\nostream.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\reactor.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\service.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\serviceMgr.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\session.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\tcpconnection.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp">
+      <Filter>net\async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\async\ioservice.cpp">
+      <Filter>net\async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\kernel.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\file\IO.cpp">
+      <Filter>util\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp">
+      <Filter>util\memory</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inspire\logger\base.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\logger\logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\logger\writer.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\thdMgr.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\threads.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\task\thdTask.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\connection.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\engine.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\nistream.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\nostream.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\reactor.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\service.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\serviceMgr.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\session.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\tcpconnection.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\async.h">
+      <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\asyncconnection.h">
+      <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\ioservice.h">
+      <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\event\event.h">
+      <Filter>net\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\event\eventhandler.h">
+      <Filter>net\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\event\eventid.h">
+      <Filter>net\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\assert.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\charConvertor.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\inspire.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\kernel.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\mempool.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\noncopyable.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\refCounter.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\reference.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\refPointer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\file\IO.h">
+      <Filter>util\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\atomic.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\condition.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\lock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\mutex.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\spinlock.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\system\util.h">
+      <Filter>util\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\memory\AllocatorMgr.h">
+      <Filter>util\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\memory\iObject.h">
+      <Filter>util\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\deque.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\map.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\util\container\set.h">
+      <Filter>util\container</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

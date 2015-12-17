@@ -1,7 +1,8 @@
 #ifndef _INSPIRE_NET_INTERFACE_TCP_CONNECTION_H_
 #define _INSPIRE_NET_INTERFACE_TCP_CONNECTION_H_
 
-#include "inspire.h"
+#include <winsock.h>
+#include "util/inspire.h"
 
 namespace inspire {
 

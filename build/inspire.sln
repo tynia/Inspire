@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "logger", "logger\logger.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "util", "util\util.vcxproj", "{C4883AE6-1A35-4E36-8F99-4741DA3906DF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "net", "net\net.vcxproj", "{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{C4883AE6-1A35-4E36-8F99-4741DA3906DF}.Release|x64.Build.0 = Release|x64
 		{C4883AE6-1A35-4E36-8F99-4741DA3906DF}.Release|x86.ActiveCfg = Release|Win32
 		{C4883AE6-1A35-4E36-8F99-4741DA3906DF}.Release|x86.Build.0 = Release|Win32
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Debug|x64.ActiveCfg = Debug|x64
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Debug|x64.Build.0 = Debug|x64
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Debug|x86.ActiveCfg = Debug|Win32
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Debug|x86.Build.0 = Debug|Win32
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Release|x64.ActiveCfg = Release|x64
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Release|x64.Build.0 = Release|x64
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Release|x86.ActiveCfg = Release|Win32
+		{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

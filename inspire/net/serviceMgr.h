@@ -1,7 +1,7 @@
 #ifndef _INSPIRE_NET_SERVICE_MANAGER_H_
 #define _INSPIRE_NET_SERVICE_MANAGER_H_
 
-#include "inspire.h"
+#include "util/inspire.h"
 #include "control.h"
 
 namespace inspire {

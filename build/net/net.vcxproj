@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E47099AD-83DA-4331-B7F5-AD4AD4DDD520}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>net</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\inspire;$(ProjectDir)..\..\inspire\net;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\inspire;$(ProjectDir)..\..\inspire\net;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\inspire\logger\base.cpp" />
+    <ClCompile Include="..\..\inspire\logger\writer.cpp" />
+    <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp" />
+    <ClCompile Include="..\..\inspire\net\async\ioservice.cpp" />
+    <ClCompile Include="..\..\inspire\net\connection.cpp" />
+    <ClCompile Include="..\..\inspire\net\nistream.cpp" />
+    <ClCompile Include="..\..\inspire\net\nostream.cpp" />
+    <ClCompile Include="..\..\inspire\net\reactor.cpp" />
+    <ClCompile Include="..\..\inspire\net\service.cpp" />
+    <ClCompile Include="..\..\inspire\net\serviceMgr.cpp" />
+    <ClCompile Include="..\..\inspire\net\session.cpp" />
+    <ClCompile Include="..\..\inspire\net\tcpconnection.cpp" />
+    <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp" />
+    <ClCompile Include="..\..\inspire\thread\thdMgr.cpp" />
+    <ClCompile Include="..\..\inspire\thread\thread.cpp" />
+    <ClCompile Include="..\..\inspire\util\file\IO.cpp" />
+    <ClCompile Include="..\..\inspire\util\kernel.cpp" />
+    <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inspire\logger\base.h" />
+    <ClInclude Include="..\..\inspire\logger\logger.h" />
+    <ClInclude Include="..\..\inspire\logger\writer.h" />
+    <ClInclude Include="..\..\inspire\net\async\async.h" />
+    <ClInclude Include="..\..\inspire\net\async\asyncconnection.h" />
+    <ClInclude Include="..\..\inspire\net\async\ioservice.h" />
+    <ClInclude Include="..\..\inspire\net\connection.h" />
+    <ClInclude Include="..\..\inspire\net\engine.h" />
+    <ClInclude Include="..\..\inspire\net\event\event.h" />
+    <ClInclude Include="..\..\inspire\net\event\eventhandler.h" />
+    <ClInclude Include="..\..\inspire\net\event\eventid.h" />
+    <ClInclude Include="..\..\inspire\net\nistream.h" />
+    <ClInclude Include="..\..\inspire\net\nostream.h" />
+    <ClInclude Include="..\..\inspire\net\reactor.h" />
+    <ClInclude Include="..\..\inspire\net\service.h" />
+    <ClInclude Include="..\..\inspire\net\serviceMgr.h" />
+    <ClInclude Include="..\..\inspire\net\session.h" />
+    <ClInclude Include="..\..\inspire\net\tcpconnection.h" />
+    <ClInclude Include="..\..\inspire\thread\task\thdTask.h" />
+    <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h" />
+    <ClInclude Include="..\..\inspire\thread\thdMgr.h" />
+    <ClInclude Include="..\..\inspire\thread\thread.h" />
+    <ClInclude Include="..\..\inspire\thread\threads.h" />
+    <ClInclude Include="..\..\inspire\util\assert.h" />
+    <ClInclude Include="..\..\inspire\util\charConvertor.h" />
+    <ClInclude Include="..\..\inspire\util\container\deque.h" />
+    <ClInclude Include="..\..\inspire\util\container\map.h" />
+    <ClInclude Include="..\..\inspire\util\container\set.h" />
+    <ClInclude Include="..\..\inspire\util\file\IO.h" />
+    <ClInclude Include="..\..\inspire\util\inspire.h" />
+    <ClInclude Include="..\..\inspire\util\kernel.h" />
+    <ClInclude Include="..\..\inspire\util\memory\AllocatorMgr.h" />
+    <ClInclude Include="..\..\inspire\util\memory\iObject.h" />
+    <ClInclude Include="..\..\inspire\util\mempool.h" />
+    <ClInclude Include="..\..\inspire\util\noncopyable.h" />
+    <ClInclude Include="..\..\inspire\util\refCounter.h" />
+    <ClInclude Include="..\..\inspire\util\reference.h" />
+    <ClInclude Include="..\..\inspire\util\refPointer.h" />
+    <ClInclude Include="..\..\inspire\util\system\atomic.h" />
+    <ClInclude Include="..\..\inspire\util\system\condition.h" />
+    <ClInclude Include="..\..\inspire\util\system\lock.h" />
+    <ClInclude Include="..\..\inspire\util\system\mutex.h" />
+    <ClInclude Include="..\..\inspire\util\system\spinlock.h" />
+    <ClInclude Include="..\..\inspire\util\system\util.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

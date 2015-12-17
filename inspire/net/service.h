@@ -1,8 +1,8 @@
 #ifndef _INSPIRE_NET_SERVICE_H_
 #define _INSPIRE_NET_SERVICE_H_
 
-#include "inspire.h"
-#include "threadentity.h"
+#include "util/inspire.h"
+#include "thread/thread.h"
 
 namespace inspire {
 
