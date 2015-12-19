@@ -2,17 +2,15 @@
 #define _INSPIRE_STREAM_ISTREAM_H_
 
 #include "baseStream.h"
-#include "binData.h"
+#include "util/binData.h"
 
 namespace inspire {
 
-   class IStream : public baseStream
+   class IStream
    {
    public:
-      IStream(const char* buffer, uint64 len);
-      virtual ~IStream();
-
-      virtual void skip(uint64 w) { _rOffset += w; }
+      IStream(const char* src, uint64 len) : _data(src), _size(len) {}
+      virtual ~IStream() { _data = NULL, _size = 0; }
 
    public:
       const char* data() const
@@ -20,12 +18,12 @@ namespace inspire {
          return _data;
       }
 
+      const uint64 size() const { return _size; }
+
       void skip(uint64 r)
       {
          _rOffset += r;
       }
-
-      char get();
 
       IStream& operator>> (bool& b);
       IStream& operator>> (char& c);
@@ -41,10 +39,12 @@ namespace inspire {
       IStream& operator>> (binData& bin);
 
    private:
-      void _readBuffer(void* buffer, const uint len, const uint toRead);
+      uint _read(void* buffer, const uint len, const uint toRead);
 
    protected:
-      uint64 _rOffset;
+      const char* _data;
+      uint64      _size;
+      uint64      _rOffset;
    };
 }
 #endif
