@@ -52,6 +52,9 @@
     <Filter Include="net\endian">
       <UniqueIdentifier>{5d9105f5-5a19-4814-bd7c-2f49453fb066}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sample">
+      <UniqueIdentifier>{4da55d78-8b77-4456-8a7f-996480577ba5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\inspire\logger\base.cpp">
@@ -125,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="..\..\inspire\net\endian\endian.cpp">
       <Filter>net\endian</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sample\client.cpp">
+      <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\binData.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\net.h">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

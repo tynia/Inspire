@@ -172,6 +172,7 @@
     <ClCompile Include="..\..\inspire\util\file\IO.cpp" />
     <ClCompile Include="..\..\inspire\util\kernel.cpp" />
     <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp" />
+    <ClCompile Include="..\..\sample\client.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="..\..\inspire\net\event\event.h" />
     <ClInclude Include="..\..\inspire\net\event\eventhandler.h" />
     <ClInclude Include="..\..\inspire\net\event\eventid.h" />
+    <ClInclude Include="..\..\inspire\net\net.h" />
     <ClInclude Include="..\..\inspire\net\nistream.h" />
     <ClInclude Include="..\..\inspire\net\nostream.h" />
     <ClInclude Include="..\..\inspire\net\reactor.h" />
