@@ -10,25 +10,19 @@ struct msgClient
    char data[100];
 };
 
-class Session
-{
-public:
-   Session(int fd) {}
-   ~Session() {}
-
-
-
-private:
-   int _fd;
-};
-
-class TaskServer : inspire::thdTask
+class TaskServer : public inspire::thdTask
 {
 public:
    TaskServer() : thdTask(SERVER_TASK_ID, "server")
    {}
 
-   ~TaskServer() {}
+   ~TaskServer() 
+   {
+      if (!_sessions.empty())
+      {
+         for( )
+      }
+   }
 
    virtual const int run()
    {
@@ -57,7 +51,10 @@ public:
          remote = ::accept(_fd, (sockaddr*)&raddr, &len);
          if (SOCKET_ERROR != remote)
          {
-            
+            msgClient cc;
+            ::recv(remote, (char*)&cc, sizeof(int64) + 100, 0);
+            std::cout << "Receive from client: " << cc.id << ", msg: " << cc.data << std::endl;
+            _sessions.push_back(remote);
          }
       }
 
@@ -68,5 +65,5 @@ private:
    bool _stop;
    int _fd;
    const int64 SERVER_TASK_ID = 65536;
-   std::map<int64, int> _sessions;
+   std::deque<int> _sessions;
 };
