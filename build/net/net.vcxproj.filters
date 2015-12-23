@@ -132,6 +132,9 @@
     <ClCompile Include="..\..\sample\client.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\sample\server.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h">

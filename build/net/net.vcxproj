@@ -173,6 +173,7 @@
     <ClCompile Include="..\..\inspire\util\kernel.cpp" />
     <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp" />
     <ClCompile Include="..\..\sample\client.cpp" />
+    <ClCompile Include="..\..\sample\server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h" />

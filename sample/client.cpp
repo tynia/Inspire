@@ -19,18 +19,19 @@ const int64 inc(atomic_id& aid)
 
 atomic_id taskId;
 
+struct msgClient
+{
+   int64 id;
+   char data[100];
+};
+
 class TaskConnnection : public inspire::thdTask
 {
 public:
-   TaskConnnection() : thdTask(inc(taskId), "client") : _stop(false)
+   TaskConnnection() : thdTask(inc(taskId), "client")
    {}
 
    ~TaskConnnection() {}
-
-   void stop()
-   {
-      _stop = false;
-   }
 
    virtual const int run()
    {
@@ -48,20 +49,16 @@ public:
       rc = ::connect(_fd, (struct sockaddr*)&serv, sizeof(sockaddr_in));
       STRONG_ASSERT(SOCKET_ERROR != rc, "Failed to connect to server: %s:%d", host, port);
 
-      char data[100] = { 0 };
-      utilSnprintf(data, 100, "hello, this is client %lld", id());
+      msgClient cc;
+      cc.id = id();
+      utilSnprintf(cc.data, 100, "hello, this is client %lld", id());
 
-      ::send(_fd, data, strlen(data), 0);
-      _stop = true;
-      while (_stop)
-      {
-         utilSleep(1000);
-      }
+      ::send(_fd, (const char*)&cc, 100 + sizeof(int64), 0);
+      utilSleep(10000);
       return 0;
    }
 private:
    int _fd;
-   bool _stop;
 };
 
 int main(int argc, char** argb)

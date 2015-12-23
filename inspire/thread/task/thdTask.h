@@ -1,8 +1,9 @@
 #ifndef _INSPIRE_THREAD_TASK_H_
 #define _INSPIRE_THREAD_TASK_H_
 
-#include "thread.h"
+#include "thread/thread.h"
 #include "thdTaskMgr.h"
+#include "util/memory/iObject.h"
 
 namespace inspire {
 
