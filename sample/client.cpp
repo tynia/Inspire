@@ -70,6 +70,9 @@ int main(int argc, char** argb)
    inspire::thdMgr* mgr = inspire::thdMgr::instance();
    STRONG_ASSERT(NULL != mgr, "Failed to init thread manager");
 
+   mgr->initialize();
+   mgr->active();
+
    uint idx = 0;
    while ( idx < 1000000)
    {

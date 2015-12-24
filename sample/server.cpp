@@ -10,18 +10,26 @@ struct msgClient
    char data[100];
 };
 
-class TaskServer : public inspire::thdTask
+class Server
 {
 public:
-   TaskServer() : thdTask(SERVER_TASK_ID, "server")
+   Server() : _fd(-1), _stop(false)
    {}
 
-   ~TaskServer() 
+   ~Server() 
    {
       if (!_sessions.empty())
       {
-         for( )
+         for (int idx = 0; idx < _sessions.size(); ++idx)
+         {
+            ::closesocket(_sessions[idx]);
+         }
       }
+   }
+
+   void stop()
+   {
+      _stop = true;
    }
 
    virtual const int run()
@@ -58,12 +66,18 @@ public:
          }
       }
 
-      int port = 5000;
+      return 0;
    }
 
 private:
    bool _stop;
    int _fd;
-   const int64 SERVER_TASK_ID = 65536;
-   std::deque<int> _sessions;
+   std::vector<int> _sessions;
 };
+
+int main(int argc, char** argv)
+{
+   Server serv;
+   serv.run();
+   return 0;
+}
