@@ -6,7 +6,7 @@ namespace inspire {
 
    AllocatorMgr::AllocatorMgr()
    {
-      for (int idx = 0, size = 8; idx < MAX_ALLOCATOR_COUNT; ++idx, size *= 2)
+      for (int idx = 0, size = 8; idx < MAX_ALLOCATOR_COUNT; ++idx, size += MEMORY_SIZE_INCREMENT)
       {
          _fls[idx].size = size;
          _fls[idx].hdr  = NULL;
@@ -182,7 +182,7 @@ namespace inspire {
          }
          else if (size > _fls[locate].size)
          {
-            high = locate + 1;
+            low = locate + 1;
          }
          else
          {
