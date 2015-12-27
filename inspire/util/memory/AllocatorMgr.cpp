@@ -163,33 +163,13 @@ namespace inspire {
       // we need find which allocator should allocate the size
       // and we use binary search
       // TODO: bug in the code block
-      INSPIRE_ASSERT(0 != size, "Try to locate 0 byte free list")
-      uint high = MAX_ALLOCATOR_COUNT - 1;
-      uint low = 0;
-      uint locate = 0;
+      INSPIRE_ASSERT(0 != size, "Try to locate 0 byte free list");
       if (size > MAX_LIMITED_MEMORY_SIZE)
       {
-         return high;
+         return MAX_ALLOCATOR_COUNT - 1;
       }
-
-      high = high - 1;
-      while (true)
-      {
-         locate = (high + low) / 2;
-         if (size <= _fls[locate].size - MEMORY_SIZE_INCREMENT)
-         {
-            high = locate - 1;
-         }
-         else if (size > _fls[locate].size)
-         {
-            low = locate + 1;
-         }
-         else
-         {
-            break;
-         }
-      }
-
+      uint locate = (size - 1) / MEMORY_SIZE_INCREMENT;
+      INSPIRE_ASSERT((0 < locate && locate <= 16) , "error index of location");
       return locate;
    }
 

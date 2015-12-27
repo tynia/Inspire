@@ -55,7 +55,7 @@ namespace inspire {
          MAX_LIMITED_MEMORY_SIZE = 128,
       };
       //index: 0   1   2   3   4   5   6   7   8   9   10  11  12   13   14   15  16
-      //size : 8   16  24  32  40  48  56  64  72  80  88  86 104  112  120  128  x
+      //size : 8   16  24  32  40  48  56  64  72  80  88  96 104  112  120  128   x
       freelist _fls[MAX_ALLOCATOR_COUNT];               // free lists
    };
 }
