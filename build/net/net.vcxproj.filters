@@ -16,9 +16,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="net\helper">
-      <UniqueIdentifier>{3c948cf2-168f-4a2b-9ede-10be556cfa78}</UniqueIdentifier>
-    </Filter>
     <Filter Include="net\async">
       <UniqueIdentifier>{e0c2d53d-4827-43ba-9349-e21ea6805ce1}</UniqueIdentifier>
     </Filter>
@@ -81,9 +78,6 @@
     <ClCompile Include="..\..\inspire\net\nostream.cpp">
       <Filter>net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\net\reactor.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\service.cpp">
       <Filter>net</Filter>
     </ClCompile>
@@ -91,9 +85,6 @@
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\inspire\net\session.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\net\tcpconnection.cpp">
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp">
@@ -135,6 +126,12 @@
     <ClCompile Include="..\..\sample\server.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\net\tcp\tcpconnection.cpp">
+      <Filter>net\tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\async\reactor.cpp">
+      <Filter>net\async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h">
@@ -173,9 +170,6 @@
     <ClInclude Include="..\..\inspire\net\nostream.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\net\reactor.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\net\service.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -183,9 +177,6 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\session.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\tcpconnection.h">
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\async.h">
@@ -298,6 +289,12 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\endpoint.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\tcp\tcpconnection.h">
+      <Filter>net\tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\reactor.h">
+      <Filter>net\async</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

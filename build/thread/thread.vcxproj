@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thdMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thread.cpp" />
+    <ClCompile Include="..\..\inspire\thread\threadMgr.cpp" />
     <ClCompile Include="..\..\inspire\util\file\IO.cpp" />
     <ClCompile Include="..\..\sample\threads.cpp" />
   </ItemGroup>
@@ -161,9 +162,12 @@
     <ClInclude Include="..\..\inspire\logger\logger.h" />
     <ClInclude Include="..\..\inspire\logger\writer.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTask.h" />
+    <ClInclude Include="..\..\inspire\thread\task\thdTaskExt.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h" />
     <ClInclude Include="..\..\inspire\thread\thdMgr.h" />
     <ClInclude Include="..\..\inspire\thread\thread.h" />
+    <ClInclude Include="..\..\inspire\thread\threadExt.h" />
+    <ClInclude Include="..\..\inspire\thread\threadMgr.h" />
     <ClInclude Include="..\..\inspire\thread\threads.h" />
     <ClInclude Include="..\..\inspire\util\assert.h" />
     <ClInclude Include="..\..\inspire\util\charConvertor.h" />

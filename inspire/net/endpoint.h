@@ -7,32 +7,15 @@ namespace inspire {
 
    struct endpoint
    {
-      int fd;
       sockaddr_in addr;
 
-      endpoint() : fd(INVALID_SOCKET)
+      endpoint()
       {
          memset(&addr, 0, sizeof(addr));
-      }
-
-      endpoint(int sock) : fd(sock)
-      {
-         INSPIRE_ASSERT(INVALID_SOCKET != fd, "endpoint init with invalid socket");
-         memset(&addr, 0, sizeof(addr));
-         getpeername(fd, (struct sockaddr*)&addr, &len);
-      }
-
-      void toServerEndpoint(int port)
-      {
-         memset(&addr, 0, sizeof(sockaddr_in));
-         addr.sin_family = AF_INET;
-         addr.sin_addr.s_addr = htonl(INADDR_ANY);
-         addr.sin_port = htons(port);
       }
 
       std::string toString()
       {
-         INSPIRE_ASSERT(INVALID_SOCKET != fd, "try to get ip with invalid socket");
          std::string str;
          str = ntohl(addr.sin_addr.s_addr);
          str += ":";
@@ -42,18 +25,75 @@ namespace inspire {
       }
    };
 
-   void toEndpoint(int sock, endpoint& end)
+   inline void toServerEndpoint(uint port, endpoint& ep)
    {
-      INSPIRE_ASSERT(INVALID_SOCKET != sock, "endpoint init with invalid socket");
-      memset(&end.addr, 0, sizeof(end.addr));
+      memset(&ep.addr, 0, sizeof(sockaddr_in));
+      ep.addr.sin_family = AF_INET;
+      ep.addr.sin_addr.s_addr = htonl(INADDR_ANY);
+      ep.addr.sin_port = htons(port);
    }
 
-   void toEndpoint(uint port, endpoint& end)
+   inline bool toEndpoint(int fd, endpoint* remote, endpoint* local)
    {
-      memset(&end.addr, 0, sizeof(sockaddr_in));
-      end.addr.sin_family = AF_INET;
-      end.addr.sin_addr.s_addr = htonl(INADDR_ANY);
-      end.addr.sin_port = htons(port);
+      if (INVALID_SOCKET == fd)
+      {
+         return false;
+      }
+
+      int len = sizeof(sockaddr_in);
+      // fetch remote addr from socket
+      if (NULL != remote)
+      {
+         int rc = getpeername(fd, (struct sockaddr*)&remote->addr, &len);
+         if (rc)
+         {
+            return false;
+         }
+      }
+      // fetch local addr from socket
+      if (NULL != local)
+      {
+         int rc = getsockname(fd, (struct sockaddr*)&local->addr, &len);
+         if (rc)
+         {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   inline void toEndpoint(const char* hostname, uint port, endpoint& ep)
+   {
+      struct hostent* hp;
+#ifdef _WIN32
+      if ((hp = gethostbyname(hostname)))
+#elif _LINUX
+      struct hostent hent;
+      struct hostent* ret = NULL;
+      int error = 0;
+      char hbuf[8192] = { 0 };
+      hp = &hent;
+      if ((0 == gethostbyname_r(hostname, &hp, hbuf, sizeof(hbuf), &ret, &error))
+          && NULL != ret)
+#elif _AIX
+      struct host hent;
+      struct hostent_data hdata;
+      hp = &hent;
+      if ((0 == gethostbyname_r(hostname, hp, &hdata)))
+#endif
+      {
+         uint* pAddr = (uint*)hp->h_addr_list[0];
+         if (pAddr)
+         {
+            ep.addr.sin_addr.s_addr = *pAddr;
+         }
+      }
+      else
+      {
+         ep.addr.sin_addr.s_addr = inet_addr(hostname);
+      }
+      ep.addr.sin_port = htons(port);
    }
 }
 #endif

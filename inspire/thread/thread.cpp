@@ -1,5 +1,31 @@
+/*******************************************************************************
+The MIT License (MIT)
+
+Copyright (c) 2015 tynia
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Author: tynia
+Date  : =========
+*******************************************************************************/
 #include "thread.h"
-#include "thdMgr.h"
+#include "threadMgr.h"
 #include "task/thdTask.h"
 
 #ifdef _WINDOWS
@@ -10,8 +36,8 @@
 
 namespace inspire {
 
-   thread::thread(thdMgr* mgr)
-      : _state(THREAD_INVALID), _detach(false), _errno(0), _tid(0), _thdMgr(mgr), _task(NULL)
+   thread::thread(threadMgr* mgr, bool detach)
+      : _state(THREAD_INVALID), _detach(detach), _errno(0), _threadMgr(mgr), _task(NULL), _tid(0)
    {
 #ifdef _WINDOWS
       _hThread = INVALID_HANDLE_VALUE;
@@ -20,7 +46,7 @@ namespace inspire {
       pthread_mutex_init(&_mtx, NULL);
       pthread_cond_init(&_cond, NULL);
 #endif
-      STRONG_ASSERT(NULL != mgr, "thdMgr cannot be NULL");
+      STRONG_ASSERT(NULL != mgr, "threadMgr cannot be NULL");
    }
 
    thread::~thread()
@@ -36,32 +62,6 @@ namespace inspire {
       pthread_mutex_destroy(&_mtx);
       pthread_cond_destroy(&_cond);
 #endif
-   }
-
-   int thread::create()
-   {
-      int rc = 0;
-      _setstate(THREAD_IDLE);
-#ifdef _WINDOWS
-      unsigned threadId = 0;
-      _hThread = (HANDLE)_beginthreadex(NULL, 0, thread::ENTRY_POINT, this, CREATE_SUSPENDED, &threadId);
-      if (INVALID_HANDLE_VALUE == _hThread)
-      {
-         rc = utilGetLastError();
-         LogError("Failed to start a thread, error: %d", rc);
-         return rc;
-      }
-      _tid = threadId;
-#else
-      rc = pthread_create(&_ntid, NULL, thread::ENTRY_POINT, this);
-      if (rc)
-      {
-         LogError("Failed to start a thread, error: %d", rc);
-         return rc;
-      }
-      _tid = (int64)_ntid;
-#endif
-      return rc;
    }
 
    void thread::active()
@@ -172,7 +172,7 @@ namespace inspire {
 
    void thread::deactive()
    {
-      _thdMgr->recycle(this);
+      _threadMgr->recycle(this);
    }
 
    void thread::_reset()
@@ -183,17 +183,43 @@ namespace inspire {
       _task   = NULL;
    }
 
+   int thread::create()
+   {
+      int rc = 0;
+      _setstate(THREAD_IDLE);
+#ifdef _WINDOWS
+      unsigned threadId = 0;
+      _hThread = (HANDLE)_beginthreadex(NULL, 0, thread::ENTRY_POINT, this, CREATE_SUSPENDED, &threadId);
+      if (INVALID_HANDLE_VALUE == _hThread)
+      {
+         rc = utilGetLastError();
+         LogError("Failed to start a thread, error: %d", rc);
+         return rc;
+      }
+      _tid = threadId;
+#else
+      rc = pthread_create(&_ntid, NULL, thread::ENTRY_POINT, this);
+      if (rc)
+      {
+         LogError("Failed to start a thread, error: %d", rc);
+         return rc;
+      }
+      _tid = (int64)_ntid;
+#endif
+      return rc;
+   }
+
 #ifdef _WINDOWS
    unsigned __stdcall thread::ENTRY_POINT(void* arg)
    {
       INSPIRE_ASSERT(NULL != arg, "Thread addition parameter cannot be NULL");
-      LogEvent("Thread starting");
+      LogDebug("Thread starting");
 
       thread* thd = static_cast<thread*>(arg);
       if (thd)
       {
          int rc = 0;
-         thdMgr* mgr = thd->threadMgr();
+         threadMgr* mgr = thd->thdMgr();
          INSPIRE_ASSERT(NULL != mgr, "Thread manager is NULL, panic");
          while (THREAD_RUNNING == thd->state())
          {
@@ -218,7 +244,7 @@ namespace inspire {
             }
          }
       }
-      LogEvent("Thread endding");
+      LogDebug("Thread endding");
       return thd->error();
    }
 #else
@@ -229,7 +255,7 @@ namespace inspire {
       thread* thd = static_cast<thread*>(arg);
       if (thd)
       {
-         thdMgr* mgr = thd->threadMgr();
+         threadMgr* mgr = thd->thdMgr();
          STRONG_ASSERT(NULL != mgr, "Thread manager is NULL, panic");
 
          while (THREAD_RUNNING & thd->state())

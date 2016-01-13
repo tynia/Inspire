@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\inspire\util\file\IO.cpp">
       <Filter>util\file</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\thread\threadMgr.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\thread\thdMgr.h">
@@ -112,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\util\container\set.h">
       <Filter>util\container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\threadExt.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\threadMgr.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\thread\task\thdTaskExt.h">
+      <Filter>thread\task</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
