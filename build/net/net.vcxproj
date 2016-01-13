@@ -185,13 +185,14 @@
     <ClInclude Include="..\..\inspire\net\async\ioservice.h" />
     <ClInclude Include="..\..\inspire\net\async\IOServiceOverlapped.h" />
     <ClInclude Include="..\..\inspire\net\async\reactor.h" />
-    <ClInclude Include="..\..\inspire\net\connection.h" />
+    <ClInclude Include="..\..\inspire\net\IConnection.h" />
     <ClInclude Include="..\..\inspire\net\endian\endian.h" />
     <ClInclude Include="..\..\inspire\net\endpoint.h" />
     <ClInclude Include="..\..\inspire\net\event\event.h" />
     <ClInclude Include="..\..\inspire\net\event\eventhandler.h" />
     <ClInclude Include="..\..\inspire\net\event\eventid.h" />
     <ClInclude Include="..\..\inspire\net\net.h" />
+    <ClInclude Include="..\..\inspire\net\network.h" />
     <ClInclude Include="..\..\inspire\net\nistream.h" />
     <ClInclude Include="..\..\inspire\net\nostream.h" />
     <ClInclude Include="..\..\inspire\net\service.h" />

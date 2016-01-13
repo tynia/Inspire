@@ -58,7 +58,7 @@ namespace inspire {
       if (0 > _epoll)
       {
          rc = -1;
-         LogError("Create epoll handle failed, errno = ", util::netError());
+         LogError("Create epoll handle failed, errno = ", util::fetchNetError());
       }
       return rc;
    }
@@ -105,7 +105,7 @@ namespace inspire {
                   int conn = ::accept(fdd->fd, (sockaddr*)&addr, &len);
                   if (conn < 0)
                   {
-                     LogError("Failed to accept remote connection, errno: %d", util::netError());
+                     LogError("Failed to accept remote connection, errno: %d", util::fetchNetError());
                      continue;
                   }
                   fdData* newFdd = new fdData(FD_CONNECTION, conn);
@@ -119,7 +119,7 @@ namespace inspire {
                   readLen = ::read(fdd->_fd, (char*)&msgLen, sizeof(int), 0);
                   if (readLen < 0)
                   {
-                     LogError("Failed to read msg length, errno: %d", util::netError());
+                     LogError("Failed to read msg length, errno: %d", util::fetchNetError());
                      //remove(fdd->_fd);
                   }
                   // need import memory pool to alloc buffer
@@ -131,7 +131,7 @@ namespace inspire {
                      readLen = ::read(fdd->_fd, buf + pos, msgLen - pos);
                      if (readLen < 0)
                      {
-                        LogError("Failed to read msg context, errno: %d", util::netError());
+                        LogError("Failed to read msg context, errno: %d", util::fetchNetError());
                         //remove(fdd->_fd);
                         break;
                      }

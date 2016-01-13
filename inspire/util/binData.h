@@ -14,7 +14,5 @@ namespace inspire {
       binData(const char* src, const uint64 l) : str(src), len(l) {}
       virtual ~binData() { str = NULL; len = 0; }
    };
-
-
 }
 #endif

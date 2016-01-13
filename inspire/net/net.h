@@ -23,7 +23,7 @@ namespace inspire {
    /**
     * init network of windows
     */
-   inline bool initializeNet()
+   inline void initializeNet()
    {
       int rc = NO_ERROR;
 #ifdef _WIN32
@@ -33,21 +33,16 @@ namespace inspire {
       if (!initialized)
       {
          rc = WSAStartup(MAKEWORD(2, 2), &wsaData);
-         if (NO_ERROR != rc)
-         {
-            //LogError
-            return false;
-         }
+         STRONG_ASSERT(NO_ERROR != rc, "Failed to init windows network environment");
          initialized = true;
       }
 #endif
-      return true;
    }
 
    /**
     * return network error
     */
-   inline int netError()
+   inline int fetchNetError()
    {
 #ifdef _WIN32
       return WSAGetLastError();

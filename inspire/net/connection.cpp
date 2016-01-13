@@ -1,31 +1,38 @@
-#include "connection.h"
-#include "iostream.h"
-#include "event/eventid.h"
-#include "event/event.h"
-#include "helper/nethelper.h"
+#include "IConnection.h"
 
 namespace inspire {
 
-   static const unsigned int UINT_SIZE = sizeof(unsigned int);
-
-   Connection::Connection(const unsigned int port) : tcpConnection(port)
+   IConnection::IConnection()
    {
    }
 
-   Connection::Connection(const char* ip, const unsigned int port) : tcpConnection(ip, port)
+   IConnection::IConnection(int sock) : _fd(sock)
    {
+      INSPIRE_ASSERT(INVALID_FD == _fd, "try to init connection using invalid socket");
    }
 
-   Connection::Connection(const int sock) : tcpConnection(sock)
+   bool IConnection::connected() const
    {
+      int rc = 0;
+#if defined(_WINDOWS)
+      rc = ::send(_fd, "", 0, 0);
+      if (SOCKET_ERROR == rc)
+#elif defined(_AIX)
+      rc = ::send(_fd, "", 0, 0);
+      if (0 == rc)
+#else
+      rc = ::recv(_fd, NULL, 0, MSG_DONTWAIT);
+      if (0 == rc)
+#endif
+      {
+         return false;
+      }
+      return true;
    }
 
-   Connection::Connection(const Connection& rhs) : tcpConnection(rhs)
+   void IConnection::_initAddr()
    {
-   }
-
-   Connection::~Connection()
-   {
+      toEndpoint(_fd, &_remote, &_local);
    }
 
    void Connection::init()

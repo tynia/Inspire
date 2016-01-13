@@ -1,6 +1,9 @@
 #ifndef _INSPIRE_NET_ASYNC_IO_H_
 #define  _INSPIRE_NET_ASYNC_IO_H_
 
+#include "network.h"
+#include "endpoint.h"
+
 namespace inspire {
 
    enum IOEvent
@@ -16,12 +19,21 @@ namespace inspire {
       MAX_BUFFER_SIZE = 8192,
    };
 
+   class IAsyncConnection;
+
    struct IOServiceOverlapped : OVERLAPPED
    {
-      IOEvent  ioeType;
-      endpoint remote;
-      WSABUF   wsaBuffer;
-      char     buffer[MAX_BUFFER_SIZE];
+      IOEvent           ioeType;
+      IAsyncConnection* conn;
+      WSABUF            wsaBuffer;
+      char              buffer[MAX_BUFFER_SIZE];
+
+      IOServiceOverlapped() : ioeType(IOE_INVALID), conn(NULL)
+      {
+         memset(buffer, 0, MAX_BUFFER_SIZE);
+         wsaBuffer.buf = buffer;
+         wsaBuffer.len = MAX_BUFFER_SIZE;
+      }
    };
 }
 #endif
