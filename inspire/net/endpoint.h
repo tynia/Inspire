@@ -14,6 +14,16 @@ namespace inspire {
          memset(&addr, 0, sizeof(addr));
       }
 
+      const unsigned short port() const
+      {
+         return ntohs(addr.sin_port);
+      }
+
+      const unsigned long ip()
+      {
+         return ntohl(addr.sin_addr.s_addr);
+      }
+
       std::string toString()
       {
          std::string str;

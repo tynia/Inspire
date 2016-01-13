@@ -63,7 +63,7 @@ private:
 
 int main(int argc, char** argb)
 {
-   STRONG_ASSERT(!inspire::netok(), "Failed initialize net environment");
+   STRONG_ASSERT(!inspire::initializeNet(), "Failed initialize net environment");
 
    taskId.id_sequeue = 0;
 

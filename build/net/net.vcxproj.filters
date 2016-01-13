@@ -161,9 +161,6 @@
     <ClInclude Include="..\..\inspire\net\connection.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\net\engine.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\net\nistream.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -294,6 +291,9 @@
       <Filter>net\tcp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\reactor.h">
+      <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\engine.h">
       <Filter>net\async</Filter>
     </ClInclude>
   </ItemGroup>
