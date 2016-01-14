@@ -2,22 +2,17 @@
 
 namespace inspire {
 
-   IConnection::IConnection()
+   IConnection::IConnection() : _fd(INVALID_FD)
    {
    }
 
-   IConnection::IConnection(int sock) : _fd(sock)
+   IConnection::IConnection(const int sock) : _fd(sock)
    {
       INSPIRE_ASSERT(INVALID_FD == _fd, "try to init connection using invalid socket");
    }
 
-   void IConnection::close()
+   IConnection::~IConnection()
    {
-      if (INVALID_FD != _fd)
-      {
-         ::closesocket(_fd);
-         _fd = INVALID_FD;
-      }
    }
 
    bool IConnection::alive() const
@@ -39,29 +34,85 @@ namespace inspire {
       return true;
    }
 
+   void IConnection::close()
+   {
+      if (INVALID_FD != _fd)
+      {
+         ::closesocket(_fd);
+         _fd = INVALID_FD;
+      }
+   }
+
    int IConnection::initialize()
    {
       _fd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
       if (INVALID_SOCKET == _fd)
       {
-         LogError("Failed to init socket");
-      }
-
-      return _fd;
-   }
-
-   int IConnection::accept(int& fd, endpoint& addr)
-   {
-      int addrLen = sizeof(sockaddr_in);
-      int rc = ::accept(fd, (struct sockaddr*)&addr, &addrLen);
-      if (SOCKET_ERROR == rc)
-      {
-         LogError("Failed to accept");
+         int rc = fetchNetError();
+         LogError("Failed to init socket, errno: %d", rc);
          return rc;
       }
-      toEndpoint(fd, &addr);
-      return rc;
+
+      return 0;
    }
+
+   int IConnection::bind(const uint port, endpoint& addr)
+   {
+      int addrLen = sizeof(addr.addr);
+      toServerEndpoint(port, addr);
+      int rc = ::bind(_fd, (struct sockaddr*)&addr.addr, addrLen);
+      if (SOCKET_ERROR == rc)
+      {
+         rc = fetchNetError();
+         LogError("Failed to bind socket and port, errno: %d", rc);
+         return rc;
+      }
+
+      return 0;
+   }
+
+   int IConnection::listen(const uint maxconn)
+   {
+      int rc = ::listen(_fd, maxconn);
+      if (SOCKET_ERROR == rc)
+      {
+         rc = fetchNetError();
+         LogError("Failed to listen on socket, errno: %d", rc);
+         return rc;
+      }
+
+      return 0;
+   }
+
+   int IConnection::accept(int& fd, endpoint& remote)
+   {
+      int addrLen = sizeof(remote.addr);
+      int rc = ::accept(fd, (struct sockaddr*)&remote.addr, &addrLen);
+      if (SOCKET_ERROR == rc)
+      {
+         rc = fetchNetError();
+         LogError("Failed to accept remote client, errno: %d", rc);
+         return rc;
+      }
+      toEndpoint(fd, &remote);
+      return 0;
+   }
+
+   int IConnection::connect(const char* hostname, const uint port, endpoint& remote)
+   {
+      toEndpoint(hostname, port, remote);
+      int addrLen = sizeof(remote.addr);
+      int rc = ::connect(_fd, (struct sockaddr*)&remote.addr, addrLen);
+      if (SOCKET_ERROR == rc)
+      {
+         rc = fetchNetError();
+         LogError("Failed to connect to remote server, errno: %d", rc);
+         return rc;
+      }
+
+      return 0;
+   }
+
    /*
    void Connection::sendEvent(CEvent& ev)
    {
