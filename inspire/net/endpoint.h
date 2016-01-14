@@ -43,7 +43,7 @@ namespace inspire {
       ep.addr.sin_port = htons(port);
    }
 
-   inline bool toEndpoint(int fd, endpoint* remote, endpoint* local)
+   inline bool toEndpoint(int fd, endpoint* remote, endpoint* local = NULL)
    {
       if (INVALID_SOCKET == fd)
       {
@@ -73,7 +73,7 @@ namespace inspire {
       return true;
    }
 
-   inline void toEndpoint(const char* hostname, uint port, endpoint& ep)
+   inline void toEndpoint(const char* hostname, const uint port, endpoint& ep)
    {
       struct hostent* hp;
 #ifdef _WIN32

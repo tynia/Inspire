@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp">
       <Filter>thread\task</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\net\connection.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\nistream.cpp">
       <Filter>net</Filter>
     </ClCompile>
@@ -131,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="..\..\inspire\net\async\reactor.cpp">
       <Filter>net\async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\IConnection.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

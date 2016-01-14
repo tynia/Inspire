@@ -41,8 +41,6 @@ namespace inspire {
          return;
       }
 #endif // _WIN32
-      _fd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-      ASSERT_STRONG(INVALID_SOCKET != _fd, "Failed to create socket");
    }
 
    void tcpConnection::bind()
@@ -126,4 +124,11 @@ namespace inspire {
       memset(&_addr, 0, sizeof(_addr));
       _port = 0 ;
    }
+
+   void tcpConnection::initialize()
+   {
+      _fd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+      INSPIRE_ASSERT(INVALID_SOCKET != _fd, "Failed to create socket");
+   }
+
 }

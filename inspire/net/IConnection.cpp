@@ -11,7 +11,16 @@ namespace inspire {
       INSPIRE_ASSERT(INVALID_FD == _fd, "try to init connection using invalid socket");
    }
 
-   bool IConnection::connected() const
+   void IConnection::close()
+   {
+      if (INVALID_FD != _fd)
+      {
+         ::closesocket(_fd);
+         _fd = INVALID_FD;
+      }
+   }
+
+   bool IConnection::alive() const
    {
       int rc = 0;
 #if defined(_WINDOWS)
@@ -30,31 +39,30 @@ namespace inspire {
       return true;
    }
 
-   void IConnection::_initAddr()
+   int IConnection::initialize()
    {
-      toEndpoint(_fd, &_remote, &_local);
-   }
-
-   void Connection::init()
-   {
-      util::initNetwork();
       _fd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
       if (INVALID_SOCKET == _fd)
       {
          LogError("Failed to init socket");
       }
+
+      return _fd;
    }
 
-   void Connection::accept(int& fd, sockaddr_in& addr)
+   int IConnection::accept(int& fd, endpoint& addr)
    {
       int addrLen = sizeof(sockaddr_in);
       int rc = ::accept(fd, (struct sockaddr*)&addr, &addrLen);
       if (SOCKET_ERROR == rc)
       {
          LogError("Failed to accept");
+         return rc;
       }
+      toEndpoint(fd, &addr);
+      return rc;
    }
-
+   /*
    void Connection::sendEvent(CEvent& ev)
    {
       COStream os;
@@ -120,5 +128,5 @@ namespace inspire {
          recvLen -= len;
          pRecv += len;
       }
-   }
+   }*/
 }

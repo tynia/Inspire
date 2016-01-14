@@ -5,17 +5,19 @@
 
 namespace inspire {
 
-   class tcpConnection : public IConnection
+   class tcpConnection// : public IConnection
    {
    public:
       tcpConnection();
       tcpConnection(const int sock);
       virtual ~tcpConnection();
 
+      void initialize();
       void connect(const char* ip, const uint port);
       void writeTo(CEvent& ev);
       void readFrom(CEvent& ev);
       void close();
+
 
    protected:
       void bind();

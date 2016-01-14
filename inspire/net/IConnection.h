@@ -12,22 +12,25 @@ namespace inspire {
    public:
       virtual void writeTo(CEvent& ev) = 0;
       virtual void readFrom(CEvent& ev) = 0;
+      virtual void close();
+
+   public:
+      const int native() const { return _fd; }
+      bool alive() const;
+
+   protected:
+      int initialize();
+      int bind(uint port);
+      int listen(uint maxconn = 10);
+      int accept(int& fd, endpoint& remote);
 
    protected:
       IConnection();
       IConnection(int sock);
       virtual ~IConnection() {}
 
-      const int native() const { return _fd; }
-      bool connected() const;
-
-   protected:
-      void _initAddr();
-
    protected:
       int _fd;
-      endpoint _remote;
-      endpoint _local;
    };
 }
 #endif
