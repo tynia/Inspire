@@ -153,7 +153,7 @@
     <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp" />
     <ClCompile Include="..\..\inspire\net\async\ioservice.cpp" />
     <ClCompile Include="..\..\inspire\net\async\reactor.cpp" />
-    <ClCompile Include="..\..\inspire\net\IConnection.cpp" />
+    <ClCompile Include="..\..\inspire\net\connection.cpp" />
     <ClCompile Include="..\..\inspire\net\endian\endian.cpp" />
     <ClCompile Include="..\..\inspire\net\nistream.cpp" />
     <ClCompile Include="..\..\inspire\net\nostream.cpp" />
@@ -185,7 +185,7 @@
     <ClInclude Include="..\..\inspire\net\async\ioservice.h" />
     <ClInclude Include="..\..\inspire\net\async\IOServiceOverlapped.h" />
     <ClInclude Include="..\..\inspire\net\async\reactor.h" />
-    <ClInclude Include="..\..\inspire\net\IConnection.h" />
+    <ClInclude Include="..\..\inspire\net\connection.h" />
     <ClInclude Include="..\..\inspire\net\endian\endian.h" />
     <ClInclude Include="..\..\inspire\net\endpoint.h" />
     <ClInclude Include="..\..\inspire\net\event\event.h" />

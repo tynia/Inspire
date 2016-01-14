@@ -1,24 +1,35 @@
-#ifndef _INSPIRE_NET_INTERFACE_TCP_CONNECTION_H_
-#define _INSPIRE_NET_INTERFACE_TCP_CONNECTION_H_
+#ifndef _INSPIRE_NET_TCP_CONNECTION_H_
+#define _INSPIRE_NET_TCP_CONNECTION_H_
 
-#include "IConnection.h"
+#include "network.h"
 
 namespace inspire {
 
-   class tcpConnection : public IConnection
+   class endpoint;
+
+   class tcpConnection
    {
    public:
-      tcpConnection();
-      tcpConnection(const int sock);
-      virtual ~tcpConnection();
-
-      int writeTo(CEvent& ev);
-      int readFrom(CEvent& ev);
+      const int native() const { return _fd; }
+      bool alive() const;
+      void close();
 
    protected:
-      int   _fd;
-      uint  _port;  // port for local
-      sockaddr_in _addr;
+      int initialize();
+      int bind(const uint port, endpoint& addr);
+      int listen(const uint maxconn = 10);
+      int accept(int& fd, endpoint& remote);
+      int connect(const char* hostname, const uint port, endpoint& remote);
+      int writeTo(const char* data, const uint len);
+      int readFrom(char* buffer, const uint bufferLen, uint &recvLen);
+
+   protected:
+      tcpConnection();
+      tcpConnection(const int sock);
+      virtual ~tcpConnection() {}
+
+   protected:
+      int _fd;
    };
 }
 #endif
