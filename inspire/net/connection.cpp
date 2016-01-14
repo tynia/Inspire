@@ -31,7 +31,7 @@ namespace inspire {
    int Connection::send(CEvent& ev)
    {
       NOStream nos;
-      nos.saveStream(ev);
+      ev.saveStream(nos);
 
       return writeTo(nos.data(), nos.size());
    }

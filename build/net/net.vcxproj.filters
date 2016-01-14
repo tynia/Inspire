@@ -132,6 +132,9 @@
     <ClCompile Include="..\..\inspire\net\connection.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\net\servconnection.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h">
@@ -297,6 +300,9 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\connection.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\servconnection.h">
       <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>

@@ -157,6 +157,7 @@
     <ClCompile Include="..\..\inspire\net\endian\endian.cpp" />
     <ClCompile Include="..\..\inspire\net\nistream.cpp" />
     <ClCompile Include="..\..\inspire\net\nostream.cpp" />
+    <ClCompile Include="..\..\inspire\net\servconnection.cpp" />
     <ClCompile Include="..\..\inspire\net\service.cpp" />
     <ClCompile Include="..\..\inspire\net\serviceMgr.cpp" />
     <ClCompile Include="..\..\inspire\net\session.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="..\..\inspire\net\network.h" />
     <ClInclude Include="..\..\inspire\net\nistream.h" />
     <ClInclude Include="..\..\inspire\net\nostream.h" />
+    <ClInclude Include="..\..\inspire\net\servconnection.h" />
     <ClInclude Include="..\..\inspire\net\service.h" />
     <ClInclude Include="..\..\inspire\net\serviceMgr.h" />
     <ClInclude Include="..\..\inspire\net\session.h" />
