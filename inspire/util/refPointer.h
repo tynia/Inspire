@@ -12,7 +12,7 @@ namespace inspire {
          _ptrCounter->_inc();
       }
 
-      refPointer(const refPointer& rhs) : _ptr(rhs._ptr), _ptrCounter(rhs._ptrCounter)
+      refPointer(const refPointer<T>& rhs) : _ptr(rhs._ptr), _ptrCounter(rhs._ptrCounter)
       {
          _ptrCounter->_inc();
       }

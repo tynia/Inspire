@@ -7,7 +7,7 @@ namespace inspire {
 
    class CEvent;
 
-   typedef Connection*(*ACCEPT_CALLBACK)(int& sock, const endpoint& remote);
+   typedef Connection*(*ACCEPT_CALLBACK)(Connection*);
 
    class servConnection : protected Connection
    {
@@ -16,15 +16,15 @@ namespace inspire {
       virtual ~servConnection();
 
    public:
-      int start(const uint port, const uint maxconn, ACCEPT_CALLBACK cb = NULL);
+      int  start(const uint port, const uint maxconn, ACCEPT_CALLBACK cb = NULL);
       void stop() { _stop = true; }
       bool running() const { return !_stop; }
-      int send(CEvent& ev);
-      int recv(CEvent& ev);
+      int  send(CEvent& ev);
+      int  recv(CEvent& ev);
 
    private:
       int  runLoop();
-      static Connection* cbAccept(int& sock, const endpoint& remote);
+      Connection* cbAccept(Connection* conn) { return NULL; }
 
    private:
       bool _stop;

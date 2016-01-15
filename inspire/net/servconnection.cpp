@@ -32,11 +32,6 @@ namespace inspire {
          return rc;
       }
 
-      if (NULL == cb)
-      {
-         _cb = &servConnection::cbAccept;
-      }
-
       return runLoop();
    }
 
@@ -62,23 +57,23 @@ namespace inspire {
             continue;
          }
 
+         Connection* conn = new Connection((void*)this, fd, remote);
+         if (NULL == conn)
+         {
+            LogError("Failed to allocate connection object, out of memory");
+            return NULL;
+         }
+
+         _conn.insert(conn);
+
          if (NULL != _cb)
          {
-            _cb(fd, remote);
+            cbAccept(conn);
+         }
+         else
+         {
+            _cb(conn);
          }
       }
    }
-
-   Connection* servConnection::cbAccept(int& sock, const endpoint& remote)
-   {
-      Connection* conn = new Connection(sock, remote);
-      if (NULL == conn)
-      {
-         LogError("Failed to allocate connection object, out of memory");
-         return NULL;
-      }
-
-      _conn.insert(conn);
-   }
-
 }

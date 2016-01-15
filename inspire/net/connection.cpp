@@ -2,11 +2,12 @@
 
 namespace inspire {
 
-   Connection::Connection()
+   Connection::Connection() : _owner(NULL)
    {
    }
 
-   Connection::Connection(const int sock, const endpoint& remote) : tcpConnection(sock)
+   Connection::Connection(void* owner, const int sock, const endpoint& remote)
+      : tcpConnection(sock), _owner(owner)
    {
       memmove(&_addr, &remote, sizeof(remote));
    }

@@ -12,7 +12,7 @@ namespace inspire {
    {
    public:
       Connection();
-      Connection(const int sock, const endpoint& remote);
+      Connection(void* owner, const int sock, const endpoint& remote);
       virtual ~Connection();
 
       int connect(const char* hostname, const uint port);
@@ -21,6 +21,7 @@ namespace inspire {
 
    protected:
       endpoint _addr;
+      void* _owner;
    };
 }
 #endif
