@@ -3,6 +3,7 @@
 
 #ifdef _WIN32
 #include <ws2tcpip.h>
+#include <windows.h>
 #else
 #endif
 

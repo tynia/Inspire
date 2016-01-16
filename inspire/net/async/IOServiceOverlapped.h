@@ -30,8 +30,13 @@ namespace inspire {
 
       IOServiceOverlapped() : ioeType(IOE_INVALID), conn(NULL)
       {
-         memset(buffer, 0, MAX_BUFFER_SIZE);
+         zero();
          wsaBuffer.buf = buffer;
+      }
+
+      void zero()
+      {
+         memset(buffer, 0, MAX_BUFFER_SIZE);
          wsaBuffer.len = MAX_BUFFER_SIZE;
       }
    };
