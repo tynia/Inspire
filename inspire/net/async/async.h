@@ -7,34 +7,17 @@
 
 namespace inspire {
 
-   inline const DWORD cpuCount()
-   {
-      SYSTEM_INFO info = {} ;
-      GetSystemInfo(&info);
-
-      return info.dwNumberOfProcessors ;
-   }
-
-   class IOService;
-   struct threadContext
-   {
-      IOService* _ioservice;
-      int    idx;
-      HANDLE hThread;
-   };
-
-   class IAsyncConnection : public tcpConnection, public INetAsyncEventHandler
+   class asyncConnection
    {
    public:
-      IAsyncConnection(const int port) : tcpConnection(port)
-      {}
-      IAsyncConnection(const char* ip, const uint port) : tcpConnection(ip, port)
-      {}
-      IAsyncConnection(const int sock) : tcpConnection(sock)
-      {}
-      IAsyncConnection(const IAsyncConnection& rhs) : tcpConnection(rhs)
-      {}
-      virtual ~IAsyncConnection() {}
+      virtual ~asyncConnection() {}
+
+      virtual void asyncWrite(CEvent& ev) = 0;
+      virtual void OnRead(const CEvent& ev) = 0;
+
+   protected:
+      int initialize();
+
    };
 }
 #endif

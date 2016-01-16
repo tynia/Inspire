@@ -2,18 +2,17 @@
 #define _INSPIRE_NET_ASYNC_CONNECTION_H_
 
 #include "async/async.h"
-#include "tcpconnection.h"
 
 namespace inspire {
 
-   class AsyncConnection : public IAsyncConnection
+   class asyncConnection
    {
    public:
-      AsyncConnection(const uint port);
-      AsyncConnection(const char* ip, const uint port);
-      AsyncConnection(const int sock);
-      AsyncConnection(const AsyncConnection& rhs);
-      virtual ~AsyncConnection();
+      asyncConnection();
+      virtual ~asyncConnection();
+
+      virtual void asyncWrite(CEvent& ev);
+      virtual void OnRead(const CEvent& ev);
 
       virtual void init();
 
