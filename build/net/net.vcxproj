@@ -180,7 +180,6 @@
     <ClInclude Include="..\..\inspire\logger\base.h" />
     <ClInclude Include="..\..\inspire\logger\logger.h" />
     <ClInclude Include="..\..\inspire\logger\writer.h" />
-    <ClInclude Include="..\..\inspire\net\async\async.h" />
     <ClInclude Include="..\..\inspire\net\async\asyncconnection.h" />
     <ClInclude Include="..\..\inspire\net\async\engine.h" />
     <ClInclude Include="..\..\inspire\net\async\ioservice.h" />

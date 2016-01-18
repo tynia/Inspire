@@ -1,29 +1,32 @@
 #ifndef _INSPIRE_NET_ASYNC_CONNECTION_H_
 #define _INSPIRE_NET_ASYNC_CONNECTION_H_
 
-#include "async/async.h"
+#include "endpoint.h"
 
 namespace inspire {
+
+   class CEvent;
 
    class asyncConnection
    {
    public:
       asyncConnection();
+
       virtual ~asyncConnection();
 
-      virtual void asyncWrite(CEvent& ev);
-      virtual void OnRead(const CEvent& ev);
+      int doWrite(CEvent& ev);
 
-      virtual void init();
+      int doRead(const CEvent& ev);
 
-      virtual void accept(int& fd, sockaddr_in& addr);
+      int doAccept(asyncConnection& conn);
 
-      virtual void sendEvent(CEvent& ev);
+      int listenOn(const uint port);
 
-      virtual void onEvent(CEvent& ev);
+      void close();
 
-   private:
-      //IOService* _hIOCP;
+   protected:
+      endpoint   _remote;
+      IOService* _hIOCP;
    };
 }
 #endif

@@ -176,9 +176,6 @@
     <ClInclude Include="..\..\inspire\net\session.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\net\async\async.h">
-      <Filter>net\async</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\asyncconnection.h">
       <Filter>net\async</Filter>
     </ClInclude>
