@@ -27,6 +27,8 @@ namespace inspire {
 
       void associate(OverlappedContext* ctx);
 
+      int addSession(asyncConnection* conn);
+
       void postEvent(OverlappedContext* ctx, IOEvent ioe);
 
       bool stopped() const;

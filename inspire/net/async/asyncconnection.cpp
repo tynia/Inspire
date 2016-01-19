@@ -2,7 +2,7 @@
 
 namespace inspire {
 
-   asyncConnection::asyncConnection(const uint port)
+   asyncConnection::asyncConnection() : _IOService(NULL)
    {
    }
 
@@ -11,23 +11,28 @@ namespace inspire {
       close();
    }
 
-   void asyncConnection::init()
+   int asyncConnection::initialize()
    {
       _fd = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0, WSA_FLAG_OVERLAPPED);
       if (INVALID_SOCKET == _fd)
       {
-         LogError("Failed to init async socket, errno: %d", WSAGetLastError());
+         int rc = WSAGetLastError();
+         LogError("Failed to init async socket, errno: %d", rc);
+         return rc;
       }
    }
 
-   void asyncConnection::accept(int& fd, sockaddr_in& addr)
+   int asyncConnection::doAccept(asyncConnection& conn)
    {
-      int addrLen = sizeof(sockaddr_in);
-      int rc = WSAAccept(fd, (struct sockaddr*)&addr, &addrLen, NULL, NULL);
+      int addrLen = sizeof(_remote.addr);
+      int rc = WSAAccept(_fd, (struct sockaddr*)&_remote.addr, &addrLen, NULL, NULL);
       if (SOCKET_ERROR == rc)
       {
-         LogError("Failed to accept a connection");
+         rc = fetchNetError();
+         LogError("Failed to accept a connection, errno: %d", rc);
+         return rc;
       }
+      _IOService->createSession()
    }
 
    void asyncConnection::sendEvent(CEvent& ev)

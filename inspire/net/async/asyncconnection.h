@@ -6,6 +6,7 @@
 namespace inspire {
 
    class CEvent;
+   class IOService;
 
    class asyncConnection
    {
@@ -13,6 +14,10 @@ namespace inspire {
       asyncConnection();
 
       virtual ~asyncConnection();
+
+      IOService* ioservice() const { return _IOService; }
+
+      int initialize();
 
       int doWrite(CEvent& ev);
 
@@ -25,8 +30,9 @@ namespace inspire {
       void close();
 
    protected:
+      int _fd;
       endpoint   _remote;
-      IOService* _hIOCP;
+      IOService* _IOService;
    };
 }
 #endif
