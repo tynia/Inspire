@@ -6,9 +6,10 @@
 
 namespace inspire {
 
-   class IAsyncConnection;
+   class asyncConnection;
+   enum IOEvent;
+   class IOServiceOverlapped;
 
-   class IThreadMgr;
    class IOService
    {
    public:
@@ -17,7 +18,7 @@ namespace inspire {
 
       void init(const uint threadCount = 0);
 
-      void bind(IAsyncConnection* conn);
+      void bind(asyncConnection* conn);
 
       void run();
 
@@ -25,11 +26,13 @@ namespace inspire {
 
       void destroy();
 
-      void associate(OverlappedContext* ctx);
+      void associate(IOServiceOverlapped* ctx);
 
-      int addSession(asyncConnection* conn);
+      int  addSession(asyncConnection* conn);
 
-      void postEvent(OverlappedContext* ctx, IOEvent ioe);
+      int  removeSession(asyncConnection* conn);
+
+      void postEvent(IOServiceOverlapped* ctx, IOEvent ioe);
 
       bool stopped() const;
 
@@ -43,7 +46,7 @@ namespace inspire {
       bool              _stopService;
       HANDLE            _hIOCP;
       uint              _threadCount;
-      IAsyncConnection* _conn;
+      asyncConnection*  _conn;
       int64*            _threadID;
       LPFN_ACCEPTEX     _lpfnAcceptEx;
       
