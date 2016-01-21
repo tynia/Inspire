@@ -45,13 +45,7 @@ namespace inspire {
    protected:
       bool              _stopService;
       HANDLE            _hIOCP;
-      uint              _threadCount;
       asyncConnection*  _conn;
-      int64*            _threadID;
-      LPFN_ACCEPTEX     _lpfnAcceptEx;
-      
-   private:
-      OverlappedContext _overlappedContext[MAX_POST_ACCEPT];
    };
 }
 #endif
