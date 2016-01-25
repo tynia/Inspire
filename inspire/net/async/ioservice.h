@@ -28,16 +28,11 @@ namespace inspire {
 
       void associate(IOServiceOverlapped* ctx);
 
-      int  addSession(asyncConnection* conn);
-
-      int  removeSession(asyncConnection* conn);
-
       void postEvent(IOServiceOverlapped* ctx, IOEvent ioe);
 
       bool stopped() const;
 
    protected:
-      void _initWorkThread();
       void _doAccept();
       void _doSend();
       void _doRecv();
