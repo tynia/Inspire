@@ -8,16 +8,15 @@ namespace inspire {
 
    class NOStream : virtual public baseStream
    {
-      static const uint BLOCKSIZE = 1024;
    public:
-      NOStream(allocator* al = NULL, const uint blockSize = BLOCKSIZE);
+      NOStream();
       virtual ~NOStream();
    public:
       const char* data() const { return _data; }
 
-      const uint64 capacity() const { return _capacity; }
+      const uint capacity() const { return _capacity; }
 
-      const uint64 size() const { return _wOffset; }
+      const uint size() const { return _wOffset; }
 
       void put(const char c);
 

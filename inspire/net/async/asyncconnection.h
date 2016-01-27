@@ -13,7 +13,7 @@ namespace inspire {
    public:
       asyncConnection();
 
-      asyncConnection(int fd);
+      asyncConnection(int sock);
 
       virtual ~asyncConnection();
 
@@ -26,6 +26,9 @@ namespace inspire {
       int doAccept(asyncConnection& conn);
 
       int listenOn(const uint port);
+
+   protected:
+
    };
 }
 #endif

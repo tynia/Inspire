@@ -1,8 +1,14 @@
 #include "asyncConnection.h"
+#include "nostream.h"
+#include "event/event.h"
 
 namespace inspire {
 
-   asyncConnection::asyncConnection() : _IOService(NULL)
+   asyncConnection::asyncConnection() : Connection()
+   {
+   }
+
+   asyncConnection::asyncConnection(int sock) : Connection(sock)
    {
    }
 
@@ -27,6 +33,12 @@ namespace inspire {
    int asyncConnection::doWrite(CEvent& ev)
    {
       int rc = 0;
+
+      NOStream nos;
+      ev.saveStream(nos);
+
+      // TODO:
+      // save data to overlapped buf
       return rc;
    }
 
@@ -68,14 +80,5 @@ namespace inspire {
          LogError("Failed to listen on socket, errno: %d", rc);
          return rc;
       }
-   }
-
-   void asyncConnection::sendEvent(CEvent& ev)
-   {
-   }
-
-   void asyncConnection::onEvent(CEvent& ev)
-   {
-
    }
 }

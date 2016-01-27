@@ -12,14 +12,14 @@ namespace inspire {
       NIStream(const char* buffer, uint64 len);
       virtual ~NIStream();
 
-      virtual void skip(uint64 w) { _rOffset += w; }
+      virtual void skip(uint w) { _rOffset += w; }
    public:
       const char* data() const
       {
          return _data;
       }
 
-      void skip(uint64 r)
+      void skip(uint r)
       {
          _rOffset += r;
       }
@@ -43,7 +43,7 @@ namespace inspire {
       void _readBuffer(void* buffer, const uint len, const uint toRead);
 
    protected:
-      uint64 _rOffset;
+      uint _rOffset;
    };
 }
 #endif
