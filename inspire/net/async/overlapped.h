@@ -1,5 +1,5 @@
-#ifndef _INSPIRE_NET_ASYNC_IO_H_
-#define  _INSPIRE_NET_ASYNC_IO_H_
+#ifndef _INSPIRE_NET_ASYNC_OVERLAPPED_H_
+#define _INSPIRE_NET_ASYNC_OVERLAPPED_H_
 
 #include "network.h"
 #include "endpoint.h"
@@ -19,17 +19,15 @@ namespace inspire {
       MAX_BUFFER_SIZE = 8192,
    };
 
-   class IAsyncConnection;
-
-   struct IOServiceOverlapped : OVERLAPPED
+   struct overlappedContext : OVERLAPPED
    {
-      OVERLAPPED        overlapped;
+      //OVERLAPPED        overlapped;
       IOEvent           ioeType;
       IAsyncConnection* conn;
       WSABUF            wsaBuffer;
       char              buffer[MAX_BUFFER_SIZE];
 
-      IOServiceOverlapped() : ioeType(IOE_INVALID), conn(NULL)
+      overlappedContext() : ioeType(IOE_INVALID), conn(NULL)
       {
          zero();
          wsaBuffer.buf = buffer;

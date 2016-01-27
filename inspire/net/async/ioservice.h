@@ -8,7 +8,7 @@ namespace inspire {
 
    class asyncConnection;
    enum IOEvent;
-   class IOServiceOverlapped;
+   class overlappedContext;
 
    class IOService
    {
@@ -26,9 +26,9 @@ namespace inspire {
 
       void destroy();
 
-      void associate(IOServiceOverlapped* pOverlapped);
+      void associate(overlappedContext* pOverlapped);
 
-      void postEvent(IOServiceOverlapped* pOverlapped, IOEvent ioe);
+      void postEvent(overlappedContext* pOverlapped, IOEvent ioe);
 
       bool stopped() const;
 

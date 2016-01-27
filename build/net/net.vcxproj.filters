@@ -278,9 +278,6 @@
     <ClInclude Include="..\..\inspire\net\net.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\net\async\IOServiceOverlapped.h">
-      <Filter>net\async</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\net\endpoint.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -301,6 +298,12 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\servconnection.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\overlappedMgr.h">
+      <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\async\overlapped.h">
+      <Filter>net\async</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

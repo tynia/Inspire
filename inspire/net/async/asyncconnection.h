@@ -26,9 +26,6 @@ namespace inspire {
       int doAccept(asyncConnection& conn);
 
       int listenOn(const uint port);
-
-   protected:
-
    };
 }
 #endif
