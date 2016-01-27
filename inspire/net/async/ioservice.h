@@ -16,7 +16,7 @@ namespace inspire {
       IOService();
       virtual ~IOService();
 
-      void init(const uint threadCount = 0);
+      void init();
 
       void bind(asyncConnection* conn);
 
@@ -26,9 +26,9 @@ namespace inspire {
 
       void destroy();
 
-      void associate(IOServiceOverlapped* ctx);
+      void associate(IOServiceOverlapped* pOverlapped);
 
-      void postEvent(IOServiceOverlapped* ctx, IOEvent ioe);
+      void postEvent(IOServiceOverlapped* pOverlapped, IOEvent ioe);
 
       bool stopped() const;
 

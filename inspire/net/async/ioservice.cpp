@@ -7,8 +7,7 @@
 
 namespace inspire {
 
-   IOService::IOService() : _stopService(true), _hIOCP(NULL), _threadCount(0),
-                            _conn(NULL), _threadID(NULL), _lpfnAcceptEx(NULL)
+   IOService::IOService() : _stopService(true), _hIOCP(NULL), _conn(NULL)
    {
       
    }
@@ -16,19 +15,14 @@ namespace inspire {
    IOService::~IOService()
    {
       _conn = NULL;
-      if (0 != _threadCount && NULL != _threadID)
-      {
-         delete [] _threadID;
-         _threadID = NULL ;
-      }
    }
 
-   void IOService::init(const uint threadCount)
+   void IOService::init()
    {
-      _threadCount = (0 == threadCount ? 2 * cpuCount() : threadCount);
+      uint threadCount = (0 == threadCount ? 2 * cpuCount() : threadCount);
 
       // create i/o completion port
-      _hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0/*threadCount*/);
+      _hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
       if (NULL == _hIOCP)
       {
          LogError("Failed to create iocp handle, errno = d%", GetLastError());

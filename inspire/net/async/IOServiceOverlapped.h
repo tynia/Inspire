@@ -23,6 +23,7 @@ namespace inspire {
 
    struct IOServiceOverlapped : OVERLAPPED
    {
+      OVERLAPPED        overlapped;
       IOEvent           ioeType;
       IAsyncConnection* conn;
       WSABUF            wsaBuffer;
