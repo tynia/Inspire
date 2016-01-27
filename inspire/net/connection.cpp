@@ -2,56 +2,47 @@
 
 namespace inspire {
 
-   Connection::Connection() : _owner(NULL)
+   Connection::Connection() : _fd(INVALID_FD)
    {
+      ::memset(&_addr, 0, sizeof(endpoint));
    }
 
-   Connection::Connection(void* owner, const int sock, const endpoint& remote)
-      : tcpConnection(sock), _owner(owner)
+   Connection::Connection(int sock) : _fd(sock)
    {
-      memmove(&_addr, &remote, sizeof(remote));
+      INSPIRE_ASSERT(INVALID_FD == _fd, "try to init connection using invalid socket");
    }
 
-   Connection::~Connection()
+   bool Connection::alive()
    {
-      close();
-   }
+      if (INVALID_FD == _fd)
+      {
+         return false;
+      }
 
-   int Connection::connect(const char* hostname, const uint port)
-   {
-      int rc = tcpConnection::connect(hostname, port, _addr);
+      int rc = 0;
+#if defined(_WINDOWS)
+      rc = ::send(_fd, "", 0, 0);
       if (SOCKET_ERROR == rc)
+#elif defined(_AIX)
+      rc = ::send(_fd, "", 0, 0);
+      if (0 == rc)
+#else
+      rc = ::recv(_fd, NULL, 0, MSG_DONTWAIT);
+      if (0 == rc)
+#endif
       {
-         LogError("try to connect to remote server, errno: %d", fetchNetError());
-         return rc;
+         return false;
       }
-
-      return 0;
+      return true;
    }
 
-   int Connection::send(CEvent& ev)
+   void Connection::close()
    {
-      NOStream nos;
-      ev.saveStream(nos);
-
-      return writeTo(nos.data(), nos.size());
-   }
-
-   int Connection::recv(CEvent& ev)
-   {
-      char buffer[8192] = { 0 };
-      uint len = 0;
-      int rc = readFrom(buffer, 8192, len);
-      if (rc)
+      if (INVALID_FD != _fd)
       {
-         LogError("Error occurs when receiving msg, erron: %d", fetchNetError());
-         return rc;
+         ::closesocket(_fd);
+         _fd = INVALID_FD;
       }
-
-      NIStream nis(buffer, len);
-      ev.loadStream(nis)
-
-      return rc;
    }
 
 }

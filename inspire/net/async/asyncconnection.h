@@ -1,21 +1,21 @@
 #ifndef _INSPIRE_NET_ASYNC_CONNECTION_H_
 #define _INSPIRE_NET_ASYNC_CONNECTION_H_
 
-#include "endpoint.h"
+#include "connection.h"
 
 namespace inspire {
 
    class CEvent;
    class IOService;
 
-   class asyncConnection
+   class asyncConnection : public Connection
    {
    public:
       asyncConnection();
 
-      virtual ~asyncConnection();
+      asyncConnection(int fd);
 
-      IOService* ioservice() const { return _IOService; }
+      virtual ~asyncConnection();
 
       int initialize();
 
@@ -26,13 +26,6 @@ namespace inspire {
       int doAccept(asyncConnection& conn);
 
       int listenOn(const uint port);
-
-      void close();
-
-   protected:
-      int _fd;
-      endpoint   _remote;
-      IOService* _IOService;
    };
 }
 #endif

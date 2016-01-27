@@ -2,26 +2,29 @@
 #define _INSPIRE_NET_CONNECTION_H_
 
 #include "endpoint.h"
-#include "tcp/tcpconnection.h"
 
 namespace inspire {
 
-   class CEvent;
-
-   class Connection : public tcpConnection
+   class Connection
    {
-   public:
+   protected:
       Connection();
-      Connection(void* owner, const int sock, const endpoint& remote);
-      virtual ~Connection();
 
-      int connect(const char* hostname, const uint port);
-      int send(CEvent& ev);
-      int recv(CEvent& ev);
+      Connection(int sock);
+
+      virtual ~Connection() { close(); }
+
+      const int native() const { return _fd; }
+
+      const char* toString() const { return _addr.toString().c_str(); }
+
+      bool alive();
+
+      void close();
 
    protected:
+      int _fd;
       endpoint _addr;
-      void* _owner;
    };
 }
 #endif

@@ -2,19 +2,15 @@
 #define _INSPIRE_NET_TCP_CONNECTION_H_
 
 #include "network.h"
+#include "connection.h"
 
 namespace inspire {
 
    class endpoint;
 
-   class tcpConnection
+   class tcpConnection : public Connection
    {
    public:
-      const int native() const { return _fd; }
-      bool alive() const;
-      void close();
-
-   protected:
       int initialize();
       int bind(const uint port, endpoint& addr);
       int listen(const uint maxconn = 10);
@@ -27,9 +23,6 @@ namespace inspire {
       tcpConnection();
       tcpConnection(const int sock);
       virtual ~tcpConnection() {}
-
-   protected:
-      int _fd;
    };
 }
 #endif

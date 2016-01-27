@@ -31,19 +31,21 @@ namespace inspire {
       _initWorkThread();
    }
 
-   void IOService::bind(IAsyncConnection* conn)
+   void IOService::bind(asyncConnection* conn)
    {
       INSPIRE_ASSERT(NULL == conn, "Connection should not be NULL");
       if (NULL != conn)
       {
          _conn = conn;
-         HANDLE h = CreateIoCompletionPort((HANDLE)_conn->socket(), _hIOCP, (ULONG_PTR)_conn->socket(), _threadCount);
+         HANDLE h = CreateIoCompletionPort((HANDLE)_conn->(), _hIOCP, (ULONG_PTR)_conn->socket(), _threadCount);
          INSPIRE_ASSERT(_hIOCP == h, "Failed to bind IO complete port to socket");
          if (GetLastError())
          {
             LogError("Failed to bind socket to iocp handle, errno = ", GetLastError());
          }
       }
+
+      _conn = conn;
 
       DWORD bytes = 0 ;
       GUID guidAcceptEx = WSAID_ACCEPTEX;  
