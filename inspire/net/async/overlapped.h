@@ -19,13 +19,14 @@ namespace inspire {
       MAX_BUFFER_SIZE = 8192,
    };
 
+   class asyncConnection;
    struct overlappedContext : OVERLAPPED
    {
-      //OVERLAPPED        overlapped;
-      IOEvent           ioeType;
-      IAsyncConnection* conn;
-      WSABUF            wsaBuffer;
-      char              buffer[MAX_BUFFER_SIZE];
+      //OVERLAPPED       overlapped;
+      IOEvent          ioeType;
+      asyncConnection* conn;
+      WSABUF           wsaBuffer;
+      char             buffer[MAX_BUFFER_SIZE];
 
       overlappedContext() : ioeType(IOE_INVALID), conn(NULL)
       {

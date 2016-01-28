@@ -135,6 +135,9 @@
     <ClCompile Include="..\..\inspire\net\servconnection.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\net\async\overlappedMgr.cpp">
+      <Filter>net\async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h">

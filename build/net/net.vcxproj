@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\inspire\logger\writer.cpp" />
     <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp" />
     <ClCompile Include="..\..\inspire\net\async\ioservice.cpp" />
+    <ClCompile Include="..\..\inspire\net\async\overlappedMgr.cpp" />
     <ClCompile Include="..\..\inspire\net\async\reactor.cpp" />
     <ClCompile Include="..\..\inspire\net\connection.cpp" />
     <ClCompile Include="..\..\inspire\net\endian\endian.cpp" />
