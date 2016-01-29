@@ -4,6 +4,9 @@
 #include "threadentity.h"
 #include "threadMgr.h"
 #include "entry/entry.h"
+#include "overlappedMgr.h"
+#include "net.h"
+#include "connection.h"
 
 namespace inspire {
 
@@ -19,8 +22,6 @@ namespace inspire {
 
    void IOService::init()
    {
-      uint threadCount = (0 == threadCount ? 2 * cpuCount() : threadCount);
-
       // create i/o completion port
       _hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
       if (NULL == _hIOCP)
@@ -28,7 +29,7 @@ namespace inspire {
          LogError("Failed to create iocp handle, errno = d%", GetLastError());
       }
 
-      _initWorkThread();
+      _overlappedMgr = GetOverlappedMgr();
    }
 
    void IOService::bind(asyncConnection* conn)
@@ -37,31 +38,13 @@ namespace inspire {
       if (NULL != conn)
       {
          _conn = conn;
-         HANDLE h = CreateIoCompletionPort((HANDLE)_conn->(), _hIOCP, (ULONG_PTR)_conn->socket(), _threadCount);
+         uint threadCount = (0 == threadCount ? 2 * cpuCount() : threadCount);
+         HANDLE h = CreateIoCompletionPort((HANDLE)_conn->native(), _hIOCP, (ULONG_PTR)_conn->native(), threadCount);
          INSPIRE_ASSERT(_hIOCP == h, "Failed to bind IO complete port to socket");
          if (GetLastError())
          {
             LogError("Failed to bind socket to iocp handle, errno = ", GetLastError());
          }
-      }
-
-      _conn = conn;
-
-      DWORD bytes = 0 ;
-      GUID guidAcceptEx = WSAID_ACCEPTEX;  
-      GUID guidGetAcceptExSockAddrs = WSAID_GETACCEPTEXSOCKADDRS; 
-      int rc = WSAIoctl(_conn->socket(), SIO_GET_EXTENSION_FUNCTION_POINTER,
-                        &guidAcceptEx, sizeof(guidAcceptEx), &_lpfnAcceptEx,
-                        sizeof(_lpfnAcceptEx), &bytes, NULL, NULL) ;
-      if (SOCKET_ERROR == rc)
-      {
-         LogError("Failed to get AcceptEx addr");
-         return;
-      }
-
-      for (int idx = 0; idx < MAX_POST_ACCEPT; ++idx)
-      {
-         postEvent(&_overlappedContext[idx], IOE_ACCEPT);
       }
    }
 

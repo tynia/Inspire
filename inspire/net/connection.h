@@ -7,13 +7,7 @@ namespace inspire {
 
    class Connection
    {
-   protected:
-      Connection();
-
-      Connection(int sock);
-
-      virtual ~Connection() { close(); }
-
+   public:
       const int native() const { return _fd; }
 
       const char* toString() const { return _addr.toString().c_str(); }
@@ -21,6 +15,13 @@ namespace inspire {
       bool alive();
 
       void close();
+
+   protected:
+      Connection();
+
+      Connection(int sock);
+
+      virtual ~Connection() { close(); }
 
    protected:
       int _fd;

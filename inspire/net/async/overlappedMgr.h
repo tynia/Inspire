@@ -24,5 +24,7 @@ namespace inspire {
       set<overlappedContext*> _ctxQueue;
       deque<overlappedContext*> _ctxIdle;
    };
+
+   extern overlappedMgr* GetOverlappedMgr();
 }
 #endif

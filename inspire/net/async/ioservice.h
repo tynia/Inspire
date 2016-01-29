@@ -41,6 +41,7 @@ namespace inspire {
       bool              _stopService;
       HANDLE            _hIOCP;
       asyncConnection*  _conn;
+      overlappedMgr*    _overlappedMgr;
    };
 }
 #endif

@@ -50,5 +50,13 @@ namespace inspire {
       return errno;
 #endif
    }
+
+   inline uint cpuCount()
+   {
+      SYSTEM_INFO cs;
+      GetSystemInfo(&cs);
+
+      return (uint)cs.dwNumberOfProcessors;
+   }
 }
 #endif
