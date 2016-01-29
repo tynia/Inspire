@@ -14,7 +14,6 @@ namespace inspire {
 
    asyncConnection::~asyncConnection()
    {
-      close();
    }
 
    int asyncConnection::initialize()
@@ -30,21 +29,27 @@ namespace inspire {
       return rc;
    }
 
-   int asyncConnection::doWrite(CEvent& ev)
+   int asyncConnection::doWrite(const char* data, const uint len)
    {
       int rc = 0;
-
-      NOStream nos;
-      ev.saveStream(nos);
-
-      // TODO:
-      // save data to overlapped buf
+      
       return rc;
    }
 
-   int asyncConnection::doRead(const CEvent& ev)
+   int asyncConnection::doRead(char* buffer, uint64 bufferLen, int64& readLen)
    {
       int rc = 0;
+      DWORD dwFlags = 0;
+      DWORD dwBytes = 0;
+      WSABUF wsabuf;
+      wsabuf.buf = buffer;
+      wsabuf.len = bufferLen;
+      int nBytesRecv = WSARecv(_fd, &wsabuf, 1, (LPDWORD)&bufferLen, &dwFlags, pOverlapped, NULL);
+      if ((SOCKET_ERROR == nBytesRecv) && (WSA_IO_PENDING != WSAGetLastError()))
+      {
+         LogError("Post RECV event error, errno = %d", WSAGetLastError());
+         return;
+      }
       return rc;
    }
 

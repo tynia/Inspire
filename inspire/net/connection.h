@@ -27,5 +27,13 @@ namespace inspire {
       int _fd;
       endpoint _addr;
    };
+
+   class INetBase
+   {
+   public:
+      virtual ~INetBase() {}
+      virtual int doWrite() = 0;
+      virtual int doRead() = 0;
+   };
 }
 #endif

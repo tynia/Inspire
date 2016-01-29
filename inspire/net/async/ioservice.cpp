@@ -7,6 +7,7 @@
 #include "overlappedMgr.h"
 #include "net.h"
 #include "connection.h"
+#include "overlapped.h"
 
 namespace inspire {
 
@@ -50,14 +51,7 @@ namespace inspire {
 
    void IOService::run()
    {
-      threadMgr* _threadMgr = getKernel()->getThreadMgr();
-      INSPIRE_ASSERT(NULL != _threadMgr, "Failed to get thread manager");
-      _stopService = false;
-      // active thread
-      for (int idx = 0; idx < _threadCount; ++idx)
-      {
-         _threadMgr->activeEntity(_threadID[idx]);
-      }
+
    }
 
    void IOService::stop()
@@ -67,38 +61,10 @@ namespace inspire {
 
    void IOService::destroy()
    {
-      threadMgr* _threadMgr = getKernel()->getThreadMgr();
-      INSPIRE_ASSERT(NULL != _threadMgr, "Failed to get thread manager");
-      // destroy thread
-      for (int idx = 0; idx < _threadCount; ++idx)
-      {
-         _threadMgr->destroyEntity(_threadID[idx]);
-      }
+      stop();
    }
 
-   void IOService::_initWorkThread()
-   {
-      threadMgr* _threadMgr = getKernel()->getThreadMgr();
-      INSPIRE_ASSERT(NULL != _threadMgr, "Failed to get thread manager");
-
-      THREAD_ENTRY_TYPES t = THREAD_SERVICE_ACCEPTOR;
-      
-      _threadID = new int64[_threadCount];
-      // create thread
-      for (int idx = 0; idx < _threadCount; ++idx)
-      {
-         int64 id = 0;
-         threadEntity* entity = _threadMgr->createEntity(t, this, id);
-         if (NULL == entity)
-         {
-            LogError("Failed to create thread entity, idx = %d", idx);
-            return;
-         }
-         _threadID[idx] = id;
-      }
-   }
-
-   void IOService::associate(OverlappedContext* ctx)
+   void IOService::associate(overlappedContext* ctx)
    {
       HANDLE h = CreateIoCompletionPort((HANDLE)ctx->_fd, _hIOCP, (DWORD)ctx, 0);
       if (NULL == h)
@@ -107,7 +73,7 @@ namespace inspire {
       }
    }
 
-   void IOService::postEvent( OverlappedContext* ctx, IOEvent ioe )
+   void IOService::postEvent(overlappedContext* ctx, IOEvent ioe)
    {
       if (IOE_ACCEPT == ioe)
       {
@@ -124,7 +90,7 @@ namespace inspire {
             return;
          }
 
-         int rc = _lpfnAcceptEx( _conn->socket(), ctx->_fd, wsabuf->buf,
+         int rc = WSAAccept( _conn->socket(), ctx->_fd, wsabuf->buf,
                                  wsabuf->len - ((sizeof(SOCKADDR_IN) + 16) * 2),
                                  sizeof(SOCKADDR_IN) + 16, sizeof(SOCKADDR_IN) + 16, &dwBytes, pOverlapped);
          if (SOCKET_ERROR == rc && WSA_IO_PENDING != WSAGetLastError())
@@ -133,15 +99,15 @@ namespace inspire {
             return;
          }
       }
-      else if (IOE_SEND == ioe)
+      else if (IOE_WRITE == ioe)
       {
          
       }
-      else if (IOE_RECV == ioe)
+      else if (IOE_READ == ioe)
       {
          DWORD   dwFlags = 0;
          DWORD   dwBytes = 0;
-         WSABUF* wsabuf  = &ctx->_wsabuf;
+         WSABUF* wsabuf  = &ctx->wsabuf;
          OVERLAPPED* pOverlapped = &ctx->_overlapped;
          ctx->zero();
          ctx->_eventType = ioe;
@@ -164,17 +130,26 @@ namespace inspire {
       return _stopService;
    }
 
-   void IOService::_doAccept()
+   void IOService::_doAccept(overlappedContext* ctx)
+   {
+      asyncConnection* conn = ctx->conn;
+      if (NULL != conn)
+      {
+         overlappedContext* overlapped = _overlappedMgr->create();
+         if (NULL != overlapped)
+         {
+            
+         }
+         conn->doAccept();
+      }
+   }
+
+   void IOService::_doSend(overlappedContext* ctx)
    {
 
    }
 
-   void IOService::_doSend()
-   {
-
-   }
-
-   void IOService::_doRecv()
+   void IOService::_doRecv(overlappedContext* ctx)
    {
 
    }

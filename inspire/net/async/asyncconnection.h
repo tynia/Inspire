@@ -19,9 +19,9 @@ namespace inspire {
 
       int initialize();
 
-      int doWrite(CEvent& ev);
+      int doWrite(const char* data, const uint len);
 
-      int doRead(const CEvent& ev);
+      int doRead(char* buffer, uint64 bufferLen, uint64& readLen);
 
       int doAccept(asyncConnection& conn);
 

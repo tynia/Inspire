@@ -33,9 +33,9 @@ namespace inspire {
       bool stopped() const;
 
    protected:
-      void _doAccept();
-      void _doSend();
-      void _doRecv();
+      void _doAccept(overlappedContext* ctx);
+      void _doSend(overlappedContext* ctx);
+      void _doRecv(overlappedContext* ctx);
 
    protected:
       bool              _stopService;
