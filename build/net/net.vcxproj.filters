@@ -129,14 +129,14 @@
     <ClCompile Include="..\..\inspire\net\async\reactor.cpp">
       <Filter>net\async</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\net\connection.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\servconnection.cpp">
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\inspire\net\async\overlappedMgr.cpp">
       <Filter>net\async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\net\baseConnection.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,13 +290,7 @@
     <ClInclude Include="..\..\inspire\net\async\reactor.h">
       <Filter>net\async</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\net\async\engine.h">
-      <Filter>net\async</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\net\network.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\connection.h">
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\servconnection.h">
@@ -307,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\overlapped.h">
       <Filter>net\async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\net\baseConnection.h">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

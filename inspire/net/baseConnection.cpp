@@ -1,18 +1,18 @@
-#include "connection.h"
+#include "baseConnection.h"
 
 namespace inspire {
 
-   Connection::Connection() : _fd(INVALID_FD)
+   baseConnection::baseConnection() : _fd(INVALID_FD)
    {
       ::memset(&_addr, 0, sizeof(endpoint));
    }
 
-   Connection::Connection(int sock) : _fd(sock)
+   baseConnection::baseConnection(int sock) : _fd(sock)
    {
-      INSPIRE_ASSERT(INVALID_FD == _fd, "try to init connection using invalid socket");
+      INSPIRE_ASSERT(INVALID_FD == _fd, "try to init baseConnection using invalid socket");
    }
 
-   bool Connection::alive()
+   bool baseConnection::alive()
    {
       if (INVALID_FD == _fd)
       {
@@ -36,7 +36,7 @@ namespace inspire {
       return true;
    }
 
-   void Connection::close()
+   void baseConnection::close()
    {
       if (INVALID_FD != _fd)
       {

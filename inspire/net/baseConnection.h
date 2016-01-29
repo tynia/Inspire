@@ -5,7 +5,7 @@
 
 namespace inspire {
 
-   class Connection
+   class baseConnection
    {
    public:
       const int native() const { return _fd; }
@@ -17,11 +17,11 @@ namespace inspire {
       void close();
 
    protected:
-      Connection();
+      baseConnection();
 
-      Connection(int sock);
+      baseConnection(int sock);
 
-      virtual ~Connection() { close(); }
+      virtual ~baseConnection() { close(); }
 
    protected:
       int _fd;

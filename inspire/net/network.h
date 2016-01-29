@@ -7,6 +7,7 @@
 #else
 #endif
 
+#include "net.h"
 #include "util/inspire.h"
 #include "util/assert.h"
 
