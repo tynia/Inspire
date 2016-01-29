@@ -3,11 +3,11 @@
 
 namespace inspire {
 
-   tcpConnection::tcpConnection() : Connection()
+   tcpConnection::tcpConnection() : baseConnection()
    {
    }
 
-   tcpConnection::tcpConnection(const int sock) : Connection(sock)
+   tcpConnection::tcpConnection(const int sock) : baseConnection(sock)
    {
    }
 

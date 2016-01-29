@@ -1,14 +1,14 @@
 #ifndef _INSPIRE_NET_ASYNC_CONNECTION_H_
 #define _INSPIRE_NET_ASYNC_CONNECTION_H_
 
-#include "connection.h"
+#include "baseConnection.h"
 
 namespace inspire {
 
    class CEvent;
    class IOService;
 
-   class asyncConnection : public Connection
+   class asyncConnection : public baseConnection
    {
    public:
       asyncConnection();

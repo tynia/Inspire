@@ -2,13 +2,13 @@
 #define _INSPIRE_NET_TCP_CONNECTION_H_
 
 #include "network.h"
-#include "connection.h"
+#include "baseConnection.h"
 
 namespace inspire {
 
    class endpoint;
 
-   class tcpConnection : public Connection
+   class tcpConnection : public baseConnection
    {
    public:
       int initialize();

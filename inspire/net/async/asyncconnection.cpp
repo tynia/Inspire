@@ -4,11 +4,11 @@
 
 namespace inspire {
 
-   asyncConnection::asyncConnection() : Connection()
+   asyncConnection::asyncConnection() : baseConnection()
    {
    }
 
-   asyncConnection::asyncConnection(int sock) : Connection(sock)
+   asyncConnection::asyncConnection(int sock) : baseConnection(sock)
    {
    }
 
@@ -47,8 +47,9 @@ namespace inspire {
       int nBytesRecv = WSARecv(_fd, &wsabuf, 1, (LPDWORD)&bufferLen, &dwFlags, pOverlapped, NULL);
       if ((SOCKET_ERROR == nBytesRecv) && (WSA_IO_PENDING != WSAGetLastError()))
       {
-         LogError("Post RECV event error, errno = %d", WSAGetLastError());
-         return;
+         rc = fetchNetError();
+         LogError("Post RECV event error, errno = %d", rc);
+         return rc;
       }
       return rc;
    }
