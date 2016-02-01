@@ -47,5 +47,13 @@ namespace inspire {
          wsaBuffer.len = MAX_BUFFER_SIZE;
       }
    };
+
+   class EventHandler
+   {
+   public:
+      virtual ~EventHandler() {}
+
+      virtual int handle(overlappedContext* overlapped) = 0;
+   };
 }
 #endif

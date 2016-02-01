@@ -1,28 +1,34 @@
 #ifndef _INSPIRE_NET_REACTOR_ENGINE_H_
 #define _INSPIRE_NET_REACTOR_ENGINE_H_
 
-#include "inspire.h"
-#include "engine.h"
+#include "util/inspire.h"
+#include "overlapped.h"
+#include "util/container/deque.h"
 
 namespace inspire {
 
-   class Reactor : public INetEngine
+   class Reactor : public EventHandler
    {
    public:
       Reactor();
       virtual ~Reactor();
 
    public:
-      virtual int initailize(uint evCount);
-      virtual int active();
-      virtual int deactive();
-      virtual int add(netEvent& nev);
-      virtual int modify(netEvent& nev);
-      virtual int remove(netEvent& nev);
-      virtual void destroy();
+      int initailize();
 
-   protected:
-      int _createReactor();
+      int bind(asyncConnection* conn);
+
+      int run();
+
+      void stop();
+
+      void destroy();
+
+      void associate(overlappedContext* overlapped);
+
+      bool stopped() const;
+
+      int  handle(overlappedContext* overlapped);
 
    private:
       bool _stop;
@@ -33,7 +39,7 @@ namespace inspire {
       int _epoll;    // epoll handle
       struct epoll_event* _events;
 #endif
-      std::map<int, fdData*> _fdDataList;
+      deque<overlappedContext*> _dequeOverlapped;
    };
 }
 #endif
