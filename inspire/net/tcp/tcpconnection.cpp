@@ -13,7 +13,6 @@ namespace inspire {
 
    tcpConnection::~tcpConnection()
    {
-      close();
    }
 
    int tcpConnection::initialize()

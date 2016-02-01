@@ -75,6 +75,7 @@ namespace inspire {
 
    void IOService::postEvent(overlappedContext* ctx, IOEvent ioe)
    {
+      asyncConnection* conn = ctx->conn;
       if (IOE_ACCEPT == ioe)
       {
          DWORD   dwBytes = 0;

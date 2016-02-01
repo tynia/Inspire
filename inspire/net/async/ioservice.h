@@ -32,6 +32,8 @@ namespace inspire {
 
       bool stopped() const;
 
+      int  handle(overlappedContext* overlapped);
+
    protected:
       void _doAccept(overlappedContext* ctx);
       void _doSend(overlappedContext* ctx);
