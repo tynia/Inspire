@@ -3,7 +3,7 @@
 namespace inspire {
 
 #ifdef _WIN32
-   Reactor::Reactor() : _stop(false), _maxEventCount(EPOLL_MAX_EVENT_COUNT), _hIOCP(INVALID_HANDLE_VALUE)
+   Reactor::Reactor() : _stop(false), _hIOCP(INVALID_HANDLE_VALUE)
    {
    }
 
