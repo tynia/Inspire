@@ -75,15 +75,6 @@
     <ClCompile Include="..\..\inspire\net\nostream.cpp">
       <Filter>net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\net\service.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\net\serviceMgr.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\net\session.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp">
       <Filter>net\async</Filter>
     </ClCompile>
@@ -129,9 +120,6 @@
     <ClCompile Include="..\..\inspire\net\async\reactor.cpp">
       <Filter>net\async</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\net\servconnection.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\async\overlappedMgr.cpp">
       <Filter>net\async</Filter>
     </ClCompile>
@@ -168,15 +156,6 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\nostream.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\service.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\serviceMgr.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\session.h">
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\asyncconnection.h">
@@ -291,9 +270,6 @@
       <Filter>net\async</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\network.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\servconnection.h">
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\overlappedMgr.h">

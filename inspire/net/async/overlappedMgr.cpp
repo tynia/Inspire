@@ -33,9 +33,10 @@ namespace inspire {
             LogError("Failed to create overlapped context, out of memory");
             return NULL;
          }
+         LogDebug("new an overlapped context");
          _ctxQueue.insert(ctx);
       }
-      LogDebug("fetch an overlapped context from idle queue");
+
       return ctx;
    }
 
@@ -46,11 +47,11 @@ namespace inspire {
 
    void overlappedMgr::recycle(overlappedContext* ctx)
    {
-      overlappedContext* pctx = NULL;
       if (!_ctxQueue.find(ctx))
       {
          LogEvent("overlapped context is not owned");
-         delete ctx;
+         //delete ctx;
+         return;
       }
 
       ctx->zero();

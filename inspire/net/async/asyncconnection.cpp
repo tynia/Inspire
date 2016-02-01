@@ -36,7 +36,7 @@ namespace inspire {
       return rc;
    }
 
-   int asyncConnection::doRead(char* buffer, uint64 bufferLen, int64& readLen)
+   int asyncConnection::doRead(char* buffer, uint64 bufferLen, uint64& readLen)
    {
       int rc = 0;
       DWORD dwFlags = 0;

@@ -20,9 +20,9 @@ namespace inspire {
    };
 
    class asyncConnection;
-   struct overlappedContext : OVERLAPPED
+   struct overlappedContext
    {
-      //OVERLAPPED       overlapped;
+      OVERLAPPED       overlapped;
       IOEvent          ioeType;
       asyncConnection* conn;
       WSABUF           wsaBuffer;
@@ -34,8 +34,15 @@ namespace inspire {
          wsaBuffer.buf = buffer;
       }
 
+//       ~overlappedContext()
+//       {
+//          zero();
+//          wsaBuffer.buf = buffer;
+//       }
+
       void zero()
       {
+         memset(&overlapped, 0, sizeof(OVERLAPPED));
          memset(buffer, 0, MAX_BUFFER_SIZE);
          wsaBuffer.len = MAX_BUFFER_SIZE;
       }
