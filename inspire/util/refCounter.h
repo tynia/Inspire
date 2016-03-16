@@ -2,7 +2,7 @@
 #define _INSPIRE_UTIL_REF_COUNTER_H_
 
 #include "inspire.h"
-#include "atomic.h"
+#include "system/atomic.h"
 
 namespace inspire {
 
