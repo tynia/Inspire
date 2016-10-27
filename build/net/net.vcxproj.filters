@@ -69,12 +69,6 @@
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp">
       <Filter>thread\task</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\net\nistream.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\net\nostream.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\async\asyncconnection.cpp">
       <Filter>net\async</Filter>
     </ClCompile>
@@ -120,6 +114,12 @@
     <ClCompile Include="..\..\inspire\stream\ostream.cpp">
       <Filter>stream</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\nistream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\nostream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inspire\logger\base.h">
@@ -145,12 +145,6 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h">
       <Filter>thread\task</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\nistream.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\net\nostream.h">
-      <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\async\asyncconnection.h">
       <Filter>net\async</Filter>
@@ -273,6 +267,15 @@
       <Filter>stream</Filter>
     </ClInclude>
     <ClInclude Include="..\..\inspire\stream\ostream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\endian.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\nistream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\nostream.h">
       <Filter>stream</Filter>
     </ClInclude>
   </ItemGroup>
