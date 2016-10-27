@@ -1,68 +1,39 @@
-#ifndef _INSPIRE_NET_BASE_STREAM_H_
-#define _INSPIRE_NET_BASE_STREAM_H_
+#ifndef _STREAM_BASE_STREAM_H_
+#define _STREAM_BASE_STREAM_H_
 
-#include "util/inspire.h"
+#include "inspire.h"
 
-namespace inspire {
+class bstr
+{
+public:
+   bstr();
+   bstr(const char* src, const uint64 len);
+   bstr(const bstr& rhs);
+   virtual ~bstr();
 
-   class refCounter;
-   class allocator;
+   int64 write(const uint64 offset, const void* toWrite, const uint64 wLen);
+   int64 read (const uint64 offset, void* toRead, const uint64 bufSize, const uint64 rLen);
 
-   class baseStream
-   {
-   public:
-      virtual void skip(uint64 w) = 0;
-   protected:
-      baseStream(const uint unitSize);
-      baseStream(const char* data, const uint64 len);
-      virtual ~baseStream();
+   uint64 capacity() const { return _capacity; }
+   uint64 length() const { return _len; }
+   const char* c_str() const { return _data; }
+   const char* data() const { return _data; }
+   char* data() { return _data; }
 
-      void _zero();
+public:
+   bstr& operator=  (const bstr& rhs);
+   bstr& operator+= (const bstr& rhs);
+   bstr& operator+= (const char* str);
+   bool  operator== (const bstr& rhs);
+   bool  operator== (const char* str);
 
-      uint64 _read(const uint64 offset, const uint64 toRead,
-                   void* buffer, const uint64 bufferLen);
-      void   _write(void* data, const uint64 toWrite);
-      
-   private:
-      void _initialize();
-      void _extCapacity(const uint64 size = 0);
+protected:
+   char* _extent(const uint64 newSize, uint bytes = 8);
 
-   protected:
-      uint        _capacity;
-      const char* _cur;
-      const char* _data;
-   };
+protected:
+   char*  _data;
+   uint64 _len;
+   uint64 _capacity;
+};
 
-   /*
-   class baseStream : virtual public refStream
-   {
-   public:
-      baseStream();
-      baseStream(const char* data, const size_t len);
-      baseStream(const baseStream* bs);
-      baseStream(const baseStream& bs);
-      virtual ~baseStream();
-
-      baseStream& operator= (const baseStream& rhs);
-      const size_t size() const;
-      bool empty() const;
-      bool readable() const;
-      bool writeable() const;
-
-   protected:
-      void _skipRead(const size_t size);
-      const size_t _seekToRead(const size_t size);
-      void _read(char* data, const size_t size, bool align = false, const int bytes = 4);
-
-      void _skipWrite(const size_t size);
-      const size_t _seekToWrite(const size_t size);
-      void _write(const char* data, const size_t size, bool align = false, const int bytes = 4);
-
-   private:
-      bool   _writeable;
-      size_t _wOffset;
-      size_t _rOffset;
-   };*/
-
-}
-#endif
+#endif // _STREAM_BASE_STREAM_H_

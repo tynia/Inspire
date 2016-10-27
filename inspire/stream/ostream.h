@@ -1,42 +1,44 @@
-#ifndef _INSPIRE_STREAM_OSTREAM_H_
-#define _INSPIRE_STREAM_OSTREAM_H_
+#ifndef _STREAM_OSTREAM_H_
+#define _STREAM_OSTREAM_H_
 
-#include "baseStream.h"
-#include "binData.h"
+#include "basestream.h"
+#include "bindata.h"
 
-namespace inspire {
+class CIStream;
+class binData;
 
-   class OStream : public baseStream
+class COStream : public bstr
+{
+public:
+   COStream();
+   COStream(const COStream& os);
+   COStream(const char* src, const uint64 len);
+   ~COStream() {}
+
+   const char* c_str() const { return _data; }
+
+   void skip(uint64 w)
    {
-      static const uint BLOCKSIZE = 1024;
-   public:
-      OStream(allocator* al = NULL, const uint blockSize = BLOCKSIZE);
-      virtual ~OStream();
+      _wOffset += w;
+   }
 
-      virtual void skip(uint64 w) { _wOffset += w; }
+   COStream& operator<< (bool b);
+   COStream& operator<< (char c);
+   COStream& operator<< (uchar uc);
+   COStream& operator<< (short s);
+   COStream& operator<< (ushort us);
+   COStream& operator<< (float f);
+   COStream& operator<< (double d);
+   COStream& operator<< (int i);
+   COStream& operator<< (uint ui);
+   COStream& operator<< (int64 i64);
+   COStream& operator<< (uint64 ui64);
+   COStream& operator<< (const char* str);
+   COStream& operator<< (std::string& str);
+   COStream& operator<< (binData& bin);
 
-   public:
-      const char* data() const { return _data; }
+private:
+   uint64 _wOffset;
+};
 
-      const uint64 capacity() const { return _capacity; }
-
-      const uint64 size() const { return _wOffset; }
-
-      void put(const char c);
-
-      OStream& operator<< (const bool b);
-      OStream& operator<< (const char c);
-      OStream& operator<< (const uchar uc);
-      OStream& operator<< (const short s);
-      OStream& operator<< (const ushort us);
-      OStream& operator<< (const float f);
-      OStream& operator<< (const double d);
-      OStream& operator<< (const int i);
-      OStream& operator<< (const uint ui);
-      OStream& operator<< (const int64& i64);
-      OStream& operator<< (const uint64& ui64);
-      OStream& operator<< (const binData& bin);
-      OStream& operator<< (const std::string& str);
-   };
-}
-#endif
+#endif //_STREAM_OSTREAM_H_

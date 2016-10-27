@@ -90,21 +90,6 @@
     <ClCompile Include="..\..\inspire\util\memory\AllocatorMgr.cpp">
       <Filter>util\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\inspire\stream\basestream.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\stream\iostream.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\stream\istream.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\stream\ostream.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\inspire\stream\refStream.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\inspire\net\endian\endian.cpp">
       <Filter>net\endian</Filter>
     </ClCompile>
@@ -125,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="..\..\inspire\net\baseConnection.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\basestream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\istream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inspire\stream\ostream.cpp">
+      <Filter>stream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,21 +230,6 @@
     <ClInclude Include="..\..\inspire\util\container\set.h">
       <Filter>util\container</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inspire\stream\basestream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\stream\iostream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\stream\istream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\stream\ostream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inspire\stream\refStream.h">
-      <Filter>stream</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inspire\net\endian\endian.h">
       <Filter>net\endian</Filter>
     </ClInclude>
@@ -280,6 +259,21 @@
     </ClInclude>
     <ClInclude Include="..\..\inspire\net\baseConnection.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\basestream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\bindata.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\inspire.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\istream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inspire\stream\ostream.h">
+      <Filter>stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

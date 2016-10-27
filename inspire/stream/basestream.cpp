@@ -1,144 +1,182 @@
 #include "basestream.h"
-#include "util.h"
-#include "allocator.h"
-#include "refCounter.h"
+#include <cstring>
 
-namespace inspire {
+bstr::bstr() : _data(NULL), _len(0), _capacity(0)
+{
+}
 
-   baseStream::baseStream(const uint unitSize) 
-      : _data(NULL), _capacity(0), _refCounter(NULL)
+bstr::bstr(const char* src, const uint64 len) : _data(NULL), _len(0), _capacity(0)
+{
+   write(0, src, len);
+}
+
+bstr::bstr(const bstr& rhs)
+{
+    write(0, rhs._data, rhs._len);
+}
+
+bstr::~bstr()
+{
+    if (NULL != _data)
+    {
+        delete [] _data;
+        _data = NULL;
+        _len = 0;
+        _capacity = 0;
+    }
+}
+
+int64 bstr::write(const uint64 offset, const void* toWrite, const uint64 wLen)
+{
+   if (NULL == toWrite)
    {
-      _initialize();
-      _refCounter = new refCounter();
-      INSPIRE_ASSERT(NULL != _refCounter, "Failed to allocate refCounter");
+      // LogError("Invalid data to write");
+      return 0;
    }
 
-   baseStream::baseStream(const char* data, const uint64 len)
-      : _data(data), _capacity(len), _refCounter(NULL)
+   if (0 == wLen)
    {
-      _refCounter = new refCounter();
-      INSPIRE_ASSERT(NULL != _refCounter, "Failed to allocate refCounter");
+      // LogError("try to write 0 byte");
+      return 0;
    }
 
-   baseStream::baseStream(baseStream& rhs)
-      : _data(rhs._data), _capacity(rhs._capacity), _wOffset(rhs._wOffset)
-      , _blockSize(rhs._blockSize), _refCounter(rhs._refCounter), _allocator(rhs._allocator)
+   if (offset > _capacity)
    {
-      _refCounter->_inc();
+      //LogError("offset is out of buffer size")
+      return 0;
    }
 
-   baseStream::~baseStream()
+   if (_capacity - offset < wLen)
    {
-      _refCounter->_dec();
-      if (0 == _refCounter->retain())
-      {
-         _allocator->dealloc(_data);
-         _allocator = NULL;
-         _blockSize = 0;
-      }
+      uint64 newSize = _len + wLen;//_capacity - offset + wLen;
+      // extent buffer
+      _extent(newSize);
+   }
+
+   memcpy(_data + offset, toWrite, wLen);
+   _len += wLen;
+
+   return wLen;
+}
+
+int64 bstr::read (const uint64 offset, void* toRead, const uint64 bufSize, const uint64 rLen)
+{
+   if (NULL == toRead)
+   {
+      // LogError("Invalid buffer to store data");
+      return 0;
+   }
+
+   if (0 == bufSize)
+   {
+      // LogError("Invalid buffer size")
+      return 0;
+   }
+
+   if (rLen == 0)
+   {
+      // LogError("Try to read 0 byte into buffer")
+      return 0;
+   }
+
+   uint64 readLen = rLen;
+
+   if (offset > _capacity)
+   {
+      // LogWarning("offset is beyond end of buffer")
+      return 0;
+   }
+
+   if (offset + rLen > _capacity)
+   {
+      // LogWarning("read will beyond end of buffer, read less data")
+      readLen = _capacity - offset;
+   }
+
+   if (rLen > bufSize)
+   {
+      // LogWarning("length to read is greater than buffer size")
+      readLen = bufSize;
+   }
+
+   memcpy(toRead, _data + offset, readLen);
+
+   return readLen;
+}
+
+bstr& bstr::operator=  (const bstr& rhs)
+{
+   if (_data == rhs._data)
+   {
+      return *this;
+   }
+
+   if (NULL != _data)
+   {
+      delete [] _data;
       _data = NULL;
+      _len = 0;
       _capacity = 0;
-      _wOffset = 0;
    }
+   write(0, rhs._data, rhs._len);
+}
 
-   void baseStream::_zero()
+bstr& bstr::operator+= (const bstr& rhs)
+{
+   write(_len, rhs._data, rhs._len);
+   return *this;
+}
+
+bstr& bstr::operator+= (const char* str)
+{
+   write(_len, str, strlen(str) + 1);
+   return *this;
+}
+
+bool bstr::operator== (const bstr& rhs)
+{
+   if (_len != rhs._len)
    {
-#ifdef DEBUG
-      memset((void*)_data, 0xfe, _capacity);
-#else
-      memset((void*)_data, 0x0, _capacity);
-#endif // DEBUG
+      return false;
    }
 
-   uint64 baseStream::_read(const uint64 offset, const uint64 toRead,
-                            void* buffer, const uint64 bufferLen)
+   if (0 != strncmp(_data, rhs._data, _len))
    {
-      if (NULL == buffer || toRead == 0)
-      {
-         return 0;
-      }
-
-      if (offset > _wOffset)
-      {
-         LogEvent("Attempt to read invalid buffer");
-         return 0;
-      }
-
-      uint64 realSize = 0;
-      const char* ptr = _data + offset;
-      if (_data + _wOffset < ptr + toRead)
-      {
-         uint64 readSize = _data + _wOffset - ptr;
-         realSize = readSize > bufferLen ? bufferLen : readSize;
-         memcpy((void*)buffer, _data + offset, realSize);
-      }
-      else
-      {
-         realSize = toRead > bufferLen ? bufferLen : toRead;
-         memcpy(buffer, _data + offset, realSize);
-      }
-      return realSize;
+      return false;
    }
 
-   void baseStream::_write(void* data, const uint64 toWrite)
+   return true;
+}
+
+bool bstr::operator== (const char* str)
+{
+   if (_len != strlen(str))
    {
-      // may be locked
-      // TODO:
-
-      if (NULL == data)
-      {
-         return;
-      }
-
-      if (_wOffset + toWrite > _capacity)
-      {
-         uint64 newCapacity = _capacity;
-         do
-         {
-            newCapacity += _blockSize;
-         } while (_wOffset + toWrite > newCapacity);
-
-         _extCapacity(newCapacity);
-      }
-
-      memcpy((void*)(_data + _wOffset), data, toWrite);
-      _wOffset += toWrite;
+      return false;
    }
 
-   void baseStream::_initialize()
+   if (0 != strncmp(_data, str, _len))
    {
-      _extCapacity(_blockSize);
+      return false;
    }
 
-   void baseStream::_extCapacity(const uint64 size)
+   return true;
+}
+
+char* bstr::_extent(const uint64 size, uint bytes)
+{
+   uint64 newSize = ((size + (bytes - 1)) - ((size + (bytes - 1)) % bytes));
+   char* ptr = new char[newSize];
+   if (NULL == ptr)
    {
-      bool  done = false;
-      uint64 allocSize = 0;
-      char* ptr = NULL;
-
-      while (NULL == ptr)
-      {
-         allocSize = (0 == size ? 2 * _capacity : size);
-         ptr = _allocator->alloc(allocSize);
-         if (NULL == ptr)
-         {
-            if (done)
-            {
-               LogError("Out of memory although prayed");
-               Panic();
-            }
-            _allocator->pray();
-            done = true;
-         }
-      }
-
-      // succeed to allocate memory,
-      if (_data)
-      {
-         memmove(ptr, _data, _wOffset);
-         _allocator->dealloc(_data);
-      }
-      _data = ptr;
-      _capacity = allocSize;
+    //    LogError("system error: out of memory");
+       return NULL;
    }
+
+   char* old = _data;
+   memcpy(ptr, _data, _len);
+   _data = ptr;
+   _capacity = newSize;
+
+   delete [] old;
 }

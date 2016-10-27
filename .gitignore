@@ -11,6 +11,7 @@
 *.opendb
 *.sdf
 *.opensdf
+*.db
 
 # Compiled Static libraries
 *.lai

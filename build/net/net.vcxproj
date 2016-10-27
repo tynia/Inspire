@@ -160,10 +160,8 @@
     <ClCompile Include="..\..\inspire\net\nostream.cpp" />
     <ClCompile Include="..\..\inspire\net\tcp\tcpconnection.cpp" />
     <ClCompile Include="..\..\inspire\stream\basestream.cpp" />
-    <ClCompile Include="..\..\inspire\stream\iostream.cpp" />
     <ClCompile Include="..\..\inspire\stream\istream.cpp" />
     <ClCompile Include="..\..\inspire\stream\ostream.cpp" />
-    <ClCompile Include="..\..\inspire\stream\refStream.cpp" />
     <ClCompile Include="..\..\inspire\thread\task\thdTaskMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thdMgr.cpp" />
     <ClCompile Include="..\..\inspire\thread\thread.cpp" />
@@ -194,10 +192,10 @@
     <ClInclude Include="..\..\inspire\net\nostream.h" />
     <ClInclude Include="..\..\inspire\net\tcp\tcpconnection.h" />
     <ClInclude Include="..\..\inspire\stream\basestream.h" />
-    <ClInclude Include="..\..\inspire\stream\iostream.h" />
+    <ClInclude Include="..\..\inspire\stream\bindata.h" />
+    <ClInclude Include="..\..\inspire\stream\inspire.h" />
     <ClInclude Include="..\..\inspire\stream\istream.h" />
     <ClInclude Include="..\..\inspire\stream\ostream.h" />
-    <ClInclude Include="..\..\inspire\stream\refStream.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTask.h" />
     <ClInclude Include="..\..\inspire\thread\task\thdTaskMgr.h" />
     <ClInclude Include="..\..\inspire\thread\thdMgr.h" />

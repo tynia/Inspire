@@ -1,50 +1,42 @@
-#ifndef _INSPIRE_STREAM_ISTREAM_H_
-#define _INSPIRE_STREAM_ISTREAM_H_
+#ifndef _STREAM_ISTREAM_H_
+#define _STREAM_ISTREAM_H_
 
-#include "baseStream.h"
-#include "util/binData.h"
+#include "basestream.h"
 
-namespace inspire {
+class COStream;
+class binData;
 
-   class IStream
+class CIStream : public bstr
+{
+public:
+   CIStream();
+   CIStream(const CIStream& rhs);
+   CIStream(const char* src, const uint64 len);
+   ~CIStream() {}
+
+   const char* c_str() const { return _data; }
+
+   void skip(uint64 r)
    {
-   public:
-      IStream(const char* src, uint64 len) : _data(src), _size(len) {}
-      virtual ~IStream() { _data = NULL, _size = 0; }
+      _rOffset += r;
+   }
 
-   public:
-      const char* data() const
-      {
-         return _data;
-      }
+   CIStream& operator>> (bool& b);
+   CIStream& operator>> (char& c);
+   CIStream& operator>> (uchar& uc);
+   CIStream& operator>> (short& s);
+   CIStream& operator>> (ushort& us);
+   CIStream& operator>> (float& f);
+   CIStream& operator>> (double& d);
+   CIStream& operator>> (int& i);
+   CIStream& operator>> (uint& ui);
+   CIStream& operator>> (int64& i64);
+   CIStream& operator>> (uint64& ui64);
+   CIStream& operator>> (std::string& str);
+   CIStream& operator>> (binData& bin);
 
-      const uint64 size() const { return _size; }
+private:
+   uint64 _rOffset;
+};
 
-      void skip(uint64 r)
-      {
-         _rOffset += r;
-      }
-
-      IStream& operator>> (bool& b);
-      IStream& operator>> (char& c);
-      IStream& operator>> (uchar& uc);
-      IStream& operator>> (short& s);
-      IStream& operator>> (ushort& us);
-      IStream& operator>> (float& f);
-      IStream& operator>> (double& d);
-      IStream& operator>> (int& i);
-      IStream& operator>> (uint& ui);
-      IStream& operator>> (int64& i64);
-      IStream& operator>> (uint64& ui64);
-      IStream& operator>> (binData& bin);
-
-   private:
-      uint _read(void* buffer, const uint len, const uint toRead);
-
-   protected:
-      const char* _data;
-      uint64      _size;
-      uint64      _rOffset;
-   };
-}
-#endif
+#endif // _STREAM_ISTREAM_H_
