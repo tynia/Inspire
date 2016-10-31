@@ -4,7 +4,6 @@
 #include "basestream.h"
 #include "bindata.h"
 
-class CIStream;
 class binData;
 
 class COStream : public bstr

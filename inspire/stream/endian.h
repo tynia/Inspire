@@ -5,7 +5,7 @@ enum ENDIAN
 {
    ENDIAN_BIG = 0,
    ENDIAN_LITTLE = 1,
-}
+};
 
 #define CONVERT_ENDIAN_2(value, to, condition)  \
 do                                              \

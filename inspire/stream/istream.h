@@ -3,7 +3,6 @@
 
 #include "basestream.h"
 
-class COStream;
 class binData;
 
 class CIStream : public bstr

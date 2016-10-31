@@ -4,7 +4,6 @@
 #include "basestream.h"
 #include "endian.h"
 
-class NOStream;
 class binData;
 
 class NIStream : public bstr

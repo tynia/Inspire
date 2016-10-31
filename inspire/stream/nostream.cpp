@@ -1,5 +1,6 @@
 #include "nostream.h"
 #include "bindata.h"
+#include "endian.h"
 
 NOStream::NOStream(ENDIAN endian) : bstr(), _endian(endian), _wOffset(0)
 {
@@ -149,8 +150,8 @@ NOStream& NOStream::operator<< (int64 i64)
 
 NOStream& NOStream::operator<< (uint64 ui64)
 {
-   int64 tmp;
-   CONVERT_ENDIAN(i64, tmp, _endian);
+   uint64 tmp;
+   CONVERT_ENDIAN(ui64, tmp, _endian);
    int64 n = write(_wOffset, (void*)&tmp, sizeof(uint64));
    if (n <= 0 || n < sizeof(uint64))
    {

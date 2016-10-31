@@ -1,19 +1,20 @@
 #include "nistream.h"
 #include "bindata.h"
+#include "endian.h"
 
-CIStream::CIStream(ENDIAN endian) : bstr(), _endian(endian), _rOffset(0)
+NIStream::NIStream(ENDIAN endian) : bstr(), _endian(endian), _rOffset(0)
 {
 }
 
-CIStream::CIStream(const CIStream& rhs) : bstr(rhs), _rOffset(0)
+NIStream::NIStream(const NIStream& rhs) : bstr(rhs), _rOffset(0)
 {
 }
 
-CIStream::CIStream(const char* src, const uint64 len, ENDIAN endian) : bstr(src, len), _endian(endian), _rOffset(0)
+NIStream::NIStream(const char* src, const uint64 len, ENDIAN endian) : bstr(src, len), _endian(endian), _rOffset(0)
 {
 }
 
-CIStream& CIStream::operator>> (bool& b)
+NIStream& NIStream::operator>> (bool& b)
 {
    int64 n = read(_rOffset, (void*)&b, sizeof(bool), sizeof(bool));
    if (n <= 0 || n < sizeof(bool))
@@ -25,7 +26,7 @@ CIStream& CIStream::operator>> (bool& b)
    return *this;
 }
 
-CIStream& CIStream::operator>> (char& c)
+NIStream& NIStream::operator>> (char& c)
 {
    int64 n = read(_rOffset, (void*)&c, sizeof(char), sizeof(char));
    if (n <= 0 || n < sizeof(char))
@@ -37,7 +38,7 @@ CIStream& CIStream::operator>> (char& c)
    return *this;
 }
 
-CIStream& CIStream::operator>> (uchar& uc)
+NIStream& NIStream::operator>> (uchar& uc)
 {
    int64 n = read(_rOffset, (void*)&uc, sizeof(uchar), sizeof(uchar));
    if (n <= 0 || n < sizeof(uchar))
@@ -49,7 +50,7 @@ CIStream& CIStream::operator>> (uchar& uc)
    return *this;
 }
 
-CIStream& CIStream::operator>> (short& s)
+NIStream& NIStream::operator>> (short& s)
 {
    short tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(short), sizeof(short));
@@ -63,7 +64,7 @@ CIStream& CIStream::operator>> (short& s)
    return *this;
 }
 
-CIStream& CIStream::operator>> (ushort& us)
+NIStream& NIStream::operator>> (ushort& us)
 {
    ushort tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(ushort), sizeof(ushort));
@@ -77,7 +78,7 @@ CIStream& CIStream::operator>> (ushort& us)
    return *this;
 }
 
-CIStream& CIStream::operator>> (float& f)
+NIStream& NIStream::operator>> (float& f)
 {
    float tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(float), sizeof(float));
@@ -91,7 +92,7 @@ CIStream& CIStream::operator>> (float& f)
    return *this;
 }
 
-CIStream& CIStream::operator>> (double& d)
+NIStream& NIStream::operator>> (double& d)
 {
    double tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(double), sizeof(double));
@@ -105,7 +106,7 @@ CIStream& CIStream::operator>> (double& d)
    return *this;
 }
 
-CIStream& CIStream::operator>> (int& i)
+NIStream& NIStream::operator>> (int& i)
 {
    int tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(int), sizeof(int));
@@ -119,7 +120,7 @@ CIStream& CIStream::operator>> (int& i)
    return *this;
 }
 
-CIStream& CIStream::operator>> (uint& ui)
+NIStream& NIStream::operator>> (uint& ui)
 {
    uint tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(int), sizeof(uint));
@@ -133,7 +134,7 @@ CIStream& CIStream::operator>> (uint& ui)
    return *this;
 }
 
-CIStream& CIStream::operator>> (int64& i64)
+NIStream& NIStream::operator>> (int64& i64)
 {
    int64 tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(int64), sizeof(int64));
@@ -147,7 +148,7 @@ CIStream& CIStream::operator>> (int64& i64)
    return *this;
 }
 
-CIStream& CIStream::operator>> (uint64& ui64)
+NIStream& NIStream::operator>> (uint64& ui64)
 {
    uint64 tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(uint64), sizeof(uint64));
@@ -161,7 +162,7 @@ CIStream& CIStream::operator>> (uint64& ui64)
    return *this;
 }
 
-CIStream& CIStream::operator>> (std::string& str)
+NIStream& NIStream::operator>> (std::string& str)
 {
    std::string s(_data + _rOffset);
    int64 n = s.length() + 1;
@@ -170,7 +171,7 @@ CIStream& CIStream::operator>> (std::string& str)
    return *this;
 }
 
-CIStream& CIStream::operator>> (binData& bin)
+NIStream& NIStream::operator>> (binData& bin)
 {
    uint64 tmp;
    int64 n = read(_rOffset, (void*)&tmp, sizeof(uint64), sizeof(uint64));
